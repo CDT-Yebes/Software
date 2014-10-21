@@ -1,0 +1,36 @@
+*** aclocal.m4.orig	Wed Nov  7 20:51:21 2001
+--- aclocal.m4	Mon Sep 10 13:38:56 2007
+***************
+*** 589,595 ****
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid'`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`
+--- 589,595 ----
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`
+***************
+*** 1455,1461 ****
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid'`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`
+--- 1455,1461 ----
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`

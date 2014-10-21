@@ -1,0 +1,29 @@
+#!/bin/sh
+
+MICORC=/dev/null
+export MICORC
+
+# run Server
+rm -f hello.ref
+./server -ORBSL3 -ORBCSIv2 &
+server_pid=$!
+
+trap "kill $server_pid > /dev/null 2> /dev/null" 0
+for i in 0 1 2 3 4 5 6 7 8 9 ; do if test -r hello.ref ; then break ; else sleep 1 ; fi ; done
+
+# run relay server
+rm -f relay.ref
+./relay -ORBSL3 -ORBCSIv2 &
+relay_pid=$!
+
+trap "kill $server_pid $relay_pid > /dev/null 2> /dev/null" 0
+for i in 0 1 2 3 4 5 6 7 8 9 ; do if test -r relay.ref ; then break ; else sleep 1 ; fi ; done
+
+# run client
+echo
+./client -ORBSL3 -ORBCSIv2 karel cobalt @objectsecurity.com
+echo
+./client -ORBSL3 -ORBCSIv2 ras ras_pw @objectsecurity.com
+echo
+./client -ORBSL3 -ORBCSIv2 uli uli_pw @objectsecurity.com
+

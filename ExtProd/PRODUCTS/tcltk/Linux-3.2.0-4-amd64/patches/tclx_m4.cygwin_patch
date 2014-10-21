@@ -1,0 +1,59 @@
+*** tcl.m4.orig	2012-10-11 08:54:50.836963000 +0000
+--- tcl.m4	2012-10-11 08:57:47.259567000 +0000
+***************
+*** 1436,1441 ****
+--- 1436,1459 ----
+  	        fi
+  	    fi
+  	    ;;
++ 	CYGWIN*)
++ 	    if test "$have_dl" = "no" ; then
++ 	       AC_CHECK_LIB(ltdl, dlopen, have_dl=yes, have_dl=no)
++ 	       DL_LIBS="-lltdl"
++ 	    else
++ 	       DL_LIBS="-ldl"
++ 	    fi
++ 	    SHLIB_CFLAGS=""
++ 	    SHLIB_LD_LIBS='${LIBS}'
++ 	    SHLIB_SUFFIX=".dll"
++ 
++ 	    SHLIB_LD="${CC} -shared"
++ 	    DL_OBJS="tclLoadDl.o"
++ 	    LDFLAGS=""
++ 	    CC_SEARCH_FLAGS='-Wl,-rpath,${LIB_RUNTIME_DIR}'
++ 	    LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
++ 	    AC_DEFINE(HAVE_TM_ZONE)
++ 	    ;;
+  	Linux*)
+  	    SHLIB_CFLAGS="-fPIC"
+  	    SHLIB_LD_LIBS='${LIBS}'
+***************
+*** 2737,2747 ****
+  	AC_MSG_RESULT([ok (TEA ${TEA_VERSION})])
+      fi
+      case "`uname -s`" in
+! 	*win32*|*WIN32*|*CYGWIN_NT*|*CYGWIN_9*|*CYGWIN_ME*|*MINGW32_*)
+  	    AC_CHECK_PROG(CYGPATH, cygpath, cygpath -w, echo)
+  	    EXEEXT=".exe"
+  	    TEA_PLATFORM="windows"
+  	    ;;
+  	*)
+  	    CYGPATH=echo
+  	    EXEEXT=""
+--- 2755,2770 ----
+  	AC_MSG_RESULT([ok (TEA ${TEA_VERSION})])
+      fi
+      case "`uname -s`" in
+! 	*win32*|*WIN32*|*MINGW32_*)
+  	    AC_CHECK_PROG(CYGPATH, cygpath, cygpath -w, echo)
+  	    EXEEXT=".exe"
+  	    TEA_PLATFORM="windows"
+  	    ;;
++ 	*CYGWIN_NT*|*CYGWIN_9*|*CYGWIN_ME*)
++ 	    CYGPATH=echo
++ 	    EXEEXT=".exe"
++ 	    TEA_PLATFORM="unix"
++ 	    ;;
+  	*)
+  	    CYGPATH=echo
+  	    EXEEXT=""

@@ -1,0 +1,19 @@
+*** tclExtend.h.orig	Mon Apr 30 14:31:01 2001
+--- tclExtend.h	Mon Apr 30 14:32:01 2001
+***************
+*** 24,30 ****
+  
+  /*
+   * The following is needed on Windows to deal with export/import of DLL
+!  * functions.  See tcl???/win/README.
+   */
+  #ifdef BUILD_TCLX
+  # undef TCL_STORAGE_CLASS
+--- 24,30 ----
+  
+  /*
+   * The following is needed on Windows to deal with export/import of DLL
+!  * functions.  See tclX.Y/win/README.
+   */
+  #ifdef BUILD_TCLX
+  # undef TCL_STORAGE_CLASS

@@ -1,0 +1,55 @@
+$Id: CHANGES,v 1.99 1996/09/27 20:53:09 hs Rel $
+
+msqltcl: Changes visible on the Tcl level.
+
+** Release 1.90 **
+
+-- Added autoconf support: many thanks to Juergen Schoenwaelder
+<schoenw@cs.utwente.nl> for doing most of the job.
+
+-- msqltcl dynamically loadable on platforms supporting this feature:
+again many thanks to Juergen Schoenwaelder <schoenw@cs.utwente.nl>.
+
+** Release 1.80 **
+
+-- mmon thoroughly revised. Adapted to Tk 4. TclX no longer required.
+
+-- Removed support for TclX and more than one Tcl/Tk version from the
+makefile.
+
+-- Added read-only variable msqlstatus(version) for showing the msqltcl
+version.
+
+** Release 1.50 **
+
+-- Bug corrections: 'msqlconnect' without host name now works as
+advertised. Makefile bug causing Tk to terminate with
+	can't read "tk_library": no such variable
+also corrected.
+
+-- New command: 'msqlseek'. Option 'current' added to the 'msqlresult'
+command.
+
+-- 'msqlsel' now returns number of result rows for SELECT statements;
+-1 if invoked with a non-SELECT statement (in addition to not setting
+a pending result). There is no error in the latter case (if the
+statement is well-formed).
+
+-- Conflict management: the same message now appears as the result of
+a failing commands as well as in 'msqlstatus(message)'. The failing
+command is saved in 'msqlstatus(command)', a new status array element.
+Only msqlstatus(code) is set for every command. The other status array
+elements retain their previous values.
+
+-- From version 1.0.6 mSQL distinguishes null values from empty
+strings. A new settable status variable,
+
+   msqlstatus(nullvalue)
+
+determines the string msqltcl returns for null values. It is initially
+the empty string -- backward compatible behaviour.
+
+-- Support for Tcl 7.4, Tk 4.0 (betas).
+
+-- The 'mmon' GUI mini-monitor has been added. It only works with
+pre-4.0 Tk, however.

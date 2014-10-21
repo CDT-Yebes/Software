@@ -1,0 +1,320 @@
+
+ MICO SL3
+ --------
+
+MICO SL3 is an implementation of the modified Adiron's
+LLC. SecurityLevel3 API. The API was modified by ObjectSecurity
+Ltd. during the work on the IST project COACH. For more information
+about SecurityLeve3, please have a look at http://coach.objectweb.org/
+and http://www.adiron.com/ORBAsec3.html
+
+What is this for?
+-----------------
+Basically we can say that SL3 API is the API designed to deal with
+CSIv2 security. It is not complete truth since it also might supports
+Kerberos, SESAME and other security architectures, but the main usage
+seems to be to provide the API for dealing with CSIv2 based security
+service. That is also true for MICO where we have written SL3 project
+solely for working together with MICO CSIv2 implementation.
+
+Installation
+------------
+You have to configure MICO with '--enable-sl3' configure option to be
+able to use MICO SL3 implementation.
+
+Command-line options
+--------------------
+There is only one command-line option provided to tell the application
+that we need to use SL3, -ORBSL3. It is nearly always used together
+with the -ORBCSIv2 option. The only exception is when SL3 is used
+directly to deal with only transport layer security, in this case the
+option -ORBCSIv2 is not used. This applies to the SL3 security aware
+application only, i.e. an application which setups all needed
+credentials by itself in its code. If there is a need to setup
+appropriate SL3 credentials in SL3 security unaware application, then
+there is a possibility to use SL3 extended command-line options
+(-ORBSL3CmdExt) together with appropriate credentials creation
+option. All SL3 options are listed in the table below.
+
+----------------------------------------------------------------------
+option name                     | description
+----------------------------------------------------------------------
+-ORBSL3                         | enables SL3
+----------------------------------------------------------------------
+-ORBCSIv2                       | enables CSIv2, when combined with
+                                | -ORBSL3 it enables CSIv2 part of SL3
+----------------------------------------------------------------------
+-ORBSL3CmdExt                   | enables recognition of extended
+                                | command-line options (all options
+                                | below in this table)
+----------------------------------------------------------------------
+-ORBSL3TCPIPInitiator           | enables TCPIP initiator credentials,
+                                | where binding socket is system
+                                | selected
+----------------------------------------------------------------------
+-ORBSL3TCPIPInitiator2          | enables TCPIP initiator credentials,
+                                | parameter is <host>:<port> and it
+                                | is used for initiator socket binding
+----------------------------------------------------------------------
+-ORBSL3TCPIPAcceptor            | enables TCPIP acceptor credentials,
+                                | where binding socket is system
+                                | selected
+----------------------------------------------------------------------
+-ORBSL3TCPIPAcceptor2           | enables TCPIP acceptor credentials,
+                                | parameter is <host>:<port>, which
+                                | specifies acceptor listening host
+                                | and port
+----------------------------------------------------------------------
+-ORBSL3TLSInitiator             | enables TLS initiator with system
+                                | selected binding port
+----------------------------------------------------------------------
+-ORBSL3TLSInitiator2            | enables TLS initiator with parameter
+                                | <host>:<port> to specify binding
+                                | host and port
+----------------------------------------------------------------------
+-ORBSL3TLSInitiatorOptions      | provides TLS initiator required
+                                | options: <CA>,<C cert>,<C key>
+                                | where <CA> is certificate
+                                | authority's certificate file, <C
+                                | cert> is client's certificate file
+                                | and <C key> is client's private key
+                                | file 
+----------------------------------------------------------------------
+-ORBSL3TLSAcceptor              | enables TLS acceptor with system
+                                | selected binding port
+----------------------------------------------------------------------
+-ORBSL3TLSAcceptor2             | enables TLS acceptor with parameter
+                                | <host>:<port> to specify binding
+                                | host and port
+----------------------------------------------------------------------
+-ORBSL3TLSAcceptorOptions       | provides TLS acceptor required
+                                | options: <CA>,<S cert>,<S key>
+                                | where <CA> is certificate
+                                | authority's certificate file, <S
+                                | cert> is server's certificate file
+                                | and <S key> is server's private key
+                                | file 
+----------------------------------------------------------------------
+-ORBSL3TLSInitiatorVerifyDepth  | provides <number> TLS initiator
+                                | verify depth
+----------------------------------------------------------------------
+-ORBSL3TLSAcceptorVerifyDepth   | provides <number> TLS acceptor
+                                | verify depth
+----------------------------------------------------------------------
+-ORBSL3IPCInitiator             | enables initiator credentials for
+                                | colocated calls
+----------------------------------------------------------------------
+-ORBSL3IPCAcceptor              | enables acceptor credentials for
+                                | colocated calls
+----------------------------------------------------------------------
+-ORBSL3CSIClientUser            | adds GSSUP client's user/password
+                                | for a specified realm in a form of
+                                | <realm>,<user name>,<user password>
+                                | parameter 
+----------------------------------------------------------------------
+-ORBSL3CSIServerUser            | adds GSSUP server's user/password in
+                                | a form of <user name>,<user
+                                | password> parameter
+----------------------------------------------------------------------
+-ORBSL3CSIServerRealm           | provides <realm> server realm
+                                | parameter 
+----------------------------------------------------------------------
+
+
+Demos
+-----
+MICO SL3 demos are provided in the mico/demo/sl3 directory. Please
+read README file in this directory to find more information about
+various demos provided.
+
+Exception table
+---------------
+Generally MICO SL3 code throws either CORBA::NO_PERMISSION or
+CORBA::BAD_PARAM exceptions. The table below lists all returned
+exception minor ids with a description why this exception was
+thrown. It aims to easy debugging of SL3 enabled application.
+
+____________________________________________________________________
+exception     | minor id |  reason
+--------------------------------------------------------------------
+NO_PERMISSION | 10001    | There are not own credentials set for
+              |          | client side (initiator side) while
+              |          | application tries to open GIOP connection
+              |          | to the target object
+--------------------------------------------------------------------
+BAD_PARAM     | 20001    | There are not credentials of a given creds id
+              |          | registered on transport security CredentialsCurator
+              |          | which user tries to remove, i.e. this
+              |          | exception is thrown by
+              |          | TransportSecurity::CredentialsCurator::remove_credentials
+              |          | operation
+--------------------------------------------------------------------
+BAD_PARAM     | 20002    | There are not credentials of a given creds id
+              |          | registered on transport security CredentialsCurator
+              |          | which user tries to release, i.e. this
+              |          | exception is thrown by
+              |          | TransportSecurity::CredentialsCurator::release_credentials
+              |          | operation
+--------------------------------------------------------------------
+BAD_PARAM     | 30001    | There are not credentials of a given creds id
+              |          | registered on security level3 CredentialsCurator
+              |          | which user tries to release, i.e. this
+              |          | exception is thrown by
+              |          | SecurityLevel3::CredentialsCurator::release_own_credentials
+              |          | operation
+--------------------------------------------------------------------
+BAD_PARAM     | 40001    | This exception is thrown from
+              |          | TCPIPArgBuilder::add_tcpip_initiator_options 
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 40002    | This exception is thrown from
+              |          | TCPIPArgBuilder::add_tcpip_acceptor_options 
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 40003    | This exception is thrown from
+              |          | TCPIPArgBuilder::add_accepting_context_observer 
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied observer reference is nil
+--------------------------------------------------------------------
+BAD_PARAM     | 40004    | This exception is thrown from
+              |          | TCPIPArgBuilder::add_initiating_context_observer 
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied observer reference is nil
+--------------------------------------------------------------------
+BAD_PARAM     | 40005    | This exception is thrown from
+              |          | TCPIPArgBuilder::add_credentials_observer 
+              |          | operation, because of supplied nil observer
+              |          | reference
+--------------------------------------------------------------------
+BAD_PARAM     | 50001    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_tls_acceptor_options
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 50002    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_tls_acceptor_options_with_passphrase
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 50003    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_tls_initiator_options 
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 50004    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_tls_initiator_options_with_passphrase
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 50005    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_tls_anonymous_initiator_options
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 50006    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_initiator_verify_depth
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied depth value is smaller than zero
+--------------------------------------------------------------------
+BAD_PARAM     | 50007    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_acceptor_verify_depth
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied depth value is smaller than zero
+--------------------------------------------------------------------
+BAD_PARAM     | 50008    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_initiator_identity_verifier
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied verifier reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 50009    | This exception is thrown from
+              |          | OpenSSLConfigArgBuilder::add_acceptor_identity_verifier
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied verifier reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60001    | This exception is thrown from
+              |          | CSIArgBuilder::add_password_generator
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied generator reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60002    | This exception is thrown from
+              |          | CSIArgBuilder::add_password_processor
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied processor reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60003    | This exception is thrown from
+              |          | CSIArgBuilder::add_trust_in_server_decider
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied decider reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60004    | This exception is thrown from
+              |          | CSIArgBuilder::add_transport_credentials
+              |          | operation, because of supplied nil
+              |          | credentials reference
+--------------------------------------------------------------------
+BAD_PARAM     | 60005    | This exception is thrown from
+              | 60006    | CSIArgBuilder::add_transport_credentials
+              | 60007    | operation, because supplied credentials
+              | 60008    | usage does not match exactly usage of
+              |          | created credentials
+--------------------------------------------------------------------
+BAD_PARAM     | 60009    | This exception is thrown from
+              |          | CSIArgBuilder::add_credentials_observer
+              |          | operation, because of supplied nil
+              |          | observer reference
+--------------------------------------------------------------------
+BAD_PARAM     | 60010    | This exception is thrown from
+              |          | CSIArgBuilder::add_client_credentials_observer
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied observer reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60011    | This exception is thrown from
+              |          | CSIArgBuilder::add_target_credentials_observer
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied observer reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60012    | This exception is thrown from
+              |          | CSIArgBuilder::add_ATLAS_object
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied token dispenser or token processor
+              |          | reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60013    | This exception is thrown from
+              |          | CSIArgBuilder::add_token_processor
+              |          | operation, because the builder is intended
+              |          | to create accept only credentials or
+              |          | supplied token processor reference is nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60014    | This exception is thrown from
+              |          | CSIArgBuilder::add_identity_processor
+              |          | operation, because the builder is intended
+              |          | to create initiate only credentials or
+              |          | supplied identity processor reference is
+              |          | nil.
+--------------------------------------------------------------------
+BAD_PARAM     | 60015    | This exception is thrown from
+              | 60016    | CSI CredetialsAcquirer as a result of trying
+              | 60017    | to create credentials from probably corrupted
+              |          | argument list
+--------------------------------------------------------------------
+NO_PERMISSION | 70001    | This exception is thrown by security
+              |          | service when set trust decider does not
+              |          | trust a target
+--------------------------------------------------------------------
+NO_PERMISSION | 70002    | This exception is thrown by security
+              |          | service when it is not able to establish
+              |          | context based on transport credentials
+--------------------------------------------------------------------

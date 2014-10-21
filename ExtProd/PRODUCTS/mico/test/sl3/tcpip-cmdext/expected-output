@@ -1,0 +1,196 @@
+wcout init
+Running.
+
+Target credentials:
+interface InitiatingContext {
+  context_id = MICO_TCPIPInitiatingContext:0
+  client_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:anonymous
+      the_name = {
+        "anonymous"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = false
+    alternate_names = {
+    }
+  }
+  client_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = null
+      interpretation_aid = null
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:anonymous
+          the_name = {
+            "anonymous"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = false
+        alternate_names = {
+        }
+      }
+    }
+  }
+  client_restricted_resources = {
+  }
+  target_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:anonymous
+      the_name = {
+        "anonymous"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = false
+    alternate_names = {
+    }
+  }
+  target_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = null
+      interpretation_aid = null
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:anonymous
+          the_name = {
+            "anonymous"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = false
+        alternate_names = {
+        }
+      }
+    }
+  }
+  target_restricted_resources = {
+  }
+  environmental_attributes = {
+    PrinAttribute("SL3:TransportMechanism","TCPIP")
+    PrinAttribute("SL3:ChannelIdentifier","TCPIPv4:127.0.0.1:7812-127.0.0.1:2312")
+  }
+  parent_credentials = MICO_TCPIP:0
+  client_authentication = false
+  target_authentication = false
+  confidentiality = false
+  integrity = false
+  expiry_time = UtcT(-1,0,0,0)
+}
+Hello World
+client credentials: 
+interface AcceptingContext {
+  context_id = MICO_TCPIPAcceptingContext:0
+  client_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:anonymous
+      the_name = {
+        "anonymous"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = false
+    alternate_names = {
+    }
+  }
+  client_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = null
+      interpretation_aid = null
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:anonymous
+          the_name = {
+            "anonymous"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = false
+        alternate_names = {
+        }
+      }
+    }
+  }
+  client_restricted_resources = {
+  }
+  target_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:anonymous
+      the_name = {
+        "anonymous"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = false
+    alternate_names = {
+    }
+  }
+  target_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = null
+      interpretation_aid = null
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:anonymous
+          the_name = {
+            "anonymous"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = false
+        alternate_names = {
+        }
+      }
+    }
+  }
+  target_restricted_resources = {
+  }
+  environmental_attributes = {
+    PrinAttribute("SL3:TransportMechanism","TCPIP")
+    PrinAttribute("SL3:ChannelIdentifier","TCPIPv4:127.0.0.1:7812-127.0.0.1:2312")
+  }
+  parent_credentials = MICO_TCPIP:0
+  client_authentication = false
+  target_authentication = false
+  confidentiality = false
+  integrity = false
+  expiry_time = UtcT(-1,0,0,0)
+  impersonalble = false
+  endorseable = false
+  quotable = false
+}
+

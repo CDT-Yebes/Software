@@ -1,0 +1,87 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2002, 2003 ObjectSecurity Ltd.
+//
+#ifndef _TRUST_IDL_
+#define _TRUST_IDL_
+
+#include <mico/security/sl3pm.idl>
+#include <mico/security/sl3cm.idl>
+
+#pragma prefix "adiron.com"
+
+/**
+ * This module contains various Trust elements for ORBAsec.
+ */
+module Trust {
+
+    /**
+     * This local interface is created by clients and used locally. It represents
+     * a trust decider that determine if the server
+     * trusted to receive further client authentication information
+     * (i.e. username password) and authorization information.
+     * It takes the server principal that has been authenticated
+     * at the transport level by the security service.
+     */
+
+    // change to local interface from valuetype done by ObjectSecurity
+
+    local interface LocalTrustInServerDecider {
+    
+        /**
+         * This operation determines the trust in the server
+         * principal. This principal is the transport principal
+         * of the server that was possibly authenticated by the 
+         * clients security service. This operation is called by
+         * the security service.
+         *
+         * @param server_principal
+         *      This field is the principal that represents the server. 
+         *      It may be authenticated. Check the attributes.
+         *
+         * @param supporting_statements
+         *      This field will contain any Identity Statements
+         *      that support the Security Services deduction of the
+         *      principal.
+         * @param confidentiality
+         *      This field is true if the transport talking to the 
+         *      server is confidential. Check the principal's 
+         *      attributes for any indication of the cipher and
+         *      its strength.
+         * @param integrity
+         *      This field is true if the transport talking with
+         *      the server has integrity protection. Check the prnicipal's
+         *      attributes for any indication of the cipher and
+         *      its strength.
+         * @param creds_directive
+         *      This is the creds directive, i.e. invoke, endorse,
+         *      or embody, that the credentials will use once trust
+         *      has been established. If this is a first time invocation
+         *      for the SL3 Credentials, a minimal transport without
+         *      endorsement, or embodiment capabilities (n/a for TLS)
+         *      is established first for the purposes of determining
+         *      trust.
+         *            
+         * @return True if this object determines that the target is
+         *         trusted to receive such things as authorization tokens,
+         *         client authenticators, and receive invocations from
+         *         this client.                   
+         */
+        boolean is_trusted(
+            in SL3PM::Principal      server_principal,
+            in SL3PM::StatementList  supporting_statements,
+            in boolean                        confidentiality,
+            in boolean                        integrity,
+            in SL3CM::CredsDirective creds_directive
+        );
+    };
+};
+#endif // _TRUST_IDL_

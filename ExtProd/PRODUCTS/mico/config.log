@@ -1,0 +1,172 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:1252: checking host system type
+configure:1273: checking target system type
+configure:1291: checking build system type
+configure:1398: checking for gcc
+configure:1511: checking whether the C compiler (gcc  -Wl,--no-as-needed) works
+configure:1527: gcc -o conftest   -Wl,--no-as-needed conftest.c  1>&5
+configure:1553: checking whether the C compiler (gcc  -Wl,--no-as-needed) is a cross-compiler
+configure:1558: checking whether we are using GNU C
+configure:1586: checking whether gcc accepts -g
+configure:1618: checking how to run the C preprocessor
+configure:1703: checking for c++
+configure:1735: checking whether the C++ compiler (c++  -Wl,--no-as-needed) works
+configure:1751: c++ -o conftest   -Wl,--no-as-needed conftest.C  1>&5
+configure:1777: checking whether the C++ compiler (c++  -Wl,--no-as-needed) is a cross-compiler
+configure:1782: checking whether we are using GNU C++
+configure:1810: checking whether c++ accepts -g
+configure:1842: checking how to run the C++ preprocessor
+configure:1908: checking for POSIXized ISC
+configure:1938: checking OS Type
+configure:2612: checking for open in -lpthread
+configure:2660: checking for pthread.h
+configure:2660: checking for sched.h
+configure:2702: checking for semaphore.h
+configure:3849: checking for bison
+configure:3882: checking for flex
+configure:3916: checking for yywrap in -lfl
+configure:3968: checking for ar
+configure:3975: checking for ranlib
+configure:4003: checking whether make sets ${MAKE}
+configure:4034: checking for tclsh
+configure:4072: checking for javac
+configure:4107: checking for JDK 1.1
+configure:4124: checking for JavaCUP
+configure:4538: checking for esnacc/c++/asn-incl.h
+configure:4571: checking for open in -lc++asn1
+configure:4618: checking for esnacc
+configure:4668: checking for smp/AttributeCertificateDefinitions.h
+configure:4703: checking for open in -lcmlasn
+configure:4838: checking for open in -lm
+configure:4890: checking for open in -lnsl
+configure:4948: checking for X
+configure:5816: checking for open in -lsocket
+configure:5866: checking for open in -lbsd
+configure:5917: checking for open in -lelf
+configure:5967: checking for open in -ldl
+configure:6017: checking for open in -ldld
+configure:6067: checking for open in -lld
+configure:6175: checking for open in -lcrypto
+configure:6225: checking for open in -lssl
+configure:6351: checking for open in -lncurses
+configure:6403: checking for open in -ltermcap
+configure:6454: checking for open in -lHcurses
+configure:6505: checking for open in -lcurses
+configure:6557: checking for readline in -lreadline
+configure:6627: checking for ANSI C header files
+configure:6737: checking for fcntl.h
+configure:6737: checking for unistd.h
+configure:6737: checking for sys/select.h
+configure:6737: checking for strings.h
+configure:6737: checking for float.h
+configure:6737: checking for ieeefp.h
+configure:6777: checking for sys/un.h
+configure:6777: checking for netinet/in.h
+configure:6777: checking for arpa/inet.h
+configure:6777: checking for netdb.h
+configure:6777: checking for dlfcn.h
+configure:6777: checking for dl.h
+configure:6817: checking for netinet/tcp.h
+configure:6817: checking for stdlib.h
+configure:6817: checking for sys/time.h
+configure:6817: checking for sunmath.h
+configure:6817: checking for sys/stat.h
+configure:6857: checking for poll.h
+configure:6898: checking for exception
+configure:6898: checking for exception.h
+configure:6898: checking for terminate.h
+configure:6898: checking for openssl/ssl.h
+configure:6898: checking for pgsql/libpq-fe.h
+configure:6940: checking for qapplication.h
+configure:6940: checking for qsocketnotifier.h
+configure:6940: checking for qlineedit.h
+configure:6982: checking for byteorder.h
+configure:7025: checking for iostream
+configure:7025: checking for map
+configure:7025: checking for string
+configure:7025: checking for sstream
+configure:7063: checking for Ansi C++ headers
+configure:7077: checking for cxxabi.h
+configure:7116: checking for __cxa_demangle
+configure:7177: checking whether time.h and sys/time.h may both be included
+configure:7212: checking for the third argument of getsockname
+configure:7293: checking for the second argument of getsockname
+configure:7339: checking for select argument type
+configure:7389: checking whether gettimeofday has two args
+configure:7432: checking for scanf("%Lf")
+configure:7453: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -Wl,--no-as-needed conftest.C -lssl -lcrypto -ldl -lm  1>&5 
+configure:7489: checking for printf("%Lf")
+configure:7511: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -Wl,--no-as-needed conftest.C -lssl -lcrypto -ldl -lm  1>&5 
+configure:7566: checking for vprintf
+configure:7673: checking for strdup
+configure:7673: checking for strerror
+configure:7673: checking for gethostname
+configure:7673: checking for infnan
+configure:7673: checking for isnan
+configure:7673: checking for isinf
+configure:7673: checking for finite
+configure:7728: checking for infnanl
+configure:7728: checking for isnanl
+configure:7728: checking for isinfl
+configure:7728: checking for asinl
+configure:7728: checking for ldexpl
+configure:7728: checking for frexpl
+configure:7728: checking for fabsl
+configure:7728: checking for floorl
+configure:7728: checking for ceill
+configure:7783: checking for powl
+configure:7783: checking for fmodl
+configure:7783: checking for dlopen
+configure:7783: checking for shl_load
+configure:7783: checking for ftime
+configure:7838: checking for backtrace
+configure:7838: checking for backtrace_symbols
+configure:9940: checking size of unsigned char
+configure:9982: checking size of int
+configure:10024: checking size of unsigned int
+configure:10066: checking size of long
+configure:10108: checking size of unsigned long
+configure:10150: checking size of long long
+configure:10192: checking size of unsigned long long
+configure:10234: checking size of short
+configure:10276: checking size of unsigned short
+configure:10318: checking size of float
+configure:10360: checking size of double
+configure:10402: checking size of long double
+configure:10450: checking whether byte ordering is bigendian
+configure:10570: checking for floating point type
+configure:10600: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -Wl,--no-as-needed conftest.C -lssl -lcrypto -ldl -lm  1>&5
+configure:10640: checking for gethostname prototype
+configure:10668:21: fatal error: winsock.h: No such file or directory
+compilation terminated.
+configure:10688: checking for finite prototype
+configure:10712: checking for strerror prototype
+configure:10736: checking for ftime prototype
+configure:10766: checking for bool
+configure:10804: checking for typename
+configure:10859: checking for guiding declarations
+configure:10914: checking for namespaces
+configure:10975: checking for const overload
+configure:11034: checking for explicit method override
+configure:11102: checking whether explicit struct methods are needed
+configure:11190: checking for overloaded typedefs
+configure:11244: checking for dynamic_cast support
+configure:11302: checking for exception handling flags
+configure:11323: checking for exception handling
+configure:11348: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -Wl,--no-as-needed conftest.C -lssl -lcrypto -ldl -lm  1>&5
+configure:11405: checking for standard exception handling
+configure:11434: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -Wl,--no-as-needed conftest.C -lssl -lcrypto -ldl -lm  1>&5
+configure:11491: checking how to create shared libraries
+configure:11521: checking build of PIC object file
+configure:11562: checking creation of shared lib
+c++ -shared -fPIC -fPIC -rdynamic  -Wl,--no-as-needed  -o libshtest.so   'shtest.o'
+configure:11586: checking if binary linked against shlib works
+configure:11612: c++ -o conftest -fPIC -rdynamic  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DHAVE_EXCEPTIONS  -L. -Wl,--no-as-needed  -rdynamic conftest.C -lshtest -lssl -lcrypto -ldl -lm  1>&5
+configure:11656: checking for exceptions in shared libraries
+configure:11690: c++ -o conftest -fPIC -rdynamic  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DHAVE_EXCEPTIONS  -L. -Wl,--no-as-needed  -rdynamic conftest.C -lshtest -lssl -lcrypto -ldl -lm  1>&5
+configure:11746: checking for dynamic loading
+configure:11796: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -Wl,--no-as-needed  -rdynamic conftest.C -lssl -lcrypto -ldl -lm  1>&5
+configure:11910: checking for thread-safe openssl
+configure:11936: c++ -o conftest  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -Wl,--no-as-needed  conftest.C -lssl -lcrypto -ldl -lm  1>&5

@@ -1,0 +1,84 @@
+*** itcl.tcl.orig	Mon Sep 30 08:06:52 2002
+--- itcl.tcl	Thu Jul  3 16:53:37 2003
+***************
+*** 50,56 ****
+  # USAGE:  itcl::class name body
+  # Adds an entry for the given class declaration.
+  #
+! auto_mkindex_parser::command itcl::class {name body} {
+      variable index
+      variable scriptFile
+      append index "set [list auto_index([fullname $name])]"
+--- 50,57 ----
+  # USAGE:  itcl::class name body
+  # Adds an entry for the given class declaration.
+  #
+! foreach cmd {itcl::class class} {
+! auto_mkindex_parser::command $cmd {name body} {
+      variable index
+      variable scriptFile
+      append index "set [list auto_index([fullname $name])]"
+***************
+*** 62,89 ****
+      $parser eval $body
+      set contextStack [lrange $contextStack 1 end]
+  }
+  
+  #
+  # USAGE:  itcl::body name arglist body
+  # Adds an entry for the given method/proc body.
+  #
+! auto_mkindex_parser::command itcl::body {name arglist body} {
+      variable index
+      variable scriptFile
+      append index "set [list auto_index([fullname $name])]"
+      append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+  }
+  
+  #
+  # USAGE:  itcl::configbody name arglist body
+  # Adds an entry for the given method/proc body.
+  #
+! auto_mkindex_parser::command itcl::configbody {name body} {
+      variable index
+      variable scriptFile
+      append index "set [list auto_index([fullname $name])]"
+      append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+  }
+  
+  #
+  # USAGE:  ensemble name ?body?
+--- 63,95 ----
+      $parser eval $body
+      set contextStack [lrange $contextStack 1 end]
+  }
++ }
+  
+  #
+  # USAGE:  itcl::body name arglist body
+  # Adds an entry for the given method/proc body.
+  #
+! foreach cmd {itcl::body body} {
+! auto_mkindex_parser::command $cmd {name arglist body} {
+      variable index
+      variable scriptFile
+      append index "set [list auto_index([fullname $name])]"
+      append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+  }
++ }
+  
+  #
+  # USAGE:  itcl::configbody name arglist body
+  # Adds an entry for the given method/proc body.
+  #
+! foreach cmd {itcl::configbody configbody} {
+! auto_mkindex_parser::command $cmd {name body} {
+      variable index
+      variable scriptFile
+      append index "set [list auto_index([fullname $name])]"
+      append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+  }
++ }
+  
+  #
+  # USAGE:  ensemble name ?body?

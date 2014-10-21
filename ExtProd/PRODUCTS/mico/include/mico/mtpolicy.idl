@@ -1,0 +1,53 @@
+//
+//  MICO --- an Open Source CORBA implementation
+//  Copyright (C) 2008 ObjectSecurity Ltd.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+//  For more information, visit the MICO Home Page at
+//  http://www.mico.org/
+//
+
+//  Written by Karel Gardas, <kgardas@objectsecurity.com>
+
+#include <mico/policy.idl>
+#include <mico/mttypes.idl>
+
+module MICOMT
+{
+    const CORBA::PolicyType SERVER_CONCURRENCY_MODEL_POLICY_TYPE = 1002;
+
+    local interface ServerConcurrencyModelPolicy : CORBA::Policy {
+        readonly attribute ServerConcurrencyModel model;
+    };
+
+    const CORBA::PolicyType CLIENT_CONCURRENCY_MODEL_POLICY_TYPE = 1003;
+
+    local interface ClientConcurrencyModelPolicy : CORBA::Policy {
+        readonly attribute ClientConcurrencyModel model;
+    };
+
+    const CORBA::PolicyType CONNECTION_LIMIT_POLICY_TYPE = 1004;
+
+    local interface ConnectionLimitPolicy : CORBA::Policy {
+        readonly attribute unsigned long limit;
+    };
+
+    const CORBA::PolicyType REQUEST_LIMIT_POLICY_TYPE = 1005;
+
+    local interface RequestLimitPolicy : CORBA::Policy {
+        readonly attribute unsigned long limit;
+    };
+};

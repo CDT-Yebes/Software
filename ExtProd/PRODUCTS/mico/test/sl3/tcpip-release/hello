@@ -1,0 +1,37 @@
+#!/bin/sh
+
+MICORC=/dev/null
+export MICORC
+
+# run Server
+rm -f hello.ref
+if test "$1" != "log"; then
+SERLOG="no"
+else
+SERLOG="yes"
+fi
+if test "$SERLOG" != "yes"; then
+./server -ORBSL3 &
+else
+./server -ORBSL3 > server.log &
+fi
+server_pid=$!
+
+trap "kill $server_pid > /dev/null 2> /dev/null" 0
+for i in 0 1 2 3 4 5 6 7 8 9 ; do if test -r hello.ref ; then break ; else sleep 1 ; fi ; done
+
+# run client
+if test "$SERLOG" != "yes"; then
+./client -ORBSL3
+else
+./client -ORBSL3 > client.log
+fi
+
+# make sure server prints everything before it is killed
+sleep 1
+
+if test "$SERLOG" != "no"; then
+  cat server.log
+  cat client.log
+  rm -f server.log client.log
+fi

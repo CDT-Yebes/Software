@@ -1,0 +1,56 @@
+ACEXT -- definition
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+-- EXPORTS ALL --
+
+IMPORTS
+
+	GeneralName, GeneralNames
+                FROM X509Common 
+	AttributeCertificate
+		FROM AttributeCertificateDefinitions
+	Certificate
+		FROM AuthenticationFramework ;
+
+right OBJECT-TYPE -- ATTRIBUTE
+        SYNTAX  RightSyntax
+        ACCESS  read-write
+        STATUS  mandatory
+        ::= {id-at-right}
+
+RightSyntax     ::=     SEQUENCE {
+        rightAuthority  [0]     GeneralNames OPTIONAL,
+        rightName       [1]     GeneralName
+        }
+
+group OBJECT-TYPE -- ATTRIBUTE
+        SYNTAX  GroupSyntax
+        ACCESS  read-write
+        STATUS  mandatory
+        ::= {id-at-group}
+
+GroupSyntax     ::=     SEQUENCE {
+        groupAuthority  [0]     GeneralNames OPTIONAL,
+        groupName       [1]     GeneralName
+        }
+
+VerifyingCertChain ::= SEQUENCE OF Certificate
+
+AttributeCertChain ::= SEQUENCE {
+	attributeCert AttributeCertificate,
+	certificateChain VerifyingCertChain
+}
+
+-- object identitifer assignment --
+
+-- proprietary and not widely known identitfiers  --
+-- assigned by ObjectSecurity Limited just        --
+-- for the purposes of OpenPMF                    --
+
+id-at-group	OBJECT IDENTIFIER ::=	{1 1 1 4 1}
+id-at-right	OBJECT IDENTIFIER ::=	{1 1 1 5 1}
+
+END

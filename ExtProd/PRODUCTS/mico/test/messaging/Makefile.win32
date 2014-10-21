@@ -1,0 +1,17 @@
+
+all: subs
+RELATIVE = ..
+!include ..\..\MakeVars.win32
+DIRS = request-timeout request-timeout-with-manager \
+     request-timeout-with-policy-manager \
+     request-timeout-with-policy-current \
+     connection-timeout connection-timeout-with-policy-manager \
+     connection-timeout-with-policy-current
+
+# relship 
+subs:
+	for %i in ( $(DIRS) ); do cmd /c "cd %i & $(MAKE)  /f Makefile.win32  "
+
+clean:
+	for %i in ( $(DIRS) ); do cmd /c "cd %i & $(MAKE) /f Makefile.win32  clean"
+

@@ -1,0 +1,192 @@
+#!/bin/sh
+echo 'This script needs to be run from a peer directory of tcl8.5 etc.'
+echo ''
+
+echo 'patches for tcl8.5.15:'
+echo '*********************'
+
+echo '---------------------------------'
+
+echo 'patches for tk8.5.15:'
+echo '********************'
+
+
+echo '---------------------------------'
+
+echo 'patches for itcl3.4.1:'
+echo '*********************'
+
+echo 'make configure script executable'
+##chmod a+x ../itcl3.4.1/configure
+
+## Incorporated by Jeff Hobbs on 2007-06-10
+# See also e-mails to/from Chad Smith, 1999-09-10, 1999-09-13, etc.
+##echo 'fix for tclIndex file (include "imported" itcl commands, like configbody)'
+##patch --backup -c ../itcl-2007-06-10/itcl/library/itcl.tcl  < tclIndex.patch
+
+echo '---------------------------------'
+
+echo 'patches for iwidgets 4.0.2:'
+echo '**************************'
+
+echo 'trailing quote in configure, swallowed by bash 3.00, but spit out by bash 3.1'
+patch --backup -c ../iwidgets-2008-08-20/tclconfig/tcl.m4        < iwidgets_tcl_m4.patch
+
+##echo 'problem with various INSTALL vars in Makefile.in" in dialog box'
+##patch --backup -c ../iwidgets-2008-08-20/Makefile.in           < iwidgets_makefile.patch
+
+## Incorporated by Jeff Hobbs on 2007-06-10
+##echo 'problem with "tkwait visibility" in dialog box'
+##patch --backup -c ../iwidgets-2007-06-10/generic/shell.itk     < shell.patch
+
+## Incorporated by Jeff Hobbs on 2007-06-10
+##echo 'auto_path refers to non-existing directory'
+##patch --backup -c ../iwidgets-2007-06-10/iwidgets.tcl.in       < iwidgets_autopath.patch
+
+## Incorporated by Jeff Hobbs on 2007-06-10
+##echo 'potential hang-up on datefield keyboard entry - see SF bug report 625441'
+##patch --backup -c ../iwidgets-2007-06-10/generic/datefield.itk < datefield.patch
+
+echo 'conflict with the new Tk 8.4 panedwindow command'
+patch --backup -c ../iwidgets-2008-08-20/generic/panedwindow.itk         < iwidgets_panedwindow.patch
+patch --backup -c ../iwidgets-2008-08-20/generic/extfileselectionbox.itk < iwidgets_extfileselectionbox.patch
+patch --backup -c ../iwidgets-2008-08-20/generic/tclIndex      < iwidgets_tclIndex.patch
+patch --backup -c ../iwidgets-2008-08-20/doc/panedwindow.n     < iwidgets_panedwindow_doc.patch
+patch --backup -c ../iwidgets-2008-08-20/demos/panedwindow     < iwidgets_panedwindow_demo.patch
+
+echo 'no border around tab-set and allow multiple tiers'
+patch --backup -c ../iwidgets-2008-08-20/generic/tabset.itk    < iwidgets_tabset.patch
+
+## Incorporated by Jeff Hobbs on 2007-06-10
+##echo 'no border around pushbutton'
+##patch --backup -c ../iwidgets-2007-06-10/generic/pushbutton.itk  < iwidgets_pushbutton.patch
+
+# Remark: other candidates for this "border" patch are:
+#    buttonbox, dialogshell, menubar, pushbutton, shell, scrolledtext
+# See SF bug report #620806.
+
+echo 'add tier configuration option'
+patch --backup -c ../iwidgets-2008-08-20/generic/tabnotebook.itk < iwidgets_tabnotebook.patch
+
+echo '---------------------------------'
+
+echo 'patches for tklib-0.6:'
+echo '*********************'
+
+echo 'trailing quote in configure, swallowed by bash 3.00, but spit out by bash 3.1'
+patch --backup -c ../tklib-0.6/aclocal.m4                 < tklib_aclocal_m4.patch
+patch --backup -c ../tklib-0.6/config/tcl.m4              < tklib_tcl_m4.patch
+
+
+# See e-mail from C. Nemethi on 28/10/2006
+##echo 'fix editing of cell in last column of tablelist widget'
+##patch --backup -c ../tklib-2006-02-22/modules/tablelist/scripts/tablelistWidget.tcl < tablelist_editing.patch
+
+echo '---------------------------------'
+
+echo '---------------------------------'
+
+echo 'patches for TclX 8.4:'
+echo '********************'
+
+echo 'support for cywgwin'
+patch --backup -c ../tclx-2012-12-13/tclconfig/tcl.m4      < tclx_m4.cygwin_patch
+patch --backup -c ../tclx-2012-12-13/configure             < tclx_configure.cygwin_patch
+
+echo '---------------------------------'
+
+echo 'patches for msql1.99:'
+echo '********************'
+echo "turn Tcl's CONSTification off, enable use of SHLIB_PATH with HP-UX;"
+echo "deal also with inclusion of compilation flags into linking by new tclConfig"
+patch --backup -c ../msqltcl-1.99/Makefile.in              < msqltcl_Makefile.in.patch
+patch --backup -c ../msqltcl-1.99/configure.in             < msqltcl_configure.in.patch
+patch --backup -c ../msqltcl-1.99/configure                < msqltcl_configure.patch
+
+echo 'use with msql 2.x'
+patch --backup -c ../msqltcl-1.99/msqltcl.c                < msqlVersion2.patch
+
+echo '---------------------------------'
+
+###echo 'patches for BLT 2.5:'
+###echo '********************'
+
+###echo "blt2.4z-patch-1: fixes"
+###echo " 1) BLT won't load into more than one interpreter."
+###echo " 2) Hiding an element"
+###echo "       .graph element configure 'e0' -hide yes"
+###echo "    also hides the legend entry."
+###patch --backup -c ../blt2.4z/src/bltGrAxis.c		< blt2.4z-patch-1.part1
+###patch --backup -c ../blt2.4z/src/bltGrElem.c		< blt2.4z-patch-1.part2
+###patch --backup -c ../blt2.4z/src/bltInit.c		< blt2.4z-patch-1.part3
+
+###echo 'blt2.4z-patch-2'
+###patch --backup -c ../blt2.4z/src/bltGrMarker.c		< blt2.4z-patch-2.part1
+###patch --backup -c ../blt2.4z/src/bltTreeView.c		< blt2.4z-patch-2.part2
+
+###echo 'work-around for seg-fault in ComputeVisibleEntries, plus MouseWheel event'
+#### To generate seg-fault, see e-mails of 2005-09-14, subject "First test day"
+###patch --backup -c ../blt2.4z/library/treeview.tcl           < blt2.4z_treeview_tcl.patch
+
+###echo 'variable "dir" not defined in pkgIndex.tcl'
+###patch --backup -c ../blt2.4.z/library/pkgIndex.tcl.in      < blt2.4z_pkgIndex.patch
+
+#### See SF bug report #1814630
+###echo 'ensure macros are also available for 64-bit compilation'  - fixed in blt2.5
+#####patch --backup -c ../blt2.4z/src/bltTree.c		< blt2.4z_bltTree.patch
+
+echo '---------------------------------'
+
+echo 'patches for snack 2.2.10:'
+echo '************************'
+
+echo 'include math.h before redefining roundf()'
+patch --backup -c ../snack2.2.10/generic/jkFormatMP3.c  < snack_math_function.patch
+
+echo '---------------------------------'
+
+echo 'patches for tkimg 1.4:'
+echo '*********************'
+
+echo '---------------------------------'
+
+echo 'patches for TkTable 2.10:'
+echo '************************'
+
+echo '---------------------------------'
+
+echo 'patches for tcllib 1.15:'
+echo '***********************'
+
+echo 'avoid naming conflicts of manpages of the struct module'
+mv -f ../tcllib-1.15/modules/struct/disjointset.man ../tcllib-1.15/modules/struct/struct_disjointset.man
+mv -f ../tcllib-1.15/modules/struct/graph.man ../tcllib-1.15/modules/struct/struct_graph.man
+mv -f ../tcllib-1.15/modules/struct/graph1.man ../tcllib-1.15/modules/struct/struct_graph1.man
+mv -f ../tcllib-1.15/modules/struct/graphops.man ../tcllib-1.15/modules/struct/struct_graphops.man
+mv -f ../tcllib-1.15/modules/struct/matrix.man ../tcllib-1.15/modules/struct/struct_matrix.man
+mv -f ../tcllib-1.15/modules/struct/matrix1.man ../tcllib-1.15/modules/struct/struct_matrix1.man
+mv -f ../tcllib-1.15/modules/struct/pool.man ../tcllib-1.15/modules/struct/struct_pool.man
+mv -f ../tcllib-1.15/modules/struct/prioqueue.man ../tcllib-1.15/modules/struct/struct_prioqueue.man
+mv -f ../tcllib-1.15/modules/struct/queue.man ../tcllib-1.15/modules/struct/struct_queue.man
+mv -f ../tcllib-1.15/modules/struct/record.man ../tcllib-1.15/modules/struct/struct_record.man
+mv -f ../tcllib-1.15/modules/struct/skiplist.man ../tcllib-1.15/modules/struct/struct_skiplist.man
+mv -f ../tcllib-1.15/modules/struct/stack.man ../tcllib-1.15/modules/struct/struct_stack.man
+cp 
+echo '---------------------------------'
+
+echo 'patches for tkman 2.2:'
+echo '*********************'
+
+echo 'Tab distances in text widget must be strictly positive in Tk 8.5'
+patch --backup -c ../tkman-2.2/gui.tcl                      < tkman_tabdistance.patch
+
+
+echo '---------------------------------'
+
+echo 'patches for expect 5.45:'
+echo '***********************'
+
+
+echo '---------------------------------'
+
+##find ..  -name '*.rej' -exec rm {} \;

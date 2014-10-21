@@ -1,0 +1,20 @@
+server: Running.
+relay: Running.
+
+client: user ``karel'' calls hello() operation
+relay: operation executed by: ``karel''
+relay: server->hello()
+server: operation executed by: ``relay'' on behalf of ``karel''
+server: Hello World
+
+client: user ``ras'' calls hello() operation
+relay: operation executed by: ``ras''
+relay: server->hello()
+server: operation executed by: ``relay'' on behalf of ``ras''
+server: Hello World
+
+client: user ``uli'' calls hello() operation
+relay: operation executed by: ``uli''
+relay: server->hello()
+server: operation executed by: ``relay'' on behalf of ``uli''
+server: Hello World

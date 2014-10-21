@@ -1,0 +1,170 @@
+
+
+Commands in global namespace
+============================
+. after append apply array auto_execok auto_import auto_load auto_load_index auto_mkindex auto_mkindex_old auto_qualify auto_reset bell binary bind bindtags break button canvas case catch cd chan checkbutton clipboard clock close concat continue destroy dict encoding entry eof error eval event exec exit expr fblocked fconfigure fcopy file fileevent flush focus font for foreach format frame getNamespaces gets glob global grab grid history if image incr info interp join label labelframe lappend lassign lindex linsert list listbox llength load lower lrange lrepeat lreplace lreverse lsearch lset lsort menu menubutton message namespace open option pack package panedwindow pid place proc puts pwd radiobutton raise read regexp regsub rename return scale scan scrollbar seek selection send set socket source spinbox split string subst switch tclLog tcl_findLibrary tell text time tk tk_chooseColor tk_chooseDirectory tk_getOpenFile tk_getSaveFile tk_menuSetFocus tk_messageBox tk_popup tk_textCopy tk_textCut tk_textPaste tkwait toplevel trace unknown unload unset update uplevel upvar variable vwait while winfo wm
+
+
+Commands in namespace ::auto_mkindex_parser
+===========================================
+cleanup command commandInit fullname hook init mkindex slavehook
+
+
+Commands in namespace ::msgcat
+==============================
+ConvertLocale Init mc mcflmset mcflset mcload mclocale mcmax mcmset mcpreferences mcset mcunknown
+
+
+Commands in namespace ::tcl
+===========================
+Bgerror CopyDirectory HistAdd HistChange HistClear HistEvent HistIndex HistInfo HistKeep HistRedo pkgconfig
+
+
+Commands in namespace ::tcl::chan
+=================================
+blocked close copy create eof event flush gets pending postevent puts read seek tell truncate
+
+
+Commands in namespace ::tcl::clock
+==================================
+ConvertLocalToUTC GetDateFields GetJulianDayFromEraYearMonthDay GetJulianDayFromEraYearWeekDay Oldscan ParseFormatArgs clicks getenv microseconds milliseconds seconds
+
+
+Commands in namespace ::tcl::dict
+=================================
+append create exists filter for get incr info keys lappend merge remove replace set size unset update values with
+
+
+Commands in namespace ::tcl::info
+=================================
+args body cmdcount commands complete default exists frame functions globals hostname level library loaded locals nameofexecutable patchlevel procs script sharedlibextension tclversion vars
+
+
+Commands in namespace ::tcl::mathfunc
+=====================================
+abs acos asin atan atan2 bool ceil cos cosh double entier exp floor fmod hypot int isqrt log log10 max min pow rand round sin sinh sqrt srand tan tanh wide
+
+
+Commands in namespace ::tcl::mathop
+===================================
+! != % & * ** + - / < << <= == > >= >> ^ eq in ne ni | ~
+
+
+Commands in namespace ::tcl::string
+===================================
+bytelength compare equal first index is last length map match range repeat replace reverse tolower totitle toupper trim trimleft trimright wordend wordstart
+
+
+Commands in namespace ::tcl::tm
+===============================
+Defaults UnknownHandler add list path remove roots
+
+
+Commands in namespace ::tcl::unsupported
+========================================
+disassemble
+
+
+Commands in namespace ::tk
+==========================
+AltKeyInDialog AmpMenuArgs AmpWidget ButtonAutoInvoke ButtonDown ButtonEnter ButtonInvoke ButtonLeave ButtonUp CancelRepeat CheckEnter CheckInvoke CheckLeave CheckRadioInvoke EntryAutoScan EntryBackspace EntryButton1 EntryClosestGap EntryGetSelection EntryInsert EntryKeySelect EntryMouseSelect EntryNextWord EntryPaste EntryPreviousWord EntryScanDrag EntryScanMark EntrySeeInsert EntrySetCursor EntryTranspose EventMotifBindings FindAltKeyTarget FirstMenu GenerateMenuSelect GetSelection ListboxAutoScan ListboxBeginExtend ListboxBeginSelect ListboxBeginToggle ListboxCancel ListboxDataExtend ListboxExtendUpDown ListboxMotion ListboxSelectAll ListboxUpDown MbButtonUp MbEnter MbLeave MbMotion MbPost MenuButtonDown MenuDownArrow MenuEscape MenuFind MenuFindName MenuFirstEntry MenuInvoke MenuLeave MenuLeftArrow MenuMotion MenuNextEntry MenuNextMenu MenuRightArrow MenuUnpost MenuUpArrow PlaceWindow PostOverPoint RestoreFocusGrab RestoreOldGrab SaveGrabInfo ScaleActivate ScaleButton2Down ScaleButtonDown ScaleControlPress ScaleDrag ScaleEndDrag ScaleIncrement ScreenChanged ScrollButton2Down ScrollButtonDown ScrollButtonUp ScrollByPages ScrollByUnits ScrollDrag ScrollEndDrag ScrollSelect ScrollStartDrag ScrollToPos ScrollTopBottom SetAmpText SetFocusGrab SourceLibFile TabToWindow TextAnchor TextAutoScan TextButton1 TextClosestGap TextCursorInSelection TextInsert TextKeyExtend TextKeySelect TextNextPara TextNextPos TextNextWord TextPasteSelection TextPrevPara TextPrevPos TextResetAnchor TextScanDrag TextScanMark TextScrollPages TextSelectTo TextSetCursor TextTranspose TextUpDownLine TraverseToMenu TraverseWithinMenu UnderlineAmpersand button canvas checkbutton entry frame label labelframe listbox mc mcmax mcmaxamp menubutton message panedwindow pkgconfig radiobutton scale scrollbar spinbox text toplevel
+
+
+Commands in namespace ::tk::msgcat
+==================================
+mc mcmax
+
+
+Commands in namespace ::tk::panedwindow
+=======================================
+Cursor DragSash Leave MarkSash Motion ReleaseSash
+
+
+Commands in namespace ::tk::spinbox
+===================================
+AutoScan ButtonDown ButtonUp ClosestGap GetSelection Invoke Motion MouseSelect Paste
+
+
+Commands in namespace ::ttk
+===========================
+CancelRepeat CursorSampler GuessTakeFocus Repeat Repeatedly RestoreGrab SaveGrab ThemeChanged bindMouseWheel button checkbutton clickToFocus combobox copyBindings cursor deprecated deprecated'warning do'deprecate entry focusFirst frame globalGrab grabWindow label labelframe menubutton notebook paned panedwindow progressbar radiobutton releaseGrab scale scrollbar separator setCursor setTheme sizegrip spinbox style takefocus takesFocus themes traverseTo treeview
+
+
+Commands in namespace ::ttk::button
+===================================
+RadioTraverse activate
+
+
+Commands in namespace ::ttk::combobox
+=====================================
+ConfigureListbox Drag LBCancel LBCleanup LBHover LBMaster LBSelect LBSelected LBTab MapPopdown Motion PlacePopdown PopdownToplevel PopdownWindow Post Press Scroll SelectEntry TraverseIn UnmapPopdown Unpost
+
+
+Commands in namespace ::ttk::entry
+==================================
+AutoScroll Backspace CharSelect Clear ClosestGap Copy Cut Delete Drag DragTo EntrySelection Extend ExtendTo Insert LineSelect Move NextWord Paste PendingDelete Press PrevWord RelIndex ScanDrag ScanMark ScanRelease See Select Shift-Press WordBack WordForward WordSelect
+
+
+Commands in namespace ::ttk::menubutton
+=======================================
+FindMenuEntry Popdown PostPosition Pulldown TransferGrab
+
+
+Commands in namespace ::ttk::notebook
+=====================================
+ActivateTab Cleanup CycleTab EnclosingNotebook MnemonicActivation MnemonicTab Press TLCleanup TLCycleTab enableTraversal
+
+
+Commands in namespace ::ttk::panedwindow
+========================================
+Drag Press Release ResetCursor SetCursor
+
+
+Commands in namespace ::ttk::progressbar
+========================================
+Autoincrement start stop
+
+
+Commands in namespace ::ttk::scale
+==================================
+Drag Increment Jump Press Release
+
+
+Commands in namespace ::ttk::scrollbar
+======================================
+Drag Jump Moveto Press Release Scroll
+
+
+Commands in namespace ::ttk::sizegrip
+=====================================
+Drag Press Release
+
+
+Commands in namespace ::ttk::spinbox
+====================================
+Adjust DoubleClick FormatValue Limit Motion MouseWheel Press Release SelectAll Spin Wrap
+
+
+Commands in namespace ::ttk::theme
+==================================
+
+
+Commands in namespace ::ttk::theme::alt
+=======================================
+
+
+Commands in namespace ::ttk::theme::clam
+========================================
+
+
+Commands in namespace ::ttk::theme::classic
+===========================================
+
+
+Commands in namespace ::ttk::theme::default
+===========================================
+
+
+Commands in namespace ::ttk::treeview
+=====================================
+ActivateHeading BrowseTo CloseItem DoubleClick Drag Keynav Motion OpenItem Press Release ScanBetween Select SelectOp Toggle ToggleFocus between heading.drag heading.press heading.release resize.drag resize.press resize.release select.choose.browse select.choose.extended select.choose.none select.extend.browse select.extend.extended select.extend.none select.toggle.browse select.toggle.extended select.toggle.none

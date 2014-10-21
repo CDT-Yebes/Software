@@ -1,0 +1,152 @@
+#
+# $Id: Makefile.in,v 1.99 1996/09/27 20:53:09 hs Rel $
+#
+# Makefile for msqltcl.
+#
+# Hakan Soderstrom, hs@soderstrom.se
+#
+############################################################################ 
+# 
+# Copyright (c) 1994-1996 Hakan Soderstrom and Tom Poindexter
+# 
+# Permission to use, copy, modify, distribute, and sell this software
+# and its documentation for any purpose is hereby granted without fee,
+# provided that the above copyright notice and this permission notice
+# appear in all copies of the software and related documentation.
+# 
+# THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+# WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+#
+# IN NO EVENT SHALL HAKAN SODERSTROM OR SODERSTROM PROGRAMVARUVERKSTAD
+# AB BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL
+# DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+# OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY
+# OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN
+# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#
+############################################################################ 
+
+#===== CONFIGURATION DEFINITIONS === EDIT TO SUIT YOUR SYSTEM =====
+
+VERSION = 1.99
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+BIN_INSTALL_DIR = $(exec_prefix)/bin
+LIB_RUNTIME_DIR = $(exec_prefix)/lib
+MAN_INSTALL_DIR = $(prefix)/man
+MANN_INSTALL_DIR = $(MAN_INSTALL_DIR)/mann
+
+#----- C compiler and options
+CC = @CC@
+OPTIM = -O
+CFLAGS = ${OPTIM} -DUSE_NON_CONST
+LDFLAGS = @LD_FLAGS@
+CC_SEARCH_FLAGS = @CC_SEARCH_FLAGS@
+LD_SEARCH_FLAGS = @LD_SEARCH_FLAGS@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+SHLIB_CFLAGS = @SHLIB_CFLAGS@
+SHLIB_LD = @SHLIB_LD@
+SHLIB_SUFFIX = @SHLIB_SUFFIX@
+
+#####################################################
+# TCL/TK STUFF
+#
+# Path to Tcl include files.
+TCLINCL = @TCL_INCLUDES@
+# Path for Tk include files, if different from the above.
+TKINCL = @TK_INCLUDES@
+# Libraries required to link plain Tcl.
+TCLLIBS = @TCL_LIB_SPEC@
+# Libraries required to link plain Tk.
+TKLIBS = @TK_LIB_SPEC@
+# Path for X11 include files.
+X11INCL = @TK_XINCLUDES@
+# Libraries required to link X11.
+X11LIBS = @TK_XLIBSW@
+# Libraries required to do dynamic linking with Tcl.
+DL_LIBS = @DL_LIBS@
+
+#----- What are the 'AppInit' files (base names)?
+TCLAPPINIT = tclAppInit
+TKAPPINIT =  tkAppInit
+
+#####################################################
+# MSQL STUFF
+#
+#----- mSQL libraries & such
+# Path for mSQL include files.
+MSQLINCL = @MSQL_INC@
+# Libraries required to link an mSQL application.
+MSQLLIB = @LIBS@ @MSQL_LIBS@
+
+ifeq ($(shell uname),SunOS)
+    SUN_LIBS = -lsocket -lnsl
+endif
+
+#===== END OF CONFIGURATION DEFINITIONS =====
+
+INCL = -I. ${TCLINCL} ${TKINCL} ${MSQLINCL} ${X11INCL}
+PROGS = msqltcl msqlwish @SHLIB_TARGET@
+TCLLINK = ${MSQLLIB} ${TCLLIBS} ${SUN_LIBS} ${DL_LIBS} -lm
+TKLINK = ${MSQLLIB} ${TKLIBS} ${TCLLIBS} ${X11LIBS} ${SUN_LIBS} ${DL_LIBS} -lm
+SHELL = /bin/sh
+
+#===== TARGETS =====
+
+all :	${PROGS}
+
+install: ${PROGS}
+	$(INSTALL_PROGRAM) msqltcl $(BIN_INSTALL_DIR)
+	$(INSTALL_PROGRAM) msqlwish $(BIN_INSTALL_DIR)
+	$(INSTALL_DATA) msqltcl.n $(MANN_INSTALL_DIR)
+	if [ -n "@SHLIB_TARGET@" ] ; then \
+	    target="libmsqltcl$(VERSION)$(SHLIB_SUFFIX)"; \
+	    $(INSTALL_DATA) @SHLIB_TARGET@ $(LIB_RUNTIME_DIR)/$$target; \
+	    chmod 555 $(LIB_RUNTIME_DIR)/$$target; \
+	    else true; \
+	fi
+
+uninstall:
+	rm -f $(BIN_INSTALL_DIR)/msqltcl
+	rm -f $(BIN_INSTALL_DIR)/msqlwish
+	rm -f $(MANN_INSTALL_DIR)/msqltcl.n
+	if [ -n "@SHLIB_TARGET@" ] ; then \
+	    target="msqltcl$(VERSION)$(SHLIB_SUFFIX)"; \
+	    rm -f $(LIB_RUNTIME_DIR)/$$target; \
+	    else true; \
+	fi
+
+clean:
+	rm -f ${PROGS} msqltcl.o tclAppInit.o tkAppInit.o
+
+distclean: clean
+	rm -f config.cache config.log config.status Makefile
+
+#----- Auxiliary targets -----
+
+msqltcl : ${TCLAPPINIT}.o msqltcl.o
+	${CC} ${LDFLAGS} ${CC_SEARCH_FLAGS} -o msqltcl ${TCLAPPINIT}.o msqltcl.o ${TCLLINK}
+
+msqlwish : ${TKAPPINIT}.o msqltcl.o
+	${CC} ${LDFLAGS} ${CC_SEARCH_FLAGS} -o msqlwish ${TKAPPINIT}.o msqltcl.o ${TKLINK}
+
+${TCLAPPINIT}.o : ${TCLAPPINIT}.c
+	${CC} -c ${CFLAGS} ${INCL} ${TCLAPPINIT}.c -o ${TCLAPPINIT}.o
+
+${TKAPPINIT}.o : ${TKAPPINIT}.c
+	${CC} -c ${CFLAGS} ${INCL} ${TKAPPINIT}.c -o ${TKAPPINIT}.o
+
+msqltcl.o : msqltcl.c
+	${CC} -c ${CFLAGS} ${SHLIB_CFLAGS} ${INCL} msqltcl.c
+
+##msqltcl${SHLIB_SUFFIX}: msqltcl.o
+##	${SHLIB_LD} msqltcl.o -o msqltcl${SHLIB_SUFFIX} ${MSQLLIB}
+
+msqltcl${SHLIB_SUFFIX}: msqltcl.o
+	${SHLIB_LD} ${LD_SEARCH_FLAGS} msqltcl.o -o msqltcl${SHLIB_SUFFIX}

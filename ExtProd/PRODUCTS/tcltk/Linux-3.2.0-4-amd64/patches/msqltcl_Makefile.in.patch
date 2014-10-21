@@ -1,0 +1,70 @@
+*** Makefile.in.orig	Tue Mar  6 08:17:37 2007
+--- Makefile.in	Fri Nov 23 17:08:55 2007
+***************
+*** 41,48 ****
+  #----- C compiler and options
+  CC = @CC@
+  OPTIM = -O
+! CFLAGS = ${OPTIM} -c
+  LDFLAGS = @LD_FLAGS@
+  
+  INSTALL = @INSTALL@
+  INSTALL_PROGRAM = @INSTALL_PROGRAM@
+--- 41,50 ----
+  #----- C compiler and options
+  CC = @CC@
+  OPTIM = -O
+! CFLAGS = ${OPTIM} -DUSE_NON_CONST
+  LDFLAGS = @LD_FLAGS@
++ CC_SEARCH_FLAGS = @CC_SEARCH_FLAGS@
++ LD_SEARCH_FLAGS = @LD_SEARCH_FLAGS@
+  
+  INSTALL = @INSTALL@
+  INSTALL_PROGRAM = @INSTALL_PROGRAM@
+***************
+*** 129,150 ****
+  #----- Auxiliary targets -----
+  
+  msqltcl : ${TCLAPPINIT}.o msqltcl.o
+! 	${CC} ${LDFLAGS} -o msqltcl ${TCLAPPINIT}.o msqltcl.o ${TCLLINK}
+  
+  msqlwish : ${TKAPPINIT}.o msqltcl.o
+! 	${CC} ${LDFLAGS} -o msqlwish ${TKAPPINIT}.o msqltcl.o ${TKLINK}
+  
+  ${TCLAPPINIT}.o : ${TCLAPPINIT}.c
+! 	${CC} ${CFLAGS} ${INCL} ${TCLAPPINIT}.c -o ${TCLAPPINIT}.o
+  
+  ${TKAPPINIT}.o : ${TKAPPINIT}.c
+! 	${CC} ${CFLAGS} ${INCL} ${TKAPPINIT}.c -o ${TKAPPINIT}.o
+  
+  msqltcl.o : msqltcl.c
+! 	${CC} ${CFLAGS} ${SHLIB_CFLAGS} ${INCL} msqltcl.c
+  
+  ##msqltcl${SHLIB_SUFFIX}: msqltcl.o
+  ##	${SHLIB_LD} msqltcl.o -o msqltcl${SHLIB_SUFFIX} ${MSQLLIB}
+  
+  msqltcl${SHLIB_SUFFIX}: msqltcl.o
+! 	${SHLIB_LD} msqltcl.o -o msqltcl${SHLIB_SUFFIX}
+--- 131,152 ----
+  #----- Auxiliary targets -----
+  
+  msqltcl : ${TCLAPPINIT}.o msqltcl.o
+! 	${CC} ${LDFLAGS} ${CC_SEARCH_FLAGS} -o msqltcl ${TCLAPPINIT}.o msqltcl.o ${TCLLINK}
+  
+  msqlwish : ${TKAPPINIT}.o msqltcl.o
+! 	${CC} ${LDFLAGS} ${CC_SEARCH_FLAGS} -o msqlwish ${TKAPPINIT}.o msqltcl.o ${TKLINK}
+  
+  ${TCLAPPINIT}.o : ${TCLAPPINIT}.c
+! 	${CC} -c ${CFLAGS} ${INCL} ${TCLAPPINIT}.c -o ${TCLAPPINIT}.o
+  
+  ${TKAPPINIT}.o : ${TKAPPINIT}.c
+! 	${CC} -c ${CFLAGS} ${INCL} ${TKAPPINIT}.c -o ${TKAPPINIT}.o
+  
+  msqltcl.o : msqltcl.c
+! 	${CC} -c ${CFLAGS} ${SHLIB_CFLAGS} ${INCL} msqltcl.c
+  
+  ##msqltcl${SHLIB_SUFFIX}: msqltcl.o
+  ##	${SHLIB_LD} msqltcl.o -o msqltcl${SHLIB_SUFFIX} ${MSQLLIB}
+  
+  msqltcl${SHLIB_SUFFIX}: msqltcl.o
+! 	${SHLIB_LD} ${LD_SEARCH_FLAGS} msqltcl.o -o msqltcl${SHLIB_SUFFIX}

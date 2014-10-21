@@ -1,0 +1,5 @@
+# Module dependencies
+alloca.o alloca.pic.o: alloca.c
+cccp.o cccp.pic.o: /usr/include cccp.c config.h pcp.h
+cexp.o cexp.pic.o: /usr/include cexp.c config.h
+config.o config.pic.o: config.c

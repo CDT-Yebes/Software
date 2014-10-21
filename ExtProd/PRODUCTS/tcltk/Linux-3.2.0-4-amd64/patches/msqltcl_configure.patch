@@ -1,0 +1,24 @@
+*** configure.orig	Mon Jul 19 09:34:16 2004
+--- configure	Tue Aug  3 17:18:23 2004
+***************
+*** 904,909 ****
+--- 904,911 ----
+  SHLIB_SUFFIX=$TCL_SHLIB_SUFFIX
+  DL_LIBS=$TCL_DL_LIBS
+  LD_FLAGS=$TCL_LD_FLAGS
++ CC_SEARCH_FLAGS=$TCL_CC_SEARCH_FLAGS
++ LD_SEARCH_FLAGS=$TCL_LD_SEARCH_FLAGS
+  TCL_INCLUDES=-I$TCL_PREFIX/include
+  
+  if test -z "$SHLIB_LD" ; then
+***************
+*** 1184,1189 ****
+--- 1186,1193 ----
+  s%@SHLIB_TARGET@%$SHLIB_TARGET%g
+  s%@DL_LIBS@%$DL_LIBS%g
+  s%@LD_FLAGS@%$LD_FLAGS%g
++ s%@CC_SEARCH_FLAGS@%$CC_SEARCH_FLAGS%g
++ s%@LD_SEARCH_FLAGS@%$LD_SEARCH_FLAGS%g
+  s%@TCL_INCLUDES@%$TCL_INCLUDES%g
+  s%@TCL_LIB_SPEC@%$TCL_LIB_SPEC%g
+  s%@TCL_VERSION@%$TCL_VERSION%g

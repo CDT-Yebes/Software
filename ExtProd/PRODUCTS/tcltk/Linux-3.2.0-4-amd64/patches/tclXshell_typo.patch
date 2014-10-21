@@ -1,0 +1,36 @@
+*** tclXshell.c.orig	Tue Nov 26 16:07:25 2002
+--- tclXshell.c	Tue Nov 26 16:08:08 2002
+***************
+*** 208,214 ****
+   *
+   *   This function runs the TclX shell, including parsing the command line and
+   * calling the Tcl_AppInit function at the approriate place.  It either enters
+!  * interactive command mode or evaulates a script or command from the command
+   * line.
+   *
+   * Parameters:
+--- 208,214 ----
+   *
+   *   This function runs the TclX shell, including parsing the command line and
+   * calling the Tcl_AppInit function at the approriate place.  It either enters
+!  * interactive command mode or evaluates a script or command from the command
+   * line.
+   *
+   * Parameters:
+***************
+*** 297,303 ****
+                            isatty (0) ? TCLX_CMDL_INTERACTIVE : 0,
+                            NULL, NULL, NULL))
+          TclX_ErrorExit (interp, 255,
+!                         "\n    while\nevaulating interactive commands");
+  
+    evalComplete:
+      TclX_ShellExit (interp, 0);
+--- 297,303 ----
+                            isatty (0) ? TCLX_CMDL_INTERACTIVE : 0,
+                            NULL, NULL, NULL))
+          TclX_ErrorExit (interp, 255,
+!                         "\n    while\nevaluating interactive commands");
+  
+    evalComplete:
+      TclX_ShellExit (interp, 0);

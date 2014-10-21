@@ -1,0 +1,287 @@
+# Module dependencies
+imr_client.o imr_client.pic.o: ../include/CORBA-SMALL.h ../include/CORBA.h
+imr_client.o imr_client.pic.o: ../include/mico/address.h ../include/mico/address_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/any.h ../include/mico/array.h
+imr_client.o imr_client.pic.o: ../include/mico/assert.h ../include/mico/basic.h
+imr_client.o imr_client.pic.o: ../include/mico/basic_seq.h ../include/mico/buffer.h
+imr_client.o imr_client.pic.o: ../include/mico/codec.h ../include/mico/codec_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/codeset.h ../include/mico/codeset_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/config-win32.h ../include/mico/config.h
+imr_client.o imr_client.pic.o: ../include/mico/current.h ../include/mico/dii.h
+imr_client.o imr_client.pic.o: ../include/mico/dsi.h ../include/mico/dynany.h
+imr_client.o imr_client.pic.o: ../include/mico/except.h ../include/mico/fast_array.h
+imr_client.o imr_client.pic.o: ../include/mico/fixed.h ../include/mico/impl.h
+imr_client.o imr_client.pic.o: ../include/mico/imr.h ../include/mico/iop.h
+imr_client.o imr_client.pic.o: ../include/mico/ioptypes.h ../include/mico/ior.h
+imr_client.o imr_client.pic.o: ../include/mico/ior_impl.h ../include/mico/ir.h
+imr_client.o imr_client.pic.o: ../include/mico/ir_base.h ../include/mico/magic.h
+imr_client.o imr_client.pic.o: ../include/mico/memtrace.h ../include/mico/message.h
+imr_client.o imr_client.pic.o: ../include/mico/messaging.h ../include/mico/mt_dispatcher.h
+imr_client.o imr_client.pic.o: ../include/mico/mt_manager.h ../include/mico/mtdebug.h
+imr_client.o imr_client.pic.o: ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+imr_client.o imr_client.pic.o: ../include/mico/native.h ../include/mico/object.h
+imr_client.o imr_client.pic.o: ../include/mico/operation.h ../include/mico/operation_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/operators.h ../include/mico/orb_excepts.h
+imr_client.o imr_client.pic.o: ../include/mico/orb_fwd.h ../include/mico/orb_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/orb_mico.h ../include/mico/os-misc.h
+imr_client.o imr_client.pic.o: ../include/mico/os-thread.h ../include/mico/os-thread/dcethreads.h
+imr_client.o imr_client.pic.o: ../include/mico/os-thread/pthreads.h ../include/mico/os-thread/pththreads.h
+imr_client.o imr_client.pic.o: ../include/mico/os-thread/solaris-threads.h
+imr_client.o imr_client.pic.o: ../include/mico/pi.h ../include/mico/poa.h
+imr_client.o imr_client.pic.o: ../include/mico/poa_base.h ../include/mico/poa_stubs.h
+imr_client.o imr_client.pic.o: ../include/mico/policy.h ../include/mico/policy2.h
+imr_client.o imr_client.pic.o: ../include/mico/policy_impl.h ../include/mico/poll_dispatcher.h
+imr_client.o imr_client.pic.o: ../include/mico/process.h ../include/mico/process_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/security/DomainManager.h
+imr_client.o imr_client.pic.o: ../include/mico/security/SecurityAdmin.h
+imr_client.o imr_client.pic.o: ../include/mico/security/atlas.h ../include/mico/security/csi.h
+imr_client.o imr_client.pic.o: ../include/mico/security/csi_base.h ../include/mico/security/csiiop.h
+imr_client.o imr_client.pic.o: ../include/mico/security/csiv2.h ../include/mico/security/gssup.h
+imr_client.o imr_client.pic.o: ../include/mico/security/odm.h ../include/mico/security/security.h
+imr_client.o imr_client.pic.o: ../include/mico/security/securitylevel1.h
+imr_client.o imr_client.pic.o: ../include/mico/security/securitylevel2.h
+imr_client.o imr_client.pic.o: ../include/mico/security/securitylevel3.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3authorization.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3cm.h ../include/mico/security/sl3cmdext.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3csi.h ../include/mico/security/sl3ipc.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3om.h ../include/mico/security/sl3omext.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3pm.h ../include/mico/security/sl3tcpip.h
+imr_client.o imr_client.pic.o: ../include/mico/security/sl3tls.h ../include/mico/security/transportsecurity.h
+imr_client.o imr_client.pic.o: ../include/mico/security/transportsecurity_p.h
+imr_client.o imr_client.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+imr_client.o imr_client.pic.o: ../include/mico/select_dispatcher.h ../include/mico/sequence.h
+imr_client.o imr_client.pic.o: ../include/mico/sequence_special.h ../include/mico/service_info.h
+imr_client.o imr_client.pic.o: ../include/mico/shlib.h ../include/mico/shlib_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/static.h ../include/mico/string.h
+imr_client.o imr_client.pic.o: ../include/mico/sysexc.h ../include/mico/tcconst.h
+imr_client.o imr_client.pic.o: ../include/mico/tckind.h ../include/mico/template.h
+imr_client.o imr_client.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+imr_client.o imr_client.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+imr_client.o imr_client.pic.o: ../include/mico/transport/tcp.h ../include/mico/transport/udp.h
+imr_client.o imr_client.pic.o: ../include/mico/transport/unix.h ../include/mico/transport_impl.h
+imr_client.o imr_client.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+imr_client.o imr_client.pic.o: ../include/mico/types.h ../include/mico/util.h
+imr_client.o imr_client.pic.o: ../include/mico/value.h ../include/mico/valuetype.h
+imr_client.o imr_client.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+imr_client.o imr_client.pic.o: ../include/ministl/bool.h ../include/ministl/bstring.h
+imr_client.o imr_client.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+imr_client.o imr_client.pic.o: ../include/ministl/function.h ../include/ministl/list
+imr_client.o imr_client.pic.o: ../include/ministl/list.h ../include/ministl/map
+imr_client.o imr_client.pic.o: ../include/ministl/map.h ../include/ministl/ministl.h
+imr_client.o imr_client.pic.o: ../include/ministl/pair ../include/ministl/pair.h
+imr_client.o imr_client.pic.o: ../include/ministl/set ../include/ministl/set.h
+imr_client.o imr_client.pic.o: ../include/ministl/simplevec.h ../include/ministl/string
+imr_client.o imr_client.pic.o: ../include/ministl/vector ../include/ministl/vector.h
+imr_client.o imr_client.pic.o: ./imr_impl.h ./imr_pch.h ./poamediator.h
+imr_client.o imr_client.pic.o: imr_client.cc imr_impl.h imr_pch.h poamediator.h
+imr_impl.o imr_impl.pic.o: ../include/CORBA.h ../include/mico/address.h
+imr_impl.o imr_impl.pic.o: ../include/mico/address_impl.h ../include/mico/any.h
+imr_impl.o imr_impl.pic.o: ../include/mico/array.h ../include/mico/assert.h
+imr_impl.o imr_impl.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h
+imr_impl.o imr_impl.pic.o: ../include/mico/buffer.h ../include/mico/codec.h
+imr_impl.o imr_impl.pic.o: ../include/mico/codec_impl.h ../include/mico/codeset.h
+imr_impl.o imr_impl.pic.o: ../include/mico/codeset_impl.h ../include/mico/config-win32.h
+imr_impl.o imr_impl.pic.o: ../include/mico/config.h ../include/mico/current.h
+imr_impl.o imr_impl.pic.o: ../include/mico/dii.h ../include/mico/dsi.h ../include/mico/dynany.h
+imr_impl.o imr_impl.pic.o: ../include/mico/except.h ../include/mico/fast_array.h
+imr_impl.o imr_impl.pic.o: ../include/mico/fixed.h ../include/mico/impl.h
+imr_impl.o imr_impl.pic.o: ../include/mico/imr.h ../include/mico/iop.h ../include/mico/ioptypes.h
+imr_impl.o imr_impl.pic.o: ../include/mico/ior.h ../include/mico/ior_impl.h
+imr_impl.o imr_impl.pic.o: ../include/mico/ir.h ../include/mico/ir_base.h
+imr_impl.o imr_impl.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h
+imr_impl.o imr_impl.pic.o: ../include/mico/message.h ../include/mico/messaging.h
+imr_impl.o imr_impl.pic.o: ../include/mico/mt_dispatcher.h ../include/mico/mt_manager.h
+imr_impl.o imr_impl.pic.o: ../include/mico/mtdebug.h ../include/mico/mtpolicy.h
+imr_impl.o imr_impl.pic.o: ../include/mico/mttypes.h ../include/mico/native.h
+imr_impl.o imr_impl.pic.o: ../include/mico/object.h ../include/mico/operation.h
+imr_impl.o imr_impl.pic.o: ../include/mico/operation_impl.h ../include/mico/operators.h
+imr_impl.o imr_impl.pic.o: ../include/mico/orb_excepts.h ../include/mico/orb_fwd.h
+imr_impl.o imr_impl.pic.o: ../include/mico/orb_impl.h ../include/mico/orb_mico.h
+imr_impl.o imr_impl.pic.o: ../include/mico/os-misc.h ../include/mico/os-thread.h
+imr_impl.o imr_impl.pic.o: ../include/mico/os-thread/dcethreads.h ../include/mico/os-thread/pthreads.h
+imr_impl.o imr_impl.pic.o: ../include/mico/os-thread/pththreads.h ../include/mico/os-thread/solaris-threads.h
+imr_impl.o imr_impl.pic.o: ../include/mico/pi.h ../include/mico/poa.h ../include/mico/poa_base.h
+imr_impl.o imr_impl.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h
+imr_impl.o imr_impl.pic.o: ../include/mico/policy2.h ../include/mico/policy_impl.h
+imr_impl.o imr_impl.pic.o: ../include/mico/poll_dispatcher.h ../include/mico/process.h
+imr_impl.o imr_impl.pic.o: ../include/mico/process_impl.h ../include/mico/security/DomainManager.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/SecurityAdmin.h ../include/mico/security/atlas.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/csi.h ../include/mico/security/csi_base.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/csiiop.h ../include/mico/security/csiv2.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/gssup.h ../include/mico/security/odm.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/security.h ../include/mico/security/securitylevel1.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/securitylevel2.h ../include/mico/security/securitylevel3.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/sl3authorization.h ../include/mico/security/sl3cm.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/sl3cmdext.h ../include/mico/security/sl3csi.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/sl3ipc.h ../include/mico/security/sl3om.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/sl3omext.h ../include/mico/security/sl3pm.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/sl3tcpip.h ../include/mico/security/sl3tls.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/transportsecurity.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/transportsecurity_p.h
+imr_impl.o imr_impl.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+imr_impl.o imr_impl.pic.o: ../include/mico/select_dispatcher.h ../include/mico/sequence.h
+imr_impl.o imr_impl.pic.o: ../include/mico/sequence_special.h ../include/mico/service_info.h
+imr_impl.o imr_impl.pic.o: ../include/mico/shlib.h ../include/mico/shlib_impl.h
+imr_impl.o imr_impl.pic.o: ../include/mico/static.h ../include/mico/string.h
+imr_impl.o imr_impl.pic.o: ../include/mico/sysexc.h ../include/mico/tcconst.h
+imr_impl.o imr_impl.pic.o: ../include/mico/tckind.h ../include/mico/template.h
+imr_impl.o imr_impl.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+imr_impl.o imr_impl.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+imr_impl.o imr_impl.pic.o: ../include/mico/transport/tcp.h ../include/mico/transport/udp.h
+imr_impl.o imr_impl.pic.o: ../include/mico/transport/unix.h ../include/mico/transport_impl.h
+imr_impl.o imr_impl.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+imr_impl.o imr_impl.pic.o: ../include/mico/types.h ../include/mico/util.h
+imr_impl.o imr_impl.pic.o: ../include/mico/value.h ../include/mico/valuetype.h
+imr_impl.o imr_impl.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+imr_impl.o imr_impl.pic.o: ../include/ministl/bool.h ../include/ministl/bstring.h
+imr_impl.o imr_impl.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+imr_impl.o imr_impl.pic.o: ../include/ministl/function.h ../include/ministl/list
+imr_impl.o imr_impl.pic.o: ../include/ministl/list.h ../include/ministl/map
+imr_impl.o imr_impl.pic.o: ../include/ministl/map.h ../include/ministl/ministl.h
+imr_impl.o imr_impl.pic.o: ../include/ministl/pair ../include/ministl/pair.h
+imr_impl.o imr_impl.pic.o: ../include/ministl/set ../include/ministl/set.h
+imr_impl.o imr_impl.pic.o: ../include/ministl/simplevec.h ../include/ministl/string
+imr_impl.o imr_impl.pic.o: ../include/ministl/vector ../include/ministl/vector.h
+imr_impl.o imr_impl.pic.o: ./imr_impl.h ./imr_pch.h ./poamediator.h imr_impl.cc
+imr_impl.o imr_impl.pic.o: imr_impl.h imr_pch.h poamediator.h
+main.o main.pic.o: ../include/CORBA.h ../include/mico/address.h ../include/mico/address_impl.h
+main.o main.pic.o: ../include/mico/any.h ../include/mico/array.h ../include/mico/assert.h
+main.o main.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h ../include/mico/buffer.h
+main.o main.pic.o: ../include/mico/codec.h ../include/mico/codec_impl.h
+main.o main.pic.o: ../include/mico/codeset.h ../include/mico/codeset_impl.h
+main.o main.pic.o: ../include/mico/config-win32.h ../include/mico/config.h
+main.o main.pic.o: ../include/mico/current.h ../include/mico/dii.h ../include/mico/dsi.h
+main.o main.pic.o: ../include/mico/dynany.h ../include/mico/except.h ../include/mico/fast_array.h
+main.o main.pic.o: ../include/mico/fixed.h ../include/mico/impl.h ../include/mico/imr.h
+main.o main.pic.o: ../include/mico/iop.h ../include/mico/ioptypes.h ../include/mico/ior.h
+main.o main.pic.o: ../include/mico/ior_impl.h ../include/mico/ir.h ../include/mico/ir_base.h
+main.o main.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h ../include/mico/message.h
+main.o main.pic.o: ../include/mico/messaging.h ../include/mico/mt_dispatcher.h
+main.o main.pic.o: ../include/mico/mt_manager.h ../include/mico/mtdebug.h
+main.o main.pic.o: ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+main.o main.pic.o: ../include/mico/native.h ../include/mico/object.h ../include/mico/operation.h
+main.o main.pic.o: ../include/mico/operation_impl.h ../include/mico/operators.h
+main.o main.pic.o: ../include/mico/orb_excepts.h ../include/mico/orb_fwd.h
+main.o main.pic.o: ../include/mico/orb_impl.h ../include/mico/orb_mico.h
+main.o main.pic.o: ../include/mico/os-misc.h ../include/mico/os-thread.h
+main.o main.pic.o: ../include/mico/os-thread/dcethreads.h ../include/mico/os-thread/pthreads.h
+main.o main.pic.o: ../include/mico/os-thread/pththreads.h ../include/mico/os-thread/solaris-threads.h
+main.o main.pic.o: ../include/mico/pi.h ../include/mico/poa.h ../include/mico/poa_base.h
+main.o main.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h
+main.o main.pic.o: ../include/mico/policy2.h ../include/mico/policy_impl.h
+main.o main.pic.o: ../include/mico/poll_dispatcher.h ../include/mico/process.h
+main.o main.pic.o: ../include/mico/process_impl.h ../include/mico/security/DomainManager.h
+main.o main.pic.o: ../include/mico/security/SecurityAdmin.h ../include/mico/security/atlas.h
+main.o main.pic.o: ../include/mico/security/csi.h ../include/mico/security/csi_base.h
+main.o main.pic.o: ../include/mico/security/csiiop.h ../include/mico/security/csiv2.h
+main.o main.pic.o: ../include/mico/security/gssup.h ../include/mico/security/odm.h
+main.o main.pic.o: ../include/mico/security/security.h ../include/mico/security/securitylevel1.h
+main.o main.pic.o: ../include/mico/security/securitylevel2.h ../include/mico/security/securitylevel3.h
+main.o main.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+main.o main.pic.o: ../include/mico/security/sl3authorization.h ../include/mico/security/sl3cm.h
+main.o main.pic.o: ../include/mico/security/sl3cmdext.h ../include/mico/security/sl3csi.h
+main.o main.pic.o: ../include/mico/security/sl3ipc.h ../include/mico/security/sl3om.h
+main.o main.pic.o: ../include/mico/security/sl3omext.h ../include/mico/security/sl3pm.h
+main.o main.pic.o: ../include/mico/security/sl3tcpip.h ../include/mico/security/sl3tls.h
+main.o main.pic.o: ../include/mico/security/transportsecurity.h ../include/mico/security/transportsecurity_p.h
+main.o main.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+main.o main.pic.o: ../include/mico/select_dispatcher.h ../include/mico/sequence.h
+main.o main.pic.o: ../include/mico/sequence_special.h ../include/mico/service_info.h
+main.o main.pic.o: ../include/mico/shlib.h ../include/mico/shlib_impl.h
+main.o main.pic.o: ../include/mico/static.h ../include/mico/string.h ../include/mico/sysexc.h
+main.o main.pic.o: ../include/mico/tcconst.h ../include/mico/tckind.h ../include/mico/template.h
+main.o main.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+main.o main.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+main.o main.pic.o: ../include/mico/transport/tcp.h ../include/mico/transport/udp.h
+main.o main.pic.o: ../include/mico/transport/unix.h ../include/mico/transport_impl.h
+main.o main.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+main.o main.pic.o: ../include/mico/types.h ../include/mico/util.h ../include/mico/value.h
+main.o main.pic.o: ../include/mico/valuetype.h ../include/mico/valuetype_impl.h
+main.o main.pic.o: ../include/mico/version.h ../include/ministl/bool.h ../include/ministl/bstring.h
+main.o main.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+main.o main.pic.o: ../include/ministl/function.h ../include/ministl/list
+main.o main.pic.o: ../include/ministl/list.h ../include/ministl/map ../include/ministl/map.h
+main.o main.pic.o: ../include/ministl/ministl.h ../include/ministl/pair
+main.o main.pic.o: ../include/ministl/pair.h ../include/ministl/set ../include/ministl/set.h
+main.o main.pic.o: ../include/ministl/simplevec.h ../include/ministl/string
+main.o main.pic.o: ../include/ministl/vector ../include/ministl/vector.h
+main.o main.pic.o: ./imr_impl.h ./imr_pch.h ./poamediator.h imr_impl.h imr_pch.h
+main.o main.pic.o: main.cc poamediator.h
+poamediator.o poamediator.pic.o: ../include/CORBA.h ../include/mico/address.h
+poamediator.o poamediator.pic.o: ../include/mico/address_impl.h ../include/mico/any.h
+poamediator.o poamediator.pic.o: ../include/mico/array.h ../include/mico/assert.h
+poamediator.o poamediator.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h
+poamediator.o poamediator.pic.o: ../include/mico/buffer.h ../include/mico/codec.h
+poamediator.o poamediator.pic.o: ../include/mico/codec_impl.h ../include/mico/codeset.h
+poamediator.o poamediator.pic.o: ../include/mico/codeset_impl.h ../include/mico/config-win32.h
+poamediator.o poamediator.pic.o: ../include/mico/config.h ../include/mico/current.h
+poamediator.o poamediator.pic.o: ../include/mico/dii.h ../include/mico/dsi.h
+poamediator.o poamediator.pic.o: ../include/mico/dynany.h ../include/mico/except.h
+poamediator.o poamediator.pic.o: ../include/mico/fast_array.h ../include/mico/fixed.h
+poamediator.o poamediator.pic.o: ../include/mico/impl.h ../include/mico/imr.h
+poamediator.o poamediator.pic.o: ../include/mico/iop.h ../include/mico/ioptypes.h
+poamediator.o poamediator.pic.o: ../include/mico/ior.h ../include/mico/ior_impl.h
+poamediator.o poamediator.pic.o: ../include/mico/ir.h ../include/mico/ir_base.h
+poamediator.o poamediator.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h
+poamediator.o poamediator.pic.o: ../include/mico/message.h ../include/mico/messaging.h
+poamediator.o poamediator.pic.o: ../include/mico/mt_dispatcher.h ../include/mico/mt_manager.h
+poamediator.o poamediator.pic.o: ../include/mico/mtdebug.h ../include/mico/mtpolicy.h
+poamediator.o poamediator.pic.o: ../include/mico/mttypes.h ../include/mico/native.h
+poamediator.o poamediator.pic.o: ../include/mico/object.h ../include/mico/operation.h
+poamediator.o poamediator.pic.o: ../include/mico/operation_impl.h ../include/mico/operators.h
+poamediator.o poamediator.pic.o: ../include/mico/orb_excepts.h ../include/mico/orb_fwd.h
+poamediator.o poamediator.pic.o: ../include/mico/orb_impl.h ../include/mico/orb_mico.h
+poamediator.o poamediator.pic.o: ../include/mico/os-misc.h ../include/mico/os-thread.h
+poamediator.o poamediator.pic.o: ../include/mico/os-thread/dcethreads.h
+poamediator.o poamediator.pic.o: ../include/mico/os-thread/pthreads.h ../include/mico/os-thread/pththreads.h
+poamediator.o poamediator.pic.o: ../include/mico/os-thread/solaris-threads.h
+poamediator.o poamediator.pic.o: ../include/mico/pi.h ../include/mico/poa.h
+poamediator.o poamediator.pic.o: ../include/mico/poa_base.h ../include/mico/poa_stubs.h
+poamediator.o poamediator.pic.o: ../include/mico/policy.h ../include/mico/policy2.h
+poamediator.o poamediator.pic.o: ../include/mico/policy_impl.h ../include/mico/poll_dispatcher.h
+poamediator.o poamediator.pic.o: ../include/mico/process.h ../include/mico/process_impl.h
+poamediator.o poamediator.pic.o: ../include/mico/security/DomainManager.h
+poamediator.o poamediator.pic.o: ../include/mico/security/SecurityAdmin.h
+poamediator.o poamediator.pic.o: ../include/mico/security/atlas.h ../include/mico/security/csi.h
+poamediator.o poamediator.pic.o: ../include/mico/security/csi_base.h ../include/mico/security/csiiop.h
+poamediator.o poamediator.pic.o: ../include/mico/security/csiv2.h ../include/mico/security/gssup.h
+poamediator.o poamediator.pic.o: ../include/mico/security/odm.h ../include/mico/security/security.h
+poamediator.o poamediator.pic.o: ../include/mico/security/securitylevel1.h
+poamediator.o poamediator.pic.o: ../include/mico/security/securitylevel2.h
+poamediator.o poamediator.pic.o: ../include/mico/security/securitylevel3.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3authorization.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3cm.h ../include/mico/security/sl3cmdext.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3csi.h ../include/mico/security/sl3ipc.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3om.h ../include/mico/security/sl3omext.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3pm.h ../include/mico/security/sl3tcpip.h
+poamediator.o poamediator.pic.o: ../include/mico/security/sl3tls.h ../include/mico/security/transportsecurity.h
+poamediator.o poamediator.pic.o: ../include/mico/security/transportsecurity_p.h
+poamediator.o poamediator.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+poamediator.o poamediator.pic.o: ../include/mico/select_dispatcher.h ../include/mico/sequence.h
+poamediator.o poamediator.pic.o: ../include/mico/sequence_special.h ../include/mico/service_info.h
+poamediator.o poamediator.pic.o: ../include/mico/shlib.h ../include/mico/shlib_impl.h
+poamediator.o poamediator.pic.o: ../include/mico/static.h ../include/mico/string.h
+poamediator.o poamediator.pic.o: ../include/mico/sysexc.h ../include/mico/tcconst.h
+poamediator.o poamediator.pic.o: ../include/mico/tckind.h ../include/mico/template.h
+poamediator.o poamediator.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+poamediator.o poamediator.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+poamediator.o poamediator.pic.o: ../include/mico/transport/tcp.h ../include/mico/transport/udp.h
+poamediator.o poamediator.pic.o: ../include/mico/transport/unix.h ../include/mico/transport_impl.h
+poamediator.o poamediator.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+poamediator.o poamediator.pic.o: ../include/mico/types.h ../include/mico/util.h
+poamediator.o poamediator.pic.o: ../include/mico/value.h ../include/mico/valuetype.h
+poamediator.o poamediator.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+poamediator.o poamediator.pic.o: ../include/ministl/bool.h ../include/ministl/bstring.h
+poamediator.o poamediator.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+poamediator.o poamediator.pic.o: ../include/ministl/function.h ../include/ministl/list
+poamediator.o poamediator.pic.o: ../include/ministl/list.h ../include/ministl/map
+poamediator.o poamediator.pic.o: ../include/ministl/map.h ../include/ministl/ministl.h
+poamediator.o poamediator.pic.o: ../include/ministl/pair ../include/ministl/pair.h
+poamediator.o poamediator.pic.o: ../include/ministl/set ../include/ministl/set.h
+poamediator.o poamediator.pic.o: ../include/ministl/simplevec.h ../include/ministl/string
+poamediator.o poamediator.pic.o: ../include/ministl/vector ../include/ministl/vector.h
+poamediator.o poamediator.pic.o: ./imr_impl.h ./imr_pch.h ./poamediator.h
+poamediator.o poamediator.pic.o: imr_impl.h imr_pch.h poamediator.cc poamediator.h

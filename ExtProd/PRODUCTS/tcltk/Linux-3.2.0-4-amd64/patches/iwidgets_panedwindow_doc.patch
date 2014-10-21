@@ -1,0 +1,19 @@
+*** panedwindow.n.orig	Mon Jan 12 14:04:58 2004
+--- panedwindow.n	Mon Jan 12 14:43:01 2004
+***************
+*** 15,21 ****
+  .SH SYNOPSIS
+  \fBiwidgets::panedwindow\fI \fIpathName \fR?\fIoptions\fR?
+  .SH "INHERITANCE"
+! itk::Widget <- iwidgets::Panedwindow
+  .SH "STANDARD OPTIONS"
+  .LP
+  .nf
+--- 15,21 ----
+  .SH SYNOPSIS
+  \fBiwidgets::panedwindow\fI \fIpathName \fR?\fIoptions\fR?
+  .SH "INHERITANCE"
+! itk::Widget <- iwidgets::Ipanedwindow
+  .SH "STANDARD OPTIONS"
+  .LP
+  .nf

@@ -1,0 +1,15 @@
+*** tcl.m4.orig	Wed Jan 22 18:20:59 2003
+--- tcl.m4	Wed Jan 22 18:21:02 2003
+***************
+*** 1538,1543 ****
+--- 1538,1547 ----
+      return 1;
+  }], tk_ok=termios, tk_ok=no, tk_ok=no)
+  
++ #!# For some strange reason, the above program fails on HP-UX and Linux when
++ #!# run via the VLTSW buildTclTk script. For HP-UX, Linux and Solaris we
++ #!# should use termios, so "hardcode" it here (next line). - EAL 2003-01-23
++ tk_ok=termios
+      if test $tk_ok = termios; then
+  	AC_DEFINE(USE_TERMIOS)
+      else

@@ -1,0 +1,29 @@
+*** itcl.tcl.orig	Mon Jun 11 06:05:28 2007
+--- itcl.tcl	Wed Jul  4 08:56:32 2007
+***************
+*** 95,105 ****
+  # USAGE:  ensemble name ?body?
+  # Adds an entry to the auto index list for the given ensemble name.
+  #
+! auto_mkindex_parser::command itcl::ensemble {name {body ""}} {
+!     variable index
+!     variable scriptFile
+!     append index "set [list auto_index([fullname $name])]"
+!     append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+  }
+  
+  #
+--- 95,107 ----
+  # USAGE:  ensemble name ?body?
+  # Adds an entry to the auto index list for the given ensemble name.
+  #
+! foreach cmd {itcl::ensemble ensemble} {
+!     auto_mkindex_parser::command $cmd {name {body ""}} {
+! 	variable index
+! 	variable scriptFile
+! 	append index "set [list auto_index([fullname $name])]"
+! 	append index " \[list source \[file join \$dir [list $scriptFile]\]\]\n"
+!     }
+  }
+  
+  #

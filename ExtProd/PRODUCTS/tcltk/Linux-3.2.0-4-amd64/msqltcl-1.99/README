@@ -1,0 +1,129 @@
+
+Msqltcl --   Tcl/Tk interface to the Mini SQL (mSQL) database server
+
+Author:      Hakan Soderstrom, hs@soderstrom.se
+Affiliation: Soderstrom Programvaruverkstad AB, Bandhagsvagen 51,
+             S-122 42 Enskede, Sweden
+
+-------------------------------------------
+Copyright (c) 1994-1996 Hakan Soderstrom and Tom Poindexter
+Additional details at end of this file.
+-------------------------------------------
+
+
+VERSIONS, PORTS
+
+This is release 1.99 of msqltcl. It has been tested with Tcl 7.5,
+Tk 4.1, mSQL 1.0.16 under SunOS 4.1.4. Successful ports of earlier
+versions to other Unix platforms have been reported. I would expect
+msqltcl to run wherever Tcl/Tk and mSQL succeed.
+
+
+WHAT IS MSQLTCL?
+
+Msqltcl is a Tcl/Tk extension providing high-level access to a Mini SQL
+(mSQL) database server. Mini SQL (mSQL) is a freely available (but not
+necessarily free), lightweight database engine.
+
+Msqltcl features:
+   -- supports multiple connections to one or more database servers,
+   -- supports all Mini-SQL statements,
+   -- returns SELECT query results either as Tcl lists, or iterates
+      a script over the resulting rows,
+   -- accesses information about databases, tables, columns.
+
+Msqltcl may be configured as a dynamically loadable package on platforms
+supporting this feature.
+
+The msqltcl distribution contains a window-based Mini-Monitor (mmon)
+written in Tcl/Tk and msqltcl.
+
+
+UNPACKING AND INSTALLING
+
+The msqltcl distribution comes in a file called msqltcl-X.Y.tar.gz,
+where X.Y is the release number. cd to a directory under which you want
+the msqltcl directory to be created. Then,
+
+   gunzip < msqltcl-X.Y.tar.gz | tar xvf -
+
+This will create a new directory called msqltcl-X.Y in the current
+directory and unpack the msqltcl source files in the new directory.
+
+`cd' into the new directory. You will find additional installation
+instructions in a file named INSTALL.
+
+
+ACKNOWLEDGEMENTS
+
+Obviously msqltcl is just a small addition to a much greater work done
+by John Ousterhout (Tcl/Tk) and David J. Hughes (mSQL).
+
+Msqltcl is derived from work by Tom Poindexter (tpoindex@nyx.cs.du.edu)
+whose Sybtcl and Oratcl are useful patterns for Tcl database extensions.
+
+
+DOCUMENTATION
+
+A man page for msqltcl. Mmon includes on-line documentation.
+
+
+REQUIREMENTS
+
+You must have Tcl/Tk and Mini SQL.
+
+** Tcl/Tk is available from numerous FTP sites.
+<URL:ftp://ftp.sunlabs.com/pub/tcl/> is its official home.
+
+A useful Tcl/Tk book is "Tcl and the Tk Toolkit" by John K. Ousterhout,
+Addison-Wesley 1994, ISBN 0-201-63337-X.
+
+** Mini SQL (mSQL) is a freely available (but not necessarily free),
+lightweight database engine developed by David J. Hughes at Bond
+University, Australia. The source (and a FAQ) can be obtained from
+<URL:ftp://Bond.edu.au/pub/Minerva/msql>.
+
+
+INSTALLATION
+
+See the file INSTALL.
+
+
+BUG REPORTS
+
+Although I have made a conscientious effort to provide zero-defect
+software and documentation, this release of msqltcl may contain blunders
+of varying magnitudes.
+
+Comments, suggestions, bug reports (maybe even encouragement!) should be
+mailed to me at the E-mail address above. Please include some
+information about your environment (platform, OS version, Tcl/Tk
+version, mSQL version, msqltcl version). Please include enough
+information for me to be able to reproduce any suspect behaviour. If you
+have a solution to a problem, please include a patch.
+
+I can't guarantee that I will fix your bug, but I'll do my best.
+
+
+COPYRIGHT & LICENSE
+
+Copyright (c) 1994-1996 Hakan Soderstrom, Enskede, Sweden
+and Tom Poindexter, Denver, Colorado
+
+Permission to use, copy, modify, distribute, and sell this software
+and its documentation for any purpose is hereby granted without fee,
+provided that the above copyright notice and this permission notice
+appear in all copies of the software and related documentation.
+
+THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+IN NO EVENT SHALL HAKAN SODERSTROM OR SODERSTROM PROGRAMVARUVERKSTAD
+AB BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL
+DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY
+OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+$Revision: 1.99 $

@@ -1,0 +1,117 @@
+*** tkXshell.c.orig	Tue Dec 17 11:53:57 2002
+--- tkXshell.c	Tue Dec 17 13:43:00 2002
+***************
+*** 131,139 ****
+      char *args, *fileName;
+      char buf[TCL_INTEGER_SPACE];
+      int code;
+- #ifndef TKX_SHELL
+      size_t length;
+- #endif
+      Tcl_Channel inChannel, outChannel;
+      Tcl_DString argString;
+      ThreadSpecificData *tsdPtr;
+--- 131,137 ----
+***************
+*** 181,193 ****
+      Tcl_InitMemory(interp);
+  #endif
+  
+  #ifdef TKX_SHELL
+      /*
+       * TclX command line parsing.  Need to find the file
+       * name. Options to Tk assumed to take one arguments, with
+       * the exception of -sync.
+       */
+-     fileName = NULL;
+      argi = 1;
+      while ((argi < argc) && (argv[argi][0] == '-')) {
+          if (STREQU(argv[argi], "--")) {
+--- 179,203 ----
+      Tcl_InitMemory(interp);
+  #endif
+  
++     /*
++      * Parse command-line arguments.  A leading "-file" argument is
++      * ignored (a historical relic from the distant past).
++      */
++ 
++     fileName = NULL;
++     if (argc > 1) {
++ 	length = strlen(argv[1]);
++ 	if ((length >= 2) && (strncmp(argv[1], "-file", length) == 0)) {
++ 	    argc--;
++ 	    argv++;
++ 	}
++     }
+  #ifdef TKX_SHELL
+      /*
+       * TclX command line parsing.  Need to find the file
+       * name. Options to Tk assumed to take one arguments, with
+       * the exception of -sync.
+       */
+      argi = 1;
+      while ((argi < argc) && (argv[argi][0] == '-')) {
+          if (STREQU(argv[argi], "--")) {
+***************
+*** 204,216 ****
+      /* Parse out file name, if supplied. */
+      if (argi < argc) {
+          int i;
+-         fileName = argv[argi];
+          if (STREQU(argv[argi-1], "--")) {
+              i = argi-1;
+          } else {
+              i = argi;
+          }
+-         argi++;
+          while (argi < argc) {
+              argv[i++] = argv[argi++];
+          }
+--- 214,227 ----
+      /* Parse out file name, if supplied. */
+      if (argi < argc) {
+          int i;
+          if (STREQU(argv[argi-1], "--")) {
+              i = argi-1;
++ 	    if (i > 1 && argv[i-1][0] != '-') fileName = argv[i-1];
+          } else {
+              i = argi;
++ 	    fileName = argv[argi];
++ 	    argi++;
+          }
+          while (argi < argc) {
+              argv[i++] = argv[argi++];
+          }
+***************
+*** 221,240 ****
+      }
+  #else
+      /*
+!      * Parse command-line arguments.  A leading "-file" argument is
+!      * ignored (a historical relic from the distant past).  If the
+!      * next argument doesn't start with a "-" then strip it off and
+       * use it as the name of a script file to process.
+       */
+- 
+-     fileName = NULL;
+-     if (argc > 1) {
+- 	length = strlen(argv[1]);
+- 	if ((length >= 2) && (strncmp(argv[1], "-file", length) == 0)) {
+- 	    argc--;
+- 	    argv++;
+- 	}
+-     }
+      if ((argc > 1) && (argv[1][0] != '-')) {
+  	fileName = argv[1];
+  	argc--;
+--- 232,240 ----
+      }
+  #else
+      /*
+!      * If the next argument doesn't start with a "-" then strip it off and
+       * use it as the name of a script file to process.
+       */
+      if ((argc > 1) && (argv[1][0] != '-')) {
+  	fileName = argv[1];
+  	argc--;

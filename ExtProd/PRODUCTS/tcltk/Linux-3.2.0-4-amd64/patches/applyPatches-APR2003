@@ -1,0 +1,69 @@
+#!/bin/sh
+echo 'This script needs to be run from a peer directory of tcl8.3 etc.'
+echo ''
+
+echo 'patches for tcl8.3.5:'
+
+echo "Recognise the non-numeric boolean literals (true,false,yes,no,on,off)"
+patch ../tcl8.3.5/generic/tclParseExpr.c     < parseTrue.patch
+
+echo "Access the right interface for the serial port (-DUSE_TERMIOS=1)"
+patch ../tcl8.3.5/unix/configure             < configure.patch
+patch ../tcl8.3.5/unix/tcl.m4                < tcl.m4.patch
+echo '---------------------------------'
+
+####echo 'patches for tk8.3.5:'
+
+####echo '---------------------------------'
+
+echo 'patches for itcl3.2.1:'
+
+# See also e-mails to/from Chad Smith, 1999-09-10, 1999-09-13, etc.
+echo 'fix for tclIndex file (include "imported" itcl commands, like configbody)'
+patch ../itcl3.2.1/itcl/library/itcl.tcl     < tclIndex.patch
+
+# See bug report 488650
+echo 'fix for "itcl::find objects <mask>"'
+patch ../itcl3.2.1/itcl/generic/itcl_cmds.c  < itcl-find.patch
+
+echo '---------------------------------'
+
+echo 'patches for iwidgets 4.0.1:'
+
+echo 'problem with "tkwait visibility" in dialog box'
+patch ../iwidgets4.0.1/generic/shell.itk     < shell.patch
+
+echo 'auto_path refers to non-existing directory'
+patch ../iwidgets4.0.1/iwidgets.tcl.in       < iwidgets_autopath.patch
+
+echo 'potential hang-up on datefield keyboard entry - see SF bug report 625441'
+patch ../iwidgets4.0.1/generic/datefield.itk < datefield.patch
+
+echo '---------------------------------'
+
+echo 'patches for TclX 8.3.5:'
+
+echo 'argument parsing fix for shells based on tkx - see SF bug report 655172'
+patch ../tclx8.3.5/tk/generic/tkXshell.c       < tkXshell_arg_parsing.patch
+
+echo 'warning about trigraph sequence due to "???" in tclExtend.h'
+patch ../tclx8.3.5/tcl/generic/tclExtend.h     < tclx_trigraph.patch
+
+echo 'typo in message: "evaulating"'
+patch ../tclx8.3.5/tcl/generic/tclXshell.c     < tclXshell_typo.patch
+
+echo '---------------------------------'
+
+echo 'patches for BLT 2.4z:'
+echo 'variable "dir" not defined in pkgIndex.tcl'
+patch ../blt2.4.z/library/pkgIndex.tcl.in      < blt2.4z_pkgIndex.patch
+
+##echo '---------------------------------'
+
+##echo 'patches for snack 2.2:'
+
+echo '---------------------------------'
+
+###echo 'patches for TkTable 2.8:'
+
+##find ..  -name '*.rej' -exec rm {} \;

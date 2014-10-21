@@ -1,0 +1,28 @@
+*** pushbutton.itk.orig	Fri Mar 10 07:49:41 2006
+--- pushbutton.itk	Fri Mar 10 08:00:06 2006
+***************
+*** 101,108 ****
+      itk_option add hull.highlightcolor
+      itk_option add hull.highlightbackground
+      
+!     component hull configure \
+  	    -borderwidth [$this cget -borderwidth]
+      
+      pack propagate $itk_component(hull) no
+  
+--- 101,115 ----
+      itk_option add hull.highlightcolor
+      itk_option add hull.highlightbackground
+      
+!     # new Tk 8.4+ frame -padx -pady options creates inadvertant margin box
+!     # See also SF tickets #620806 and #514222.   eallaert 2006-03-08
+!     if {$::tk_version > 8.3} {
+! 	component hull configure -padx 0 -pady 0 \
+  	    -borderwidth [$this cget -borderwidth]
++     } else {
++ 	component hull configure \
++ 	    -borderwidth [$this cget -borderwidth]
++     }
+      
+      pack propagate $itk_component(hull) no
+  

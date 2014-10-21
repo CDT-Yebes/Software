@@ -1,0 +1,84 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2002, 2003 ObjectSecurity Ltd.
+//
+
+// Note: this module has been completely rewritten to use local
+// interfaces as a holder of argument. This way we get rid of
+// valuetype and any usage.
+
+#ifndef _SL3AQArgs_IDL_
+#define _SL3AQArgs_IDL_
+
+#include <mico/security/sl3cm.idl>
+
+#pragma prefix "adiron.com"
+
+module SL3AQArgs
+{
+    /**
+     * This interface is an abstract parent for others
+     * which will hold concrete configurations
+     * used to acquire credentials
+     */
+    local interface Argument {
+        readonly attribute SL3CM::AcquisitionArgumentType type;
+    };
+    typedef sequence<Argument> ArgumentSeq;
+    
+    /**
+     * ArgBuilder is generic way how to work with
+     * Arguments. Concrete transports will then use children of this
+     * interface to provide more concrete functionality
+     */
+    local interface ArgBuilder {
+	/**
+	 * This operation adds one argument into the argument list
+	 */
+        void add_arg(in Argument arg);
+
+	/**
+	 * This operation adds list of arguments into the argument
+         * list
+	 */
+	void add_args(in ArgumentSeq args);
+
+	/**
+	 * This operation is used to obtain argument list, which is
+	 * then used for obtaining credentials. The list is returned
+         * in a form of ArgsHolder which is a child of Argument, but
+	 * which is defined in private MICO SL3 API
+	 */
+        Argument reap_args();
+
+	/**
+	 * This operation destroys argument builder
+	 */
+        void destroy();
+    };
+    
+    /**
+     * This interface is a generic factory for argument
+     * builders. Concrete transports will then provide its child(ren)
+     * for obtaining concrete transport argument builder
+     */
+    local interface ArgBuilderFactory {
+
+        /**
+         * Creates a new Builder interface with the specified usage.
+         */
+	ArgBuilder create_arg_builder(in SL3CM::CredentialsUsage usage);
+    };
+};
+
+#endif
+                
+    

@@ -1,0 +1,19 @@
+*** extfileselectionbox.itk.orig	Mon Jan 12 14:03:26 2004
+--- extfileselectionbox.itk	Mon Jan 12 14:49:03 2004
+***************
+*** 167,173 ****
+      # Create a paned window for the directory and file lists.
+      #
+      itk_component add listpane {
+!         iwidgets::Panedwindow $itk_interior.listpane -orient vertical
+      } 
+  
+      $itk_component(listpane) add dirs -margin 5
+--- 167,173 ----
+      # Create a paned window for the directory and file lists.
+      #
+      itk_component add listpane {
+!         iwidgets::Ipanedwindow $itk_interior.listpane -orient vertical
+      } 
+  
+      $itk_component(listpane) add dirs -margin 5

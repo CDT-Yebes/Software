@@ -1,0 +1,36 @@
+*** tcl.m4.orig	Tue Mar  6 08:18:58 2007
+--- tcl.m4	Mon Sep 10 12:58:26 2007
+***************
+*** 759,765 ****
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid'`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`
+--- 759,765 ----
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`
+***************
+*** 2026,2032 ****
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid'`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`
+--- 2026,2032 ----
+  	    # results, and the version is kept in special file).
+  	
+  	    if test -r /etc/.relid -a "X`uname -n`" = "X`uname -s`" ; then
+! 		system=MP-RAS-`awk '{print $3}' /etc/.relid`
+  	    fi
+  	    if test "`uname -s`" = "AIX" ; then
+  		system=AIX-`uname -v`.`uname -r`

@@ -1,0 +1,318 @@
+# Module dependencies
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/CORBA.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/coss/CosEventComm.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/address.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/any.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/array.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/assert.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/basic.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/basic_seq.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/buffer.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/codec.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/codeset.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/config-win32.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/config.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/current.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/dii.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/dsi.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/dynany.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/except.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/fixed.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/imr.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/ioptypes.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/ior.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/ir.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/ir_base.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/magic.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/memtrace.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/messaging.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/mtdebug.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/mtpolicy.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/mttypes.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/native.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/object.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/operators.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/orb_excepts.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/orb_fwd.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/orb_mico.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/os-thread.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/os-thread/dcethreads.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/os-thread/pthreads.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/os-thread/pththreads.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/os-thread/solaris-threads.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/pi.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/poa.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/poa_base.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/poa_stubs.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/policy.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/policy2.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/DomainManager.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/SecurityAdmin.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/atlas.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/csi.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/csi_base.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/csiiop.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/csiv2.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/gssup.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/odm.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/security.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/securitylevel1.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/securitylevel2.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/securitylevel3.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3aqargs.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3aqargs_p.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3authorization.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3cm.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3cmdext.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3csi.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3ipc.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3om.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3omext.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3pm.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3tcpip.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/sl3tls.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/transportsecurity.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/transportsecurity_p.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/trust.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/security/userpassword.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/sequence.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/sequence_special.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/service_info.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/static.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/string.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/sysexc.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/tcconst.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/tckind.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/template.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/template_impl.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/throw.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/timebase.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/transport.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/typecode.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/typecode_seq.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/types.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/value.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/valuetype.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/valuetype_impl.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/mico/version.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/bool.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/bstring.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/defalloc.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/function
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/function.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/list
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/list.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/map
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/map.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/ministl.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/pair
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/pair.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/set
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/set.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/simplevec.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/string
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/vector
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ../../include/ministl/vector.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: ./CosEventChannelAdmin.h
+CosEventChannelAdmin.o CosEventChannelAdmin.pic.o: CosEventChannelAdmin.cc
+CosEventComm.o CosEventComm.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/codec.h ../../include/mico/codeset.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/config-win32.h ../../include/mico/config.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/current.h ../../include/mico/dii.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/dsi.h ../../include/mico/dynany.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/ir_base.h ../../include/mico/magic.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/memtrace.h ../../include/mico/messaging.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/orb_excepts.h ../../include/mico/orb_fwd.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/orb_mico.h ../../include/mico/os-thread.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/os-thread/dcethreads.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/os-thread/pthreads.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/os-thread/pththreads.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/os-thread/solaris-threads.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/DomainManager.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/SecurityAdmin.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/atlas.h ../../include/mico/security/csi.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/csi_base.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/csiiop.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/csiv2.h ../../include/mico/security/gssup.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/odm.h ../../include/mico/security/security.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/securitylevel1.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/securitylevel2.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/securitylevel3.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3aqargs.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3aqargs_p.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3authorization.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3cm.h ../../include/mico/security/sl3cmdext.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3csi.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3ipc.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3om.h ../../include/mico/security/sl3omext.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3pm.h ../../include/mico/security/sl3tcpip.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/sl3tls.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/transportsecurity.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/transportsecurity_p.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/value.h ../../include/mico/valuetype.h
+CosEventComm.o CosEventComm.pic.o: ../../include/mico/valuetype_impl.h ../../include/mico/version.h
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/bool.h ../../include/ministl/bstring.h
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/defalloc.h ../../include/ministl/function
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/function.h ../../include/ministl/list
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/list.h ../../include/ministl/map
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/map.h ../../include/ministl/ministl.h
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/simplevec.h ../../include/ministl/string
+CosEventComm.o CosEventComm.pic.o: ../../include/ministl/vector ../../include/ministl/vector.h
+CosEventComm.o CosEventComm.pic.o: ./CosEventComm.h CosEventComm.cc
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/CORBA.h ../../include/coss/CosEventComm.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/address.h ../../include/mico/any.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/array.h ../../include/mico/assert.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/basic.h ../../include/mico/basic_seq.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/ir.h ../../include/mico/ir_base.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/os-thread.h ../../include/mico/os-thread/dcethreads.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/os-thread/pthreads.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/os-thread/pththreads.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/os-thread/solaris-threads.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/DomainManager.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/SecurityAdmin.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/atlas.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/csi.h ../../include/mico/security/csi_base.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/csiiop.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/csiv2.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/gssup.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/odm.h ../../include/mico/security/security.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/securitylevel1.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/securitylevel2.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/securitylevel3.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3aqargs.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3aqargs_p.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3authorization.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3cm.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3cmdext.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3csi.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3ipc.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3om.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3omext.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3pm.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3tcpip.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/sl3tls.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/transportsecurity.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/transportsecurity_p.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/trust.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/security/userpassword.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/value.h ../../include/mico/valuetype.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/valuetype_impl.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/string ../../include/ministl/vector
+CosEvent_impl.o CosEvent_impl.pic.o: ../../include/ministl/vector.h ./CosEventChannelAdmin.h
+CosEvent_impl.o CosEvent_impl.pic.o: ./CosEventComm.h ./CosEvent_impl.h
+CosEvent_impl.o CosEvent_impl.pic.o: CosEventChannelAdmin.h CosEventComm.h
+CosEvent_impl.o CosEvent_impl.pic.o: CosEvent_impl.cc CosEvent_impl.h
+main.o main.pic.o: ../../include/CORBA.h ../../include/coss/CosEventComm.h
+main.o main.pic.o: ../../include/coss/CosNaming.h ../../include/mico/address.h
+main.o main.pic.o: ../../include/mico/any.h ../../include/mico/array.h ../../include/mico/assert.h
+main.o main.pic.o: ../../include/mico/basic.h ../../include/mico/basic_seq.h
+main.o main.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+main.o main.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+main.o main.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+main.o main.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h ../../include/mico/dynany.h
+main.o main.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+main.o main.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+main.o main.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h ../../include/mico/ir_base.h
+main.o main.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+main.o main.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+main.o main.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+main.o main.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+main.o main.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+main.o main.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+main.o main.pic.o: ../../include/mico/os-misc.h ../../include/mico/os-thread.h
+main.o main.pic.o: ../../include/mico/os-thread/dcethreads.h ../../include/mico/os-thread/pthreads.h
+main.o main.pic.o: ../../include/mico/os-thread/pththreads.h ../../include/mico/os-thread/solaris-threads.h
+main.o main.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h ../../include/mico/poa_base.h
+main.o main.pic.o: ../../include/mico/poa_stubs.h ../../include/mico/policy.h
+main.o main.pic.o: ../../include/mico/policy2.h ../../include/mico/security/DomainManager.h
+main.o main.pic.o: ../../include/mico/security/SecurityAdmin.h ../../include/mico/security/atlas.h
+main.o main.pic.o: ../../include/mico/security/csi.h ../../include/mico/security/csi_base.h
+main.o main.pic.o: ../../include/mico/security/csiiop.h ../../include/mico/security/csiv2.h
+main.o main.pic.o: ../../include/mico/security/gssup.h ../../include/mico/security/odm.h
+main.o main.pic.o: ../../include/mico/security/security.h ../../include/mico/security/securitylevel1.h
+main.o main.pic.o: ../../include/mico/security/securitylevel2.h ../../include/mico/security/securitylevel3.h
+main.o main.pic.o: ../../include/mico/security/sl3aqargs.h ../../include/mico/security/sl3aqargs_p.h
+main.o main.pic.o: ../../include/mico/security/sl3authorization.h ../../include/mico/security/sl3cm.h
+main.o main.pic.o: ../../include/mico/security/sl3cmdext.h ../../include/mico/security/sl3csi.h
+main.o main.pic.o: ../../include/mico/security/sl3ipc.h ../../include/mico/security/sl3om.h
+main.o main.pic.o: ../../include/mico/security/sl3omext.h ../../include/mico/security/sl3pm.h
+main.o main.pic.o: ../../include/mico/security/sl3tcpip.h ../../include/mico/security/sl3tls.h
+main.o main.pic.o: ../../include/mico/security/transportsecurity.h ../../include/mico/security/transportsecurity_p.h
+main.o main.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+main.o main.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+main.o main.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+main.o main.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+main.o main.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+main.o main.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+main.o main.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+main.o main.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+main.o main.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+main.o main.pic.o: ../../include/mico/util.h ../../include/mico/value.h
+main.o main.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+main.o main.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+main.o main.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+main.o main.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+main.o main.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+main.o main.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+main.o main.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+main.o main.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+main.o main.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+main.o main.pic.o: ../../include/ministl/string ../../include/ministl/vector
+main.o main.pic.o: ../../include/ministl/vector.h ./CosEventChannelAdmin.h
+main.o main.pic.o: ./CosEventComm.h ./CosEvent_impl.h CosEventChannelAdmin.h
+main.o main.pic.o: CosEventComm.h CosEvent_impl.h main.cc

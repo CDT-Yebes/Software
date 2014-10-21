@@ -1,0 +1,90 @@
+*** INSTALLING ***
+
+TkMan has been built successfully by many people on many different
+flavors of UNIX, including these: SunOS, Sun Solaris, Hewlett-Packard
+HP-UX, AT&T System V, OSF/1, DEC Ultrix, SGI IRIX, Linux, SCO, IBM
+AIX, FreeBSD, BSDI.  TkMan has been favorably compared to Windoze Help,
+and now TkMan even runs under Windoze, if you install the
+Cygnus Cygwin utilties.  As Windoze lacks a number of supporting
+utilities, you do lose some functionality, including formatting pages
+on-the-fly, glimpse full-text searching, apropos, and printing.
+
+Before you report a problem in getting TkMan
+installed on your machine, double check that you haven't overlooked
+something important in the Makefile.  And check the home site
+http://tkman.sourceforge.net
+to make sure you're working with the latest version.
+
+Before reporting a bug, first check the home site to make sure you're
+using the latest version of TkMan.  If you send me bug reports and/or
+suggestions for new features, include your MANPATH, the versions of
+TkMan, Tcl, Tk, X, and UNIX, your machine and X window manager names,
+the edited Makefile, a copy of your ~/.tkman file, and the first few
+lines of the `tkman' executable.  I'd also be interested in learning
+where you obtained TkMan.  Feedback without all this information will
+likely be ignored.  Send feedback to phelps@ACM.org
+
+TkMan 2.2 is based on Tcl/Tk 8.4 and will not work with earlier
+versions; it may or may not work with later versions.
+
+Be sure to read through the Makefile as there are pieces throughout
+the top half of it that you may wish or need to customize for your
+site.  Set BINDIR in the Makefile to where you keep your binaries (the
+`tkman' script goes here).  After properly editing the Makefile, type
+`make install'.  Thereafter type `tkman' to invoke TkMan (perhaps
+after a `rehash').
+
+
+
+SUN SOLARIS, SGI IRIX, SCO, IBM AIX, BSDI
+These systems store manual pages in nonstandard ways.  Each of
+Solaris, SGI IRIX and SCO requires a special bindings file found in
+the contrib directory.  TkMan automatically installs the appropriate
+binding file for new users (those without a ~/.tkman startup file);
+otherwise one can manually integrate the bindings into an existing
+startup file.  Random System V based OS'es should follow the example
+for SGI.  Solaris 7 ships pages as SGML; you should use the -c option
+of catman to convert them to nroff format.  IBM AIX'ers should convert
+InfoExplorer format man pages to the standard /usr/man/cat* format
+using, I've been told, the procedure described in section 7 of the document
+/usr/lpp/bos/bsdadm or in the FAQ for the comp.unix.aix newsgroup.
+BSDI users should replace makewhatis with some freely available
+version of mkwhatis--one that puts whatis files in the right place,
+though this isn't essential (don't ask me where to find such a
+mkwhatis; check archie for freely available man page tool suites)
+
+
+WINDOZE
+First, you need to install the Cygwin utilities from www.cygnus.com.
+(Maybe other UNIX-under-Windoze packages, such as NuTCRACKER will
+work, maybe even be better or more complete, but I haven't tried them.)
+
+In specifying the MANPATH, note that whereas UNIX uses the colon to
+separate paths and the semicolon to separate commands, Windoze
+uses the colon to specify drive letters (drive letters in the 21st
+century--progress is a myth), and semicolon to separate paths.
+Thus a possible valid MANPATH under Windoze only is:
+	D:/prj/TkMan/man;D/Phelps/man
+(Note that Cygwin uses a different scheme for handling drive letters:
+by starting a path with a double slash and the letter.)
+
+In the Makefile there are several places where an optional feature
+won't be available, such as page formatting(?) and glimpse full-text searching.
+Comment these out.
+
+
+--------------------------------------------------
+
+Be sure to look in the contrib directory for lots of good stuff.
+
+--------------------------------------------------
+
+
+License
+
+This software is distributed under the Artistic License (see
+http://www.opensource.org/licenses/artistic-license.html).
+
+(This version of TkMan represents a complete rewrite of version 1.4 of
+1993, which is copyrighted by the Regents of the University of
+California, and therefore is not under their jurisdiction.)

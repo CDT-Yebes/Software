@@ -1,0 +1,40 @@
+*** tcl.m4.orig	Mon Dec  6 20:46:29 2004
+--- tcl.m4	Wed Dec  8 09:02:05 2004
+***************
+*** 1033,1040 ****
+  	    if test "$GCC" = "yes" ; then
+  		SHLIB_LD="gcc -shared"
+  		SHLIB_LD_LIBS='${LIBS}'
+! 		LD_SEARCH_FLAGS=''
+! 		CC_SEARCH_FLAGS=''
+  	    fi
+  
+  	    # Users may want PA-RISC 1.1/2.0 portable code - needs HP cc
+--- 1033,1040 ----
+  	    if test "$GCC" = "yes" ; then
+  		SHLIB_LD="gcc -shared"
+  		SHLIB_LD_LIBS='${LIBS}'
+! 		LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
+! 		##CC_SEARCH_FLAGS=''
+  	    fi
+  
+  	    # Users may want PA-RISC 1.1/2.0 portable code - needs HP cc
+***************
+*** 1050,1057 ****
+  			    do64bit_ok=yes
+  			    SHLIB_LD="gcc -shared"
+  			    SHLIB_LD_LIBS='${LIBS}'
+! 			    LD_SEARCH_FLAGS=''
+! 			    CC_SEARCH_FLAGS=''
+  			    ;;
+  			*)
+  			    AC_MSG_WARN("64bit mode not supported with GCC on $system")
+--- 1050,1057 ----
+  			    do64bit_ok=yes
+  			    SHLIB_LD="gcc -shared"
+  			    SHLIB_LD_LIBS='${LIBS}'
+! 			    LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
+! 			    ##CC_SEARCH_FLAGS=''
+  			    ;;
+  			*)
+  			    AC_MSG_WARN("64bit mode not supported with GCC on $system")

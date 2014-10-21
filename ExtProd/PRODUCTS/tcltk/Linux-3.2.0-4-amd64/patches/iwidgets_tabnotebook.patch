@@ -1,0 +1,48 @@
+*** tabnotebook.itk.orig	Fri Mar  3 15:02:37 2006
+--- tabnotebook.itk	Wed Mar  8 16:29:27 2006
+***************
+*** 56,61 ****
+--- 56,66 ----
+  # SOFTWARE.
+  # ======================================================================
+  
++ # ----------------------------------------------------------------------
++ #  Multi-tier option added by E. Allaert and A. Longinotti, 2005-2006
++ #  (European Southern Observatory, Munich)
++ #----------------------------------------------------------------------
++ 
+  #
+  # Default resources.
+  #
+***************
+*** 128,133 ****
+--- 133,139 ----
+      itk_option define -gap gap Gap overlap 
+      itk_option define -angle angle Angle 15 
+      itk_option define -tabpos tabPos TabPos s 
++     itk_option define -tiers tiers Tiers 0
+      
+      public method add { args }
+      public method configure { args } 
+***************
+*** 605,610 ****
+--- 611,629 ----
+      }
+  }
+  
++ # ----------------------------------------------------------------------
++ # OPTION -tiers
++ #
++ # Specifies the maximum number of tiers for the tabs.
++ # A value of 0 means a single tier without any tab-expansion/-compression.
++ # ----------------------------------------------------------------------
++ itcl::configbody iwidgets::Tabnotebook::tiers {
++     if {$itk_option(-tiers) != {}} {
++         set _tiers $itk_option(-tiers)
++ 	$itk_component(tabset) configure -tiers $itk_option(-tiers)
++     }
++ }
++ 
+  # -------------------------------------------------------------
+  # METHOD: configure ?<option>? ?<value> <option> <value>...?
+  #

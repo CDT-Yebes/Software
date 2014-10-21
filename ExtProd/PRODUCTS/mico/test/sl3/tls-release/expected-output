@@ -1,0 +1,62 @@
+server started
+ServerCredsObserver_1 create_credentials: MICO_TLS:0
+ServerCredsObserver_2 create_credentials: MICO_TLS:0
+ServerCredsObserver_3 create_credentials: MICO_TLS:0
+ServerCredsObserver_4 create_credentials: MICO_TLS:0
+Running.
+AcceptingContextObserver_1 establish_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_2 establish_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_3 establish_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_4 establish_context: MICO_TLSAcceptingContext:0
+Hello World
+Hello World
+Hello World
+Hello World
+ServerCredsObserver_1 relinquish_credentials: MICO_TLS:0
+ServerCredsObserver_2 relinquish_credentials: MICO_TLS:0
+ServerCredsObserver_3 relinquish_credentials: MICO_TLS:0
+ServerCredsObserver_4 relinquish_credentials: MICO_TLS:0
+Hello World
+Hello World
+Hello World
+Hello World
+AcceptingContextObserver_1 close_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_2 close_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_3 close_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_4 close_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_1 destroy_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_2 destroy_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_3 destroy_context: MICO_TLSAcceptingContext:0
+AcceptingContextObserver_4 destroy_context: MICO_TLSAcceptingContext:0
+ServerCredsObserver_1 destroy_credentials: MICO_TLS:0
+ServerCredsObserver_2 destroy_credentials: MICO_TLS:0
+ServerCredsObserver_3 destroy_credentials: MICO_TLS:0
+ServerCredsObserver_4 destroy_credentials: MICO_TLS:0
+client started
+ClientCredsObserver_1 create_credentials: MICO_TLS:0
+ClientCredsObserver_2 create_credentials: MICO_TLS:0
+ClientCredsObserver_3 create_credentials: MICO_TLS:0
+ClientCredsObserver_4 create_credentials: MICO_TLS:0
+InitiatingContextObserver_1 establish_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_2 establish_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_3 establish_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_4 establish_context: MICO_TLSInitiatingContext:0
+client remove creds: MICO_TLS:0
+ClientCredsObserver_1 relinquish_credentials: MICO_TLS:0
+ClientCredsObserver_2 relinquish_credentials: MICO_TLS:0
+ClientCredsObserver_3 relinquish_credentials: MICO_TLS:0
+ClientCredsObserver_4 relinquish_credentials: MICO_TLS:0
+client release creds: MICO_TLS:0
+client finished
+InitiatingContextObserver_1 close_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_2 close_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_3 close_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_4 close_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_1 destroy_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_2 destroy_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_3 destroy_context: MICO_TLSInitiatingContext:0
+InitiatingContextObserver_4 destroy_context: MICO_TLSInitiatingContext:0
+ClientCredsObserver_1 destroy_credentials: MICO_TLS:0
+ClientCredsObserver_2 destroy_credentials: MICO_TLS:0
+ClientCredsObserver_3 destroy_credentials: MICO_TLS:0
+ClientCredsObserver_4 destroy_credentials: MICO_TLS:0

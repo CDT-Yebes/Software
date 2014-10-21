@@ -1,0 +1,40 @@
+*** configure.orig	Tue Dec  7 01:23:45 2004
+--- configure	Wed Dec  8 09:01:59 2004
+***************
+*** 2553,2560 ****
+  	    if test "$GCC" = "yes" ; then
+  		SHLIB_LD="gcc -shared"
+  		SHLIB_LD_LIBS='${LIBS}'
+! 		LD_SEARCH_FLAGS=''
+! 		CC_SEARCH_FLAGS=''
+  	    fi
+  
+  	    # Users may want PA-RISC 1.1/2.0 portable code - needs HP cc
+--- 2553,2560 ----
+  	    if test "$GCC" = "yes" ; then
+  		SHLIB_LD="gcc -shared"
+  		SHLIB_LD_LIBS='${LIBS}'
+! 		LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
+! 		##CC_SEARCH_FLAGS=''
+  	    fi
+  
+  	    # Users may want PA-RISC 1.1/2.0 portable code - needs HP cc
+***************
+*** 2570,2577 ****
+  			    do64bit_ok=yes
+  			    SHLIB_LD="gcc -shared"
+  			    SHLIB_LD_LIBS='${LIBS}'
+! 			    LD_SEARCH_FLAGS=''
+! 			    CC_SEARCH_FLAGS=''
+  			    ;;
+  			*)
+  			    echo "configure: warning: "64bit mode not supported with GCC on $system"" 1>&2
+--- 2570,2577 ----
+  			    do64bit_ok=yes
+  			    SHLIB_LD="gcc -shared"
+  			    SHLIB_LD_LIBS='${LIBS}'
+! 			    LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
+! 			    ##CC_SEARCH_FLAGS=''
+  			    ;;
+  			*)
+  			    echo "configure: warning: "64bit mode not supported with GCC on $system"" 1>&2

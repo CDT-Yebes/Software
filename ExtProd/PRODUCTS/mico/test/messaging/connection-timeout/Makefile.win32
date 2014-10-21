@@ -1,0 +1,23 @@
+
+RELATIVE = ..\..\..
+
+include ..\..\..\MakeVars.win32
+
+CXXFLAGS = -I. -I..\..\..\include $(CXXFLAGS)
+LDFLAGS  = /LIBPATH:..\..\..\orb $(LDFLAGS) 
+LDLIBS    = mico$(VERSION).lib $(CONFLIBS)
+
+all: client.exe server.exe
+
+client.exe:	hello.obj client.obj
+	$(LD) $(LDFLAGS) hello.obj client.obj $(LDLIBS) /OUT:$@
+
+server.exe:	hello.obj server.obj
+	$(LD)  $(LDFLAGS) hello.obj server.obj $(LDLIBS)  /OUT:$@
+
+hello.cc hello.h : hello.idl
+	$(IDL) hello.idl                                            
+
+clean:
+	-$(RM) server.exe client.exe *.obj *.exe.manifest hello.h hello.cc *.ref server.log .depend *~
+

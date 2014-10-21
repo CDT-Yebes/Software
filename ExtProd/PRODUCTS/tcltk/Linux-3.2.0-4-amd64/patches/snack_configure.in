@@ -1,0 +1,23 @@
+*** configure.in.orig	Thu Jun 24 15:40:34 2004
+--- configure.in	Mon Aug  2 13:03:38 2004
+***************
+*** 92,98 ****
+  	AFLAG="-DHPUX"
+  	ALIB="-L/opt/audio/lib -lAlib"
+  	AOBJ="jkAudIO_hp.o"
+! 	SHLIB_LD="$SHLIB_LD +s"
+  	;;
+      IRIX*)
+  	AFLAG="-DIRIX"
+--- 92,102 ----
+  	AFLAG="-DHPUX"
+  	ALIB="-L/opt/audio/lib -lAlib"
+  	AOBJ="jkAudIO_hp.o"
+! 	if test "$SHLIB_LD" = "ld -b" ; then
+! 	    SHLIB_LD="$SHLIB_LD +s"
+! 	else
+! 	    SHLIB_LD="$SHLIB_LD -Xlinker +s"
+! 	fi
+  	;;
+      IRIX*)
+  	AFLAG="-DIRIX"

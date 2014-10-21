@@ -1,0 +1,52 @@
+#! /usr/bin/env tclsh
+
+# @(#) $Id: tcl 1.6 2007/08/29 17:50:05 EAL $
+
+package require Tclx
+
+# Parse command line options
+if {$argc != 0} {
+    # possible first arguments:
+    #   -c <script>   : if given, must come as first arg!
+    #   <otherOption> : options must be identified by a leading -
+    #   <scriptFile>  : name of script to execute; must come as first arg!
+    switch -glob -- [lindex $argv 0] {
+        -c	{
+            incr argc -2
+            lvarpop argv
+            if {[catch {eval [lvarpop argv]}]} {
+                puts stderr $errorInfo
+                exit 1
+            } else {
+		exit 0
+            }
+        }
+        -*      {}
+        default	{
+            incr argc -1
+            if {[catch {source [lvarpop argv]}]} {
+                puts stderr $errorInfo
+                exit 1
+            } else {
+		exit 0
+            }
+        }
+    }
+}
+
+# If we get here, there are either no args passed, or the arg-list
+# does not start with a script-filename nor the -c option; in other
+# words, we have an interactive session.
+# Remark that [fstat stdin] will not indicate a tty if the input
+# is piped into stdin (e.g. via a "echo" cmd). As "mainloop"
+# will not read from stdin if tcl_interactive is 0, we need to
+# force it to 1.
+set tcl_prompt1 "puts -nonewline stdout [file tail $argv0]>"
+set tcl_prompt2 {puts -nonewline stdout =>}
+if {[catch {fconfigure stdin}]} {
+     # stdin is closed - cannot go "interactive"
+     exit 0
+} 
+##if {[fstat stdin tty]} {set tcl_interactive 1}
+set tcl_interactive 1
+mainloop

@@ -1,0 +1,23 @@
+*** gui.tcl.orig	2012-11-13 12:59:32.340328000 +0000
+--- gui.tcl	2012-11-13 12:55:30.250395000 +0000
+***************
+*** 745,753 ****
+  # so cols = (50/307)*562 = 91, want ~90, yay
+  	set repstr "ETRNIOASM          aaabcdeeeefghiijklmnnooprrsttuy"; set replen [string length $repstr]
+  
+! 	set rm [expr {[winfo width $t]-2*[$t cget -padx]-10}]
+  	$t tag configure info -tabs [list 0.3i $rm right]
+! 	$t tag configure census -tabs [list [expr {$rm-150}] right $rm right]
+  	$t tag configure high -tabs [list $rm right]
+  	$t tag configure rmtab -tabs [list $rm right]
+  
+--- 745,753 ----
+  # so cols = (50/307)*562 = 91, want ~90, yay
+  	set repstr "ETRNIOASM          aaabcdeeeefghiijklmnnooprrsttuy"; set replen [string length $repstr]
+  
+! 	set rm [expr {abs([winfo width $t]-2*[$t cget -padx]-10)}]
+  	$t tag configure info -tabs [list 0.3i $rm right]
+! 	$t tag configure census -tabs [list [expr {abs($rm-150)}] right $rm right]
+  	$t tag configure high -tabs [list $rm right]
+  	$t tag configure rmtab -tabs [list $rm right]
+  

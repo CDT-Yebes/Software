@@ -1,0 +1,15 @@
+*** configure.orig	Wed Jan 22 18:12:00 2003
+--- configure	Wed Jan 22 18:19:29 2003
+***************
+*** 4935,4940 ****
+--- 4935,4944 ----
+  rm -f core core.* *.core conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+  fi
+  
++ #!# For some strange reason, the above program fails on HP-UX and Linux when
++ #!# run via the VLTSW buildTclTk script. For HP-UX, Linux and Solaris we
++ #!# should use termios, so "hardcode" it here (next line). - EAL 2003-01-23
++ tk_ok=termios
+      if test $tk_ok = termios; then
+  	cat >>confdefs.h <<\_ACEOF
+  #define USE_TERMIOS 1

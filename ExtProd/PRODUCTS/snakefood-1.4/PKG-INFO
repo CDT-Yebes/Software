@@ -1,0 +1,13 @@
+Metadata-Version: 1.0
+Name: snakefood
+Version: 1.4
+Summary: Dependency Graphing for Python
+Home-page: http://furius.ca/snakefood
+Author: Martin Blais
+Author-email: blais@furius.ca
+License: GPL
+Description: 
+        Generate dependencies from Python code, filter, cluster and generate graphs
+        from the dependency list.
+        
+Platform: UNKNOWN

@@ -1,0 +1,133 @@
+
+ Threading Policies API
+ ----------------------
+
+This README file describes MICO specific Threading Policies
+Application Programming Interface. The Threading Policies were added
+in order to be able to set various concurrency models properties
+directly from the application source code without a need to use the
+command-line arguments.
+
+MICO provides following properties for threading framework
+management:
+
+- server's concurrency model: this property specifies which
+  concurrency model is going to be used on the server side of the
+  application. Possible models are thread pool and thread per
+  connection. By default thread pool is used.
+
+- client's concurrency model: this property specifies which
+  concurrency model is going to be used on the client side of the
+  application. Possible values are threaded, blocking threaded and
+  reactive. By default threaded is used.
+
+- request limit: this property specifies maximum number of requests
+  which is application able to issue/get in parallel. It applies to
+  thread pool, threaded and blocking threaded concurrency models
+  only and internally specifies a maximum number of working threads
+  allocated in the thread pool. By default the value of the property
+  is set to 128.
+
+- connection limit: this property specifies maximum number of
+  incoming/outgoing GIOP connections. The value 0 means that
+  connection limit management is disabled. By default for thread pool
+  concurrency model the value is set to 0 and for thread per
+  connection concurrency model it is set to 128.
+
+
+There are two Threading Policies implementation limitations which
+exist due to an attempt to not make general MICO threading framework
+initialization code more complex than absolutely needed. In fact while
+implementing the stuff we have chosen simpler way to preserve as much
+as possible from the current code and not destabilise MICO if not
+needed. The limitations are when to set the policies to make them
+effective and where exactly. The problem is that values set to
+threading policies are used only once in the application life-cycle
+and that's in the time of the threading framework initialization. MICO
+tries to initialize threading framework lazily, which means once it is
+needed to either start serving requests or when the application itself
+issues a request, but the application writer needs to keep this in
+mind while using the API in his/her application code. The second
+limitation is that Threading Policies values are propagated only if
+set on the global ORB's PolicyManager object. They are not propagated
+if set on the PolicyCurrent object nor if set on the object reference
+itself. Global PolicyManager has been chosen due to fact that
+threading framework initialization itself is a global task from the
+application point of view.
+
+
+Example:
+
+There is mttypes.idl provided which defines needed values for setting
+both server and client side concurrency models. For setting both
+request limit and connection limit numbers, standard CORBA::ULong type
+might be used. mttypes.idl definitions look like:
+
+
+module MICOMT
+{
+    enum ServerConcurrencyModel {
+        THREAD_POOL,
+        THREAD_PER_CONNECTION
+    };
+
+    enum ClientConcurrencyModel {
+        REACTIVE,
+        THREADED,
+        BLOCKING_THREADED
+    };
+};
+
+As we need PolicyManager object obtained from the ORB and also to
+create a policy instance itself, we need to put the code below (from
+the call time point of view) the ORB_init call. It might look:
+
+// we need to either include CORBA.h
+// or application stub/skeleton header file which
+// includes CORBA.h itself in order to get
+// MICOMT definitions included
+// i.e. CORBA.h itself includes mttypes.h
+// which is provided by MICO
+#include <CORBA.h>
+
+int
+main (int argc, char *argv[])
+{
+    // initialize values
+    MICOMT::ServerConcurrencyModel server_model = MICOMT::THREAD_PER_CONNECTION;
+    MICOMT::ClientConcurrencyModel client_model = MICOMT::REACTIVE;
+    CORBA::ULong reqlimit = 32;
+    CORBA::ULong connlimit = 1024;
+
+    // initialize ORB
+    CORBA::ORB_var orb = CORBA::ORB_init (argc, argv);
+
+    // create policy list with appropriate values
+    CORBA::PolicyList pl;
+    pl.length(4);
+    CORBA::Any value;
+
+    value <<= server_model;
+    pl[0] = orb->create_policy(MICOMT::SERVER_CONCURRENCY_MODEL_POLICY_TYPE, value);
+    value <<= client_model;
+    pl[1] = orb->create_policy(MICOMT::CLIENT_CONCURRENCY_MODEL_POLICY_TYPE, value);
+    value <<= reqlimit;
+    pl[2] = orb->create_policy(MICOMT::REQUEST_LIMIT_POLICY_TYPE, value);
+    value <<= connlimit;
+    pl[3] = orb->create_policy(MICOMT::CONNECTION_LIMIT_POLICY_TYPE, value);
+
+    // obtain ORB's policy manager object
+    Object_var obj = orb->resolve_initial_references("ORBPolicyManager");
+    PolicyManager_var pmgr = PolicyManager::_narrow(obj);
+    assert(!CORBA::is_nil(pmgr));
+
+    // set policy list on the manager
+    pmgr->set_policy_overrides(pl, SET_OVERRIDE);
+
+    // here the user application code might continue
+
+
+For concrete example of usage of Threading Policies API, please have a
+look into Threading Policies tests located in mico/test/threading
+sub-directory.
+

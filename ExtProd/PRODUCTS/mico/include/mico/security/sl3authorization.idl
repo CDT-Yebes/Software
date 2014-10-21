@@ -1,0 +1,173 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2004 ObjectSecurity Ltd.
+//
+#ifndef _SL3Authorization_IDL_
+#define _SL3Authorization_IDL_
+//#include <mico/security/securitylevel3.idl>
+#include <mico/security/sl3pm.idl>
+#include <mico/security/csi.idl>
+
+#pragma prefix "adiron.com"
+
+/**
+ * This module contains structures and an interface for
+ * dealing with accepting CSIv2 Authorization Tokens and 
+ * processing them into its principals, statements, and
+ * restricted resources for the ORBAsec SL3
+ * SecurityLevel3 Framework.
+ * <p>
+ * An application writer will create an object of the 
+ * <a href="SL3Authorization.TokenProcessor.html">TokenProcessor</a>
+ * interface  and place it is credentials using the 
+ * <a href="SL3CSI.CSIAQBuilder.html#addATLASObject">CSIAQBuilder.addATLASObject</a>
+ * operation.
+ */
+module SL3Authorization {
+    
+    /**
+     * This structure is returned from
+     * <a href="#accept_token">TokenProcessor.accept_token</a>
+     * operation. An implementer of the TokenProcessor interface must construct
+     * the proper principals, the statements, and the restricted 
+     * resources from the information the implementor receives.
+     */ 
+    struct AuthorizationInfo {
+        SL3PM::Principal        the_principal;
+        SL3PM::StatementList    the_statements;
+        SL3PM::ResourceNameList the_resources;
+    };
+    
+    /**
+     * The implementor of the 
+     * <a href="#accept_token">TokenProcessor.accept_token</a>
+     * operation will raise this exception to trigger a CSIv2
+     * InvalidEvidence Error message back to the client.
+     */
+    exception InvalidEvidence {
+        unsigned long minor;
+    };
+    
+    /**
+     * The implementor of the 
+     * <a href="#accept_token">TokenProcessor.accept_token</a>
+     * operation will raise this exception to trigger a CSIv2
+     * InvalidMechanism Error message back to the client.
+     */
+    exception InvalidMechanism {
+        unsigned long minor;
+    };
+    
+    /**
+     * The TokenProcessor interface of this module is one part needed
+     * to use ATLAS effectively. The TokenProcessor is implemented by
+     * an object that processes
+     * <a href="CSI.html#AuthorizationToken">CSIv2 AuthorizationToken</a>.
+     * It gets called on by the Security Service when a CSIv2 Authorization
+     * Token is received from a client.
+     * <p>
+     * An application writer will create an object of the 
+     * <a href="SL3Authorization.TokenProcessor.html">TokenProcessor</a>
+     * interface  and place it is credentials using the 
+     * <a href="SL3CSI.CSIArgBuilder.html#addATLASObject">CSIArgBuilder.addATLASObject</a>
+     * operation.
+     */
+    local interface TokenProcessor {
+
+        /**
+         * This operation returns true if this processor can handle
+         * and successfully process authorization information that
+         * may authorize the target to speak on behalf of the client.
+         * This function aids in the Security Service's construction of
+         * the IOR.
+         */
+        boolean supports_endorsement_by_client();
+        /**
+         * This operation returns true if this processor requires
+         * such authorization information that
+         * will authorize the target to speak on behalf of the client.
+         * This function aids in the Security Service's construction of
+         * the IOR.
+         */
+        boolean requires_endorsement_by_client();
+        
+        /**
+         * This operation is called by the Security Service every time
+         * a new CSIv2 context is established. It is up to this 
+         * objects operation to verify and compose all information
+         * from the information given. The arguments are as follows:
+         * <p>
+         * <dl>
+         * <dt>transport_principal
+         * <dd>This is the possibly compound principal that presents
+         *     the client as he may have authenticated at the transport
+         *     layer. This principal is lifted directly from the
+         *     <a href="TransportSecurity.ClientCredentials.html#client_principal">
+         *     TransportSecurity.ClientCredentials.client_principal</a>.
+         * <dt>transport_statements
+         * <dd>Any statements that support the transport principal.
+         *     This list is lifted directly from the
+         *     <a href="TransportSecurity.ClientCredentials.html#client_supporting_statements">
+         *     TransportSecurity.ClientCredentials.client_supporting_statements</a>.
+         * <dt>client_auth_principal
+         * <dd>This is the simple principal that presents
+         *     the client as he may have authenticated at the CSIv2 Authentication
+         *     layer. If no authentication token was delivered the value of
+         *     this argument will be null.
+         * <dt>client_auth_statement
+         * <dd>The IdentityStatement that supports the client authentication principal.
+         *     If the principal is null, this statement will be null as well.
+         * <dt>identity_assert_principal
+         * <dd>This is the possibly compound principal that presents
+         *     the client says for who he is making the request.
+         * <dt>identity_assert_statements
+         * <dd>Any statements that support the identity assertion principal.
+         * <dt>auth_token
+         * <dd>This argument is the authorization token, which contains
+         *     a list of tagged encodings.
+         * <dt>auth_info
+         * <dt>This argument is the return value.
+         * </dl>
+         */
+	// begin of ObjectSecurity change
+	// change from passing AuthorizationInfo as an out parameter
+	// to return it as it is more usuall practise
+        AuthorizationInfo accept_token(
+            /** The principal of the client's transport */
+            in SL3PM::Principal         transport_principal,
+            in SL3PM::StatementList     transport_statements,
+            in SL3PM::ResourceNameList  transport_resources,
+            in SL3PM::SimplePrincipal   client_auth_principal,
+            in SL3PM::IdentityStatement client_auth_statement,
+            in SL3PM::Principal         identity_assert_principal,
+            in SL3PM::StatementList     identity_assert_statements,
+            in CSI::AuthorizationToken           auth_token
+        ) raises (
+            InvalidEvidence,
+            InvalidMechanism
+        );
+
+	// end of ObjectSecurity change
+
+	// begin of ObjectSecurity addition
+	// this operation is needed to find the appropriate
+	// TokenProcessor on client side to handle authorization token(s)
+	// returned by ATLAS
+	// Note that we need to support registering multiple token processors
+	// on the client side
+	CSI::AuthorizationElementType accept_token_type();
+	// end of ObjectSecurity addition
+    };
+};
+#endif
+
+
+

@@ -1,0 +1,514 @@
+#
+# Makefile for TkMan
+#
+# You also need the companion filter PolyglotMan.
+#
+#   It's helpful to read the README-tkman file first.
+#   You should read over *all* parts of this file,
+#      down to the "you shouldn't modify" line.
+#   If you make tkman (`tkman'--all lowercase--refers to the 
+#      executable) and subsequently find you need to change variables 
+#      in the Makefile, make sure that these changes aren't being 
+#      overridden in ~/.tkman.
+#   Don't forget the interesting extensions in the contrib directory.
+#
+
+
+
+# required minimum versions of Tcl and Tk, for your information (don't modify these values)
+# TkMan may work with a later version of Tcl/Tk, but Tcl/Tk does introduces
+#    incompatible changes between versions, so no guarantees.
+mintcl = 8.4
+mintk = 8.4
+
+
+
+### you need to localize the paths on these lines
+
+#WISH = /usr/local/bin/wish8.4
+#WISH = /usr/sww/tcl-8.4/bin/wish
+#WISH = /private/share/bin/wish8.4
+WISH = wish
+
+# the executable `tkman' is placed in BINDIR
+# this should be a directory that's in your bin PATH
+#BINDIR = /usr/local/bin
+#BINDIR = /private/share/bin
+BINDIR = $(TCLTK_ROOT)/bin
+
+
+# OPTIONAL FEATURES
+# directory in which to make Texinfo summary databases/indexes and find file
+# "dir.tkman" with references to Texinfo source files (which may be compressed).
+# (Follow pattern in sample "dir.tkman".)
+# This directory should not have any Texinfo source itself.
+# More information is given in manual.html
+# if you don't have Texinfo files, leave this variable empty
+texinfodir = ""
+#texinfodir = /home/orodruin/h/bair/phelps/spine/tkman/info
+#texinfodir = /usr/local/info
+# In order to search within Texinfo files you need a grep, such as GNU grep 2.1,
+# that can report byte offsets (with the -b switch).  This needs to be
+# gzgrep if you'll be searching in compressed Texinfo source.
+gzgrep = ""
+#gzgrep = "gzgrep -E"
+#gzgrep = "gzgrep -Ew"
+# Linux calls it zgrep
+#gzgrep = "zgrep -E"
+# Cygwin calls it grep
+#gzgrep = grep
+# if you don't compress your Texinfo source, this is fine
+#gzgrep = grep
+
+# OPTIONAL
+# directory root of hierarchy of RFC files, with "rfc-index.txt" at the root
+# This may just be a convention at my site.  
+# If glimpse set as well, RFC .txt documents are indexed too.
+# If this makes no sense to you, ignore it without a second thought.
+rfcdir = ""
+#rfcdir = /usr/sww/doc/RFC
+
+
+# OPTIONAL
+# if you want to show man page version difference based on RCS
+# information, create an RCS directory in the same directory as the pages
+# and create revision files for those selected pages
+# More information is given in manual.html
+
+
+# Since manual pages and their corresponding binaries (if applicable) can be
+# scattered hither and yon in a file system, it would be nice to know about 
+# them if a search came up empty.  The following is a list of directories TkMan
+# will examine for matches if a search in the usual locations fails while searching
+# for a man pages and displaying its associated binaries (if any).
+# Use this feature carefully as a large number of directories can slow down startup.
+mastermen = "/usr/man /usr/local/man"
+#mastermen = "/usr/man /usr/local/man /usr/sww/man /usr/share/man /usr/kerberos/man"
+masterbin = "/usr/bin /usr/local/bin"
+#masterbin = "/usr/bin /usr/local/bin /usr/sww/bin /usr/sww/share/bin /usr/sww/share/X11R5/bin"
+
+
+# names of common printers, in addition to default printer (PRINTER or LPDEST)
+# (individual users can edit this list in the Preferences panel)
+printers = ""
+#printers = "lws483a kp"
+
+
+# list of font dpi's generated in the X server (see xlsfonts(1))
+# At startup, TkMan will compute the screen DPI and use the font
+# at the closest DPI in this list
+dpis = "75 100"
+
+
+# # # MACHINE DEPENDENCIES # # #
+
+#manformat = {tbl | neqn | nroff -man }
+# col performs the line overlays implied by reverse line-feeds,
+# but seems to kill international characters, such as u-with-umlaut
+#manformat = {tbl | neqn | nroff -man | col }
+# ALTERNATIVES
+#manformat = {groff -Tascii -te -man}
+#manformat = {groff -Tlatin1 -te -man}
+# Marco Melgazzi (marco@techie.com) prefers LONGER MAN PAGE LINES (recommended).
+# The following line adds an entry in Preferences/See to set the length.
+# You must use groff and the "/tmp/ll" path for this feature to take effect.
+# Lines are cached in .../man/cat<n>@<line-length>; 
+#   that is, the line length is appended to the usual cache directory names
+#manformat = {groff -te -Tascii -man /tmp/ll -}
+manformat = {groff -te -Tlatin1 -man /tmp/ll -}
+# Ultrix users should uncomment the following line (you don't have eqn)
+#manformat = {tbl | nroff -man }
+# HP-UX uses a number of macros that groff doesn't define, so use the builtin nroff
+# (groff's GROFF_TMAC_PATH doesn't help as HP-UX's macros definitions don't have a
+#  space between the .de and the macro name, and groff doesn't like this.)
+#manformat = {tbl | neqn | nroff -man }
+# BSD macros (.Sh, .Ss, .PP, ...) need -mandoc
+#manformat = {groff -Tascii -te -mandoc}
+# BSDI
+#manformat = {tbl | eqn -Tascii | nroff -man }
+# It's actually legal to leave this empty if all the pages you'll ever
+# want to look at have already been formatted (as on SGI or maybe Windoze)
+#manformat = ""
+
+
+# if you have GNU's zip, use it!
+# Especially if you're working in a herterogeneous environment.
+# gzip works everywhere and produces the smallest compressed files.
+# (give gzip -q option because we don't want a GZIP environment variable
+#  with -v spitting out non-error statistics to stderr)
+
+zcat = "gzip -dcfq"
+compress = "gzip -q"
+zlist = {gz z Z}
+
+# If you don't have gzip try these:
+
+# SGI users can use pcat instead of gzcat (though gzcat works great)
+#zcat = pcat
+#compress = "pack -f"
+#zlist = z
+
+# HP-UX needs these variations, if gzip isn't available
+#zcat = "zcat < "
+#compress = compress
+#zlist = Z
+
+# if nothing else, use these
+#zcat = zcat
+#compress = compress
+#zlist = Z
+
+# other compressors
+# bzip2 (see http://www.digistar.com/bzip2/) - not tested
+# You can't have a mixture of bzip2 and gzip compressed pages.
+#zcat = "bzip -dcf"
+#compress = bzip
+#zlist = bz2
+
+
+# pick a printing pipeline for which your platform has all the constituants
+manprint = {groff -man -Tps -te -l}
+# alternatives
+#manprint = {groff -man -Tps -te -l | psnup -n2}
+#manprint = {tbl | eqn | troff -man -t | lpr -t}
+#manprint = {tbl | eqn | psroff -man}
+#manprint = {tbl | eqn | gtroff -Tpsc | psdit | lpr}
+# use an empty pipeline if you're environmentally conscious or have no printer
+#manprint = ""
+# printing string for preformatted pages without [tn]roff source
+catprint = lpr
+#catprint = "lpr -h"
+#catprint = enscript
+#catprint = ""
+
+
+shortnames = 0
+# if you have an old UNIX with short limit to file name length
+#shortnames = 1
+
+
+
+# # # GLIMPSE # # # 
+
+# OPTIONAL
+# Add full text search of manual pages with Glimpse.
+# For more information about Glimpse see http://glimpse.cs.arizona.edu/
+# or ftp the glimpse software from ftp.cs.arizona.edu:/glimpse
+# Glimpse uses indexes of only "2-5%" of the size of the original text,
+# indexes that are shared just like the man pages they index,
+# and TkMan automates the process of creating the index files,
+# so how can you lose?
+#
+# Once installing and linking to glimpse, build the glimpse index with
+# the right-topmost menu's Rebuild Database/Glimpse Index menu choice.
+
+# BY DEFAULT OFF
+glimpse = ""
+# Glimpse on, with Boolean scope set to entire file
+##glimpse = "glimpse -W"
+# give the full path, if you'd like
+#glimpse = /usr/sww/bin/glimpse
+# variations (refer to the Glimpse manual page)
+# no characters treated as meta characters:
+#glimpse = "glimpse -Wk"
+# compressed manual pages are handled automatically; don't add -z to above
+
+# glimpseindex indexes the manual pages, for each component of one's MANPATH,
+# and places the results in a set of files named .glimpse_* in that MANPATH
+# component directory.
+#
+# To create the necessary indexes, simply start up TkMan and
+# choose `Rebuild Glimpse Database' under the Occasionals (named `...') menu.
+#
+# Refer to the Glimpse manual page for more information.
+# Before reporting a problem with indexing under TkMan, turn on debugging
+# (`-debug' option), obtain the problemmatic glimpseindex command,
+# and make sure it works when executed by hand.
+
+# Produce a larger index ("7-9%" of source text) allowing faster search w/"-o"
+# You need either -o or -b in any set of glimpseindex options
+#glimpseindex = "glimpseindex -o -B"
+# To shorten most index build times by incrementally building index when possible.
+# For me, this drops indexing time from ~25 minutes to ~3 minutes, depending
+glimpseindex = "glimpseindex -o -B -f"
+# -M 8 gives 8MB of main memory instead of default 2, which speeds up indexing, maybe
+#glimpseindex = "glimpseindex -o -B -f -M 8"
+# if you don't want give the power to index, disable glimpseindex here
+#glimpseindex = ""
+#glimpseindex = "/usr/sww/bin/glimpseindex -o -B"
+# compressed manual pages are handled automatically; don't add -z to above
+
+# directory in which to place stray man directories added with manDescAdd
+# that don't correspond to a directory in MANPATH
+# This can't be the same as a component in MANPATH.
+glimpsestrays = /tmp
+#glimpsestrays = $$env(HOME)/tmp
+#glimpsestrays = /private
+
+# By default Glimpse indexes are placed in the same directory trees as the pages
+# they index.  This way indexes can be shared.  If you don't have permission
+# to write in these directories, comment in "unified" below and the glimpsestrays
+# directory given above (which should be writable) will hold a single index 
+# of all pages.
+indexglimpse = "distributed"
+#indexglimpse = "unified"
+
+# additional directory subtrees to index, 
+# besides man page and Texinfo and RFC, 
+# perhaps FAQs or full text of books
+indexalso = ""
+#indexalso = "/usr/sww/doc/faq /usr/sww/doc/etext/Jargon"
+
+
+
+# # # PUBLIC INSTALLATION # # #
+
+# If a new user--as indicated by the lack of a ~/.tkman file--runs TkMan,
+# you can execute some Tcl code of your own design to customize his 
+# environment for the local site.
+newuser = ""
+#newuser = "exec cp /usr/local/lib/tkman-new.tcl $$env(HOME)/.tkman"
+#newuser = "source /usr/local/lib/tkman-new.tcl"
+
+
+
+# # # these lines are probably fine
+
+co = co
+rlog = rlog
+cksum = cksum
+#cksum = md5sum
+rcsdiff = rcsdiff
+vdiff = diff
+# GNU diff can find a more minimal set of differences
+#vdiff = {gdiff -Bwd}
+# do not use GNU's wdiff.  I tried to use it to generate more precise
+# change information, but it has a bug with (not) associating newlines with old text
+
+
+# if you don't want to put RosettaMan (rman) in your PATH, make the name fully qualified
+# (that's probably a good idea if `tkman' is installed on a central server)
+rman = rman
+#rman = /usr/local/bin/rman
+
+apropos = {man -k}
+# Linux uses a shell script instead:
+#apropos = apropos
+# if don't have apropos (maybe on Windoze)
+#apropos = ""
+
+catsig = {cat[^/]+(/[^/]+)?$$}
+# if your flavor of UNIX puts formatted man pages in directories
+# ending in manX rather than catX, uncomment the following line
+#catsig = {.*}
+
+
+
+#
+# variables used in this Makefile only and not propagated to executable
+#
+
+CP = cp
+# or you can use GNU's cp and backup files that are about to be overwritten
+#CP = cp -b
+
+
+#--------------------------------------------------
+#
+# you shouldn't modify anything below here
+#
+#--------------------------------------------------
+
+version = 2.2
+
+tkman = tkman-$(version)
+srcs =	gui.tcl prefs.tcl highlights.tcl version.tcl glimpse.tcl stats.tcl \
+	manualpage.tcl database.tcl manpath.tcl tkmandesc.tcl \
+	texi.tcl bmb.tcl \
+	tkman.tcl
+objs = tkman
+libs = searchbox.tcl taputils.tcl textmanip.tcl
+aux = ANNOUNCE-tkman.txt README-tkman Makefile CHANGES scripthead dir.tkman retkman.tcl
+help = manual.html tkman-help.tcl
+distrib = $(srcs) $(libs) xbm $(aux) contrib $(help)
+
+all: tkman retkman
+	@echo
+	@echo 'TkMan is compiled in the current directory.'
+	@echo 'You can test it by typing "./tkman".'
+	@echo 'To install it and the man page, type "make install".'
+	@echo
+
+
+# Concatenate everything into a single script so we don't have to worry about library paths.
+# Even with Tcl compiler need to retain comment zapping, 
+# since we want lines that look like comments to be stripped and these can occur, 
+# say, in the middle of lists
+tkman: $(srcs) $(libs) Makefile
+	cat scripthead > tkman
+	echo 'exec $(WISH) $$0 $${1+"$$@"}' >> tkman
+	echo 'set manx(version) $(version)' >> tkman
+	echo 'set manx(mintcl) $(mintcl)' >> tkman
+	echo 'set manx(mintk) $(mintk)' >> tkman
+	echo 'set manx(newuser) $(newuser)' >> tkman
+	echo 'set manx(mastermen) $(mastermen)' >> tkman
+	echo 'set manx(masterbin) $(masterbin)' >> tkman
+	echo 'set man(zcat) $(zcat)' >> tkman
+	echo 'set man(compress) $(compress)' >> tkman
+	echo 'set man(apropos) $(apropos)' >> tkman
+	echo 'set man(glimpse) $(glimpse)' >> tkman
+	echo 'set man(glimpseindex) $(glimpseindex)' >> tkman
+	echo 'set man(glimpsestrays) $(glimpsestrays)' >> tkman
+	echo 'set man(indexglimpse) $(indexglimpse)' >> tkman
+	echo 'set man(indexalso) $(indexalso)' >> tkman
+	echo 'set man(texinfodir) $(texinfodir)' >> tkman
+	echo 'set man(gzgrep) $(gzgrep)' >> tkman
+	echo 'set man(rfcdir) $(rfcdir)' >> tkman
+	echo 'set man(format) $(manformat)' >> tkman
+	echo 'set man(printers) $(printers)' >> tkman
+	echo 'set manx(dpis) $(dpis)' >> tkman
+	echo 'set man(print) $(manprint)' >> tkman
+	echo 'set man(cksum) $(cksum)' >> tkman
+	echo 'set man(zlist) $(zlist)' >> tkman
+	echo 'set man(co) $(co)' >> tkman
+	echo 'set man(rlog) $(rlog)' >> tkman
+	echo 'set man(rcsdiff) $(rcsdiff)' >> tkman
+	echo 'set man(vdiff) $(vdiff)' >> tkman
+	echo 'set manx(rman) $(rman)' >> tkman
+	echo 'set man(catprint) $(catprint)' >> tkman
+	echo 'set man(catsig) $(catsig)' >> tkman
+	echo 'set man(shortnames) $(shortnames)' >> tkman
+	echo 'set manx(changes) {' >> tkman
+	cat CHANGES >> tkman
+	echo '}' >> tkman
+	echo 'proc manHelpDump {t} {' >> tkman
+	cat tkman-help.tcl >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap icon -foreground black -background white -data {' >> tkman
+	cat contrib/tkman.bitmap >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap face -foreground black -background white -data {' >> tkman
+	cat xbm/face.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap opened -data {' >> tkman
+	cat xbm/opened.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap closed -data {' >> tkman
+	cat xbm/closed.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap sections -data {' >> tkman
+	cat xbm/sect.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap history -data {' >> tkman
+	cat xbm/history.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap random -data {' >> tkman
+	cat xbm/random.xbm >> tkman
+	echo '}' >> tkman
+	echo 'set manx(rebus) file|text|home|directory|disk|mail|Macintosh|TeX' >> tkman
+	echo 'image create bitmap fileRebus -data {' >> tkman
+	cat xbm/file.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap diskRebus -data {' >> tkman
+	cat xbm/disk_tiny.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap homeRebus -data {' >> tkman
+	cat xbm/woodhouse.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap textRebus -data {' >> tkman
+	cat xbm/text.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap directoryRebus -data {' >> tkman
+	cat xbm/file_dir.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap mailRebus -data {' >> tkman
+	cat xbm/mail.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap macintoshRebus -data {' >> tkman
+	cat xbm/mac.xbm >> tkman
+	echo '}' >> tkman
+	echo 'image create bitmap texRebus -data {' >> tkman
+	cat xbm/tex.xbm >> tkman
+	echo '}' >> tkman
+	echo 'set manx(solaris-bindings) {' >> tkman
+	cat contrib/solaris_bindings.tcl >> tkman
+	echo '}' >> tkman
+	echo 'set manx(solaris25-bindings) {' >> tkman
+	cat contrib/solaris25_bindings.tcl >> tkman
+	echo '}' >> tkman
+	echo 'set manx(solaris26-bindings) {' >> tkman
+	cat contrib/solaris26_bindings.tcl >> tkman
+	echo '}' >> tkman
+	echo 'set manx(solaris28-bindings) {' >> tkman
+	cat contrib/solaris28_bindings.tcl >> tkman
+	echo '}' >> tkman
+	echo 'set manx(irix-bindings) {' >> tkman
+	cat contrib/irix_bindings.tcl >> tkman
+	echo '}' >> tkman
+	echo 'set manx(sco-bindings) {' >> tkman
+	cat contrib/sco_bindings.tcl >> tkman
+	echo '}' >> tkman
+	sed -e 's/^[	 ]*//' -e '/^#/d' $(libs) $(srcs) >> tkman
+	chmod +x tkman
+
+retkman: retkman.tcl Makefile
+	cat scripthead > retkman
+	echo 'exec $(WISH) $$0 $${1+"$$@"}' >> retkman
+	cat retkman.tcl >> retkman
+	chmod +x retkman
+
+install: tkman retkman
+	$(CP) tkman $(BINDIR)
+	chmod +rx $(BINDIR)/tkman
+	$(CP) retkman $(BINDIR)
+	chmod +rx $(BINDIR)/retkman
+	@echo 'You also need RosettaMan to run TkMan.'
+
+test: dox tkman
+	cp tkman $(BINDIR)
+	tkman -noiconify -debug -profile
+
+sww:
+	rm -f tkman $(wildcard ~/bin/tkman)
+	tkman
+
+dox: tkman-help.tcl CHANGES ANNOUNCE-tkman.txt
+
+ANNOUNCE-tkman.txt: Announce-tkman
+	sed -e /=========/,/bogusline/p -e d Announce-tkman > ANNOUNCE-tkman.txt
+
+#tkman-help.tcl: manual.html
+#	cat ../html/html.dtd manual.html | sgmls | ../html/html2tk.pl > tkman-help.tcl
+
+checkpoint:
+	echo foreach i ($(srcs))
+	echo rcsdiff $$i
+	echo ci -l $$i
+	echo end
+
+wc:
+	wc $(srcs)
+
+clean:
+	rm -f $(objs)
+
+dist: dox
+	rm -rf $(tkman)*
+	mkdir $(tkman)
+	cp -R $(distrib) $(tkman)
+	rm -f $(tkman)/contrib/*~
+	@echo 'gcksum crc   length name' > MANIFEST
+	@echo '----------   ------ ----' >> MANIFEST
+	@cksum $(filter-out contrib, $(filter-out %~, $(distrib) $(wildcard contrib/*))) | tee -a MANIFEST
+	mv MANIFEST $(tkman)
+	tar chvf $(tkman).tar $(tkman)
+#	compress $(tkman).tar
+	gzip -9v $(tkman).tar
+	ls -l $(tkman).tar.gz
+	rm -rf $(tkman) ANNOUNCE-tkman.txt
+	@echo "*** Did you remember to ci -l first?"
+
+uu: dist
+	gznew $(tkman).tar.Z
+	echo 'uudecode, gunzip (from GNU), untar' > $(tkman).tar.gz.uu
+	uuencode $(tkman).tar.gz $(tkman).tar.gz >> $(tkman).tar.gz.uu

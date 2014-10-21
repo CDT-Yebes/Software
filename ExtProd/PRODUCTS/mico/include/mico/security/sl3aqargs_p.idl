@@ -1,0 +1,258 @@
+//
+//  MICO SL3 --- an Open Source SL3 implementation
+//  Copyright (C) 2002, 2003, 2004 ObjectSecurity Ltd.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+//  Send comments and/or bug reports to:
+//                 micosec@objectsecurity.com
+//
+
+//  Written by Karel Gardas, <kgardas@objectsecurity.com>
+
+
+#ifndef _SL3AQARGS_P_IDL_
+#define _SL3AQARGS_P_IDL_
+
+#include <mico/security/sl3cm.idl>
+#include <mico/security/sl3aqargs.idl>
+#include <mico/security/trust.idl>
+#include <mico/security/userpassword.idl>
+#include <mico/security/sl3tls.idl>
+#include <mico/security/transportsecurity.idl>
+#include <mico/security/atlas.idl>
+#include <mico/security/sl3authorization.idl>
+
+/**
+ * These definitions are MICO SL3 private.
+ */
+module SL3AQArgs {
+
+    const SL3CM::AcquisitionArgumentType ArgsHolderType = "ArgsHolder";
+
+    local interface ArgsHolder : Argument {
+	readonly attribute SL3CM::CredentialsUsage usage;
+	readonly attribute SL3AQArgs::ArgumentSeq args;
+    };
+
+    //
+    // TCPIP TransportSecurity Credentials Acquisition
+    //
+    
+    // CSIv1 support
+
+    const SL3CM::AcquisitionArgumentType CSIv1SupportType = "CSIv1Support";
+    local interface CSIv1Support : Argument {
+	readonly attribute boolean support;
+    };
+
+    // CSIv2 support
+
+    const SL3CM::AcquisitionArgumentType CSIv2SupportType = "CSIv2Support";
+    local interface CSIv2Support : Argument {
+	readonly attribute boolean support;
+    };
+
+    // TCPIPInitiatorArgument
+
+    struct TCPIPInitiatorOptions {
+        string bind;      // Interface to bind the socket to.
+	                  // If empty, then system selects
+        long   low_port;  // If 0 system selects
+        long   high_port; // Only if low_port != 0, high port >=low_port
+                          // If equal, it binds to that port.
+                          // If greater, it will try for ports within
+                          // the range.
+        long   timeout;   // default timeout for connections.
+    };
+
+    const SL3CM::AcquisitionArgumentType TCPIPInitiatorArgumentType
+    = "TCPIPInitiatorArgument";
+
+    local interface TCPIPInitiatorArgument : Argument {
+	readonly attribute TCPIPInitiatorOptions options;
+    };
+    
+    // TCPIPAcceptorArgument
+
+    struct TCPIPAcceptorOptions {
+        CORBA::StringSeq   hosts;     // If empty, system select
+        string             bind;      // if not empty, must be one of hosts.
+        long               low_port;  // 0 means system select
+        long               high_port; // Only if low_port != 0;
+        long               backlog;   // socket parameter
+        boolean            numeric;   // use numeric addresses inIORs?
+    };
+
+    const SL3CM::AcquisitionArgumentType TCPIPAcceptorArgumentType
+    = "TCPIPAcceptorArgument";
+
+    local interface TCPIPAcceptorArgument : Argument {
+	readonly attribute TCPIPAcceptorOptions options;
+    };
+    
+    //
+    // TLS TransportSecurity Credentials Acquisition
+    //
+    
+    // TLSX509IdentityVerifierArgument
+
+    const SL3CM::AcquisitionArgumentType TLSX509IdentityVerifierInitiatorArgumentType
+    = "TLSX509IdentityVerifierInitiatorArgument";
+
+    local interface TLSX509IdentityVerifierInitiatorArgument : Argument {
+	readonly attribute SL3TLS::TLSX509IdentityVerifier verifier;
+    };
+
+    const SL3CM::AcquisitionArgumentType TLSX509IdentityVerifierAcceptorArgumentType
+    = "TLSX509IdentityVerifierAcceptorArgument";
+
+    local interface TLSX509IdentityVerifierAcceptorArgument : Argument {
+	readonly attribute SL3TLS::TLSX509IdentityVerifier verifier;
+    };
+
+    // OpenSSLConfigArgument
+
+    struct OpenSSLConfig {
+	string cert_file;
+	string key_file;
+	string ca_file;
+	string ca_path;
+	string cipher;
+	boolean use_passphrase;
+	string passphrase;
+	long verify_depth;
+    };
+
+    const SL3CM::AcquisitionArgumentType OpenSSLInitiatorArgumentType
+    = "OpenSSLInitiatorArgument";
+
+    local interface OpenSSLInitiatorArgument : Argument {
+	readonly attribute OpenSSLConfig config;
+    };
+
+    const SL3CM::AcquisitionArgumentType OpenSSLAcceptorArgumentType
+    = "OpenSSLAcceptorArgument";
+
+    local interface OpenSSLAcceptorArgument : Argument {
+	readonly attribute OpenSSLConfig config;
+    };
+
+    //
+    // SecurityLevel3 Credentials Acquisition
+    //
+
+    // TransportCredentialsArgument
+
+    const SL3CM::AcquisitionArgumentType TransportCredentialsArgumentType
+    = "TransportCredentialsArgument";
+
+    local interface TransportCredentialsArgument : Argument {
+	readonly attribute TransportSecurity::OwnCredentials creds;
+    };
+
+    // LocalTrustInServerDeciderArgument
+
+    const SL3CM::AcquisitionArgumentType DeciderArgumentType
+    = "LocalTrustInServerDeciderArgument";
+
+    local interface DeciderArgument : Argument {
+	readonly attribute Trust::LocalTrustInServerDecider decider;
+    };
+
+    // GeneratorArgument
+
+    const SL3CM::AcquisitionArgumentType GeneratorArgumentType
+    = "UserPasswordGenerator";
+
+    local interface GeneratorArgument : Argument {
+	readonly attribute UserPassword::PasswordGenerator generator;
+    };
+
+    // ProcessorArgument
+
+    const SL3CM::AcquisitionArgumentType ProcessorArgumentType
+    = "UserPasswordProcessor";
+
+    local interface ProcessorArgument : Argument {
+	readonly attribute UserPassword::PasswordProcessor processor;
+    };
+
+    // QuotingPrincipalArgument
+
+    const SL3CM::AcquisitionArgumentType QuotingPrincipalArgumentType
+    = "QuotingPrincipal";
+
+    local interface QuotingPrincipalArgument : Argument {
+	readonly attribute SL3PM::QuotingPrincipal principal;
+    };
+
+    // ATLAS
+
+    const SL3CM::AcquisitionArgumentType ATLASArgumentType = "ATLAS";
+
+    local interface ATLASArgument : Argument {
+	readonly attribute ATLAS::ATLASCacheId cache_id;
+	readonly attribute ATLAS::AuthTokenDispenser token_dispenser;
+	readonly attribute SL3Authorization::TokenProcessor token_processor;
+    };
+
+    // token processors for client side
+
+    typedef sequence<SL3Authorization::TokenProcessor> TokenProcessorSeq;
+
+    const SL3CM::AcquisitionArgumentType TokenProcessorSeqArgumentType
+    = "TokenProcessorSeq";
+
+    local interface TokenProcessorSeqArgument : Argument {
+	readonly attribute TokenProcessorSeq tpseq;
+    };
+
+    // IPC initiator
+
+    const SL3CM::AcquisitionArgumentType IPCInitiatorArgumentType
+    = "IPCInitiator";
+
+    local interface IPCInitiatorArgument : Argument {
+    };
+
+    // IPC acceptor
+
+    const SL3CM::AcquisitionArgumentType IPCAcceptorArgumentType
+    = "IPCAcceptor";
+
+    local interface IPCAcceptorArgument : Argument {
+    };
+
+    // Observer sequence
+
+    const SL3CM::AcquisitionArgumentType ObserverSeqArgumentType
+    = "ObserverSeq";
+
+    local interface ObserverSeqArgument : Argument {
+	readonly attribute SL3OM::ObserverSeq observers;
+    };
+
+    // IdentityProcessorArgument
+
+    const SL3CM::AcquisitionArgumentType IdentityProcessorArgumentType
+    = "TLSX509IdentityProcessor";
+
+    local interface IdentityProcessorArgument : Argument {
+	readonly attribute SL3TLS::TLSX509IdentityProcessor processor;
+    };
+
+};
+#endif // _SL3AQARGS_P_IDL_

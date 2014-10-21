@@ -1,0 +1,75 @@
+
+In this directory you can find various MICO SL3 demos. All demos
+might be divided into two categories: transport security demos and
+security level 3 demos.
+
+
+Transport Security demos
+------------------------
+These demos demonstrate working with credentials directly on the
+transport layer. The supported transport layers are plain TCPIP and
+SSL/TLS.
+
+Demos:
+
+tcpip: this demo demonstrates working with plain TCPIP/IIOP protocol
+
+tls: this demo demonstrates working with the SSL/TLS protocol
+
+tls-anon: this demo demonstrates working with the SSL/TLS protocol,
+          where client does not have its own certificate and so
+          initiates so called anonymous TLS connection
+
+tls-naming: this demo demonstrates combined usage of both TCPIP and
+            SSL/TLS protocols. The TCPIP protocol is used to
+            obtain/set server object reference from/into naming
+            service and SSL/TLS protocol is then used for
+            communication between client and server.
+
+Security Level 3 demos
+----------------------
+These demos demonstrate working with credentials in SAS (CSIv2)
+protocol layers. Security Level 3 credentials are always build upon
+some supported transport layer and so they internally use transport
+layer's credentials. All demos in this category demonstrate simple
+CSIv2 GSS user-password authentication scheme usage.
+
+user-pass-tcpip: this demo demonstrates working with security level 3
+                 credentials on top of TCPIP transport layer
+
+user-pass-tls: this demo demonstrates working with security level 3
+               credentials on top of TLS transport layer
+
+user-pass-tls-anon: this demo demonstrates working with security level
+                    3 credentials on top of TLS transport layer where
+                    client uses anonymous SSL/TLS connections.
+
+user-pass-tcpip-identity: this demo demonstrates usage of
+                          QuotingPrincipal functionality on top of
+                          TCPIP transport layer
+
+user-pass-tls-plain-tls-client: this demo demonstrates ability of
+                                security service to establish context
+                                based on transport credentials
+
+
+
+SL3 to CSIv2 demos mapping
+--------------------------
+This table illustrates which SL3 demo is counterpart to which CSIv2
+demo.
+
++--------------------------------+-----------------+
+|SL3                             |     CSIv2       |
++--------------------------------+-----------------+
+| tcpip                          | none            |
+| tls                            | none            |
+| tls-anon                       | none            |
+| tls-naming                     | none            |
+| user-pass-tcpip                | hello-1         |
+| user-pass-tcpip-identity       | identity-1      |
+| user-pass-tls                  | tls-hello-1     |
+| user-pass-tls-anon             | none            |
+| user-pass-tls-plain-tls-client | tls-hello-2     |
++--------------------------------------------------+
+

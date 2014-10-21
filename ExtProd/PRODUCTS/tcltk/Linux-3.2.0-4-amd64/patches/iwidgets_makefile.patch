@@ -1,0 +1,29 @@
+*** Makefile.in.orig	Wed Feb  2 15:52:47 2005
+--- Makefile.in	Wed Feb  2 16:03:00 2005
+***************
+*** 55,64 ****
+  # Top-level directory in which to install manual entries:
+  MAN_INSTALL_DIR = $(DESTDIR)$(mandir)/mann
+  
+! INSTALL		= @INSTALL@
+! INSTALL_PROGRAM	= @INSTALL_PROGRAM@
+! INSTALL_DATA	= @INSTALL_DATA@
+! INSTALL_SCRIPT	= @INSTALL_SCRIPT@
+  SHELL		= @SHELL@
+  TOP_DIR		= $(srcdir)
+  GENERIC_DIR	= $(TOP_DIR)/generic
+--- 55,68 ----
+  # Top-level directory in which to install manual entries:
+  MAN_INSTALL_DIR = $(DESTDIR)$(mandir)/mann
+  
+! INSTALL =		@TCLSH_PROG@ `@CYGPATH@ @ITCL_SRC_DIR@/../config/installFile.tcl` -c
+! INSTALL_PROGRAM =	$(INSTALL)
+! INSTALL_DATA =		$(INSTALL) -m 644
+! INSTALL_SCRIPT =	$(INSTALL) -m 555
+! ###INSTALL		= @INSTALL@
+! ###INSTALL_PROGRAM	= @INSTALL_PROGRAM@
+! ###INSTALL_DATA	= @INSTALL_DATA@
+! ###INSTALL_SCRIPT	= @INSTALL_SCRIPT@
+  SHELL		= @SHELL@
+  TOP_DIR		= $(srcdir)
+  GENERIC_DIR	= $(TOP_DIR)/generic

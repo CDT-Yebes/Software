@@ -1,0 +1,50 @@
+
+
+Commands in global namespace
+============================
+after append apply array auto_execok auto_import auto_load auto_load_index auto_qualify binary break case catch cd chan clock close concat continue dict encoding eof error eval exec exit expr fblocked fconfigure fcopy file fileevent flush for foreach format getNamespaces gets glob global history if incr info interp join lappend lassign lindex linsert list llength load lrange lrepeat lreplace lreverse lsearch lset lsort namespace open package pid proc puts pwd read regexp regsub rename return scan seek set socket source split string subst switch tclLog tell time trace unknown unload unset update uplevel upvar variable vwait while
+
+
+Commands in namespace ::tcl
+===========================
+Bgerror CopyDirectory HistAdd HistChange HistClear HistEvent HistIndex HistInfo HistKeep HistRedo pkgconfig
+
+
+Commands in namespace ::tcl::chan
+=================================
+blocked close copy create eof event flush gets pending postevent puts read seek tell truncate
+
+
+Commands in namespace ::tcl::clock
+==================================
+ConvertLocalToUTC GetDateFields GetJulianDayFromEraYearMonthDay GetJulianDayFromEraYearWeekDay Oldscan ParseFormatArgs clicks getenv microseconds milliseconds seconds
+
+
+Commands in namespace ::tcl::dict
+=================================
+append create exists filter for get incr info keys lappend merge remove replace set size unset update values with
+
+
+Commands in namespace ::tcl::info
+=================================
+args body cmdcount commands complete default exists frame functions globals hostname level library loaded locals nameofexecutable patchlevel procs script sharedlibextension tclversion vars
+
+
+Commands in namespace ::tcl::mathfunc
+=====================================
+abs acos asin atan atan2 bool ceil cos cosh double entier exp floor fmod hypot int isqrt log log10 max min pow rand round sin sinh sqrt srand tan tanh wide
+
+
+Commands in namespace ::tcl::mathop
+===================================
+! != % & * ** + - / < << <= == > >= >> ^ eq in ne ni | ~
+
+
+Commands in namespace ::tcl::string
+===================================
+bytelength compare equal first index is last length map match range repeat replace reverse tolower totitle toupper trim trimleft trimright wordend wordstart
+
+
+Commands in namespace ::tcl::unsupported
+========================================
+disassemble

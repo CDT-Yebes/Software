@@ -1,0 +1,31 @@
+*** jkFormatMP3.c.orig	2011-06-03 10:34:26.957288000 +0200
+--- jkFormatMP3.c	2011-06-03 10:40:13.553876000 +0200
+***************
+*** 29,34 ****
+--- 29,36 ----
+  #include "snack.h"
+  #include "jkFormatMP3.h"
+  #include <string.h>
++ /* ensure math.h is included before redefinition of roundf */
++ #include <math.h>
+  #define FRAS2(is,a) ((is) > 0 ? t_43[(is)]*(a):-t_43[-(is)]*(a))
+  #define MAXFRAMESIZE 2106  /* frame size starting at header */
+  #define roundf(x) (floor((x)+(float )0.5f))
+***************
+*** 1309,1315 ****
+    return len;
+  }
+  
+! #include <math.h>
+  
+  #define PI12      0.261799387f
+  #define PI36      0.087266462f
+--- 1311,1318 ----
+    return len;
+  }
+  
+! /* math.h is already included */
+! /* #include <math.h> */
+  
+  #define PI12      0.261799387f
+  #define PI36      0.087266462f

@@ -1,0 +1,15 @@
+server: started
+server: running.
+client: started
+client caught: IDL:omg.org/CORBA/NO_PERMISSION:1.0 (10001, not-completed)
+client: finished
+client: started
+Hello World
+client: finished
+server: finished
+client: started
+client caught: IDL:omg.org/CORBA/COMM_FAILURE:1.0 (0, not-completed)
+client: finished
+client: started
+client caught: IDL:omg.org/CORBA/NO_PERMISSION:1.0 (10001, not-completed)
+client: finished

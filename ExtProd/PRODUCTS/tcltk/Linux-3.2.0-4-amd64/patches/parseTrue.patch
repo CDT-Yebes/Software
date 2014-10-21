@@ -1,0 +1,235 @@
+*** tclParseExpr.c.orig	Sat Dec  4 07:15:42 1999
+--- tclParseExpr.c	Fri May  4 16:02:58 2001
+***************
+*** 7,17 ****
+   *	code analysis, etc.
+   *
+   * Copyright (c) 1997 Sun Microsystems, Inc.
+   *
+   * See the file "license.terms" for information on usage and redistribution
+   * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+   *
+!  * RCS: @(#) $Id: tclParseExpr.c,v 1.6 1999/12/04 06:15:42 hobbs Exp $
+   */
+  
+  #include "tclInt.h"
+--- 7,18 ----
+   *	code analysis, etc.
+   *
+   * Copyright (c) 1997 Sun Microsystems, Inc.
++  * Copyright (c) 1998-2000 by Scriptics Corporation.
+   *
+   * See the file "license.terms" for information on usage and redistribution
+   * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+   *
+!  * RCS: @(#) $Id: tclParseExpr.c,v 1.8 2001/04/09 09:48:41 dkf Exp $
+   */
+  
+  #include "tclInt.h"
+***************
+*** 118,123 ****
+--- 119,127 ----
+  #define NOT		31
+  #define BIT_NOT		32
+  
++ #define STREQ		33
++ #define STRNEQ		34
++ 
+  /*
+   * Mapping from lexemes to strings; used for debugging messages. These
+   * entries must match the order and number of the lexeme definitions above.
+***************
+*** 130,136 ****
+      "*", "/", "%", "+", "-",
+      "<<", ">>", "<", ">", "<=", ">=", "==", "!=",
+      "&", "^", "|", "&&", "||", "?", ":",
+!     "!", "~"
+  };
+  #endif /* TCL_COMPILE_DEBUG */
+  
+--- 134,140 ----
+      "*", "/", "%", "+", "-",
+      "<<", ">>", "<", ">", "<=", ">=", "==", "!=",
+      "&", "^", "|", "&&", "||", "?", ":",
+!     "!", "~", "eq", "ne",
+  };
+  #endif /* TCL_COMPILE_DEBUG */
+  
+***************
+*** 720,726 ****
+   * ParseEqualityExpr --
+   *
+   *	This procedure parses a Tcl equality (inequality) expression:
+!  *	equalityExpr ::= relationalExpr {('==' | '!=') relationalExpr}
+   *
+   * Results:
+   *	The return value is TCL_OK on a successful parse and TCL_ERROR
+--- 724,731 ----
+   * ParseEqualityExpr --
+   *
+   *	This procedure parses a Tcl equality (inequality) expression:
+!  *	equalityExpr ::= relationalExpr
+!  *		{('==' | '!=' | 'ne' | 'eq') relationalExpr}
+   *
+   * Results:
+   *	The return value is TCL_OK on a successful parse and TCL_ERROR
+***************
+*** 754,762 ****
+      }
+  
+      lexeme = infoPtr->lexeme;
+!     while ((lexeme == EQUAL) || (lexeme == NEQ)) {
+  	operator = infoPtr->start;
+! 	code = GetLexeme(infoPtr); /* skip over == or != */
+  	if (code != TCL_OK) {
+  	    return code;
+  	}
+--- 759,768 ----
+      }
+  
+      lexeme = infoPtr->lexeme;
+!     while ((lexeme == EQUAL) || (lexeme == NEQ)
+! 	    || (lexeme == STREQ) || (lexeme == STRNEQ)) {
+  	operator = infoPtr->start;
+! 	code = GetLexeme(infoPtr); /* skip over ==, !=, 'eq' or 'ne'  */
+  	if (code != TCL_OK) {
+  	    return code;
+  	}
+***************
+*** 766,772 ****
+  	}
+  
+  	/*
+! 	 * Generate tokens for the subexpression and '==' or '!=' operator.
+  	 */
+  
+  	PrependSubExprTokens(operator, 2, srcStart,
+--- 772,779 ----
+  	}
+  
+  	/*
+! 	 * Generate tokens for the subexpression and '==', '!=', 'eq' or 'ne'
+! 	 * operator.
+  	 */
+  
+  	PrependSubExprTokens(operator, 2, srcStart,
+***************
+*** 1192,1198 ****
+  	exprTokenPtr->size = infoPtr->size;
+  	exprTokenPtr->numComponents = 1;
+  	break;
+! 	
+      case DOLLAR:
+  	/*
+  	 * $var variable reference.
+--- 1199,1205 ----
+  	exprTokenPtr->size = infoPtr->size;
+  	exprTokenPtr->numComponents = 1;
+  	break;
+! 
+      case DOLLAR:
+  	/*
+  	 * $var variable reference.
+***************
+*** 1399,1405 ****
+  	exprTokenPtr->size = (infoPtr->next - exprTokenPtr->start);
+  	exprTokenPtr->numComponents = parsePtr->numTokens - firstIndex;
+  	break;
+! 	
+      default:
+  	goto syntaxError;
+      }
+--- 1406,1412 ----
+  	exprTokenPtr->size = (infoPtr->next - exprTokenPtr->start);
+  	exprTokenPtr->numComponents = parsePtr->numTokens - firstIndex;
+  	break;
+! 
+      default:
+  	goto syntaxError;
+      }
+***************
+*** 1735,1741 ****
+--- 1742,1771 ----
+  	    infoPtr->lexeme = BIT_NOT;
+  	    return TCL_OK;
+  
++ 	case 'e':
++ 	    if (src[1] == 'q') {
++ 		infoPtr->lexeme = STREQ;
++ 		infoPtr->size = 2;
++ 		infoPtr->next = src+2;
++ 		parsePtr->term = infoPtr->next;
++ 		return TCL_OK;
++ 	    } else {
++ 		goto checkFuncName;
++ 	    }
++ 
++ 	case 'n':
++ 	    if (src[1] == 'e') {
++ 		infoPtr->lexeme = STRNEQ;
++ 		infoPtr->size = 2;
++ 		infoPtr->next = src+2;
++ 		parsePtr->term = infoPtr->next;
++ 		return TCL_OK;
++ 	    } else {
++ 		goto checkFuncName;
++ 	    }
++ 
+  	default:
++ 	checkFuncName:
+  	    offset = Tcl_UtfToUniChar(src, &ch);
+  	    c = UCHAR(ch);
+  	    if (isalpha(UCHAR(c))) {	/* INTL: ISO only. */
+***************
+*** 1748,1753 ****
+--- 1778,1827 ----
+  		infoPtr->size = (src - infoPtr->start);
+  		infoPtr->next = src;
+  		parsePtr->term = infoPtr->next;
++ 		/*
++ 		 * Check for boolean literals (true, false, yes, no, on, off)
++ 		 */
++ 		switch (infoPtr->start[0]) {
++ 		case 'f':
++ 		    if (infoPtr->size == 5 &&
++ 			strncmp("false", infoPtr->start, 5) == 0) {
++ 			infoPtr->lexeme = LITERAL;
++ 			return TCL_OK;
++ 		    }
++ 		    break;
++ 		case 'n':
++ 		    if (infoPtr->size == 2 &&
++ 			strncmp("no", infoPtr->start, 2) == 0) {
++ 			infoPtr->lexeme = LITERAL;
++ 			return TCL_OK;
++ 		    }
++ 		    break;
++ 		case 'o':
++ 		    if (infoPtr->size == 3 &&
++ 			strncmp("off", infoPtr->start, 3) == 0) {
++ 			infoPtr->lexeme = LITERAL;
++ 			return TCL_OK;
++ 		    } else if (infoPtr->size == 2 &&
++ 			strncmp("on", infoPtr->start, 2) == 0) {
++ 			infoPtr->lexeme = LITERAL;
++ 			return TCL_OK;
++ 		    }
++ 		    break;
++ 		case 't':
++ 		    if (infoPtr->size == 4 &&
++ 			strncmp("true", infoPtr->start, 4) == 0) {
++ 			infoPtr->lexeme = LITERAL;
++ 			return TCL_OK;
++ 		    }
++ 		    break;
++ 		case 'y':
++ 		    if (infoPtr->size == 3 &&
++ 			strncmp("yes", infoPtr->start, 3) == 0) {
++ 			infoPtr->lexeme = LITERAL;
++ 			return TCL_OK;
++ 		    }
++ 		    break;
++ 		}
+  		return TCL_OK;
+  	    }
+  	    infoPtr->lexeme = UNKNOWN;

@@ -1,0 +1,64 @@
+#!/bin/sh -f
+
+usage()
+{
+        cat <<EOF
+Usage: mico-config [OPTIONS]
+Options:
+        [--prefix]
+        [--version]
+	[--target]
+	[--build]
+	[--host]
+	[--cxx]
+	[--cxxflags]
+	[--picflags]
+        [--libs]
+	[--cosslibs]
+EOF
+        exit $1
+}
+
+if test $# -eq 0; then
+        usage 1 1>&2
+fi
+
+
+for arg
+do
+  case "$arg" in
+  --prefix)
+    echo "/alma/ACS-2014.4/mico"
+    ;;
+  --version)
+    echo "2.3.13"
+    ;;
+  --target)
+    echo "x86_64-unknown-linux-gnu"
+    ;;
+  --build)
+    echo "x86_64-unknown-linux-gnu"
+    ;;
+  --host)
+    echo "x86_64-unknown-linux-gnu"
+    ;;
+  --cxx)
+    echo "c++"
+    ;;
+  --cxxflags)
+    echo "-I/alma/ACS-2014.4/mico/include   -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE  "
+    ;;
+  --picflags)
+    echo "-fPIC"
+    ;;
+  --libs)
+    echo "-rdynamic -L/alma/ACS-2014.4/mico/lib -lmico2.3.13 -Wl,--no-as-needed  -lssl -lcrypto -ldl -lm  -lpthread"
+    ;;
+  --cosslibs)
+    echo "-rdynamic -L/alma/ACS-2014.4/mico/lib -lmicocoss2.3.13 -lmico2.3.13 -Wl,--no-as-needed  -lssl -lcrypto -ldl -lm  -lpthread"
+    ;;
+  --help)
+    usage
+    ;;
+  esac
+done

@@ -1,0 +1,18 @@
+
+#ifndef __MESSAGING_IDL__
+#define __MESSAGING_IDL__
+
+#include <mico/policy.idl>
+#include <mico/timebase.idl>
+
+#pragma prefix "omg.org"
+
+module Messaging {
+    const CORBA::PolicyType RELATIVE_RT_TIMEOUT_POLICY_TYPE = 32;
+
+    local interface RelativeRoundtripTimeoutPolicy : CORBA::Policy {
+        readonly attribute TimeBase::TimeT relative_expiry;
+    };
+};
+
+#endif // __MESSAGING_IDL__

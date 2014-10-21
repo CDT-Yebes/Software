@@ -1,0 +1,705 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2002, 2003, 2004 ObjectSecurity Ltd.
+//
+#ifndef _TRANSPORT_SECURITY_IDL_
+#define _TRANSPORT_SECURITY_IDL_
+
+#include <mico/security/sl3pm.idl>
+#include <mico/security/sl3cm.idl>
+#include <mico/security/sl3aqargs.idl>
+
+#include <mico/security/csi.idl>
+#include <mico/security/csiiop.idl>
+
+//#include <mico/orb.idl>
+#include <mico/basic_seq.idl>
+#include <mico/policy.idl>
+#include <mico/timebase.idl>
+
+#pragma prefix "adiron.com"
+
+/**
+ * The Transport Security Module contains the data definitions
+ * and Application Programmers Interface for dealing with
+ * ORB security at the Transport Layer. This security is commonly
+ * known as Common Secure Interoperability Version 1 (CSIv1).
+ * <p>
+ * This module uses the data and valuetype definitions of the
+ * SecurityLevel3 module, to give a common representation of
+ * important security information, such as Principals and 
+ * Statements about Principals.
+ * <p>
+ * In order to let this module stand on its own, many of the
+ * primitive data definitions parallel those of the Security
+ * Level 3 module, such as string types, and integer constants.
+ * For example, CredentialsType, CredentialsUsage, CredentialsState,
+ * CredsDirective, FeatureDirective, all have type names and
+ * constant names that parallel in both name and values to their
+ * counterparts in the SecurityLevel3 module. At least in Java,
+ * where the IDL language mapping dereferences types to their
+ * most primitive type (such as int), these values can be 
+ * used interchangeably between modules, in your Java code.
+ * <p>
+ * The Transport Security Service parallels the Security Level 3
+ * module in that brings forth the security service (for the 
+ * Transport Layer) with two objects that are returned by the
+ * ORB's resolve_initial_references call. These two objects are:
+ * the
+ * <a href="TransportSecurity.SecurityManager.html">
+ * TransportSecurity::SecurityManager</a>, and
+ * <a href="TransportSecurity.SecurityCurrent.html">
+ * TransportSecurity::SecurityCurrent</a> objects.
+ * <p>
+ * The Transport Security Service has the same Credentials model
+ * we use in SecurityLevel3. This
+ * model, which is heavily based on the Principal Calculus, yields
+ * an API for accessing principal information. The credentials 
+ * represent the ORB's credentials, as well as the establishment
+ * of security contexts between client and servers.
+ * <p>
+ * The Transport Security Service is currently CSIv1 Level 0 and 
+ * Level 1 compliant depending on the ORB options
+ * <ul>
+ * <li>
+ * Level 0: SSL/TLS (SSLIOP) and plain TCPIP (IIOP).
+ * <li>
+ * Level 1: KerberosV5/SECP (SECIOP-Kerberos).
+ * </ul>
+ * Each mechanism (SSL, TCPIP, Kerberos) has its own security
+ * characteristics which are illustrated by the credentials
+ * initiator (client side) or acceptor (server side). These
+ * security characteristics are:
+ * <ul>
+ * <li>
+ * confidentiality: True if the credentials and mechanism support
+ * encryption (TLS Kerberos)
+ * <li>
+ * integrity: True if the credentials and mechanism support
+ * cryptographic integrity checking. (TLS, Kerberos)
+ * <li>
+ * client_authentication: True if the credentials have the ability
+ * to authenticate the client of a security association. (TLS, Kerberos)
+ * <li>
+ * target_authentication: True if the credentials have the ability
+ * to authenticate the target of a security association. (TLS, Kerberos)
+ * <li>
+ * supports_embodiment: True if the credentials initiator can 
+ * make the target impersonate the client. This is a form of 
+ * "unrestricted delegation" (Kerberos).
+ * <li>
+ * supports_endorsement: True if the credentials initiator can
+ * endorse the target with its credentials. (Currently, no mechanism
+ * can do that at the transport layer).
+ * <li>
+ * supports_quoting: True if the credentials initiator can 
+ * quote another principal (Currently, no mechanism can do that
+ * at the transport layer, and this feature is largely done at the 
+ * Security Level 3 (CSIv2) layer.
+ * </ul>
+ * <p>
+ * The <a href="TransportSecurity.CredentialsCurator.html">
+ * Credentials Curator</a> is an object that is retrievable off of the
+ * <a href="TransportSecurity.SecurityManager.html">
+ * TransportSecurity::SecurityManager</a>.
+ * You use this object to acquire transport
+ * <a href="TransportSecurity.OwnCredentials.html">OwnCredentials</a>.
+ * Transport Credentials give you the ability
+ * to communicate with other clients and servers with transport security
+ * protection. However, we model plain IIOP (GIOP/TCP/IP) with the
+ * same credentials model. This gives you the ability to extract 
+ * information from clients and target objects, such as their 
+ * Internet addresses, which may be useful in your access control
+ * and auditing decisions.
+ * <P>
+ * You cannot communicate with IIOP ORBs unless you acquire TCPIP
+ * credentials.
+ */
+module TransportSecurity
+{
+
+    /**
+     * The Adiron VMCID, which is used in Minor Error Codes, 
+     * Policy Tags, etc.
+     */
+    const unsigned long ADIRON_VMCID = 0xA11C000;
+
+    //-------------------------------------------------------------
+    //  Transport Security Data Representations
+    //
+    //-------------------------------------------------------------
+    
+    /**
+     * The CSIVersion type has two constants which represent the
+     * versions of Common Security Interoperability as defined
+     * by the OMG. These constants are used to indicate whether
+     * a transport will handle CSIv1 or CSIv2 requests. This is
+     * important, since CSIv2 transports handle state retention
+     * of CSIv2 security contexts that are associated with
+     * the transports.
+     */
+    typedef long CSIVersion;
+    /**
+     * This constant represents CSIv1, which is the ability to
+     * handle security only at the transport layer. When 
+     * credentials are acquired at the Transport Security Layer
+     * they usually support CSIv1 and not CSIv2. CSIv2 may have to
+     * be explicitly activated. Check with the parameters given
+     * to the Credentials Acquirer of a particular mechanism.
+     */
+    const CSIVersion CSIv1 = 1;
+    /**
+     * This constant represents CSIv2, which has the the ability
+     * to associate and process CSIv2 requests over its transport
+     * protection layer. This option is not supported by default
+     * unless TransportSecurity Credentials are implicitly acquired
+     * by the SecurityLevel3 Credentials Acquire in support of
+     * those CSIv2 enabled Credentials.
+     */
+    const CSIVersion CSIv2 = 2;
+    
+    /**
+     * The ExternalizationType is a string that is used for requesting
+     * the externalization format/type of Transport Security 
+     * credentials, if it is supported by the particular mechanism.
+     */
+
+    // begin of ObjectSecurity removal
+
+//      typedef string ExternalizationType;
+
+    // end of ObjectSecurity removal
+    
+    //-------------------------------------------------------------
+    //  Transport Security Application Users Interface
+    //
+    //-------------------------------------------------------------
+    
+    //
+    // The Transport Security Credentials Model
+    //
+    // These interfaces give the information that the application can
+    // use about the transport security.
+    //
+    
+    /**
+     * This interface represents the initiator side of the OwnCredentials.
+     * It contains the local principal and capabilities in establishing
+     * secure associations with servers.
+     */
+    local interface CredentialsInitiator {
+
+        readonly attribute SL3PM::Principal        the_principal;
+        readonly attribute SL3PM::StatementList    supporting_statements;
+        readonly attribute SL3PM::ResourceNameList restricted_resources;
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+        readonly attribute boolean                          supports_embodiment;
+        readonly attribute boolean                          supports_endorsement;
+        readonly attribute boolean                          supports_quoting;
+        readonly attribute boolean                          supports_client_authentication;
+        readonly attribute boolean                          supports_target_authentication;
+        readonly attribute boolean                          supports_confidentiality;
+        readonly attribute boolean                          supports_integrity;
+        readonly attribute TimeBase::UtcT                   expiry_time;
+    };
+    
+    /**
+     * This interface represents the acceptor side of the OwnCredentials.
+     * It contains the local principal and the capabilities in accepting
+     * a secure association with clients.
+     */
+    local interface CredentialsAcceptor {
+
+        readonly attribute SL3PM::Principal        the_principal;
+        readonly attribute SL3PM::StatementList    supporting_statements;
+        readonly attribute SL3PM::ResourceNameList restricted_resources;
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+        readonly attribute boolean                          supports_endorsement;
+        readonly attribute boolean                          supports_quoting;
+        readonly attribute boolean                          supports_client_authentication;
+        readonly attribute boolean                          supports_target_authentication;
+        readonly attribute boolean                          supports_confidentiality;
+        readonly attribute boolean                          supports_integrity;
+        readonly attribute TimeBase::UtcT                   expiry_time;
+    };
+    
+    /**
+     * This interface is the base interface for all the transport credentials,
+     * own, target, and client.
+     */
+    local interface TransportCredentials
+    {
+	readonly attribute SL3CM::CredentialsId        creds_id;    // Allocated by System
+	// begin of ObjectSecurity addition
+	readonly attribute SL3CM::CredentialsState     creds_state;
+	// end of ObjectSecurity addition
+        readonly attribute SL3CM::CredentialsType      creds_type;  // Own, Client, Target
+        readonly attribute SL3CM::CredentialsUsage     creds_usage; // Accept, Initiate, Both
+        readonly attribute TimeBase::UtcT       expiry_time;
+    };
+    
+    /**
+     * This interface is the own credentials. Objects of this interface
+     * are created by the CredentialsAcquirer.
+     */
+    local interface OwnCredentials : TransportCredentials {
+
+        /**
+         * This operation stipulates the transport support for CSI.
+         * If CSIv1 is true, then CSIv2 contexts are not supported
+         * over transports derived from these Credentials. If CSIv2 is true,
+         * and CSIv1 is false, a CSIv2 ServiceContext message must
+         * accompany GIOP requests over the transport.
+         */
+        boolean supports_csi_version(
+            in CSIVersion version
+        );
+        
+        /**
+         * This attribute is Null if creds_usage is not initiating.
+         */
+        readonly attribute CredentialsInitiator     the_initiator;
+        
+        /**
+         * This attribute is Null if creds_usage is not accepting.
+         */
+        readonly attribute CredentialsAcceptor      the_acceptor;
+        
+        /**
+         * This function releases the credentials from use and 
+         * from the default credentials list, if it is present
+         * on it. The credentials shall not be actually released
+         * from use until all its pending work is done.
+         */
+        void release_credentials();
+        
+        /**
+         * The externalize_credentials operation writes the credentials
+         * to a form that may be able to be used by other programs, such
+         * as a Kerberos Session Credentials Cache. This operation will
+         * raise a System Exception of BAD_PARAM, if the type is invalid
+         * for the mechanism, or url is invalid, or cannot be accessed.
+         * <p>
+         * For Kerberos, you can get the credentials dumped to a credentials
+         * cache file by, using the type of "CredCache", and a FILE: url, 
+         * such as in the following:
+         * <pre>
+         * creds.externalize("CredCache","FILE:/tmp/krb5cc_user");
+         * </pre>
+         *
+         * @param externalization_type
+         *             The externalization_type parameter holds the type
+         *             of externalization desired. Identifiers are specific
+         *             to mechanisms.
+         * @param dest_url
+         *             The dest_url parameter must hold a valid
+         *             writable URL, such as "FILE:/tmp/krb5cc".
+         */
+
+	// begin of ObjectSecurity removal
+
+//          void externalize_credentials(
+//              in ExternalizationType externalization_type,
+//              in string dest_url
+//          );
+
+	// end of ObjectSecurity removal
+    };
+    typedef sequence<OwnCredentials> OwnCredentialsList;
+    
+    /**
+     * An object of this interface represents an established
+     * secure association with a client. This object is only
+     * retrievable from the TransportSecurity::SecurityCurrent
+     * object, as it is thread based, i.e. available during
+     * the servicing of a CORBA request.
+     */
+    local interface ClientCredentials : TransportCredentials {
+
+        readonly attribute SL3CM::ContextId                        context_id;
+        readonly attribute SL3PM::Principal        client_principal;
+        readonly attribute SL3PM::StatementList    client_supporting_statements;
+        readonly attribute SL3PM::ResourceNameList client_restricted_resources;
+        readonly attribute SL3PM::Principal        target_principal;
+        readonly attribute SL3PM::StatementList    target_supporting_statements;
+        readonly attribute SL3PM::ResourceNameList target_restricted_resources;
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+        readonly attribute OwnCredentials                   parent_credentials;
+        readonly attribute boolean                          client_authentication;
+        readonly attribute boolean                          target_authentication;
+        readonly attribute boolean                          confidentiality;
+        readonly attribute boolean                          integrity;
+        
+        // The following means that Own transport credentials can be made 
+        // from this context using the corresponding proxy directive
+        //
+        readonly attribute boolean                          impersonable;
+        readonly attribute boolean                          endorseable;
+        readonly attribute boolean                          quotable;
+        
+    };
+    
+    /**
+     * Objects of this interface are returned by the SecurityManager's
+     * get_target_credentials operation. It represents an established
+     * secure association with a server.
+     */
+    local interface TargetCredentials : TransportCredentials {
+
+        readonly attribute SL3CM::ContextId                        context_id;
+        readonly attribute SL3PM::Principal        client_principal;
+        readonly attribute SL3PM::StatementList    client_supporting_statements;
+        readonly attribute SL3PM::ResourceNameList client_restricted_resources;
+        readonly attribute SL3PM::Principal        target_principal;
+        readonly attribute SL3PM::StatementList    target_supporting_statements;
+        readonly attribute SL3PM::ResourceNameList target_restricted_resources;
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+        readonly attribute OwnCredentials                   parent_credentials;
+        readonly attribute boolean                          client_authentication;
+        readonly attribute boolean                          target_authentication;
+        readonly attribute boolean                          confidentiality;
+        readonly attribute boolean                          integrity;
+        readonly attribute boolean                          target_embodied;
+        readonly attribute boolean                          target_endorsed;
+    };
+    
+    //--------------------------------------------------------------------
+    // Transport Security Credentials Acquisition Mechanism
+    // 
+    //--------------------------------------------------------------------
+
+    /**
+     * This type specifies the transport mechanisms, which is used for
+     * acquiring Credentials such as TCPIP, TLS, SECIOP-Kerberos.
+     *
+     * NOTE: Currently Supported, "TCPIP", "TLS".
+     */
+//      typedef string MechanismId;
+//      typedef sequence<MechanismId> MechanismList;
+
+    /**
+     * An object of this interface is created by the CredentialsCurator
+     * in managing the acquisition of an OwnCredentials object. The 
+     * acquisition process, determined by the acquisition method, may
+     * be a multistep process.
+     */
+    local interface CredentialsAcquirer {
+
+        /**
+         * The mechanism for which these credentials are being
+         * acquired, such as "TLS".
+         */
+
+	// begin of ObjectSecurity removal
+
+//          readonly attribute SL3CM::MechanismId       mechanism_id;
+        /**
+         * The acquisition_method field contains the acquisition method
+         * identifier naming the method by which these credentials
+         * are being acquired.
+         */
+//          readonly attribute SL3CM::AcquisitionMethod acquisition_method;
+
+	// end of ObjectSecurity removal
+
+        /**
+         * This call is used to retrieve the acquired OwnCredentials
+         * and place the credentials on the curator's own
+         * credentials list.
+         *
+         * @param on_list  True if these credentials go on the default
+         *                 list of credentials.
+         */
+        OwnCredentials get_credentials(
+            in boolean on_list
+        );
+        
+        /**
+         * This operation is used to destroy the object before
+         * get_credentials is called.
+         */
+        void destroy();
+    };
+
+    /**
+     * The CredentialsCurator object is a single object per an ORB
+     * instance's Transport Security Service. It is retrieved by
+     * <p>
+     * ORB.resolve_initial_references("TransportSecurity:CredentialsCurator");
+     * <p>
+     * It has the ability to create
+     * CredentialsAcquirers and keeps a list of active default credentials.
+     */
+    local interface CredentialsCurator {
+        
+        /**
+         * This attribute lists the transport mechanism that are
+         * supported, such as TCPIP, TLS, SECIOP-Kerberos.
+         */
+
+	// begin ObjectSecurity removal
+
+//          readonly attribute SL3CM::MechanismList supported_mechanisms;
+       
+        /**
+         * This attribute lists the supported acquisition methods
+         * for the particular mechanism.
+         */ 
+//          SL3CM::AcquisitionMethodList get_supported_acquisition_methods(
+//              in SL3CM::MechanismId mech_id
+//          );
+
+	// end of ObjectSecurity removal
+        
+        /**
+         * This operation creates a CredentialAcquirer for a 
+         * particular supported mechanism and
+         * acquisition methods, with an "initial" set of arguments.
+         * The initial arguments, allow for instant reaping of the
+         * credentials from the Acquirer should the 
+         * acquisition status indicate success.
+         */
+
+	// begin of ObjectSecurity change
+
+        CredentialsAcquirer acquire_credentials(
+            in SL3AQArgs::Argument acquisition_arguments
+        );
+
+	// end of ObjectSecurity change
+        
+        /**
+         * This is the default list of own credentials.
+         */
+        readonly attribute OwnCredentialsList default_creds_list;
+        
+        /**
+         * This operation retrieves the OwnCredentials, if still
+         * available by its credentials identifier.
+         */
+        OwnCredentials get_own_credentials(
+            in SL3CM::CredentialsId       creds_id
+        );
+        
+        /**
+         * This operation removes the own credentials from the
+         * default_creds_list. However, it does not release
+         * the credentials. A BAD_PARAM exception is thrown 
+         * if the credentials are not on the default credentials
+         * list.
+         */
+        void remove_credentials(
+            in SL3CM::CredentialsId      creds_id
+        );
+        
+        /**
+         * This operation provides management of the own credentials 
+         * list, since the own credentials list is used as default
+         * credentials policy. This should be to remove the credentials
+         * from the default_credentials_list, if there, and calls
+         * release() on the credentials. A BAD_PARAM exception is
+         * thrown if the credentials do not exist.
+         */
+        void release_credentials(
+            in SL3CM::CredentialsId       creds_id
+        );
+
+    };
+    
+    //--------------------------------------------------------------------
+    // Transport Security Service ORB Objects
+    //     Retrieved from the ORB by "resolve_initial_references".
+    // 
+    //--------------------------------------------------------------------
+
+    local interface ContextEstablishmentPolicy;
+
+    local interface ObjectCredentialsPolicy;
+
+    /**
+     * The SecurityManager holds TransportSecurity Service information
+     * and operations.
+     * The SecurityManager object is retrieved by
+     * <p>
+     * ORB.resolve_initial_references("TransportSecurity:SecurityManager");
+     * <p>
+     * It holds a pointer to the transport credentials curator and
+     * is able to get the transport credentials for a target object.
+     */
+    local interface SecurityManager {
+
+        /**
+         * The credentials_curator attribute holds the reference to
+         * TransportSecurity's Credentials Curator,
+         * which is used to acquire own Credentials.
+         */
+        readonly attribute CredentialsCurator credentials_curator;
+        
+        /**
+         * The get_target_credentials operation is used to
+         * "discover" the credentials for a target object.
+         */
+        TargetCredentials get_target_credentials(
+            in  Object          the_object
+        );
+
+        /**
+         * The create_context_estab_policy operation
+         * is a factory operation that creates the
+         * ContextEstablishmentPolicy object.
+         */
+        ContextEstablishmentPolicy create_context_estab_policy(
+            in SL3CM::CredsDirective     creds_directive,
+            in OwnCredentialsList creds_list,
+            in SL3CM::FeatureDirective   use_client_auth,
+            in SL3CM::FeatureDirective   use_target_auth,
+            in SL3CM::FeatureDirective   use_confidentiality,
+            in SL3CM::FeatureDirective   use_integrity
+        );
+
+        /**
+         * This is a factory operation that creates the
+         * ObjectCredentialsPolicy object. ObjectCredentialsPolicy
+         * is used during the creation of a Portable Object
+         * Adapter (POA) to specify the credentials that are
+         * behind objects created by that POA. This allows the
+         * Credentials' information to appear in the object
+         * references IOR.
+         */
+
+        ObjectCredentialsPolicy create_object_creds_policy(
+            in OwnCredentialsList   creds_list
+        );
+    };
+    
+    /**
+     * The SecurityCurrent object holds thread based security information.
+     * The SecurityCurrent object is retrieved by
+     * <p>
+     * ORB.resolve_initial_references("TransportSecurity:SecurityCurrent");
+     * <p>
+     * It is able to get the ClientCredentials that represents
+     * the transport association with the client during a request.
+     */
+    local interface SecurityCurrent {
+
+        /**
+         * The client_credentials attribute returns the ClientCredentials
+         * that represents the threads security association with the
+         * remote client. If this is a CSIv2 only based request, this
+         * attribute will be null. This attribute will also be null if
+         * the thread is purely a client thread.
+         */
+        readonly attribute ClientCredentials client_credentials;
+    };
+
+    //--------------------------------------------------------------------
+    // Transport Security Invocation Policy
+    // 
+    //--------------------------------------------------------------------
+
+    /**
+     * The ContextEstablishmentPolicyType constant is 
+     * holds value used to denote the ContextEstablishmentPolicy.
+     */
+    const CORBA::PolicyType ContextEstablishmentPolicyType = ADIRON_VMCID | 2001;
+    
+    /**
+     * The ContextEstablishmentPolicy policy object directs the
+     * establishment of security contexts with a target.
+     * <p>
+     * The CredsDirective usage is the following:
+     * <dl>
+     * <dt>
+     * CD_Default
+     * <dd>
+     *       This directive means to use the default set
+     *       up by the thread, the  ORB, the ORB configuration
+     *       or other policies.
+     * <dt>
+     * CD_InvokeTarget
+     * <dd>
+     *       This directive means to use the
+     *       the specified OwnCredentials to create a 
+     *       secure association with the target
+     *       before invocation. Do not endorse or embody the target.
+     *       Credentials may be IT_Simple, IT_Quoting, or IT_Proxy.
+     * <dt>
+     * CD_EndorseTarget
+     * <dd>
+     *       This directive means to use the 
+     *       the specified OwnCredentials to create a 
+     *       secure association with the target
+     *       before invocation. 
+     *       The credentials must be
+     *       IT_Simple, IT_Quoting, or IT_Proxy own credentials 
+     *       that supports endorsement.
+     *       Note, a Initiator Credentials that is a IT_Proxy
+     *       may have an endorsement statement that not only
+     *       endorses this immediate client, but may very well
+     *       apply to the next target.
+     * <dt>
+     * CD_EmbodyTarget
+     * <dd>
+     *       If possible give the target the ability to
+     *       impersonate the client, is performed using
+     *       transports that can forward their credentials
+     *       in the transport that give the ability to the
+     *       target to work in their own behalf. Alternatively,
+     *       the authenticator may be able to be passed on.
+     *       IT_Simple credentials must have or have the
+     *       ability to forward credentials. This is analogous
+     *       to flipping the DELEGATE bit on GSS-Kerberos Forwardable
+     *       credentials. IT_Quoting principals means
+     *       that you can forward the transport credentials,
+     *       authenticator plus the Quoting statement.
+     *       IT_Proxy principals means that you can forward
+     *       the transport credentials, authenticator,
+     *       and associated proxy statements.
+     * </dl>
+     * <p>
+     * On using Own Credentials. The creds_ids name Own Credentials. 
+     * Also, they restrict the invocation to use only certain credentials.
+     * If the cred_ids list is empty, then the own credentials for the 
+     * invocation are selected from a default, which may be 
+     * set on the thread or the ORB instance.
+     */
+    local interface ContextEstablishmentPolicy : CORBA::Policy {
+
+        readonly attribute OwnCredentialsList  creds_list;
+        readonly attribute SL3CM::CredsDirective      creds_directive;
+        readonly attribute SL3CM::FeatureDirective    use_client_auth;
+        readonly attribute SL3CM::FeatureDirective    use_target_auth;
+        readonly attribute SL3CM::FeatureDirective    use_confidentiality;
+        readonly attribute SL3CM::FeatureDirective    use_integrity;
+    };
+
+    /**
+     * This policy is placed on a POA to indicate the own credentials
+     * that govern the accepting contexts for objects underneath
+     * that POA. The credentials listed here, if they have Accepting
+     * capability, are used to created security components in the 
+     * IOR of the object's reference when created.
+     */
+
+    local interface ObjectCredentialsPolicy : CORBA::Policy {
+
+        readonly attribute OwnCredentialsList   creds_list;
+    };
+    
+
+    /**
+     * The ObjectCredentialsPolicyType constant is 
+     * holds value used to denote the ObjectCredentialsPolicy.
+     */
+    const CORBA::PolicyType ObjectCredentialsPolicyType = ADIRON_VMCID | 2002;
+};
+#endif

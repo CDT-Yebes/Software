@@ -1,0 +1,36 @@
+*** scrolledhtml.itk.orig	Sat Feb 16 06:11:08 2002
+--- scrolledhtml.itk	Mon Dec  6 09:10:20 2004
+***************
+*** 42,48 ****
+  # ----------------------------------------------------------------------
+  #  AUTHOR: Kris Raney                    EMAIL: kraney@spd.dsccc.com
+  #
+! #  @(#) $Id: scrolledhtml.itk,v 1.7 2002/02/16 05:11:08 mgbacke Exp $
+  # ----------------------------------------------------------------------
+  #            Copyright (c) 1996 DSC Technologies Corporation
+  # ======================================================================
+--- 42,48 ----
+  # ----------------------------------------------------------------------
+  #  AUTHOR: Kris Raney                    EMAIL: kraney@spd.dsccc.com
+  #
+! #  @(#) $Id: scrolledhtml.itk,v 1.8 2004/12/02 17:49:18 davygrvy Exp $
+  # ----------------------------------------------------------------------
+  #            Copyright (c) 1996 DSC Technologies Corporation
+  # ======================================================================
+***************
+*** 1418,1424 ****
+        if {![regexp {^[+-].*} $ar(size)]} {
+           set _pointsndx $ar(size)
+        } else {
+!         set _pointsndx [expr {$_basefontsize $ar(size)}]
+        }
+        if { $_pointsndx > 6 } {
+         set _pointsndx 6
+--- 1418,1424 ----
+        if {![regexp {^[+-].*} $ar(size)]} {
+           set _pointsndx $ar(size)
+        } else {
+!         set _pointsndx [expr $_basefontsize $ar(size)]
+        }
+        if { $_pointsndx > 6 } {
+         set _pointsndx 6

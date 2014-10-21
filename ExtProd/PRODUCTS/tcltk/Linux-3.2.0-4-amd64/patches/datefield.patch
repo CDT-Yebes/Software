@@ -1,0 +1,21 @@
+*** datefield.itk.orig	Mon Feb 25 05:45:02 2002
+--- datefield.itk	Mon Feb 17 09:19:07 2003
+***************
+*** 457,463 ****
+      # aren't attempting to insert more that 10 characters.  If
+      # so ring the bell and break.
+      #
+!     if {[regexp {[0-9]} $char]} {
+          if {[$itk_component(date) index insert] == 10} {
+              bell
+              return -code break
+--- 457,465 ----
+      # aren't attempting to insert more that 10 characters.  If
+      # so ring the bell and break.
+      #
+!     # SF-bug #625441: potential lock-up under Tcl/Tk 8.4
+!     # replace "if {[regexp {[0-9]} $char]}" by the next line
+!     if {[string match {[0-9]} $char]} {
+          if {[$itk_component(date) index insert] == 10} {
+              bell
+              return -code break

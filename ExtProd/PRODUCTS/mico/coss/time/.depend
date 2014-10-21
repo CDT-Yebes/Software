@@ -1,0 +1,480 @@
+# Module dependencies
+CosTime.o CosTime.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+CosTime.o CosTime.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+CosTime.o CosTime.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+CosTime.o CosTime.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+CosTime.o CosTime.pic.o: ../../include/mico/codec.h ../../include/mico/codeset.h
+CosTime.o CosTime.pic.o: ../../include/mico/config-win32.h ../../include/mico/config.h
+CosTime.o CosTime.pic.o: ../../include/mico/current.h ../../include/mico/dii.h
+CosTime.o CosTime.pic.o: ../../include/mico/dsi.h ../../include/mico/dynany.h
+CosTime.o CosTime.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+CosTime.o CosTime.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+CosTime.o CosTime.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h
+CosTime.o CosTime.pic.o: ../../include/mico/ir_base.h ../../include/mico/magic.h
+CosTime.o CosTime.pic.o: ../../include/mico/memtrace.h ../../include/mico/messaging.h
+CosTime.o CosTime.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+CosTime.o CosTime.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+CosTime.o CosTime.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+CosTime.o CosTime.pic.o: ../../include/mico/orb_excepts.h ../../include/mico/orb_fwd.h
+CosTime.o CosTime.pic.o: ../../include/mico/orb_mico.h ../../include/mico/os-thread.h
+CosTime.o CosTime.pic.o: ../../include/mico/os-thread/dcethreads.h ../../include/mico/os-thread/pthreads.h
+CosTime.o CosTime.pic.o: ../../include/mico/os-thread/pththreads.h ../../include/mico/os-thread/solaris-threads.h
+CosTime.o CosTime.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+CosTime.o CosTime.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+CosTime.o CosTime.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/DomainManager.h ../../include/mico/security/SecurityAdmin.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/atlas.h ../../include/mico/security/csi.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/csi_base.h ../../include/mico/security/csiiop.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/csiv2.h ../../include/mico/security/gssup.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/odm.h ../../include/mico/security/security.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/securitylevel1.h ../../include/mico/security/securitylevel2.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/securitylevel3.h ../../include/mico/security/sl3aqargs.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/sl3aqargs_p.h ../../include/mico/security/sl3authorization.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/sl3cm.h ../../include/mico/security/sl3cmdext.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/sl3csi.h ../../include/mico/security/sl3ipc.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/sl3om.h ../../include/mico/security/sl3omext.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/sl3pm.h ../../include/mico/security/sl3tcpip.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/sl3tls.h ../../include/mico/security/transportsecurity.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/transportsecurity_p.h
+CosTime.o CosTime.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+CosTime.o CosTime.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+CosTime.o CosTime.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+CosTime.o CosTime.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+CosTime.o CosTime.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+CosTime.o CosTime.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+CosTime.o CosTime.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+CosTime.o CosTime.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+CosTime.o CosTime.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+CosTime.o CosTime.pic.o: ../../include/mico/value.h ../../include/mico/valuetype.h
+CosTime.o CosTime.pic.o: ../../include/mico/valuetype_impl.h ../../include/mico/version.h
+CosTime.o CosTime.pic.o: ../../include/ministl/bool.h ../../include/ministl/bstring.h
+CosTime.o CosTime.pic.o: ../../include/ministl/defalloc.h ../../include/ministl/function
+CosTime.o CosTime.pic.o: ../../include/ministl/function.h ../../include/ministl/list
+CosTime.o CosTime.pic.o: ../../include/ministl/list.h ../../include/ministl/map
+CosTime.o CosTime.pic.o: ../../include/ministl/map.h ../../include/ministl/ministl.h
+CosTime.o CosTime.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+CosTime.o CosTime.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+CosTime.o CosTime.pic.o: ../../include/ministl/simplevec.h ../../include/ministl/string
+CosTime.o CosTime.pic.o: ../../include/ministl/vector ../../include/ministl/vector.h
+CosTime.o CosTime.pic.o: ./CosTime.h CosTime.cc
+main.o main.pic.o: ../../include/CORBA.h ../../include/coss/CosNaming.h
+main.o main.pic.o: ../../include/mico/address.h ../../include/mico/any.h
+main.o main.pic.o: ../../include/mico/array.h ../../include/mico/assert.h
+main.o main.pic.o: ../../include/mico/basic.h ../../include/mico/basic_seq.h
+main.o main.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+main.o main.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+main.o main.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+main.o main.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h ../../include/mico/dynany.h
+main.o main.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+main.o main.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+main.o main.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h ../../include/mico/ir_base.h
+main.o main.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+main.o main.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+main.o main.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+main.o main.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+main.o main.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+main.o main.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+main.o main.pic.o: ../../include/mico/os-misc.h ../../include/mico/os-thread.h
+main.o main.pic.o: ../../include/mico/os-thread/dcethreads.h ../../include/mico/os-thread/pthreads.h
+main.o main.pic.o: ../../include/mico/os-thread/pththreads.h ../../include/mico/os-thread/solaris-threads.h
+main.o main.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h ../../include/mico/poa_base.h
+main.o main.pic.o: ../../include/mico/poa_stubs.h ../../include/mico/policy.h
+main.o main.pic.o: ../../include/mico/policy2.h ../../include/mico/security/DomainManager.h
+main.o main.pic.o: ../../include/mico/security/SecurityAdmin.h ../../include/mico/security/atlas.h
+main.o main.pic.o: ../../include/mico/security/csi.h ../../include/mico/security/csi_base.h
+main.o main.pic.o: ../../include/mico/security/csiiop.h ../../include/mico/security/csiv2.h
+main.o main.pic.o: ../../include/mico/security/gssup.h ../../include/mico/security/odm.h
+main.o main.pic.o: ../../include/mico/security/security.h ../../include/mico/security/securitylevel1.h
+main.o main.pic.o: ../../include/mico/security/securitylevel2.h ../../include/mico/security/securitylevel3.h
+main.o main.pic.o: ../../include/mico/security/sl3aqargs.h ../../include/mico/security/sl3aqargs_p.h
+main.o main.pic.o: ../../include/mico/security/sl3authorization.h ../../include/mico/security/sl3cm.h
+main.o main.pic.o: ../../include/mico/security/sl3cmdext.h ../../include/mico/security/sl3csi.h
+main.o main.pic.o: ../../include/mico/security/sl3ipc.h ../../include/mico/security/sl3om.h
+main.o main.pic.o: ../../include/mico/security/sl3omext.h ../../include/mico/security/sl3pm.h
+main.o main.pic.o: ../../include/mico/security/sl3tcpip.h ../../include/mico/security/sl3tls.h
+main.o main.pic.o: ../../include/mico/security/transportsecurity.h ../../include/mico/security/transportsecurity_p.h
+main.o main.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+main.o main.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+main.o main.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+main.o main.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+main.o main.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+main.o main.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+main.o main.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+main.o main.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+main.o main.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+main.o main.pic.o: ../../include/mico/util.h ../../include/mico/value.h
+main.o main.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+main.o main.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+main.o main.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+main.o main.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+main.o main.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+main.o main.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+main.o main.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+main.o main.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+main.o main.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+main.o main.pic.o: ../../include/ministl/string ../../include/ministl/vector
+main.o main.pic.o: ../../include/ministl/vector.h ./CosTime.h ./TimeService_help.h
+main.o main.pic.o: ./TimeService_impl.h CosTime.h TimeService_help.h TimeService_impl.h
+main.o main.pic.o: main.cc
+TimeService_help.o TimeService_help.pic.o: ../../include/CORBA-SMALL.h ../../include/CORBA.h
+TimeService_help.o TimeService_help.pic.o: ../../include/coss/CosNaming.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/address.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/basic_seq.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/codeset.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/config-win32.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/ioptypes.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/ir_base.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/messaging.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/mtdebug.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/mtpolicy.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/mttypes.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/operators.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/orb_excepts.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/orb_fwd.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/orb_mico.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/os-misc.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/os-thread.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/os-thread/dcethreads.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/os-thread/pthreads.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/os-thread/pththreads.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/os-thread/solaris-threads.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/poa_base.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/poa_stubs.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/DomainManager.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/SecurityAdmin.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/atlas.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/csi.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/csi_base.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/csiiop.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/csiv2.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/gssup.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/odm.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/security.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/securitylevel1.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/securitylevel2.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/securitylevel3.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3aqargs.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3aqargs_p.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3authorization.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3cm.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3cmdext.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3csi.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3ipc.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3om.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3omext.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3pm.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3tcpip.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/sl3tls.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/transportsecurity.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/transportsecurity_p.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/trust.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/security/userpassword.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/sequence.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/sequence_special.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/service_info.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/static.h ../../include/mico/string.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/sysexc.h ../../include/mico/tcconst.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/tckind.h ../../include/mico/template.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/template_impl.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/transport.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/typecode.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/typecode_seq.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/types.h ../../include/mico/util.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/value.h ../../include/mico/valuetype.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/valuetype_impl.h
+TimeService_help.o TimeService_help.pic.o: ../../include/mico/version.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/bool.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/bstring.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/defalloc.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/function
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/function.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/ministl.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/simplevec.h
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/string
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/vector
+TimeService_help.o TimeService_help.pic.o: ../../include/ministl/vector.h
+TimeService_help.o TimeService_help.pic.o: ./CosTime.h ./TimeService_help.h
+TimeService_help.o TimeService_help.pic.o: CosTime.h TimeService_help.cc
+TimeService_help.o TimeService_help.pic.o: TimeService_help.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/basic_seq.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/codeset.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/config-win32.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/ioptypes.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/ir_base.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/messaging.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/mtdebug.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/mtpolicy.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/mttypes.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/operators.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/orb_excepts.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/orb_fwd.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/orb_mico.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/os-thread.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/os-thread/dcethreads.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/os-thread/pthreads.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/os-thread/pththreads.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/os-thread/solaris-threads.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/poa_base.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/poa_stubs.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/DomainManager.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/SecurityAdmin.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/atlas.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/csi.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/csi_base.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/csiiop.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/csiv2.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/gssup.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/odm.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/security.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/securitylevel1.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/securitylevel2.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/securitylevel3.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3aqargs.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3aqargs_p.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3authorization.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3cm.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3cmdext.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3csi.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3ipc.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3om.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3omext.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3pm.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3tcpip.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/sl3tls.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/transportsecurity.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/transportsecurity_p.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/trust.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/security/userpassword.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/sequence.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/sequence_special.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/service_info.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/static.h ../../include/mico/string.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/sysexc.h ../../include/mico/tcconst.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/tckind.h ../../include/mico/template.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/template_impl.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/transport.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/typecode.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/typecode_seq.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/types.h ../../include/mico/value.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/valuetype.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/valuetype_impl.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/mico/version.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/bool.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/bstring.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/defalloc.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/function
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/function.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/ministl.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/simplevec.h
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/string
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/vector
+TimeService_impl.o TimeService_impl.pic.o: ../../include/ministl/vector.h
+TimeService_impl.o TimeService_impl.pic.o: ./CosTime.h ./TimeService_help.h
+TimeService_impl.o TimeService_impl.pic.o: ./TimeService_impl.h CosTime.h
+TimeService_impl.o TimeService_impl.pic.o: TimeService_help.h TimeService_impl.cc
+TimeService_impl.o TimeService_impl.pic.o: TimeService_impl.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/basic_seq.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/ir.h ../../include/mico/ir_base.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/messaging.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/orb_excepts.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/os-thread.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/os-thread/dcethreads.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/os-thread/pthreads.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/os-thread/pththreads.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/os-thread/solaris-threads.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/DomainManager.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/SecurityAdmin.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/atlas.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/csi.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/csi_base.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/csiiop.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/csiv2.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/gssup.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/odm.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/security.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/securitylevel1.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/securitylevel2.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/securitylevel3.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3aqargs.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3aqargs_p.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3authorization.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3cm.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3cmdext.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3csi.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3ipc.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3om.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3omext.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3pm.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3tcpip.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/sl3tls.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/transportsecurity.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/transportsecurity_p.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/trust.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/security/userpassword.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/service_info.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/static.h ../../include/mico/string.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/sysexc.h ../../include/mico/tcconst.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/tckind.h ../../include/mico/template.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/template_impl.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/transport.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/typecode.h ../../include/mico/typecode_seq.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/types.h ../../include/mico/value.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/valuetype.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/valuetype_impl.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/bstring.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/defalloc.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/function
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/function.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/ministl.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/simplevec.h
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/string ../../include/ministl/vector
+TimeService_tio.o TimeService_tio.pic.o: ../../include/ministl/vector.h
+TimeService_tio.o TimeService_tio.pic.o: ./CosTime.h ./TimeService_help.h
+TimeService_tio.o TimeService_tio.pic.o: ./TimeService_impl.h CosTime.h
+TimeService_tio.o TimeService_tio.pic.o: TimeService_help.h TimeService_impl.h
+TimeService_tio.o TimeService_tio.pic.o: TimeService_tio.cc
+TimeService_uto.o TimeService_uto.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/basic_seq.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/ir.h ../../include/mico/ir_base.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/messaging.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/orb_excepts.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/os-thread.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/os-thread/dcethreads.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/os-thread/pthreads.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/os-thread/pththreads.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/os-thread/solaris-threads.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/DomainManager.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/SecurityAdmin.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/atlas.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/csi.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/csi_base.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/csiiop.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/csiv2.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/gssup.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/odm.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/security.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/securitylevel1.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/securitylevel2.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/securitylevel3.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3aqargs.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3aqargs_p.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3authorization.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3cm.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3cmdext.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3csi.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3ipc.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3om.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3omext.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3pm.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3tcpip.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/sl3tls.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/transportsecurity.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/transportsecurity_p.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/trust.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/security/userpassword.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/service_info.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/static.h ../../include/mico/string.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/sysexc.h ../../include/mico/tcconst.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/tckind.h ../../include/mico/template.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/template_impl.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/transport.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/typecode.h ../../include/mico/typecode_seq.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/types.h ../../include/mico/value.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/valuetype.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/valuetype_impl.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/bstring.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/defalloc.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/function
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/function.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/ministl.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/simplevec.h
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/string ../../include/ministl/vector
+TimeService_uto.o TimeService_uto.pic.o: ../../include/ministl/vector.h
+TimeService_uto.o TimeService_uto.pic.o: ./CosTime.h ./TimeService_help.h
+TimeService_uto.o TimeService_uto.pic.o: ./TimeService_impl.h CosTime.h
+TimeService_uto.o TimeService_uto.pic.o: TimeService_help.h TimeService_impl.h
+TimeService_uto.o TimeService_uto.pic.o: TimeService_uto.cc

@@ -1,0 +1,277 @@
+# Module dependencies
+dynany_impl.o dynany_impl.pic.o: dynany_impl.cc
+fltkmico.o fltkmico.pic.o: ../include/CORBA.h ../include/mico/address.h
+fltkmico.o fltkmico.pic.o: ../include/mico/any.h ../include/mico/array.h
+fltkmico.o fltkmico.pic.o: ../include/mico/assert.h ../include/mico/basic.h
+fltkmico.o fltkmico.pic.o: ../include/mico/basic_seq.h ../include/mico/buffer.h
+fltkmico.o fltkmico.pic.o: ../include/mico/codec.h ../include/mico/codeset.h
+fltkmico.o fltkmico.pic.o: ../include/mico/config-win32.h ../include/mico/config.h
+fltkmico.o fltkmico.pic.o: ../include/mico/current.h ../include/mico/dii.h
+fltkmico.o fltkmico.pic.o: ../include/mico/dsi.h ../include/mico/dynany.h
+fltkmico.o fltkmico.pic.o: ../include/mico/except.h ../include/mico/fixed.h
+fltkmico.o fltkmico.pic.o: ../include/mico/fltkmico.h ../include/mico/imr.h
+fltkmico.o fltkmico.pic.o: ../include/mico/ioptypes.h ../include/mico/ior.h
+fltkmico.o fltkmico.pic.o: ../include/mico/ir.h ../include/mico/ir_base.h
+fltkmico.o fltkmico.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h
+fltkmico.o fltkmico.pic.o: ../include/mico/messaging.h ../include/mico/mtdebug.h
+fltkmico.o fltkmico.pic.o: ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+fltkmico.o fltkmico.pic.o: ../include/mico/native.h ../include/mico/object.h
+fltkmico.o fltkmico.pic.o: ../include/mico/operators.h ../include/mico/orb_excepts.h
+fltkmico.o fltkmico.pic.o: ../include/mico/orb_fwd.h ../include/mico/orb_mico.h
+fltkmico.o fltkmico.pic.o: ../include/mico/os-thread.h ../include/mico/os-thread/dcethreads.h
+fltkmico.o fltkmico.pic.o: ../include/mico/os-thread/pthreads.h ../include/mico/os-thread/pththreads.h
+fltkmico.o fltkmico.pic.o: ../include/mico/os-thread/solaris-threads.h ../include/mico/pi.h
+fltkmico.o fltkmico.pic.o: ../include/mico/poa.h ../include/mico/poa_base.h
+fltkmico.o fltkmico.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h
+fltkmico.o fltkmico.pic.o: ../include/mico/policy2.h ../include/mico/security/DomainManager.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/SecurityAdmin.h ../include/mico/security/atlas.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/csi.h ../include/mico/security/csi_base.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/csiiop.h ../include/mico/security/csiv2.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/gssup.h ../include/mico/security/odm.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/security.h ../include/mico/security/securitylevel1.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/securitylevel2.h ../include/mico/security/securitylevel3.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/sl3authorization.h ../include/mico/security/sl3cm.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/sl3cmdext.h ../include/mico/security/sl3csi.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/sl3ipc.h ../include/mico/security/sl3om.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/sl3omext.h ../include/mico/security/sl3pm.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/sl3tcpip.h ../include/mico/security/sl3tls.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/transportsecurity.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/transportsecurity_p.h
+fltkmico.o fltkmico.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+fltkmico.o fltkmico.pic.o: ../include/mico/sequence.h ../include/mico/sequence_special.h
+fltkmico.o fltkmico.pic.o: ../include/mico/service_info.h ../include/mico/static.h
+fltkmico.o fltkmico.pic.o: ../include/mico/string.h ../include/mico/sysexc.h
+fltkmico.o fltkmico.pic.o: ../include/mico/tcconst.h ../include/mico/tckind.h
+fltkmico.o fltkmico.pic.o: ../include/mico/template.h ../include/mico/template_impl.h
+fltkmico.o fltkmico.pic.o: ../include/mico/throw.h ../include/mico/timebase.h
+fltkmico.o fltkmico.pic.o: ../include/mico/transport.h ../include/mico/typecode.h
+fltkmico.o fltkmico.pic.o: ../include/mico/typecode_seq.h ../include/mico/types.h
+fltkmico.o fltkmico.pic.o: ../include/mico/value.h ../include/mico/valuetype.h
+fltkmico.o fltkmico.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+fltkmico.o fltkmico.pic.o: ../include/ministl/bool.h ../include/ministl/bstring.h
+fltkmico.o fltkmico.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+fltkmico.o fltkmico.pic.o: ../include/ministl/function.h ../include/ministl/list
+fltkmico.o fltkmico.pic.o: ../include/ministl/list.h ../include/ministl/map
+fltkmico.o fltkmico.pic.o: ../include/ministl/map.h ../include/ministl/ministl.h
+fltkmico.o fltkmico.pic.o: ../include/ministl/pair ../include/ministl/pair.h
+fltkmico.o fltkmico.pic.o: ../include/ministl/set ../include/ministl/set.h
+fltkmico.o fltkmico.pic.o: ../include/ministl/simplevec.h ../include/ministl/string
+fltkmico.o fltkmico.pic.o: ../include/ministl/vector ../include/ministl/vector.h
+fltkmico.o fltkmico.pic.o: fltkmico.cc
+gtkmico.o gtkmico.pic.o: ../include/CORBA-SMALL.h ../include/CORBA.h ../include/mico/address.h
+gtkmico.o gtkmico.pic.o: ../include/mico/any.h ../include/mico/array.h ../include/mico/assert.h
+gtkmico.o gtkmico.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h
+gtkmico.o gtkmico.pic.o: ../include/mico/buffer.h ../include/mico/codec.h
+gtkmico.o gtkmico.pic.o: ../include/mico/codeset.h ../include/mico/config-win32.h
+gtkmico.o gtkmico.pic.o: ../include/mico/config.h ../include/mico/current.h
+gtkmico.o gtkmico.pic.o: ../include/mico/dii.h ../include/mico/dsi.h ../include/mico/dynany.h
+gtkmico.o gtkmico.pic.o: ../include/mico/except.h ../include/mico/fixed.h
+gtkmico.o gtkmico.pic.o: ../include/mico/gtkmico.h ../include/mico/imr.h
+gtkmico.o gtkmico.pic.o: ../include/mico/ioptypes.h ../include/mico/ior.h
+gtkmico.o gtkmico.pic.o: ../include/mico/ir.h ../include/mico/ir_base.h
+gtkmico.o gtkmico.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h
+gtkmico.o gtkmico.pic.o: ../include/mico/messaging.h ../include/mico/mtdebug.h
+gtkmico.o gtkmico.pic.o: ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+gtkmico.o gtkmico.pic.o: ../include/mico/native.h ../include/mico/object.h
+gtkmico.o gtkmico.pic.o: ../include/mico/operators.h ../include/mico/orb_excepts.h
+gtkmico.o gtkmico.pic.o: ../include/mico/orb_fwd.h ../include/mico/orb_mico.h
+gtkmico.o gtkmico.pic.o: ../include/mico/os-thread.h ../include/mico/os-thread/dcethreads.h
+gtkmico.o gtkmico.pic.o: ../include/mico/os-thread/pthreads.h ../include/mico/os-thread/pththreads.h
+gtkmico.o gtkmico.pic.o: ../include/mico/os-thread/solaris-threads.h ../include/mico/pi.h
+gtkmico.o gtkmico.pic.o: ../include/mico/poa.h ../include/mico/poa_base.h
+gtkmico.o gtkmico.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h
+gtkmico.o gtkmico.pic.o: ../include/mico/policy2.h ../include/mico/security/DomainManager.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/SecurityAdmin.h ../include/mico/security/atlas.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/csi.h ../include/mico/security/csi_base.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/csiiop.h ../include/mico/security/csiv2.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/gssup.h ../include/mico/security/odm.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/security.h ../include/mico/security/securitylevel1.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/securitylevel2.h ../include/mico/security/securitylevel3.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/sl3authorization.h ../include/mico/security/sl3cm.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/sl3cmdext.h ../include/mico/security/sl3csi.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/sl3ipc.h ../include/mico/security/sl3om.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/sl3omext.h ../include/mico/security/sl3pm.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/sl3tcpip.h ../include/mico/security/sl3tls.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/transportsecurity.h ../include/mico/security/transportsecurity_p.h
+gtkmico.o gtkmico.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+gtkmico.o gtkmico.pic.o: ../include/mico/sequence.h ../include/mico/sequence_special.h
+gtkmico.o gtkmico.pic.o: ../include/mico/service_info.h ../include/mico/static.h
+gtkmico.o gtkmico.pic.o: ../include/mico/string.h ../include/mico/sysexc.h
+gtkmico.o gtkmico.pic.o: ../include/mico/tcconst.h ../include/mico/tckind.h
+gtkmico.o gtkmico.pic.o: ../include/mico/template.h ../include/mico/template_impl.h
+gtkmico.o gtkmico.pic.o: ../include/mico/throw.h ../include/mico/timebase.h
+gtkmico.o gtkmico.pic.o: ../include/mico/transport.h ../include/mico/typecode.h
+gtkmico.o gtkmico.pic.o: ../include/mico/typecode_seq.h ../include/mico/types.h
+gtkmico.o gtkmico.pic.o: ../include/mico/value.h ../include/mico/valuetype.h
+gtkmico.o gtkmico.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+gtkmico.o gtkmico.pic.o: ../include/ministl/bool.h ../include/ministl/bstring.h
+gtkmico.o gtkmico.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+gtkmico.o gtkmico.pic.o: ../include/ministl/function.h ../include/ministl/list
+gtkmico.o gtkmico.pic.o: ../include/ministl/list.h ../include/ministl/map
+gtkmico.o gtkmico.pic.o: ../include/ministl/map.h ../include/ministl/ministl.h
+gtkmico.o gtkmico.pic.o: ../include/ministl/pair ../include/ministl/pair.h
+gtkmico.o gtkmico.pic.o: ../include/ministl/set ../include/ministl/set.h
+gtkmico.o gtkmico.pic.o: ../include/ministl/simplevec.h ../include/ministl/string
+gtkmico.o gtkmico.pic.o: ../include/ministl/vector ../include/ministl/vector.h
+gtkmico.o gtkmico.pic.o: gtkmico.cc
+qtmico.o qtmico.pic.o: ../include/CORBA-SMALL.h ../include/CORBA.h ../include/mico/address.h
+qtmico.o qtmico.pic.o: ../include/mico/any.h ../include/mico/array.h ../include/mico/assert.h
+qtmico.o qtmico.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h
+qtmico.o qtmico.pic.o: ../include/mico/buffer.h ../include/mico/codec.h
+qtmico.o qtmico.pic.o: ../include/mico/codeset.h ../include/mico/config-win32.h
+qtmico.o qtmico.pic.o: ../include/mico/config.h ../include/mico/current.h
+qtmico.o qtmico.pic.o: ../include/mico/dii.h ../include/mico/dsi.h ../include/mico/dynany.h
+qtmico.o qtmico.pic.o: ../include/mico/except.h ../include/mico/fixed.h
+qtmico.o qtmico.pic.o: ../include/mico/imr.h ../include/mico/ioptypes.h
+qtmico.o qtmico.pic.o: ../include/mico/ior.h ../include/mico/ir.h ../include/mico/ir_base.h
+qtmico.o qtmico.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h
+qtmico.o qtmico.pic.o: ../include/mico/messaging.h ../include/mico/mtdebug.h
+qtmico.o qtmico.pic.o: ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+qtmico.o qtmico.pic.o: ../include/mico/native.h ../include/mico/object.h
+qtmico.o qtmico.pic.o: ../include/mico/operators.h ../include/mico/orb_excepts.h
+qtmico.o qtmico.pic.o: ../include/mico/orb_fwd.h ../include/mico/orb_mico.h
+qtmico.o qtmico.pic.o: ../include/mico/os-thread.h ../include/mico/os-thread/dcethreads.h
+qtmico.o qtmico.pic.o: ../include/mico/os-thread/pthreads.h ../include/mico/os-thread/pththreads.h
+qtmico.o qtmico.pic.o: ../include/mico/os-thread/solaris-threads.h ../include/mico/pi.h
+qtmico.o qtmico.pic.o: ../include/mico/poa.h ../include/mico/poa_base.h
+qtmico.o qtmico.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h
+qtmico.o qtmico.pic.o: ../include/mico/policy2.h ../include/mico/qtmico.h
+qtmico.o qtmico.pic.o: ../include/mico/security/DomainManager.h ../include/mico/security/SecurityAdmin.h
+qtmico.o qtmico.pic.o: ../include/mico/security/atlas.h ../include/mico/security/csi.h
+qtmico.o qtmico.pic.o: ../include/mico/security/csi_base.h ../include/mico/security/csiiop.h
+qtmico.o qtmico.pic.o: ../include/mico/security/csiv2.h ../include/mico/security/gssup.h
+qtmico.o qtmico.pic.o: ../include/mico/security/odm.h ../include/mico/security/security.h
+qtmico.o qtmico.pic.o: ../include/mico/security/securitylevel1.h ../include/mico/security/securitylevel2.h
+qtmico.o qtmico.pic.o: ../include/mico/security/securitylevel3.h ../include/mico/security/sl3aqargs.h
+qtmico.o qtmico.pic.o: ../include/mico/security/sl3aqargs_p.h ../include/mico/security/sl3authorization.h
+qtmico.o qtmico.pic.o: ../include/mico/security/sl3cm.h ../include/mico/security/sl3cmdext.h
+qtmico.o qtmico.pic.o: ../include/mico/security/sl3csi.h ../include/mico/security/sl3ipc.h
+qtmico.o qtmico.pic.o: ../include/mico/security/sl3om.h ../include/mico/security/sl3omext.h
+qtmico.o qtmico.pic.o: ../include/mico/security/sl3pm.h ../include/mico/security/sl3tcpip.h
+qtmico.o qtmico.pic.o: ../include/mico/security/sl3tls.h ../include/mico/security/transportsecurity.h
+qtmico.o qtmico.pic.o: ../include/mico/security/transportsecurity_p.h ../include/mico/security/trust.h
+qtmico.o qtmico.pic.o: ../include/mico/security/userpassword.h ../include/mico/sequence.h
+qtmico.o qtmico.pic.o: ../include/mico/sequence_special.h ../include/mico/service_info.h
+qtmico.o qtmico.pic.o: ../include/mico/static.h ../include/mico/string.h
+qtmico.o qtmico.pic.o: ../include/mico/sysexc.h ../include/mico/tcconst.h
+qtmico.o qtmico.pic.o: ../include/mico/tckind.h ../include/mico/template.h
+qtmico.o qtmico.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+qtmico.o qtmico.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+qtmico.o qtmico.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+qtmico.o qtmico.pic.o: ../include/mico/types.h ../include/mico/value.h ../include/mico/valuetype.h
+qtmico.o qtmico.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+qtmico.o qtmico.pic.o: ../include/ministl/bool.h ../include/ministl/bstring.h
+qtmico.o qtmico.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+qtmico.o qtmico.pic.o: ../include/ministl/function.h ../include/ministl/list
+qtmico.o qtmico.pic.o: ../include/ministl/list.h ../include/ministl/map
+qtmico.o qtmico.pic.o: ../include/ministl/map.h ../include/ministl/ministl.h
+qtmico.o qtmico.pic.o: ../include/ministl/pair ../include/ministl/pair.h
+qtmico.o qtmico.pic.o: ../include/ministl/set ../include/ministl/set.h ../include/ministl/simplevec.h
+qtmico.o qtmico.pic.o: ../include/ministl/string ../include/ministl/vector
+qtmico.o qtmico.pic.o: ../include/ministl/vector.h qtmico.cc
+tclmico.o tclmico.pic.o: ../include/CORBA-SMALL.h ../include/CORBA.h ../include/mico/address.h
+tclmico.o tclmico.pic.o: ../include/mico/any.h ../include/mico/array.h ../include/mico/assert.h
+tclmico.o tclmico.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h
+tclmico.o tclmico.pic.o: ../include/mico/buffer.h ../include/mico/codec.h
+tclmico.o tclmico.pic.o: ../include/mico/codeset.h ../include/mico/config-win32.h
+tclmico.o tclmico.pic.o: ../include/mico/config.h ../include/mico/current.h
+tclmico.o tclmico.pic.o: ../include/mico/dii.h ../include/mico/dsi.h ../include/mico/dynany.h
+tclmico.o tclmico.pic.o: ../include/mico/except.h ../include/mico/fixed.h
+tclmico.o tclmico.pic.o: ../include/mico/imr.h ../include/mico/ioptypes.h
+tclmico.o tclmico.pic.o: ../include/mico/ior.h ../include/mico/ir.h ../include/mico/ir_base.h
+tclmico.o tclmico.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h
+tclmico.o tclmico.pic.o: ../include/mico/messaging.h ../include/mico/mtdebug.h
+tclmico.o tclmico.pic.o: ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+tclmico.o tclmico.pic.o: ../include/mico/native.h ../include/mico/object.h
+tclmico.o tclmico.pic.o: ../include/mico/operators.h ../include/mico/orb_excepts.h
+tclmico.o tclmico.pic.o: ../include/mico/orb_fwd.h ../include/mico/orb_mico.h
+tclmico.o tclmico.pic.o: ../include/mico/os-thread.h ../include/mico/os-thread/dcethreads.h
+tclmico.o tclmico.pic.o: ../include/mico/os-thread/pthreads.h ../include/mico/os-thread/pththreads.h
+tclmico.o tclmico.pic.o: ../include/mico/os-thread/solaris-threads.h ../include/mico/pi.h
+tclmico.o tclmico.pic.o: ../include/mico/poa.h ../include/mico/poa_base.h
+tclmico.o tclmico.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h
+tclmico.o tclmico.pic.o: ../include/mico/policy2.h ../include/mico/security/DomainManager.h
+tclmico.o tclmico.pic.o: ../include/mico/security/SecurityAdmin.h ../include/mico/security/atlas.h
+tclmico.o tclmico.pic.o: ../include/mico/security/csi.h ../include/mico/security/csi_base.h
+tclmico.o tclmico.pic.o: ../include/mico/security/csiiop.h ../include/mico/security/csiv2.h
+tclmico.o tclmico.pic.o: ../include/mico/security/gssup.h ../include/mico/security/odm.h
+tclmico.o tclmico.pic.o: ../include/mico/security/security.h ../include/mico/security/securitylevel1.h
+tclmico.o tclmico.pic.o: ../include/mico/security/securitylevel2.h ../include/mico/security/securitylevel3.h
+tclmico.o tclmico.pic.o: ../include/mico/security/sl3aqargs.h ../include/mico/security/sl3aqargs_p.h
+tclmico.o tclmico.pic.o: ../include/mico/security/sl3authorization.h ../include/mico/security/sl3cm.h
+tclmico.o tclmico.pic.o: ../include/mico/security/sl3cmdext.h ../include/mico/security/sl3csi.h
+tclmico.o tclmico.pic.o: ../include/mico/security/sl3ipc.h ../include/mico/security/sl3om.h
+tclmico.o tclmico.pic.o: ../include/mico/security/sl3omext.h ../include/mico/security/sl3pm.h
+tclmico.o tclmico.pic.o: ../include/mico/security/sl3tcpip.h ../include/mico/security/sl3tls.h
+tclmico.o tclmico.pic.o: ../include/mico/security/transportsecurity.h ../include/mico/security/transportsecurity_p.h
+tclmico.o tclmico.pic.o: ../include/mico/security/trust.h ../include/mico/security/userpassword.h
+tclmico.o tclmico.pic.o: ../include/mico/sequence.h ../include/mico/sequence_special.h
+tclmico.o tclmico.pic.o: ../include/mico/service_info.h ../include/mico/static.h
+tclmico.o tclmico.pic.o: ../include/mico/string.h ../include/mico/sysexc.h
+tclmico.o tclmico.pic.o: ../include/mico/tcconst.h ../include/mico/tckind.h
+tclmico.o tclmico.pic.o: ../include/mico/tclmico.h ../include/mico/template.h
+tclmico.o tclmico.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+tclmico.o tclmico.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+tclmico.o tclmico.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+tclmico.o tclmico.pic.o: ../include/mico/types.h ../include/mico/value.h
+tclmico.o tclmico.pic.o: ../include/mico/valuetype.h ../include/mico/valuetype_impl.h
+tclmico.o tclmico.pic.o: ../include/mico/version.h ../include/ministl/bool.h
+tclmico.o tclmico.pic.o: ../include/ministl/bstring.h ../include/ministl/defalloc.h
+tclmico.o tclmico.pic.o: ../include/ministl/function ../include/ministl/function.h
+tclmico.o tclmico.pic.o: ../include/ministl/list ../include/ministl/list.h
+tclmico.o tclmico.pic.o: ../include/ministl/map ../include/ministl/map.h
+tclmico.o tclmico.pic.o: ../include/ministl/ministl.h ../include/ministl/pair
+tclmico.o tclmico.pic.o: ../include/ministl/pair.h ../include/ministl/set
+tclmico.o tclmico.pic.o: ../include/ministl/set.h ../include/ministl/simplevec.h
+tclmico.o tclmico.pic.o: ../include/ministl/string ../include/ministl/vector
+tclmico.o tclmico.pic.o: ../include/ministl/vector.h tclmico.cc
+x11.o x11.pic.o: ../include/CORBA-SMALL.h ../include/CORBA.h ../include/mico/address.h
+x11.o x11.pic.o: ../include/mico/any.h ../include/mico/array.h ../include/mico/assert.h
+x11.o x11.pic.o: ../include/mico/basic.h ../include/mico/basic_seq.h ../include/mico/buffer.h
+x11.o x11.pic.o: ../include/mico/codec.h ../include/mico/codeset.h ../include/mico/config-win32.h
+x11.o x11.pic.o: ../include/mico/config.h ../include/mico/current.h ../include/mico/dii.h
+x11.o x11.pic.o: ../include/mico/dsi.h ../include/mico/dynany.h ../include/mico/except.h
+x11.o x11.pic.o: ../include/mico/fixed.h ../include/mico/imr.h ../include/mico/ioptypes.h
+x11.o x11.pic.o: ../include/mico/ior.h ../include/mico/ir.h ../include/mico/ir_base.h
+x11.o x11.pic.o: ../include/mico/magic.h ../include/mico/memtrace.h ../include/mico/messaging.h
+x11.o x11.pic.o: ../include/mico/mtdebug.h ../include/mico/mtpolicy.h ../include/mico/mttypes.h
+x11.o x11.pic.o: ../include/mico/native.h ../include/mico/object.h ../include/mico/operators.h
+x11.o x11.pic.o: ../include/mico/orb_excepts.h ../include/mico/orb_fwd.h
+x11.o x11.pic.o: ../include/mico/orb_mico.h ../include/mico/os-thread.h
+x11.o x11.pic.o: ../include/mico/os-thread/dcethreads.h ../include/mico/os-thread/pthreads.h
+x11.o x11.pic.o: ../include/mico/os-thread/pththreads.h ../include/mico/os-thread/solaris-threads.h
+x11.o x11.pic.o: ../include/mico/pi.h ../include/mico/poa.h ../include/mico/poa_base.h
+x11.o x11.pic.o: ../include/mico/poa_stubs.h ../include/mico/policy.h ../include/mico/policy2.h
+x11.o x11.pic.o: ../include/mico/security/DomainManager.h ../include/mico/security/SecurityAdmin.h
+x11.o x11.pic.o: ../include/mico/security/atlas.h ../include/mico/security/csi.h
+x11.o x11.pic.o: ../include/mico/security/csi_base.h ../include/mico/security/csiiop.h
+x11.o x11.pic.o: ../include/mico/security/csiv2.h ../include/mico/security/gssup.h
+x11.o x11.pic.o: ../include/mico/security/odm.h ../include/mico/security/security.h
+x11.o x11.pic.o: ../include/mico/security/securitylevel1.h ../include/mico/security/securitylevel2.h
+x11.o x11.pic.o: ../include/mico/security/securitylevel3.h ../include/mico/security/sl3aqargs.h
+x11.o x11.pic.o: ../include/mico/security/sl3aqargs_p.h ../include/mico/security/sl3authorization.h
+x11.o x11.pic.o: ../include/mico/security/sl3cm.h ../include/mico/security/sl3cmdext.h
+x11.o x11.pic.o: ../include/mico/security/sl3csi.h ../include/mico/security/sl3ipc.h
+x11.o x11.pic.o: ../include/mico/security/sl3om.h ../include/mico/security/sl3omext.h
+x11.o x11.pic.o: ../include/mico/security/sl3pm.h ../include/mico/security/sl3tcpip.h
+x11.o x11.pic.o: ../include/mico/security/sl3tls.h ../include/mico/security/transportsecurity.h
+x11.o x11.pic.o: ../include/mico/security/transportsecurity_p.h ../include/mico/security/trust.h
+x11.o x11.pic.o: ../include/mico/security/userpassword.h ../include/mico/sequence.h
+x11.o x11.pic.o: ../include/mico/sequence_special.h ../include/mico/service_info.h
+x11.o x11.pic.o: ../include/mico/static.h ../include/mico/string.h ../include/mico/sysexc.h
+x11.o x11.pic.o: ../include/mico/tcconst.h ../include/mico/tckind.h ../include/mico/template.h
+x11.o x11.pic.o: ../include/mico/template_impl.h ../include/mico/throw.h
+x11.o x11.pic.o: ../include/mico/timebase.h ../include/mico/transport.h
+x11.o x11.pic.o: ../include/mico/typecode.h ../include/mico/typecode_seq.h
+x11.o x11.pic.o: ../include/mico/types.h ../include/mico/value.h ../include/mico/valuetype.h
+x11.o x11.pic.o: ../include/mico/valuetype_impl.h ../include/mico/version.h
+x11.o x11.pic.o: ../include/mico/x11.h ../include/ministl/bool.h ../include/ministl/bstring.h
+x11.o x11.pic.o: ../include/ministl/defalloc.h ../include/ministl/function
+x11.o x11.pic.o: ../include/ministl/function.h ../include/ministl/list ../include/ministl/list.h
+x11.o x11.pic.o: ../include/ministl/map ../include/ministl/map.h ../include/ministl/ministl.h
+x11.o x11.pic.o: ../include/ministl/pair ../include/ministl/pair.h ../include/ministl/set
+x11.o x11.pic.o: ../include/ministl/set.h ../include/ministl/simplevec.h
+x11.o x11.pic.o: ../include/ministl/string ../include/ministl/vector ../include/ministl/vector.h
+x11.o x11.pic.o: x11.cc

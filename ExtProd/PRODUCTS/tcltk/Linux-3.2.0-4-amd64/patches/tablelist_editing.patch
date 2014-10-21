@@ -1,0 +1,19 @@
+*** tablelistWidget.tcl.orig	Mon Nov 27 09:50:53 2006
+--- tablelistWidget.tcl	Mon Nov 27 09:51:18 2006
+***************
+*** 560,566 ****
+      bindtags $w [lreplace [bindtags $w] 1 1]
+      tk::frame $data(hdrTxtFr) -borderwidth 0 -container 0 -height 0 \
+  			      -highlightthickness 0 -relief flat \
+! 			      -takefocus 0 -width 0
+      $w window create 1.0 -window $data(hdrTxtFr)
+      set w $data(hdrLbl)			;# filler label within the header frame
+      if {$usingTile} {
+--- 560,566 ----
+      bindtags $w [lreplace [bindtags $w] 1 1]
+      tk::frame $data(hdrTxtFr) -borderwidth 0 -container 0 -height 0 \
+  			      -highlightthickness 0 -relief flat \
+! 			      -takefocus 0 -width 0 -padx 0 -pady 0
+      $w window create 1.0 -window $data(hdrTxtFr)
+      set w $data(hdrLbl)			;# filler label within the header frame
+      if {$usingTile} {

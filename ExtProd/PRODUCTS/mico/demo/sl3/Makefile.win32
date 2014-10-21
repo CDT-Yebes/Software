@@ -1,0 +1,22 @@
+
+all: subs
+
+RELATIVE = ..\..
+!include ..\MakeVars.win32
+DIRS = tcpip user-pass-tcpip tls user-pass-tls \
+  tls-anon user-pass-tls-anon tls-naming user-pass-tcpip-identity \
+  user-pass-tls-plain-tls-client
+
+
+subs:
+    set path=%path%;$(MPATH)
+    for %i in ( $(DIRS) ); do cmd /c "cd %i &$(MAKE) /nologo /f Makefile.win32  "
+
+clean:
+    for %i in ( $(DIRS) ); do cmd /c "cd %i &$(MAKE) /nologo /f Makefile.win32  clean"
+
+install:
+    $(IDIRCMD) $(INSTDIR)\doc\mico\examples\poa
+    $(ISRCCMD) Makefile $(INSTDIR)\doc\mico\examples\poa
+    $(ISRCCMD) README $(INSTDIR)\doc\mico\examples\poa
+    for i in $(DIRS); do $(MAKE) -C $$i install || exit 1; done

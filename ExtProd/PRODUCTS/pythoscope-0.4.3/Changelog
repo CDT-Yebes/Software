@@ -1,0 +1,98 @@
+Changelog
+=========
+
+0.4.3
+-----
+
+* Pythoscope now ignores application and test modules it could not inspect (`#487138 <https://bugs.launchpad.net/bugs/487138>`_ `#462849 <https://bugs.launchpad.net/bugs/462849>`_).
+* Improved generation of assertions for functions with varargs and kwargs (`#475414 <https://bugs.launchpad.net/bugs/475414>`_ `#475409 <https://bugs.launchpad.net/bugs/475409>`_).
+* Pythoscope will no longer generate two test cases with the same name (`#475504 <https://bugs.launchpad.net/bugs/475504>`_).
+* Installation package now contains all essential files (`#481238 <https://bugs.launchpad.net/bugs/481238>`_).
+* Pythoscope now properly handles string exceptions thrown inside entry points (`#522364 <https://bugs.launchpad.net/bugs/522364>`_).
+* Entry points are now run with the current directory being the project root (`#524352 <https://bugs.launchpad.net/bugs/524352>`_).
+
+0.4.2
+-----
+
+* Removed `dependency on fixture module <https://blueprints.launchpad.net/pythoscope/+spec/stop-using-fixture>`_.
+* Fixed test generation bug related to function definitions with varargs (`#440773 <https://bugs.launchpad.net/bugs/440773>`_).
+* Dynamic inspector can now `handle all types of exceptions <https://blueprints.launchpad.net/pythoscope/+spec/better-exception-handling>`_ (including string exceptions).
+* Frequently Asked Questions document has been created, also `available online <http://pythoscope.org/faq>`_.
+* Added `support for Pythons 2.3 <https://blueprints.launchpad.net/pythoscope/+spec/support-python2.3>`_ `through 2.6 <https://blueprints.launchpad.net/pythoscope/+spec/support-python2.6>`_.
+* New imports added by Pythoscope are now placed after existing ones, so they don't cause a syntax error when __future__ imports were used (`#373978 <https://bugs.launchpad.net/bugs/373978>`_).
+* Fixed inspection bug related to classes deriving from namedtuple instances (`#460715 <https://bugs.launchpad.net/pythoscope/+bug/460715>`_).
+* `Setuptools is no longer required for installation <https://blueprints.launchpad.net/pythoscope/+spec/dont-require-setuptools-for-installation>`_.
+
+0.4.1
+-----
+
+* Greatly improved `information storage performance <https://blueprints.launchpad.net/pythoscope/+spec/improve-information-storage-performance>`_.
+* Added Pythoscope module for Emacs to the misc/ directory in the source tree.
+* Unittests can now be used as points of entry (`#275059 <https://bugs.launchpad.net/bugs/275059>`_).
+* Pythoscope now ignores source control files (`#284568 <https://bugs.launchpad.net/bugs/284568>`_).
+* Static inspection happens on --init, as it should be (`#325928 <https://bugs.launchpad.net/bugs/325928>`_).
+* Ported itertive pattern matcher for lib2to3 from Python trunk (`#304541 <https://bugs.launchpad.net/bugs/304541>`_).
+* Fixed test generation bug related to nested function arguments (`#344220 <https://bugs.launchpad.net/bugs/344220>`_).
+* Fixed point of entry cleanup bug (`#324522 <https://bugs.launchpad.net/bugs/324522>`_).
+* Fixed some more Windows-specific bugs (`#348136 <https://bugs.launchpad.net/bugs/348136>`_).
+
+0.4
+---
+
+* Stopped `using pickle for object serialization <https://blueprints.launchpad.net/pythoscope/+spec/dont-use-pickle-for-object-serialization>`_ and implemented our own mechanism that carefully captures changing state of objects during dynamic inspection.
+* Implemented `preserve objects identity <https://blueprints.launchpad.net/pythoscope/+spec/preserve-objects-identity>`_ blueprint.
+* Fixed bug related to multiple generator calls (`#295340 <https://bugs.launchpad.net/pythoscope/+bug/295340>`_).
+* Made handling of special method names (like __init__ or __eq__) consistent with handling of normal method names.
+* Made `test stubs more useful <https://blueprints.launchpad.net/pythoscope/+spec/better-test-stubs>`_.
+
+0.3.2
+-----
+
+* Made Pythoscope `more verbose <https://blueprints.launchpad.net/pythoscope/+spec/more-verbose-output>`_.
+* Added `support for user-defined exceptions <https://blueprints.launchpad.net/pythoscope/+spec/user-defined-exceptions>`_.
+* Fixed unicode handling bug (`#284585 <https://bugs.launchpad.net/bugs/284585>`_).
+* Improved performance of the internal information storage.
+
+0.3.1
+-----
+
+* Added implementation of samefile function for Windows (`#271882 <https://bugs.launchpad.net/pythoscope/+bug/271882>`_).
+* Fixed wrong indentation bug (`#271892 <https://bugs.launchpad.net/pythoscope/+bug/271892>`_).
+* Made lib2to3.pgen2.parse.ParseError pickable (`#271904 <https://bugs.launchpad.net/pythoscope/+bug/271904>`_).
+* Added `support for Python generators <https://blueprints.launchpad.net/pythoscope/+spec/handle-python-generators>`_.
+* Fixed static inspection of functions having attributes with default values (`#275459 <https://bugs.launchpad.net/pythoscope/+bug/275459>`_).
+
+0.3
+---
+
+* Fixed generate bug for test modules (`#264449 <https://bugs.launchpad.net/pythoscope/+bug/264449>`_).
+* .pythoscope became a directory.
+* Introduced --init option for initializing .pythoscope/ directory.
+* Added a notion of points of entry introducing dynamic analysis.
+* Pythoscope can now generate assert_equal and assert_raises type of assertions.
+* Implemented `no more inspect command blueprint <https://blueprints.launchpad.net/pythoscope/+spec/remove-inspect-command>`_.
+* Changed the default test directory from pythoscope-tests/ to tests/.
+* Added a tutorial to the README file.
+
+0.2.2
+-----
+
+* Fixed the inner classes bug (`#260924 <https://bugs.launchpad.net/pythoscope/+bug/260924>`_).
+* Collector appends new data to .pythoscope file instead of overwriting it.
+* Test modules are being analyzed as well.
+* Using lib2to3 for static code analysis instead of stdlib's compiler module.
+* Generator can append test cases to existing test modules. Preserves comments and original whitespace.
+* Cheetah is no longer a dependency.
+* Renamed 'collect' command to 'inspect'.
+
+0.2.1
+-----
+
+Contains a packaging bug fix, which prevented users from using the tests
+cases generator and running internal pythoscope tests.
+
+0.2
+---
+
+First release, featuring static code analysis and generation of test
+stubs.

@@ -1,0 +1,59 @@
+.TH TCLCHECK 1L "July 20 1994"
+.SH NAME
+tclCheck \- check bracket nesting for tcl programs.
+.SH SYNOPSIS
+.B tclCheck
+.tr _-
+[_cgijlmqs] [\fIfilename\fP\|]...
+.tr
+.SH DESCRIPTION
+.I tclCheck
+does a simple bracket nesting check on tcl programs to help you find
+missing or extra brackets. The program will often detect things that
+are very likely typing errors but which the tcl interpreter silently
+accepts. However, simple bracket matching is not all that useful for
+finding missing brackets and so the program also provides various ways
+of rpinting out the bracket "skeleton" of a program. This gives a line
+numbered listing showing where all the brackets occur in the program.
+It is usually very easy to spot errors from this.
+.LP
+.SH OPTIONS
+.LP
+.IP "\fB-c\fP"
+By default
+.I tclCheck
+attempts to recognise comments so as to permit unmatching brackets in
+them. This flag turns this behaviour off.
+.IP "\fB-e\fP"
+This flag enables checking for lines that have a \\ followed by spaces
+or tabs at their end. By default this test is not carried out.
+.IP "\fB-g\fR"
+By default
+.I tclCheck
+pops its stack of brackets to a find a match with } > ] > ). This flag
+turns this off.
+.IP "\fB-i\fR"
+This flag stops the printing of error messages beginning "Inside a
+string". 
+.IP "\fB-j\fR"
+Generates a compressed skeleton print out where indentation is ignored
+when matching brackets (see -l).
+.IP "\fB-l\fR"
+Generates a compressed skeleton print out where nested matching lines
+are paired up and removed. Matching includes any indentation.
+.IP "\fB-m\fR"
+Removes from the skeleton print out bracket pairs that match up
+directly on lines.
+.IP "\fB-q\fR"
+Do not generate any output unless exceptions are detected.
+.IP "\fB-s\fR"
+Generate a print out of the bracket skeleton of the whole program.
+.IP "\fB-t\fR"
+tiger mode - this will flag any single " that occur in places where
+tcl would not detect the start of a string. By default this is turned
+off, but it can be very useful for tracking down som ehard to find
+problems.
+.SH BUGS
+Bracket matching in tcl is an inexact science and the program takes a
+very conservative view so valid structures will sometimes be
+flagged. This is a feature not a bug!

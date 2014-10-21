@@ -1,0 +1,90 @@
+tcl>
+
+Commands in global namespace
+============================
+LoadBLT25 abs acos after alarm append apply array asin assign_fields atan atan2 auto_execok auto_import auto_load auto_load_index auto_load_pkg auto_mkindex auto_mkindex_old auto_qualify auto_reset binary break bsearch case catch catclose catgets catopen ccollate cconcat cd ceil cequal cexpand chan chgrp chmod chown chroot cindex clength clock close cmdtrace commandloop concat continue convert_lib convertclock copyfile cos cosh crange csubstr ctoken ctype dict dirs double dup echo edprocs encoding eof error eval exec execl exit exp expr fabs fblocked fcntl fconfigure fcopy file fileevent flock floor flush fmod fmtclock for for_array_keys for_file for_recursive_glob foreach fork format frename fstat ftruncate funlock getNamespaces getclock gets glob global history host_info id if incr info infox int interp intersect intersect3 join keyldel keylget keylkeys keylset kill lappend lassign lcontain lempty lgets lindex link linsert list llength lmatch load loadlibindex log log10 loop lrange lrepeat lreplace lreverse lrmdups lsearch lset lsort lvarcat lvarpop lvarpush mainloop max min mkdir namespace nice open package pid pipe pkg_mkIndex popd pow proc profile profrep pushd puts pwd random read read_file readdir recursive_glob regexp regsub rename replicate return rmdir round saveprocs scan scancontext scanfile scanmatch seek select server_accept server_cntl server_connect server_create server_info server_open server_send set showproc signal sin sinh sleep socket source split sqrt string subst switch sync system tan tanh tclLog tclPkgSetup tclPkgUnknown tcl_findLibrary tclx_fork tclx_load_tndxs tclx_sleep tclx_system tclx_wait tell time times trace translit try_eval umask union unknown unlink unload unset update uplevel upvar variable vwait wait while write_file
+
+
+Commands in namespace ::TclX
+============================
+ParseTclIndex
+
+
+Commands in namespace ::TclXProfRep
+===================================
+print sort sortcmp sum
+
+
+Commands in namespace ::auto_mkindex_parser
+===========================================
+cleanup command commandInit fullname hook init mkindex slavehook
+
+
+Commands in namespace ::pkg
+===========================
+create
+
+
+Commands in namespace ::tcl
+===========================
+Bgerror CopyDirectory HistAdd HistChange HistClear HistEvent HistIndex HistInfo HistKeep HistRedo MacOSXPkgUnknown pkgconfig pkgindex
+
+
+Commands in namespace ::tcl::Pkg
+================================
+CompareExtension Create
+
+
+Commands in namespace ::tcl::chan
+=================================
+blocked close copy create eof event flush gets pending postevent puts read seek tell truncate
+
+
+Commands in namespace ::tcl::clock
+==================================
+ConvertLocalToUTC GetDateFields GetJulianDayFromEraYearMonthDay GetJulianDayFromEraYearWeekDay Oldscan ParseFormatArgs clicks getenv microseconds milliseconds seconds
+
+
+Commands in namespace ::tcl::dict
+=================================
+append create exists filter for get incr info keys lappend merge remove replace set size unset update values with
+
+
+Commands in namespace ::tcl::info
+=================================
+args body cmdcount commands complete default exists frame functions globals hostname level library loaded locals nameofexecutable patchlevel procs script sharedlibextension tclversion vars
+
+
+Commands in namespace ::tcl::mathfunc
+=====================================
+abs acos asin atan atan2 bool ceil cos cosh double entier exp floor fmod hypot int isqrt log log10 max min pow rand round sin sinh sqrt srand tan tanh wide
+
+
+Commands in namespace ::tcl::mathop
+===================================
+! != % & * ** + - / < << <= == > >= >> ^ eq in ne ni | ~
+
+
+Commands in namespace ::tcl::string
+===================================
+bytelength compare equal first index is last length map match range repeat replace reverse tolower totitle toupper trim trimleft trimright wordend wordstart
+
+
+Commands in namespace ::tcl::tm
+===============================
+Defaults UnknownHandler add list path remove roots
+
+
+Commands in namespace ::tcl::unsupported
+========================================
+disassemble
+
+
+Commands in namespace ::tclx
+============================
+Init apropos help helpcd helppwd
+
+
+Commands in namespace ::tclx::help
+==================================
+ConvertPath Display DisplayColumns DisplayPage FlattenPath HelpOnHelp ListSubject RelativePath RootDirs

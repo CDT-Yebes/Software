@@ -1,0 +1,12 @@
+*** pkgIndex.tcl.in.orig	Tue Nov 26 18:12:59 2002
+--- pkgIndex.tcl.in	Tue Nov 26 18:14:46 2002
+***************
+*** 33,38 ****
+--- 33,39 ----
+  }
+  
+  set version "%VERSION%"
++ set dir     "%LIB_DIR%"
+  
+  package ifneeded BLT $version [list LoadBLT $version $dir]
+  

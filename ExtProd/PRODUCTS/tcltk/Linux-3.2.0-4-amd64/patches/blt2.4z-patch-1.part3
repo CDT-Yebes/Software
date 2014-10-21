@@ -1,0 +1,162 @@
+*** bltInit.c.orig	2002-09-10 00:12:33.000000000 -0500
+--- bltInit.c		2002-12-02 22:25:33.000000000 -0600
+***************
+*** 38,54 ****
+  #endif
+  #endif
+  
+  double bltNaN;
+  #if (TCL_MAJOR_VERSION > 7)
+  Tcl_Obj *bltEmptyStringObjPtr;
+  #endif
+  
+  static Tcl_MathProc MinMathProc, MaxMathProc;
+- static int tclLoaded = FALSE;
+- #ifndef TCL_ONLY
+- static int tkLoaded = FALSE;
+- #endif
+- 
+  static char libPath[1024] =
+  {
+      BLT_LIBRARY
+--- 38,53 ----
+  #endif
+  #endif
+  
++ #define BLT_THREAD_KEY		"BLT Initialized"
++ #define BLT_TCL_CMDS		(1<<0)
++ #define BLT_TK_CMDS		(1<<1)
++ 
+  double bltNaN;
+  #if (TCL_MAJOR_VERSION > 7)
+  Tcl_Obj *bltEmptyStringObjPtr;
+  #endif
+  
+  static Tcl_MathProc MinMathProc, MaxMathProc;
+  static char libPath[1024] =
+  {
+      BLT_LIBRARY
+***************
+*** 404,410 ****
+  Blt_Init(interp)
+      Tcl_Interp *interp;		/* Interpreter to add extra commands */
+  {
+!     if (!tclLoaded) {
+  	register Tcl_AppInitProc **p;
+  	Tcl_Namespace *nsPtr;
+  	Tcl_ValueType args[2];
+--- 403,412 ----
+  Blt_Init(interp)
+      Tcl_Interp *interp;		/* Interpreter to add extra commands */
+  {
+!     int flags;
+! 
+!     flags = (int)Tcl_GetAssocData(interp, BLT_THREAD_KEY, NULL);
+!     if ((flags & BLT_TCL_CMDS) == 0) {
+  	register Tcl_AppInitProc **p;
+  	Tcl_Namespace *nsPtr;
+  	Tcl_ValueType args[2];
+***************
+*** 451,460 ****
+  	if (Tcl_PkgProvide(interp, "BLT", BLT_VERSION) != TCL_OK) {
+  	    return TCL_ERROR;
+  	}
+! 	tclLoaded = TRUE;
+      }
+  #ifndef TCL_ONLY
+!     if (!tkLoaded) {
+  	register Tcl_AppInitProc **p;
+  	Tcl_Namespace *nsPtr;
+  
+--- 453,463 ----
+  	if (Tcl_PkgProvide(interp, "BLT", BLT_VERSION) != TCL_OK) {
+  	    return TCL_ERROR;
+  	}
+! 	Tcl_SetAssocData(interp, BLT_THREAD_KEY, NULL, 
+! 		(ClientData)(flags | BLT_TCL_CMDS));
+      }
+  #ifndef TCL_ONLY
+!     if ((flags & BLT_TK_CMDS) == 0) {
+  	register Tcl_AppInitProc **p;
+  	Tcl_Namespace *nsPtr;
+  
+***************
+*** 486,492 ****
+  	    }
+  	}
+  	Blt_InitEpsCanvasItem(interp);
+! 	tkLoaded = TRUE;
+      }
+  #endif
+      return TCL_OK;
+--- 489,496 ----
+  	    }
+  	}
+  	Blt_InitEpsCanvasItem(interp);
+! 	Tcl_SetAssocData(interp, BLT_THREAD_KEY, NULL, 
+! 		(ClientData)(flags | BLT_TK_CMDS));
+      }
+  #endif
+      return TCL_OK;
+***************
+*** 499,505 ****
+  Blt_Init(interp)
+      Tcl_Interp *interp;		/* Interpreter to add extra commands */
+  {
+!     if (!tclLoaded) {
+  	register Tcl_AppInitProc **p;
+  	Tcl_ValueType args[2];
+  
+--- 503,512 ----
+  Blt_Init(interp)
+      Tcl_Interp *interp;		/* Interpreter to add extra commands */
+  {
+!     int flags;
+! 
+!     flags = (int)Tcl_GetAssocData(interp, BLT_THREAD_KEY, NULL);
+!     if ((flags & BLT_TCL_CMDS) == 0) {
+  	register Tcl_AppInitProc **p;
+  	Tcl_ValueType args[2];
+  
+***************
+*** 537,546 ****
+  	if (Tcl_PkgProvide(interp, "BLT", BLT_VERSION) != TCL_OK) {
+  	    return TCL_ERROR;
+  	}
+! 	tclLoaded = TRUE;
+      }
+  #ifndef TCL_ONLY
+!     if (!tkLoaded) {
+  	register Tcl_AppInitProc **p;
+  
+  #if (TCL_VERSION_NUMBER >= _VERSION(8,1,0)) 
+--- 544,554 ----
+  	if (Tcl_PkgProvide(interp, "BLT", BLT_VERSION) != TCL_OK) {
+  	    return TCL_ERROR;
+  	}
+! 	Tcl_SetAssocData(interp, BLT_THREAD_KEY, NULL, 
+! 		(ClientData)(flags | BLT_TCL_CMDS));
+      }
+  #ifndef TCL_ONLY
+!     if ((flags & BLT_TK_CMDS) == 0) {
+  	register Tcl_AppInitProc **p;
+  
+  #if (TCL_VERSION_NUMBER >= _VERSION(8,1,0)) 
+***************
+*** 560,566 ****
+  	    }
+  	}
+  	Blt_InitEpsCanvasItem(interp);
+! 	tkLoaded = TRUE;
+      }
+  #endif
+      return TCL_OK;
+--- 568,575 ----
+  	    }
+  	}
+  	Blt_InitEpsCanvasItem(interp);
+! 	Tcl_SetAssocData(interp, BLT_THREAD_KEY, NULL, 
+! 		(ClientData)(flags | BLT_TK_CMDS));
+      }
+  #endif
+      return TCL_OK;

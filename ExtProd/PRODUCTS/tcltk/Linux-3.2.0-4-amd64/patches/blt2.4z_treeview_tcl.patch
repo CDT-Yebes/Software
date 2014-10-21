@@ -1,0 +1,69 @@
+*** treeview.tcl.orig	Thu Sep 15 15:00:55 2005
+--- treeview.tcl	Thu Sep 15 15:01:17 2005
+***************
+*** 36,41 ****
+--- 36,81 ----
+  #
+  # ======================================================================
+  
++ # The MouseWheel will typically only fire on Windows.  However,
++ # someone could use the "event generate" command to produce one
++ # on other platforms.
++ if {[string equal [tk windowingsystem] "classic"]
++ 	|| [string equal [tk windowingsystem] "aqua"]} {
++     bind TreeView <MouseWheel> {
++         %W yview scroll [expr {- (%D)}] units
++     }
++     bind TreeView <Option-MouseWheel> {
++         %W yview scroll [expr {-10 * (%D)}] units
++     }
++     bind TreeView <Shift-MouseWheel> {
++         %W xview scroll [expr {- (%D)}] units
++     }
++     bind TreeView <Shift-Option-MouseWheel> {
++         %W xview scroll [expr {-10 * (%D)}] units
++     }
++ } else {
++     bind TreeView <MouseWheel> {
++         %W yview scroll [expr {- (%D / 120) * 4}] units
++     }
++ }
++ 
++ if {[string equal "x11" [tk windowingsystem]]} {
++     # Support for mousewheels on Linux/Unix commonly comes through mapping
++     # the wheel to the extended buttons.  If you have a mousewheel, find
++     # Linux configuration info at:
++     #	http://www.inria.fr/koala/colas/mouse-wheel-scroll/
++     bind TreeView <4> {
++ 	if {!$tk_strictMotif} {
++ 	    %W yview scroll -5 units
++ 	}
++     }
++     bind TreeView <5> {
++ 	if {!$tk_strictMotif} {
++ 	    %W yview scroll 5 units
++ 	}
++     }
++ }
++ 
+  namespace eval blt::tv {
+      set afterId ""
+      set scroll 0
+***************
+*** 103,109 ****
+      # Button bindings
+      #
+      $w button bind all <ButtonRelease-1> {
+! 	%W see -anchor nw current
+  	%W toggle current
+      }
+      $w button bind all <Enter> {
+--- 143,150 ----
+      # Button bindings
+      #
+      $w button bind all <ButtonRelease-1> {
+! 	# If next line is in, ComputeVisibleEntries() can seg-fault
+! 	##%W see -anchor nw current
+  	%W toggle current
+      }
+      $w button bind all <Enter> {

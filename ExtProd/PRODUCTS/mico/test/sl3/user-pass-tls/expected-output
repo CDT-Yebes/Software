@@ -1,0 +1,470 @@
+wcout init
+server: OwnCredentials:
+interface OwnCredentials {
+  creds_id = MICO_SL3CSI:0
+  creds_type = 0
+  creds_usage = 3
+  creds_state = 1
+  interface CredsAcceptor {
+    the_principal = valuetype SimplePrincipal {
+      the_type = 0
+      the_name = struct PrincipalName {
+        the_type = SL3:X509DirectoryPathName
+        the_name = {
+          "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+          "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+        }
+      }
+
+      with_privileges = {
+      }
+      authenticated = true
+      alternate_names = {
+      }
+    }
+    supporting_statements = {
+      valuetype PrincipalIdentityStatement {
+        the_layer = 1
+        the_type = 1
+        encoding_type = Unknown
+        interpretation_aid = X509:V1IdentityCertificate
+        the_principal = valuetype SimplePrincipal {
+          the_type = 0
+          the_name = struct PrincipalName {
+            the_type = SL3:X509DirectoryPathName
+            the_name = {
+              "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+              "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+            }
+          }
+
+          with_privileges = {
+          }
+          authenticated = true
+          alternate_names = {
+          }
+        }
+      }
+    }
+    restricted_resources = {
+    }
+    environmental_attributes = {
+      PrinAttribute("SL3:TransportMechanism","TLS")
+      PrinAttribute("SL3:LocalAddress","127.0.0.1")
+      PrinAttribute("SL3:LocalPort","2345")
+    }
+    accepts_endorsement = false
+    accepts_quoting = true
+    expiry_time = UtcT(-1,0,0,0)
+  }
+}
+Running.
+client: OwnCredentials:
+interface OwnCredentials {
+  creds_id = MICO_SL3CSI:0
+  creds_type = 0
+  creds_usage = 4
+  creds_state = 1
+  interface CredsInitiator {
+    the_principal = valuetype ProxyPrincipal {
+      the_type = 2
+      the_name = struct PrincipalName {
+        the_type = oid:2.23.130.1.2.1
+        the_name = {
+          "karel"
+        }
+      }
+
+      with_privileges = {
+      }
+      speaking = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+      speaks_for = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = oid:2.23.130.1.2.1
+          the_name = {
+            "karel"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+    supporting_statements = {
+      valuetype PrincipalIdentityStatement {
+        the_layer = 1
+        the_type = 1
+        encoding_type = Unknown
+        interpretation_aid = X509:V1IdentityCertificate
+        the_principal = valuetype SimplePrincipal {
+          the_type = 0
+          the_name = struct PrincipalName {
+            the_type = SL3:X509DirectoryPathName
+            the_name = {
+              "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+              "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+            }
+          }
+
+          with_privileges = {
+          }
+          authenticated = true
+          alternate_names = {
+          }
+        }
+      }
+      valuetype PrincipalIdentityStatement {
+        the_layer = 3
+        the_type = 1
+        encoding_type = null
+        interpretation_aid = null
+        the_principal = valuetype SimplePrincipal {
+          the_type = 0
+          the_name = struct PrincipalName {
+            the_type = oid:2.23.130.1.2.1
+            the_name = {
+              "karel"
+            }
+          }
+
+          with_privileges = {
+          }
+          authenticated = true
+          alternate_names = {
+          }
+        }
+      }
+    }
+    restricted_resources = {
+    }
+    environmental_attributes = {
+      PrinAttribute("SL3:TransportMechanism","TLS")
+    }
+    initiator_type = 3
+    supports_embodiment = false
+    supports_endorsement = false
+    supports_quoting = true
+    expiry_time = UtcT(-1,0,0,0)
+  }
+}
+client: TargetCredentials:
+interface TargetCredentials {
+  creds_id = MICO_SL3CSI:0_TargetCredentials:0
+  creds_type = 2
+  creds_usage = 2
+  creds_state = 1
+  context_id = CSI_TargetCredentials:0
+  client_principal = valuetype ProxyPrincipal {
+    the_type = 2
+    the_name = struct PrincipalName {
+      the_type = oid:2.23.130.1.2.1
+      the_name = {
+        "karel"
+      }
+    }
+
+    with_privileges = {
+    }
+    speaking = valuetype SimplePrincipal {
+      the_type = 0
+      the_name = struct PrincipalName {
+        the_type = SL3:X509DirectoryPathName
+        the_name = {
+          "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+          "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+        }
+      }
+
+      with_privileges = {
+      }
+      authenticated = true
+      alternate_names = {
+      }
+    }
+    speaks_for = valuetype SimplePrincipal {
+      the_type = 0
+      the_name = struct PrincipalName {
+        the_type = oid:2.23.130.1.2.1
+        the_name = {
+          "karel"
+        }
+      }
+
+      with_privileges = {
+      }
+      authenticated = true
+      alternate_names = {
+      }
+    }
+  }
+  client_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+    valuetype PrincipalIdentityStatement {
+      the_layer = 3
+      the_type = 1
+      encoding_type = null
+      interpretation_aid = null
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = oid:2.23.130.1.2.1
+          the_name = {
+            "karel"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  client_restricted_resources = {
+  }
+  target_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:X509DirectoryPathName
+      the_name = {
+        "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+        "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = true
+    alternate_names = {
+    }
+  }
+  target_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  target_restricted_resources = {
+  }
+  environmental_attributes = {
+    PrinAttribute("SL3:TransportMechanism","TLS")
+    PrinAttribute("SL3:TLSCipherSuite","AES256-SHA")
+  }
+  parent_credentials = MICO_SL3CSI:0
+  client_authentication = true
+  target_authentication = true
+  confidentiality = true
+  integrity = true
+  target_embodied = false
+  target_endorsed = false
+}
+server: Hello World
+server: ClientCredentials:
+interface ClientCredentials {
+  creds_id = MICO_SL3CSI:0_ClientCredentials:0
+  creds_type = 1
+  creds_usage = 2
+  creds_state = 1
+  context_id = CSI_ClientCredentials:0
+  client_principal = valuetype ProxyPrincipal {
+    the_type = 2
+    the_name = struct PrincipalName {
+      the_type = oid:2.23.130.1.2.1
+      the_name = {
+        "karel"
+      }
+    }
+
+    with_privileges = {
+    }
+    speaking = valuetype SimplePrincipal {
+      the_type = 0
+      the_name = struct PrincipalName {
+        the_type = SL3:X509DirectoryPathName
+        the_name = {
+          "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+          "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+        }
+      }
+
+      with_privileges = {
+      }
+      authenticated = true
+      alternate_names = {
+      }
+    }
+    speaks_for = valuetype SimplePrincipal {
+      the_type = 0
+      the_name = struct PrincipalName {
+        the_type = oid:2.23.130.1.2.1
+        the_name = {
+          "karel"
+        }
+      }
+
+      with_privileges = {
+      }
+      authenticated = true
+      alternate_names = {
+      }
+    }
+  }
+  client_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+    valuetype PrincipalIdentityStatement {
+      the_layer = 3
+      the_type = 1
+      encoding_type = null
+      interpretation_aid = null
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = oid:2.23.130.1.2.1
+          the_name = {
+            "karel"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  client_restricted_resources = {
+  }
+  target_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:X509DirectoryPathName
+      the_name = {
+        "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+        "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = true
+    alternate_names = {
+    }
+  }
+  target_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  target_restricted_resources = {
+  }
+  environmental_attributes = {
+    PrinAttribute("SL3:TransportMechanism","TLS")
+    PrinAttribute("SL3:TLSCipherSuite","AES256-SHA")
+  }
+  parent_credentials = MICO_SL3CSI:0
+  client_authentication = true
+  target_authentication = true
+  confidentiality = true
+  integrity = true
+}
+

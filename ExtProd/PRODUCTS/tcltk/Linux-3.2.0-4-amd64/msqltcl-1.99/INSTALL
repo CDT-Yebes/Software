@@ -1,0 +1,167 @@
+-------------------------------------------
+Copyright (c) 1994-1996 Hakan Soderstrom and Tom Poindexter
+Additional details at end of this file.
+-------------------------------------------
+
+
+UNPACKING THE DISTRIBUTION
+
+The msqltcl distribution comes in a file called msqltcl-X.Y.tar.gz,
+where X.Y is the release number. cd to a directory under which you want
+the msqltcl directory to be created. Then,
+
+   gunzip < msqltcl-X.Y.tar.gz | tar xvf -
+
+This will create a new directory called msqltcl-X.Y in the current
+directory and unpack the msqltcl source files in the new directory.
+
+`cd' into the new directory and read ... well, this file. (You are right
+on target; keep moving.-)
+
+
+MSQLTCL INSTALLATION
+
+(1) Install Tcl and Tk according to their installation instructions.
+
+(2) Install mSQL according to its installation instructions.
+
+(3a) The next step is to run an auto-configuration script. Before you do
+so you may want to consider what options to pass to the script.
+
+Consult the file INSTALL.GNU if you want to know more/all about the
+auto-configuration procedure. The following description covers the
+essentials.
+
+You will get a complete list of auto-configuration options by invoking
+
+  ./configure --help
+
+Here are some guidelines:
+
+The auto-configuration script uses some of the configuration settings
+determined when your Tcl/Tk was installed. The settings are recorded in
+files named tclConfig.sh and tkConfig.sh. If your installation keeps
+these files in unusual places, you should use the options
+
+   --with-tcl-config=DIR1  --with-tk-config=DIR2
+
+DIR1 and DIR2 must be paths to directories where the tclConfig.sh and
+tkConfig.sh files are stored, respectively. (DIR1 and DIR2 may be one
+and the same.)
+
+If the home of your mSQL installation is not /usr/local/Minerva you
+should use the options
+
+  --with-msql-include=DIR3  --with-msql-library=DIR4
+
+DIR3 and DIR4 must be paths to directories where mSQL include files and
+libraries are kept, respectively.
+
+To enable dynamic loading you must use the option
+
+  --enable-shared
+
+(3b) Run the command
+
+  ./configure OPTIONS
+
+where OPTIONS is the auto-configuration options you have determined to
+use as described in step 4a.
+
+The auto-configuration script will inform you about the checks it does.
+
+The main result of this step is a Makefile. It also creates a shell
+script `config.status' that you can run in the future to recreate the
+current configuration, a file `config.cache' that saves the results of
+its tests to speed up reconfiguring, and a file `config.log' containing
+compiler output (useful mainly for debugging `configure').
+
+(4) Still in the same directory, run
+
+  make
+
+This step creates the following files:
+
+  msqltcl     A Tcl shell (like tclsh) with the msqltcl extension
+  msqlwish    A Tcl shell (like wish) with Tk and msqltcl
+  msqltcl{VERSION}.so  
+              A dynamically loadable shared object (if configure
+              was run with --enable-shared; the exact file name depends
+              on your platform)
+
+
+DYNAMIC LOADING
+
+If you have enabled dynamic loading, you may use msqltcl as a Tcl
+package named `msqltcl'. This means you may store the shared object in
+your package library, index it with `pkg_mkIndex', and access it from
+plain Tcl (or Tk) with
+
+   package require msqltcl
+
+If you make msqltcl available through your standard `auto_path' chances
+are you don't have to keep the `msqltcl' and `msqlwish' executables.
+
+Of course it is also possible to simply load the shared object code with
+
+   load msqltcl.so
+
+(The actual file name depends on your platform.) The `package' command
+is more flexible, however.
+
+
+MMON (MINI-MONITOR) INSTALLATION
+
+If you want a preview, invoke
+
+   msqlwish mmon &
+
+Edit the very first line of the `mmon' file to correctly indicate the
+path to `msqlwish'. Move `mmon' to a suitable location and check that
+execute permission is on. Provided `mmon' is in your $PATH you should
+now be able to start it by saying
+
+   mmon &
+
+If msqltcl is a package available through your standard `auto_path' the
+path on the first line of `mmon' may denote a plain tclsh (provided Tk
+is dynamically loadable) or a plain wish.
+
+
+DOCUMENTATION
+
+The msqltcl man page is in file `msqltcl.n'. A PostScript version is in
+`msqltcl.ps', an ascii version in `msqltcl.doc'.
+
+mmon has online help, but no man page.
+
+
+AUTHOR
+
+Hakan Soderstrom, hs@soderstrom.se
+Affiliation: Soderstrom Programvaruverkstad AB, Bandhagsvagen 51,
+S-12242 Enskede, Sweden.
+
+
+COPYRIGHT & LICENSE
+
+Copyright (c) 1994-1996 Hakan Soderstrom, Enskede, Sweden
+and Tom Poindexter, Denver, Colorado
+
+Permission to use, copy, modify, distribute, and sell this software
+and its documentation for any purpose is hereby granted without fee,
+provided that the above copyright notice and this permission notice
+appear in all copies of the software and related documentation.
+
+THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+IN NO EVENT SHALL HAKAN SODERSTROM OR SODERSTROM PROGRAMVARUVERKSTAD
+AB BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL
+DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY
+OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+$Revision: 1.99 $

@@ -1,0 +1,48 @@
+// -*- c++ -*-
+//
+//  MICO SL3 --- an Open Source SL3 implementation
+//  Copyright (C) 2004 ObjectSecurity Ltd.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+//  Send comments and/or bug reports to:
+//                 micosec@objectsecurity.com
+//
+
+//  Written by Karel Gardas, <kgardas@objectsecurity.com>
+
+
+#ifndef __SL3IPC_IDL__
+#define __SL3IPC_IDL__
+
+#include <mico/security/sl3aqargs.idl>
+#include <mico/security/sl3om.idl>
+
+module SL3IPC {
+
+    local interface IPCArgBuilder : SL3AQArgs::ArgBuilder {
+    
+        void add_CSIv1_support(in boolean support);
+
+        void add_CSIv2_support(in boolean support);
+        
+	void add_accepting_context_observer(in SL3OM::AcceptingContextObserver observer);
+	void add_initiating_context_observer(in SL3OM::InitiatingContextObserver observer);
+	void add_credentials_observer(in SL3OM::CredentialsObserver observer);
+    };
+
+}; // SL3IPC
+
+#endif // __SL3IPC_IDL__

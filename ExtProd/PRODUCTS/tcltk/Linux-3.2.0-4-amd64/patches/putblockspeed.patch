@@ -1,0 +1,57 @@
+*** ../tk8.4.9/generic/tkImgPhoto.c.orig	Thu Dec  9 16:16:03 2004
+--- ../tk8.4.9/generic/tkImgPhoto.c	Thu Dec  9 16:21:22 2004
+***************
+*** 17,23 ****
+   *	   Department of Computer Science,
+   *	   Australian National University.
+   *
+!  * RCS: @(#) $Id: tkImgPhoto.c,v 1.36.2.12 2004/12/03 13:16:35 dkf Exp $
+   */
+  
+  #include "tkInt.h"
+--- 17,23 ----
+   *	   Department of Computer Science,
+   *	   Australian National University.
+   *
+!  * RCS: @(#) $Id: tkImgPhoto.c,v 1.36.2.13 2004/12/09 10:05:38 dkf Exp $
+   */
+  
+  #include "tkInt.h"
+***************
+*** 4586,4592 ****
+       * Check if display code needs alpha blending...
+       */
+  
+!     ToggleComplexAlphaIfNeeded(masterPtr);
+  
+      /*
+       * Update each instance.
+--- 4586,4594 ----
+       * Check if display code needs alpha blending...
+       */
+  
+!     if (alphaOffset != 0 || masterPtr->flags & COMPLEX_ALPHA) {
+! 	ToggleComplexAlphaIfNeeded(masterPtr);
+!     }
+  
+      /*
+       * Update each instance.
+***************
+*** 4878,4884 ****
+       * Check if display code needs alpha blending...
+       */
+  
+!     ToggleComplexAlphaIfNeeded(masterPtr);
+  
+      /*
+       * Update each instance.
+--- 4880,4888 ----
+       * Check if display code needs alpha blending...
+       */
+  
+!     if (alphaOffset != 0 || masterPtr->flags & COMPLEX_ALPHA) {
+! 	ToggleComplexAlphaIfNeeded(masterPtr);
+!     }
+  
+      /*
+       * Update each instance.

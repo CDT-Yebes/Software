@@ -1,0 +1,254 @@
+# -*- Makefile -*-
+#
+#  MICO --- an Open Source CORBA implementation
+#  Copyright (c) 1997-2008 by The Mico Team
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Library General Public
+#  License as published by the Free Software Foundation; either
+#  version 2 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Library General Public License for more details.
+#
+#  You should have received a copy of the GNU Library General Public
+#  License along with this library; if not, write to the Free
+#  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#  For more information, visit the MICO Home Page at
+#  http://www.mico.org/
+#
+
+prefix		= /alma/ACS-2014.4/mico
+exec_prefix	= ${prefix}
+SRCDIR		= /home/almamgr/ACS/ExtProd/PRODUCTS/mico/.
+INSTDIR		= /alma/ACS-2014.4/mico
+SHARED_INSTDIR	= /alma/ACS-2014.4/mico
+
+OSTYPE          = unix
+# We need the compiler type, not just the os
+HAVE_MINGW	= 
+HAVE_CYGWIN	= 
+
+HAVE_REPO	= no
+HAVE_PRELINK	= no
+HAVE_JDK	= no
+HAVE_SHARED	= yes
+HAVE_STATIC	= yes
+HAVE_DYNAMIC	= yes
+HAVE_FINAL	= no
+HAVE_NAMESPACE  = yes
+HAVE_EXCEPTIONS = yes
+HAVE_SHARED_EXCEPTS = yes
+HAVE_ORB_EXCEPTS = yes
+HAVE_THREADS	= yes
+HAVE_QT		= no
+HAVE_GTK        = no
+HAVE_X11	= no
+HAVE_TCL	= no
+HAVE_SSL	= yes
+HAVE_PGSQL      = no
+HAVE_BLUETOOTH  = no
+HAVE_SNACC	= no
+HAVE_SMP	= no
+HAVE_MEMCHECK   = no
+USE_MEMTRACE    = no
+
+USE_CCM		= no
+USE_MESSAGING	= yes
+USE_NAMING	= yes
+USE_EVENTS	= yes
+USE_STREAMS	= no
+USE_RELSHIP	= no
+USE_PROPERTY	= yes
+USE_TRADER      = no
+USE_TIME	= yes
+USE_CSL2        = no
+USE_CSIV2	= yes
+USE_SL3		= yes
+USE_LIFE	= no
+USE_EXTERN	= no
+USE_WIRELESS	= no
+USE_WIRELESS_HOME	= no
+USE_WIRELESS_ACCESS	= no
+USE_WIRELESS_TERMINAL	= no
+THREADING_POLICIES	= yes
+
+USE_PCH_DIR	= no
+
+ORB_CORE_ONLY	= no
+
+SHELL           = /bin/sh
+RANLIB          = ranlib
+AR              = ar
+ARFLAGS		= rc
+LDCONFIG    = ldconfig
+FLEX            = flex
+BISON           = bison -y
+TCLSH		= /usr/bin/tclsh
+MOC		= 
+SNACC		= no
+CXX		= c++ 
+PICFLAGS	= -DPIC -fPIC
+NOPICFLAGS	=
+EHFLAGS		= 
+EHOPTFLAGS	= 
+NOEHFLAGS	= -fno-exceptions
+DLFLAGS		= -rdynamic
+CPPFLAGS	= 
+CXXFLAGS	=    -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE 
+PCHFLAGS	= 
+PRELINK_FLAG	= 
+CC		= gcc
+CFLAGS		=  -Wall 
+X_CFLAGS	= 
+X_LIBS		= 
+QT_CXXFLAGS	= 
+QT_LIBS		= 
+GTK_CFLAGS      = 
+GTK_LIBS        = 
+TCL_LIBS        = 
+PURE_LDFLAGS	= -Wl,--no-as-needed 
+LDFLAGS		= $(PURE_LDFLAGS) $(DLFLAGS)
+LDSO		= $(SRCDIR)/admin/mico-shld
+LDSOFLAGS	= -fPIC
+SOEXT		= so
+POSTLD		= true
+RM              = rm -f
+LN		= ln -f -s
+PATCH		= patch
+MKDIR           = mkdir
+JAVAC           = javac
+JCUP            = java java_cup.Main
+LATEX		= latex
+BIBTEX		= bibtex
+DVIPS		= dvips
+DVIPDFM		= dvipdfm
+LATEX2HTML	= latex2html
+FIG2DEV		= fig2dev
+MKFAQ           = $(SRCDIR)/admin/mkfaq
+IDL		= $(SRCDIR)/idl/idl
+IDLGEN		= $(SRCDIR)/idl/idl
+CCMGEN          = $(SRCDIR)/ccm/mico-ccm
+MKDEPEND	= $(SRCDIR)/admin/mkdepend
+# on some Solaris systems strip does not support ELF binaries ...
+IBINCMD         = $(SRCDIR)/admin/install-sh -c -m 755
+# mode 555 is a tribute to HP-UX
+ILIBCMD         = $(SRCDIR)/admin/install-sh -c -m 555
+IMANCMD         = $(SRCDIR)/admin/install-sh -c -m 644
+IINCCMD         = $(SRCDIR)/admin/install-sh -c -m 644
+IDIRCMD         = $(SRCDIR)/admin/mkinstalldirs
+ISCRIPTCMD      = $(SRCDIR)/admin/install-sh -c -m 755
+ISRCCMD         = $(SRCDIR)/admin/install-sh -c -m 644
+
+CONFLIBS	= -lssl -lcrypto -ldl -lm  -lpthread 
+SHLIBS		= -lpthread
+CURSESLIBS	= -lssl -lcrypto -ldl -lm  -lpthread
+VERSION		= $(shell tr b \. < $(SRCDIR)/VERSION)
+
+
+ifeq ($(HAVE_SHARED), yes)
+export LD_LIBRARY_PATH := $(SRCDIR)/libs:$(LD_LIBRARY_PATH)
+export LIBPATH         := $(SRCDIR)/libs:$(LIBPATH)
+export SHLIB_PATH      := $(SRCDIR)/libs:$(SHLIB_PATH)
+export PATH            := $(SRCDIR)/libs:$(PATH)
+export DYLD_LIBRARY_PATH := $(SRCDIR)/libs:$(DYLD_LIBRARY_PATH)
+LIBMICO		       = libmico$(VERSION).$(SOEXT)
+LIBMICOIR	       = libmicoir$(VERSION).$(SOEXT)
+else
+LIBMICO		       = libmico$(VERSION).a
+LIBMICOIR              = libmicoir$(VERSION).a
+endif
+
+ifeq ($(HAVE_SHARED_EXCEPTS), yes)
+LIBMICOCOSS	       = libmicocoss$(VERSION).$(SOEXT)
+LIBMICOAUX	       = libmicoaux$(VERSION).$(SOEXT)
+else
+LIBMICOCOSS	       = libmicocoss$(VERSION).a
+LIBMICOAUX	       = libmicoaux$(VERSION).a
+endif
+
+LDMICO                 = -lmico$(VERSION)
+LDMICOIR               = -lmicoir$(VERSION)
+LDMICOCOSS             = -lmicocoss$(VERSION)
+LDMICOAUX              = -lmicoaux$(VERSION)
+LDMICOCCM              = -lmicoccm$(VERSION)
+
+ifeq ($(OSTYPE), windows)
+ifeq ($(HAVE_SHARED), yes)
+export PATH           := $(SRCDIR)/libs:$(PATH)
+NODOTVERSION           = $(shell tr -d \. < $(SRCDIR)/VERSION)
+LIBMICO               := mico$(NODOTVERSION).dll
+LDMICO                := -lmico$(NODOTVERSION)
+LIBMICOIR              = libmicoir$(VERSION).a
+LIBMICOAUX	       = libmicoaux$(VERSION).a
+LIBMICOCOSS	       = libmicocoss$(VERSION).a
+endif
+endif
+
+export PATH           := $(SRCDIR)/cpp:$(PATH):.
+
+
+main_target: all
+
+
+.SUFFIXES: .java .class .cup .tex .dvi .ps .fig .eps .gif .moc .pic.o .ll .yy
+.SUFFIXES: .$(SOEXT)
+
+
+# delete builtin rules ...
+%.c: %.y
+%.c: %.l
+%.dvi: %.tex
+%.o: %.cc
+
+%.pic.o: %.cc
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(PICFLAGS) -c $< -o $@
+
+%.o: %.cc
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(NOPICFLAGS) -c $< -o $@
+
+%.cc: %.ll
+	$(FLEX) -B -8 -o$@ $<
+
+%.cc: %.yy
+	$(BISON) -d -t -v -o $*.c $<
+	mv $*.c $*.cc
+
+%.c: %.y
+	$(BISON) -d -t -v -o $*.c $<
+
+%.class: %.java
+	$(JAVAC) $<
+
+%.java: %.cup
+	$(JCUP) < $<
+
+%.dvi: %.tex
+	$(LATEX) $<
+	if grep Rerun `basename $< .tex`.log >/dev/null; then $(LATEX) $< ; fi
+	if grep citation `basename $< .tex`.aux >/dev/null; then \
+		$(BIBTEX) `basename $< .tex`; \
+	fi
+	$(LATEX) $<
+	if grep Rerun `basename $< .tex`.log >/dev/null; then $(LATEX) $< ; fi
+
+%.ps: %.dvi
+	$(DVIPS) $< -o $@
+
+%.pdf: %.dvi
+	$(DVIPDFM) -o $@ $<
+
+%.eps: %.fig
+	$(FIG2DEV) -L ps < $< > $@
+
+%.ps: %.gif
+	giftopnm $< | pnmtops -noturn > $@
+
+%.moc: %.cc
+	$(MOC) $< -o $@
+
+%.moc: %.h
+	$(MOC) $< -o $@

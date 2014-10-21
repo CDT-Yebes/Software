@@ -1,0 +1,3 @@
+[console_scripts]
+pythoscope = pythoscope:main
+

@@ -1,0 +1,5 @@
+foolscap
+foolscap/logging
+foolscap/test
+foolscap/appserver
+foolscap/slicers

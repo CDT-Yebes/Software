@@ -1,0 +1,19 @@
+*** msqltcl.c.orig	Thu May 15 18:24:58 2003
+--- msqltcl.c	Mon Nov 24 14:29:37 2003
+***************
+*** 561,567 ****
+        res = buf ;
+        break ;
+      case MSQL_COL_PRIMKEY_K:
+!       sprintf (buf, "%c", (IS_PRI_KEY(fld->flags))?'1':'0') ;
+        res = buf ;
+        break ;
+      case MSQL_COL_NONNULL_K:
+--- 561,567 ----
+        res = buf ;
+        break ;
+      case MSQL_COL_PRIMKEY_K:
+!       sprintf (buf, "%c", (IS_UNIQUE(fld->flags))?'1':'0') ;
+        res = buf ;
+        break ;
+      case MSQL_COL_NONNULL_K:

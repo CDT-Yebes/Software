@@ -1,0 +1,24 @@
+*** bltTreeView.c.orig	2002-08-15 23:15:04.000000000 -0500
+--- bltTreeView.c	2003-03-04 11:15:34.000000000 -0600
+***************
+*** 3866,3871 ****
+--- 3866,3872 ----
+  	assert(tvPtr->visibleArr);
+      }
+      tvPtr->nVisible = 0;
++     tvPtr->visibleArr[0] = NULL;
+  
+      if (tvPtr->rootPtr->flags & ENTRY_HIDDEN) {
+  	return TCL_OK;		/* Root node is hidden. */
+***************
+*** 4631,4636 ****
+--- 4632,4640 ----
+      int width;
+      int x0, cx, xOffset;
+  
++     if (tvPtr->titleHeight < 1) {
++ 	return;
++     }
+      columnWidth = columnPtr->width;
+      cx = x;
+      if (columnPtr->position == Blt_ChainGetLength(tvPtr->colChainPtr)) {

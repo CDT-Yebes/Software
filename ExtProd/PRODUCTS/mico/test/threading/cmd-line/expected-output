@@ -1,0 +1,38 @@
+Running.
+server: Hello World! I'm running with thread pool concurrency model
+        maximum number of requests processed in parallel is 100
+        maximum number of connections is 1000
+client: hello operation invoked. I'm running with threaded client concurrency model
+        maximum number of requests processed in parallel is 20
+        maximum number of connections is 30
+server: Hello World! I'm running with thread pool concurrency model
+        maximum number of requests processed in parallel is 100
+        maximum number of connections is 1000
+client: hello operation invoked. I'm running with reactive client concurrency model
+        maximum number of requests processed in parallel is 2
+        maximum number of connections is 2
+server: Hello World! I'm running with thread pool concurrency model
+        maximum number of requests processed in parallel is 100
+        maximum number of connections is 1000
+client: hello operation invoked. I'm running with blocking threaded client concurrency model
+        maximum number of requests processed in parallel is 8
+        maximum number of connections is 8
+Running.
+server: Hello World! I'm running with thread per connection concurrency model
+        maximum number of requests processed in parallel is 40
+        maximum number of connections is 100
+client: hello operation invoked. I'm running with threaded client concurrency model
+        maximum number of requests processed in parallel is 20
+        maximum number of connections is 30
+server: Hello World! I'm running with thread per connection concurrency model
+        maximum number of requests processed in parallel is 40
+        maximum number of connections is 100
+client: hello operation invoked. I'm running with reactive client concurrency model
+        maximum number of requests processed in parallel is 2
+        maximum number of connections is 2
+server: Hello World! I'm running with thread per connection concurrency model
+        maximum number of requests processed in parallel is 40
+        maximum number of connections is 100
+client: hello operation invoked. I'm running with blocking threaded client concurrency model
+        maximum number of requests processed in parallel is 8
+        maximum number of connections is 8

@@ -1,0 +1,258 @@
+# Module dependencies
+main.o main.pic.o: ../../include/CORBA-SMALL.h ../../include/CORBA.h ../../include/coss/CosNaming.h
+main.o main.pic.o: ../../include/coss/PropertyService.h ../../include/coss/PropertyService_impl.h
+main.o main.pic.o: ../../include/mico/address.h ../../include/mico/any.h
+main.o main.pic.o: ../../include/mico/array.h ../../include/mico/assert.h
+main.o main.pic.o: ../../include/mico/basic.h ../../include/mico/basic_seq.h
+main.o main.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+main.o main.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+main.o main.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+main.o main.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h ../../include/mico/dynany.h
+main.o main.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+main.o main.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+main.o main.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h ../../include/mico/ir_base.h
+main.o main.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+main.o main.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+main.o main.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+main.o main.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+main.o main.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+main.o main.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+main.o main.pic.o: ../../include/mico/os-misc.h ../../include/mico/os-thread.h
+main.o main.pic.o: ../../include/mico/os-thread/dcethreads.h ../../include/mico/os-thread/pthreads.h
+main.o main.pic.o: ../../include/mico/os-thread/pththreads.h ../../include/mico/os-thread/solaris-threads.h
+main.o main.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h ../../include/mico/poa_base.h
+main.o main.pic.o: ../../include/mico/poa_stubs.h ../../include/mico/policy.h
+main.o main.pic.o: ../../include/mico/policy2.h ../../include/mico/security/DomainManager.h
+main.o main.pic.o: ../../include/mico/security/SecurityAdmin.h ../../include/mico/security/atlas.h
+main.o main.pic.o: ../../include/mico/security/csi.h ../../include/mico/security/csi_base.h
+main.o main.pic.o: ../../include/mico/security/csiiop.h ../../include/mico/security/csiv2.h
+main.o main.pic.o: ../../include/mico/security/gssup.h ../../include/mico/security/odm.h
+main.o main.pic.o: ../../include/mico/security/security.h ../../include/mico/security/securitylevel1.h
+main.o main.pic.o: ../../include/mico/security/securitylevel2.h ../../include/mico/security/securitylevel3.h
+main.o main.pic.o: ../../include/mico/security/sl3aqargs.h ../../include/mico/security/sl3aqargs_p.h
+main.o main.pic.o: ../../include/mico/security/sl3authorization.h ../../include/mico/security/sl3cm.h
+main.o main.pic.o: ../../include/mico/security/sl3cmdext.h ../../include/mico/security/sl3csi.h
+main.o main.pic.o: ../../include/mico/security/sl3ipc.h ../../include/mico/security/sl3om.h
+main.o main.pic.o: ../../include/mico/security/sl3omext.h ../../include/mico/security/sl3pm.h
+main.o main.pic.o: ../../include/mico/security/sl3tcpip.h ../../include/mico/security/sl3tls.h
+main.o main.pic.o: ../../include/mico/security/transportsecurity.h ../../include/mico/security/transportsecurity_p.h
+main.o main.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+main.o main.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+main.o main.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+main.o main.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+main.o main.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+main.o main.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+main.o main.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+main.o main.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+main.o main.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+main.o main.pic.o: ../../include/mico/util.h ../../include/mico/value.h
+main.o main.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+main.o main.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+main.o main.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+main.o main.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+main.o main.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+main.o main.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+main.o main.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+main.o main.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+main.o main.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+main.o main.pic.o: ../../include/ministl/string ../../include/ministl/vector
+main.o main.pic.o: ../../include/ministl/vector.h main.cc
+PropertyService.o PropertyService.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/basic_seq.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/ir.h ../../include/mico/ir_base.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/messaging.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/orb_excepts.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/os-thread.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/os-thread/dcethreads.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/os-thread/pthreads.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/os-thread/pththreads.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/os-thread/solaris-threads.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/DomainManager.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/SecurityAdmin.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/atlas.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/csi.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/csi_base.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/csiiop.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/csiv2.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/gssup.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/odm.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/security.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/securitylevel1.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/securitylevel2.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/securitylevel3.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3aqargs.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3aqargs_p.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3authorization.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3cm.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3cmdext.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3csi.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3ipc.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3om.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3omext.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3pm.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3tcpip.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/sl3tls.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/transportsecurity.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/transportsecurity_p.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/trust.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/security/userpassword.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/service_info.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/static.h ../../include/mico/string.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/sysexc.h ../../include/mico/tcconst.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/tckind.h ../../include/mico/template.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/template_impl.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/transport.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/typecode.h ../../include/mico/typecode_seq.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/types.h ../../include/mico/value.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/valuetype.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/valuetype_impl.h
+PropertyService.o PropertyService.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/bstring.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/defalloc.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/function
+PropertyService.o PropertyService.pic.o: ../../include/ministl/function.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/ministl.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/simplevec.h
+PropertyService.o PropertyService.pic.o: ../../include/ministl/string ../../include/ministl/vector
+PropertyService.o PropertyService.pic.o: ../../include/ministl/vector.h
+PropertyService.o PropertyService.pic.o: ./PropertyService.h PropertyService.cc
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/CORBA-SMALL.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/CORBA.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/coss/PropertyService.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/coss/PropertyService_impl.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/address.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/any.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/array.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/assert.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/basic.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/basic_seq.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/buffer.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/codec.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/codeset.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/config-win32.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/config.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/current.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/dii.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/dsi.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/dynany.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/except.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/fixed.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/imr.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/ioptypes.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/ior.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/ir.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/ir_base.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/magic.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/memtrace.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/messaging.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/mtdebug.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/mtpolicy.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/mttypes.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/native.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/object.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/operators.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/orb_excepts.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/orb_fwd.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/orb_mico.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/os-thread.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/os-thread/dcethreads.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/os-thread/pthreads.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/os-thread/pththreads.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/os-thread/solaris-threads.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/pi.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/poa.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/poa_base.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/poa_stubs.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/policy.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/policy2.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/DomainManager.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/SecurityAdmin.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/atlas.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/csi.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/csi_base.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/csiiop.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/csiv2.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/gssup.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/odm.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/security.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/securitylevel1.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/securitylevel2.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/securitylevel3.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3aqargs.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3aqargs_p.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3authorization.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3cm.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3cmdext.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3csi.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3ipc.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3om.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3omext.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3pm.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3tcpip.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/sl3tls.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/transportsecurity.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/transportsecurity_p.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/trust.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/security/userpassword.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/sequence.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/sequence_special.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/service_info.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/static.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/string.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/sysexc.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/tcconst.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/tckind.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/template.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/template_impl.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/throw.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/timebase.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/transport.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/typecode.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/typecode_seq.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/types.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/value.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/valuetype.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/valuetype_impl.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/mico/version.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/bool.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/bstring.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/defalloc.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/function
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/function.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/list
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/list.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/map
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/map.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/ministl.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/pair
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/pair.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/set
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/set.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/simplevec.h
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/string
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/vector
+PropertyService_impl.o PropertyService_impl.pic.o: ../../include/ministl/vector.h
+PropertyService_impl.o PropertyService_impl.pic.o: PropertyService_impl.cc

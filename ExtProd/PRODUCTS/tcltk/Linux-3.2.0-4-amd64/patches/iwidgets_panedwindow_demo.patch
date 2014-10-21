@@ -1,0 +1,19 @@
+*** panedwindow.orig	Mon Jan 12 14:50:12 2004
+--- panedwindow	Mon Jan 12 14:50:41 2004
+***************
+*** 5,11 ****
+  
+  . configure -background white
+  
+! iwidgets::panedwindow .pw -width 3i -height 3i 
+  pack .pw -padx 4 -pady 4
+  
+  .pw add "top"
+--- 5,11 ----
+  
+  . configure -background white
+  
+! iwidgets::ipanedwindow .pw -width 3i -height 3i 
+  pack .pw -padx 4 -pady 4
+  
+  .pw add "top"

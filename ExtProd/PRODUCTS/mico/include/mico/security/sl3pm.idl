@@ -1,0 +1,752 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2002, 2003 ObjectSecurity Ltd.
+//
+#ifndef _SL3PM_IDL_
+#define _SL3PM_IDL_
+
+#pragma prefix "adiron.com"
+
+module SL3PM {
+    // The SL3PM module contains common SL3 data structure
+    // definitions. These definitions were moved here from
+    // SecurityLevel3 module, since they are also used in the
+    // TransportSecurity module.
+    //
+    // The major part of this module are Principals related
+    // definitions which closely resemble the Principal Calculus as
+    // described in [Abadi]
+
+    //-------------------------------------------------------------
+    //  Security Level 3 Data Representations
+    //
+    //-------------------------------------------------------------
+    
+    //
+    // A Principal Name
+    //   A principal name always has a type, and a path of
+    //   name components. They are ordered from least significant
+    //   to most significant. For example, if a principal is represented
+    //   by a single X.509 certificate, the first element in the path
+    //   is the SubjectDN, and the second is the IssuerDN.
+    //
+    /**
+     * A NameType is used for typing a PrincipalName data structure.
+     * A NameType is a string that represents an ASN.1 
+     * OBJECT IDENTIFIER. Its representation is usually of the form
+     * "oid:1.2.3.4". Other forms may be possible. It is used 
+     * for encoding name type identifiers, which are ASN.1 DER encoded
+     * OBJECT IDENTIFIERs, in the CSI protocol.
+     * @see NameComponent
+     * @see NamePath
+     * @see NameValue
+     * @see PrincipalName
+     */
+    typedef string                  NameType;
+
+    /**
+     * A NameComponent is an ordered component of a NamePath. The
+     * least significant component is always the first component.
+     * It is the type of a wstring to handle international character
+     * values.
+     * @see NameType
+     * @see NamePath
+     * @see NameValue
+     * @see PrincipalName
+     */    
+    typedef wstring                 NameComponent;
+    
+    /**
+     * A NamePath is an ordered collection of NameComponents, ordered
+     * from the least significant to most significant. For example,
+     * an identity that is defined by a certificate that has a 
+     * SubjectDN of "C=US,CN=Joe,O=Adiron" and an IssuerDN of
+     * "C=US,CN=AdironCA,O=Adiron" will have the following 
+     * name components:
+     * <pre>
+     *  NameComponent[0] = "C=US,CN=Joe,O=Adiron"
+     *  NameComponent[1] = "C=US,CN=AdironCA,O=Adiron"
+     * </pre>
+     * @see NameType
+     * @see NameComponent
+     * @see NameValue
+     * @see PrincipalName
+     */
+    typedef sequence<NameComponent> NamePath;
+    
+    /**
+     * A NameValue is the value component of a PrincipalName,
+     * which is a "type-value" pair. It is defined as a NamePath.
+     * @see NameType
+     * @see NameComponent
+     * @see NamePath
+     * @see PrincipalName
+     */
+    typedef NamePath                NameValue;
+    
+    /**
+     * A PrincipalName is a "type-value" structure. The type directs
+     * what the encoding and format of the components in the the
+     * value component are. For example, a type of "X509DirectoryPath"
+     * means that the value contains the DNs of the subject and
+     * subsequent issuers.
+     * @see NameType
+     * @see NameComponent
+     * @see NamePath
+     * @see NameValue
+     */
+    struct PrincipalName {
+        NameType          the_type;
+        NameValue         the_name;
+    };
+    
+    /**
+     * A list of PrincipalNames.
+     * @see PrincipalName
+     */
+    typedef sequence<PrincipalName> PrincipalNameList;
+    
+    
+    //
+    // Attributes for privileges and other things. They are type value pairs.
+    //
+    
+    /**
+     * A PrinAttribute is a "type-value" pair, usually attributed to
+     * a Principal by some means, such as values stored in its certificate
+     * or environmental concerns, such as the channel the principal was
+     * authenticated over.
+     * <p>
+     * The type of a PrinAttribute is represented by a string.
+     * <p>
+     * Privilege Attribute Types, that might come from X.509 certificates
+     * might be represented by OIDs. OIDs are represented as:
+     * <pre>
+     *   oid:n1.n2.n3.n4.n5.n6.... 
+     *             for an OID where ni are non-negative integers.
+     * </pre>
+     * These OIDs are meant to be used to direct the "type-value" encoding
+     * of a GSS-API ExportName, which uses an OID as a type that directs
+     * the encoding of the value.
+     * <p>
+     * Example Environmental Attribute Types
+     * <p><pre>
+     *   SL3:ChannelIdentifier
+     *   SL3:LocalAddress
+     *   SL3:LocalPort
+     *   SL3:TransportMechanism
+     *   SL3:TLSCipherSuite
+     * </pre>
+     * @see PrinAttribute
+     */
+    typedef string PrinAttributeType;
+    
+    /**
+     * A PrinAttributeValue is a wide character string that encodes
+     * or decodes the value of an attribute. An attempt is always
+     * meant to represent an attribute's value in a human readable
+     * string form. If the value cannot be decoded this way, and its
+     * native form is binary, then it is represented in a Hex encoding
+     * of the binary form.
+     * @see PrinAttribute
+     */
+    typedef wstring PrinAttributeValue;
+    
+    /**
+     * A PrinAttribute is a "type-value" pair, usually attributed to
+     * a Principal by some means, such as values stored in its certificate
+     * or environmental concerns, such as the channel the principal was
+     * authenticated over.
+     * @see PrinAttribute
+     */
+    struct PrinAttribute {
+        PrinAttributeType   the_type; 
+        PrinAttributeValue  the_value;
+    };
+    
+    /**
+     * A list of PrinAttributes.
+     * @see PrinAttribute
+     */
+    typedef sequence<PrinAttribute> PrinAttributeList;
+    
+    /**
+     * A ResourceName is the constructed name of a "resource". A 
+     * ResourceName is closely modeled after CORBAmed's Resource
+     * Access Decision (RAD) facility's "Resource". It contains
+     * a sequence of strings.
+     */
+    struct ResourceName {
+        sequence<string>  components;
+    };
+    
+    /** 
+     * A List of Resource Names.
+     * @See ResourceName
+     */
+    typedef sequence<ResourceName> ResourceNameList;
+    
+    
+    //
+    // NameTypes used in SL3
+    //
+    
+    /**
+     * An NT_KerberosName is a NameType that signifies that the
+     * value of a PrincipalName is a Kerberos formated name. 
+     * A KerberosName is a single string encoded in the
+     * familiar "name@REALM" format.
+     * <p>
+     * From GSS-Kerboeros RFC 1964:
+     * <p>
+     * 2.1.1. Kerberos Principal Name Form
+     * <p>
+     * This name form shall be represented by the Object Identifier {iso(1)
+     * member-body(2) United States(840) mit(113554) infosys(1) gssapi(2)
+     * krb5(2) krb5_name(1)}.
+     */
+    const NameType NT_KerberosName = "oid:1.2.840.113554.1.2.2.1";
+
+    /**
+     * An NT_X509DirectoryNamePath is a NameType that signifies that
+     * the value of a PrincipalName is constructed from a chain
+     * of certificates, such that the end entity is the least 
+     * significant position, with the subsequent issuers following
+     * in order of signature.
+     * <p>
+     * The coding of the names is the string encoding of
+     * complete X.500 DN's, such as "C=US, CN=Joe, O=Adiron".
+     * There is no indication whether the last DN in the path is a 
+     * "root", i.e. it's issuer is the same.
+     */
+    const NameType NT_X509DirectoryNamePath = "SL3:X509DirectoryPathName";
+    
+    /**
+     * The NT_Anonymous is a name type that specifies that the 
+     * PrincipalName is representing the "anonymous" principal.
+     * Its value always as a single name component of "anonymous"
+     */
+    const NameType NT_Anonymous = "SL3:anonymous";
+
+    /**
+     * The NT_StringName is a NameType that specifies that the
+     * PrincipalName is represented by a single NameComponent
+     * of name in a "scoped" name space. The name and scope
+     * are separated by a single "@" character. The escape character
+     * is "\". This string name as we call it is the same form
+     * used for the GSSUP (GSS-UserPassword NameType). This
+     * oid is the OID defined by the OMG CSIv2 specification. It
+     * is the value defined by the CSI::GSS_NT_Scoped_Username_OID
+     * constant.
+     */
+    const NameType NT_StringName = "oid:2.23.130.1.2.1";
+
+    //
+    // Privileges
+    //
+
+    /**
+     * A ScopedPrivileges structure represents privileges that
+     * belong to a scope defined by a principal. This structure 
+     * is used to represent a principal that is a privilege authority
+     * that issues privileges. Privileges are represented as 
+     * PrinAttributes.
+     */
+    struct ScopedPrivileges {
+        PrincipalName         privilege_authority;
+        PrinAttributeList     privileges;
+    };
+    
+    /**
+     * A list of ScopedPrivileges
+     * @see ScopedPrivileges
+     */
+    typedef sequence<ScopedPrivileges> ScopedPrivilegesList;
+    
+    //
+    // Principals
+    //
+    
+    /**
+     * A Principal comes in three forms, which correspond to the 
+     * Principal Calculus. The forms are "Simple", "Quoting", and 
+     * "Proxy". Simple is a principal that represents a single
+     * entity, usually "speaking for" itself. A "Quoting" principal
+     * is a "compound" principal that says that one principal is
+     * speaking on behalf of another, usually denoted by "(A|B)", i.e.
+     * "A is quoting B", which means that "A is speaking on behalf of B".
+     * A "Proxy" principal is almost the same as a "Quoting" principal.
+     * However, the security service has determined that enough evidence
+     * exists that proves that Principal A is authorized to speak in
+     * B's behalf. This principal is denoted in the calculus as "(A for B)"
+     * in contrast to the quoting principal "(A|B)".
+     */
+    typedef unsigned long PrincipalType;
+    
+    /**
+     * The Simple Principal Type (A)
+     * @see PrincipalType
+     */
+    const PrincipalType PT_Simple  = 0; // A,        valuetype SimplePrincipal
+    /**
+     * The Quoting Principal Type (A|B)
+     * @see PrincipalType
+     */
+    const PrincipalType PT_Quoting = 1; // B | A,    valuetype QuotingPrincipal
+    /**
+     * The Proxy Principal Type (A for B)
+     * @see PrincipalType
+     */
+    const PrincipalType PT_Proxy   = 2; // B for A,  valuetype ProxyPrincipal
+    
+    /**
+     * A Principal is represented by a base value type, which is extended
+     * for the various principals, Simple, Quoting, and Proxy. This base 
+     * type of a Principal may be sufficient for access control in 
+     * most systems.
+     * @param the_type    contains the corresponding identifier
+     * @param the_name    contains the logical name of the most derived
+     *                    Principal. Such as if the Principal is a nested
+     *                    ProxyPrincipal (i.e. C for B for A) the name here
+     *                    is A.
+     * @param environmental_attributes
+     *                    The attributes name certain things that do are 
+     *                    environmental, such as IP addresses.
+     * @param with_privileges
+     *                    These are the privileges associated with Principal A
+     *                    restricted_resources.
+     *                    This field contains a collection of resources on which
+     *                    the principal is authorized to perform actions.
+     */
+    valuetype Principal {
+        /** This field contains the type of the Principal. */
+        public PrincipalType          the_type;
+        /** This field contains the name of the Principal */
+        public PrincipalName          the_name;
+        /**
+         * This field contains the attributes of the principal
+         * that are considered environmental, such as authentication
+         * mechanism, authentication channel identifier, etc.
+         */
+
+	// begin of ObjectSecurity removal
+	// as suggested by Adiron's Joncheng Kuo, this should go into
+	// Client/TargetCredentials and CredentialsInitiator
+	// and CredentialsAcceptor
+
+//          public PrinAttributeList      environmental_attributes;
+
+	// end of ObjectSecurity removal
+
+        /**
+         * This field contains the list of scoped privileges the
+         * security service has determined belong to the particular
+         * principal.
+         */
+        public ScopedPrivilegesList   with_privileges;
+    };
+    
+    /**
+     * A list of Principals
+     * @see Principal
+     */
+    typedef sequence<Principal> PrincipalList;
+    
+    /**
+     *  A Simple Principal represents a single entity. It is usually 
+     * derived by authentication, trust rules concerning quoting,
+     * or trust rules and certificates concerning Proxying.
+     * It has one extra field over the base Principal, which is 
+     * "alternate_names". 
+     * @param alternate_names   
+     *          This field contains other name types, such
+     *          as that appear in an X.509 alternate name fields.
+     */
+     
+    //
+    // NOTE: The factory interfaces are not needed for general user use
+    //        and will be eliminated.
+    valuetype SimplePrincipal : truncatable Principal {
+        /** 
+         * This field indicates whether the principal was derived from
+         * a authentication mechanism and authenticated.
+         */
+        public boolean            authenticated;
+        /**
+         * This field contains the other name types, such as
+         * that appear in the X.509 alternate name fields.
+         */
+        public PrincipalNameList  alternate_names;
+
+        /** @deprecated */
+        factory create(
+            in PrincipalName           the_name,
+            in ScopedPrivilegesList    with_privileges,
+            in PrincipalNameList       alternate_names
+        );
+    };
+    
+    /**
+     *  A ProxyPrincipal represents a principal that speaks for another.
+     * The principal is proved that it is authorized to speak for another.
+     * The system believes this, either by trust rules of its own,
+     * or by delivered endorsement from the principal such as
+     * Principal (B for A) where the endorsement takes the form
+     * in the Principal Calculus as (T says B serves A)
+     * where T is some entity trusted by the security service
+     * to make those statements.
+     * <p>
+     * Important: This valuetype extends the Principal value type. The
+     * "the_name" filed of this object will contain the name of the 
+     * speaks_for principal, as that is the name most access control
+     * systems would care about. Therefore, this value type can be
+     * truncated by access control systems that do not want to 
+     * examine the principal in detail.
+     */
+    valuetype ProxyPrincipal :  truncatable Principal {
+    
+        /** 
+         * In a Proxy Principal of (A for B) the speaking field represents
+         * the principal A.
+         */
+        public Principal  speaking;
+        
+         /** 
+         * In a Proxy Principal of (A for B) the speaks_for field represents
+         * the principal B.
+         */
+       public Principal  speaks_for;
+        
+        /** @deprecated */
+        factory create(
+            in Principal  speaking,
+            in Principal  speaks_for
+        );
+    };
+    
+    /**
+     *  A QuotingPrincipal represents a principal that speaks for another.
+     * The principal is not proved that it is authorized to speak for another.
+     * The system derives principals like this based on statements in the
+     * calculus, such as "(A says B says r), which results in the
+     * quoting principal ((A|B) says r), where "r" is a statement,like
+     * a CORBA request. The security service derives principals like
+     * this from the CSI Identity Assertion mechanism.
+     * <p>
+     * Important: This valuetype extends the Principal value type. The
+     * "the_name" filed of this object will contain the name of the 
+     * speaks_for principal, as that is the name most access control
+     * systems would care about. Therefore, this value type can be
+     * truncated by access control systems that do not want to 
+     * examine the principal in detail.
+     */
+    valuetype QuotingPrincipal :  truncatable Principal {
+    
+        /** 
+         * In a Proxy Principal of (A|B) the speaking field represents
+         * the principal A.
+         */
+        public Principal        speaking;
+        
+        /** 
+         * In a Proxy Principal of (A|B) the quotes_for field represents
+         * the principal B. 
+         */
+        public Principal        quotes_for;
+        
+        factory create(
+            in Principal         speaking,
+            in Principal         quotes_for
+        );
+    };
+    
+    //
+    // Statements
+    //
+    
+    /**
+     * A Statement is a value type that has extensions which
+     * represent the different relevant data directed by its StatementType.
+     * There are two basic Statement Types, an IdentityStatement and
+     * an EndorsementStatement. An identity statement is a statement that
+     * asserts an identity. It may represent a the components of 
+     * an X.509 certificate during an authentication. An EndorsementStatement
+     * may represent the contents of an X.509 AttributeCertificate or
+     * some other notion of an endorsement, such as a certificate in 
+     * BizTalk XML.
+     * <p>
+     * Statements are contained in the Credentials Objects. They
+     * represent pieces of evidence collected from which the security
+     * service deduces the Principal of the Credentials Objects.
+     */
+    typedef unsigned long StatementType;
+    
+    /**
+     * The Identity Statement Type.
+     * <p>
+     * A statement of this type at least extends to the 
+     * IdentityStatement valuetype, if not truncated
+     * @see IdentityStatement
+     */
+    const StatementType ST_IdentityStatement    = 1; //valuetype IdentityStatement
+
+    /**
+     * The Endorsement Statement Type.
+     * <p>
+     * A statement of this type at least extends to the 
+     * EndorsementStatement valuetype, if not truncated
+     * @see EndorsementStatement
+     */
+    const StatementType ST_EndorsementStatement = 2; //valuetype EndorsementStatement
+
+    /**
+     * An encoding is a sequence of bytes.
+     */
+    typedef sequence<octet> Encoding;
+    
+    /**
+     * Statement encoding type.
+     * <p>
+     * Statements carry their original encoding information, if
+     * they came from an encoding, such as list of X.509 identity
+     * certificates (i.e. a chain). The encoding type may be derivable
+     * from the encoding itself. For example, it's easy to tell the
+     * difference between a PEM encoded certificate, and a DER encoded
+     * certificate. Therefore, the encoding type may default to "Unknown".
+     * Other types may exist than the ones provided as constants in 
+     * this module.
+     */
+    typedef string EncodingType;
+    
+    /**
+     * The ET_NoEncoding type signifies that the statement
+     * has been generated solely by the security service
+     * and has no encoding.
+     */
+    const EncodingType ET_NoEncoding = "NoEncoding";
+    
+    /**
+     * The ET_Unknown encoding type may always be used if the encoding
+     * type can only be figured out from encoding itself.
+     */
+    const EncodingType ET_Unknown = "Unknown";
+
+    /**
+     * User Exception for a bad encoding.
+     */
+    exception BadEncoding {};
+    
+    /**
+     * User Exception for a bad or unsupported encoding type.
+     */
+    exception BadEncodingType {};
+        
+    /**
+     * The Statement Layer is the layer of the protocol or security
+     * service from which the statement emanated, derived, or was collected.
+     */
+    typedef unsigned long StatementLayer;
+    
+    /**
+     * Default type for a Statement Layer
+     */
+    const StatementLayer SL_Unknown          = 0;
+    /**
+     * The SL_Transport statement type signifies that the associated
+     * statement is derived from the transport layer, such as 
+     * an X.509 Certificate from a TLS handshake.
+     */
+    const StatementLayer SL_Transport        = 1;
+    /**
+     * The SL_CSIAuthorization statement type signifies that the associated
+     * statement is derived from the CSI Authorization Layer in the CSIv2
+     * protocol.
+     */
+    const StatementLayer SL_CSIAuthorization = 2;
+    /**
+     * The SL_CSIClientAuth statement type signifies that the associated
+     * statement is derived from the CSI Client Authentication Layer 
+     * in the CSIv2 protocol.
+     */
+    const StatementLayer SL_CSIClientAuth    = 3;
+    /**
+     * The SL_CSIIdentity statement type signifies that the associated
+     * statement is derived from the CSI Identity Assertion Layer 
+     * in the CSIv2 protocol.
+     */
+    const StatementLayer SL_CSIIdentity      = 4;
+    
+    /**
+     * The SL_UserDefined statement layer signifies that the associate
+     * statement is derived or created by a user or some other
+     * entity than the security service.
+     */
+    const StatementLayer SL_UserDefined     = 5;
+    
+    /**
+     * The Statement base type contains the information common
+     * to all statements. A statement has an "external" encoding, such
+     * as an X509 Certificate. Some statements may not have an encoding, 
+     * but its extension may carry the pertinent marshable information,
+     * such as a PrincipalIdentityStatement for anonymous, which is
+     * generated by the security service.
+     */
+    valuetype Statement {
+        /**
+         * This field contains an identifier of the 
+         * service layer that generated the statement.
+         * The layer that generated or delivered 
+         * the statement, i.e. transport, CSIv2 Authentication,
+         * CSIv2 Authorization, or CSIv2 Identity Assertion.
+         */
+       public StatementLayer          the_layer;
+        /**
+         * The type of statement, which indicates its extension
+         * such as an Identity Statement or an Endorsement
+         * Statement.
+         */
+        public StatementType           the_type;
+        /**
+         * This field indicates the type of encoding.
+         * The encoding may be contrived, at the encoding
+         * may not exist, however, the extension of the
+         * statement type may contain data that can
+         * be marshaled across the wire. See the Principal
+         * Identity Statement.
+         */
+        private EncodingType  encoding_type;
+        /**
+         * The bytes of the encoding, if it exists.
+         */
+        private Encoding      the_encoding;
+    
+        /**
+         * Returns the encoding type
+         */
+        EncodingType get_encoding_type();
+        
+        /**
+         * Returns an encoding of this statement. Some implementations
+         * may be able to convert. Using and encoding_type of
+         * ET_Unknown, will always yield the default encoding,
+         * if it exists. If the encoding does not exist,
+         * a successful return containing an empty 
+         * sequence will result.
+         */
+        Encoding get_encoding(
+            in EncodingType encoding_type
+        ) raises (
+            BadEncodingType
+        );
+        
+        /**
+         * This factory method allows users to create their
+         * own Statements from an encoding. The statements created
+         * by this factory method may have a type which is a further
+         * extension of the valuetype Statement.
+         */
+        factory create(
+            in EncodingType   encoding_type,
+            in Encoding       the_encoding
+        );
+     };
+     typedef sequence<Statement> StatementList;
+
+    /**
+     * The Identity Statement further classifies the encoding
+     * as a statement that if verified asserts an identity. 
+     */
+    valuetype IdentityStatement : Statement {
+        /**
+         * This field contains a possibly well known identifier that
+         * may aid in the interpretation of the identity statement's
+         * encoding. It may be an empty string, which signifies that
+         * there is no known interpretation aid for the encoding, or
+         * that there is no encoding.
+         */
+        public string                      interpretation_aid;
+    };
+    
+    /**
+     * The Principal Identity Statement is the minimal version of an 
+     * Identity statement that asserts a single identity that the 
+     * security service can translate into a principal.
+     * <p>
+     * An example of an identity statement is an X.509 certificate in
+     * which its attributes are exposed into the principal, such as
+     * privileges. This valuetype may also be further extended by the
+     * security service depending on its encoding and the capabilities
+     * of the security service.
+     */
+    valuetype PrincipalIdentityStatement : IdentityStatement {
+        public Principal the_principal;
+    };
+    
+    /**
+     * The Endorsement Statement is a statement that is used for 
+     * authorization. An Endorsement statement endorses a 
+     * principal with certain characteristics, such as privileges
+     * or the authority to act on behalf of another principal, sometimes
+     * called "delegation".
+     * <p>
+     * According to our research, an endorsement statement may be a
+     * complex entity containing  matching rules for the endorsement. 
+     * An endorsement may have the following general form:
+     * <pre>
+     *     I says Principal A matching [(P1 with [p1,...,pn]) or ....]
+     *        speaks_for 
+     *          Principal B matching [(T1 with [t1,...,tn]) or ... ]
+     *        has [s1,...,sm]
+     *        on Resources matching [R1, .... Rn]
+     * </pre>
+     * Actual semantic reduction of principals is directed by the
+     * the matching rules, and may depend on other statements as well,
+     * such as local trust rules in the security service configuration.
+     * Also, much of the capability of an endorsement statement is
+     * dependent on its encoding.
+     * <p>
+     * This approach to authorization is a largely unexplored research
+     * topic. There are not many or well known encodings of endorsement
+     * statements. Therefore, we are reluctant to produce interfaces
+     * just yet, that go beyond the encoding. However, we do expose the
+     * Endorsement statement type, which may further direct the interpretation
+     * of it's encoding.
+     */
+    valuetype EndorsementStatement : Statement {
+        /**
+         * This field contains a possibly well known identifier that
+         * may aid in the interpretation of the identity statement's
+         * encoding. It may be an empty string, which signifies that
+         * there is no known interpretation aid for the encoding, or
+         * that there is no encoding.
+         */
+        public string                      interpretation_aid;
+    };
+        
+    /**
+     * An X509IdentityStatement is one that extends the Principal Identity
+     * Statement. If one does get an X509 IdentityStatement, it is
+     * currently supported with IAIK in both DER and PEM formats.
+     */
+    valuetype X509IdentityStatement : PrincipalIdentityStatement {
+        /**
+         * This factory method allows users to create their
+         * own X509Identity statements from an encoding.
+         */
+        factory create(
+            in EncodingType   encoding_type,
+            in Encoding       the_encoding
+        );
+    };
+    typedef sequence<X509IdentityStatement> X509IdentityStatementList;
+    
+}; // SL3PM
+#endif // _SL3PM_IDL_

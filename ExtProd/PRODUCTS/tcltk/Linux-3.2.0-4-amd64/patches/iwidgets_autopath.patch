@@ -1,0 +1,17 @@
+*** iwidgets.tcl.in.orig	Wed Jan 26 08:03:07 2005
+--- iwidgets.tcl.in	Wed Feb  2 14:09:26 2005
+***************
+*** 25,31 ****
+      variable version @PACKAGE_VERSION@
+  }
+  
+! lappend auto_path $iwidgets::library \
+! 		  [file join $iwidgets::library generic] \
+! 		  [file join $iwidgets::library scripts]
+  package provide Iwidgets $iwidgets::version
+--- 25,29 ----
+      variable version @PACKAGE_VERSION@
+  }
+  
+! lappend auto_path $iwidgets::library [file join $iwidgets::library scripts]
+  package provide Iwidgets $iwidgets::version

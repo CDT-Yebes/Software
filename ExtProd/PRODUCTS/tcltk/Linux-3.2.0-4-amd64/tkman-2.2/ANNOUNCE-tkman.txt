@@ -1,0 +1,129 @@
+======================================================================
+
+Read a review at http://www.linuxgazette.com/issue23/tkman.html
+Complete details and downloading information at
+	http://tkman.sourceforge.net
+
+
+WHAT'S NEW 8.4:
+* The license is now free for any use under the Artistic License.
+* The old elided text patch has been incorporated into core Tk,
+  so TkMan runs on unmodified Tcl/Tk.
+
+
+
+WHAT'S NEW 8.3:
+* Tcl/Tk 8.3 has incoroprated the elided text patch, so TkMan is now
+even easier to install.  (The patch as hijacked by the dash patch
+collection had a confusing interface; fortunately reason prevailed 
+and Tcl/Tk 8.3 uses the sensible original.)
+* Direct support for Solaris 7 and 8's SGML version of man pages
+(no need to batch convert to roff format with catman -c).
+* Over the past several years, it has been reimplemented from scratch
+and is now Open Source, under the Artistic License (see
+http://www.opensource.org/licenses/artistic-license.html).
+(Version 1.4, released in 1993, was claimed to be encumbered, 
+though it was never defended.)
+* SGI support fixed vis-a-vis last beta.  SGI should be faster on
+"messy" catman directories.
+
+
+TkMan is mature and stable.  New releases mostly just track changes in
+Tcl/Tk and (sigh) manual page formats and directory organizations.
+
+Read a review at http://www.linuxgazette.com/issue23/tkman.html
+Complete details and downloading information at
+	http://tkman.sourceforge.net
+
+
+======================================================================
+
+TkMan is a graphical, hypertext manual page and Texinfo browser for
+UNIX.  TkMan boasts hypertext links, (optional) outline view of man pages,
+high quality display and superior navigational interface to Texinfo documents,
+a novel information visualization mechanism called Notemarks, full text
+search among man pages and Texinfo, incremental and regular expression
+search within pages, regular expression search within Texinfo that
+shows all matches (not just the next), robust yellow highlight
+annotations, a shortcut/hot list, lists of all pages in user
+configurable volumes, a comprehensive Preferences panel, man page
+versioning support, and unmatched online text formatting and display
+quality, among many other features.
+
+	"I encourage you to use TkMan for reading man pages. ... 
+	TkMan provides an extremely pleasant GUI for browsing man
+	pages.  I cannot describe all the nice features of TkMan in
+	this small space.  Instead I will merely say that I now
+	actually look forward to reading man pages as long as I can do
+	it with TkMan."
+		-- Don Libes, _Exploring Expect_, page 21
+
+TkMan offers many major advantages over man and xman: hypertext links
+to other man pages (click on a word in the text which corresponds to a
+man page, and you jump there), and better navigation within long man
+pages with searches (both incremental and regular expression) and
+direct jumps to sections of a page.  TkMan also offers some
+convenience features, like a user-configurable list of commonly used
+man pages, a one-click printout, and integration of `apropos'.
+
+The Texinfo browser takes a very different approach than any other GNU
+info brower, and thereby is able to provide a number of advantages not
+usually possible.  (1) TkMan's browser works from the Texinfo source,
+as opposed to a compiled form that has been formatted for character
+terminal displays, and therefore can and does provide much better
+looking text, in multiple fonts (proportionally-spaced for body text,
+typewriter for computer text, bold and italics, blue hyperlinks for
+crossreferences, and even a cedilla and a lowered E in TeX).  (2) An
+outlining interface that continuously gives overview and context to
+navigation within the document, as opposed to the system of nodes with
+only immediate neighbors known (next, previous, parent), which, at
+least for me, very quickly leads to being "lost in info-space".  All
+this costs disk space of only 2% over the original source files, which
+themselves may be compressed.
+
+Further, one may highlight, as if with a yellow marker, arbitrary
+passages of text in man pages and subsequently jump directly to these
+passages by selecting an identifying excerpt from a pulldown menu.
+(Highlights are robust across changes to page content and movement of
+the file.)  Pages are given an outlining user interface whereby the
+text of a section can be collapsed or expanded underneath its header,
+independently of other sections.  Within otherwise collapsed sections,
+a variety of Notemarks(TM) can appear.  Notemarks are excerpts from
+the text showing highlighted text, command-line options, search
+results, or the first line of each paragraph in that section, and
+shown in context with section headers and other Notemarks.
+Functioning as a note, a Notemark may itself communicate sufficient
+information; functioning as a bookmark, it can be clicked on to
+automatically expand the corresponding section and scroll to that
+point.  Notemarks provide numerous immediately available hooks into
+long texts to expedite identification of a desired passage.
+
+
+Other features include:
+* full text search of man pages AND Texinfo files (with Glimpse; optional)
+* when searching for documentation, try Texinfo names too, and
+  optionally) prefer Texinfo documentation to man page
+* individualized directory-to-volume mappings
+* if an old version of the page is available under RCS,
+  optionally show differences: additions as italics, deletions
+  as overstrike, changes as bold italics.  It would be interesting 
+  if someone created RCS files for Tcl/Tk since Tcl 1.0.
+  It takes a little work to set up, but try it out.
+* when multiple pages match the search name, a pulldown list of all matches
+* regular expression searches for manual page names
+* man page name completion
+* Fuzzy search for man page names if not exact match found
+  (e.g., "srcolbzart" finds "scrollbar")
+* list of recently added or changed manual pages
+* "history" list of recently visited pages
+* user-configurable "shortcuts" or "hot" list
+* comprehensive preferences panel to control fonts, colors, and other system settings
+* compatibility with compressed pages (both source and formatted)
+* diagnostics on your manual page installation
+* elision of those unsightly page headers and footers,
+* Helper script "retkman" that can be used to restart TkMan after
+  changes to the MANPATH in a shell, either manually or as a side effect
+  of a modules management system.
+* and, when asking to print a page available only in formatted form,
+  reverse compilation into [tn]roff source, which can then be reformatted
+  as good-looking PostScript

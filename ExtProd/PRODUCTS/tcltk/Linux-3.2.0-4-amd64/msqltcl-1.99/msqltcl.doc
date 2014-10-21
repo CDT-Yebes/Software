@@ -1,0 +1,528 @@
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+NAME
+     Msqltcl - mSQL (Mini SQL) server access commands for Tcl
+
+INTRODUCTION
+     Msqltcl  is  a  collection  of Tcl commands and a Tcl global
+     array that provide access  to  one  or  more  mSQL  database
+     servers.   mSQL  (Mini SQL) is a lightweight database engine
+     developed by David J.  Hughes at Bond University, Australia.
+     At  this  writing the mSQL archive is located at Bond.edu.au
+     in /pub/Minerva/msql.  If you want  more  information  about
+     mSQL,  get the FAQ document from the mSQL archive.  There is
+     also an mSQL mailing list.  You may join it by  sending  the
+     word  subscribe  in  the  body of your message to msql-list-
+     request@bunyip.com.  Please use these sources  for  informa-
+     tion  regarding mSQL itself.  The remainder of this man page
+     is limited to msqltcl.  msqltcl comes with mmon,  a  window-
+     based  interactive  monitor  for mSQL.  It is not documented
+     here; it carries its own on-line documentation.
+
+
+MSQLTCL COMMANDS
+     msqlconnect ?hostname?
+          Connect to an mSQL server.  If hostname  is  specified,
+          then  an  attempt  will  be made to connect to a server
+          located on this host.  Hostname may be the name or  the
+          IP address of the desired host.  If hostname is omitted
+          the connection is attempted on the local host.
+
+          A handle is returned which should be used in all  other
+          msqltcl  commands using this connection.  Multiple con-
+          nections to the same or different servers are  allowed,
+          up  to  a maximum of 15 total connections.  (This limit
+          is a compilation constant.)  msqlconnect raises  a  Tcl
+          error if the connection fails.
+
+
+     msqluse handle dbname
+          Associate   a   connected   handle  with  a  particular
+          database.  If successful the handle is said  to  be  in
+          use.  Handle must be a valid handle previously obtained
+          from msqlconnect.
+
+          Msqluse raises a Tcl error if the handle  is  not  con-
+          nected  or  if the database name specified could not be
+          used.
+
+
+     msqlsel handle sql-statement
+          Send sql-statement to the server.  The handle  must  be
+          in use (through msqlconnect and msqluse).
+
+          If  sql-statement  is  a  SELECT  statement the command
+
+
+
+Tcl                       Last change:                          1
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+          returns the number of rows returned as  the  result  of
+          the  query.   The  rows can be obtained by the msqlnext
+          and/or the msqlmap commands.  The  resulting  rows  are
+          called the pending result.
+
+          If  sql-statement  is a valid mSQL statement, but not a
+          SELECT statement, the command returns -1 after  execut-
+          ing  the statement.  There is no pending result in this
+          case.
+
+          In either case msqlsel implicitly cancels any  previous
+          result still pending for the handle.
+
+
+     msqlexec handle sql-statement
+          Send  sql-statement,  an  mSQL non-SELECT statement, to
+          the server.  The handle must be in use  (through  msql-
+          connect and msqluse).
+
+          Msqlexec implicitly cancels any previous result pending
+          for the handle.
+
+          If sql-statement is a valid mSQL SELECT statement,  the
+          statement is executed, but the result is discarded.  No
+          Tcl error is generated.  This amounts to a (potentially
+          costly)  no-op.   Use  the  msqlsel  command for SELECT
+          statements.
+
+
+     msqlnext handle
+          Return the next row of the pending result (from a  pre-
+          vious  msqlsel  command).  The row is returned as a Tcl
+          list.  Each list element contains the value of one col-
+          umn.   The order is determined by the SELECT statement.
+          A null column is converted  to  the  current  value  of
+          msqlstatus(nullvalue).   If  there are no more rows the
+          command returns an empty list.
+
+          Msqlnext raises a Tcl error  if  there  is  no  pending
+          result for handle.
+
+
+     msqlmap handle binding-list script
+          Iterate  a  script over the rows of the pending result.
+          Msqlmap may consume all rows or only some of  the  rows
+          of  the  pending  result.   Any  remaining  rows may be
+          obtained by further msqlnext or msqlmap commands.
+
+          Handle must be a handle with a pending  result  from  a
+          previous  msqlsel command.  Binding-list must be a list
+          of one or more variable names.  Script must  be  a  Tcl
+          script.   It  may be empty, but usually it contains one
+
+
+
+Tcl                       Last change:                          2
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+          or more commands.
+
+          Msqlmap processes one row at a time  from  the  pending
+          result.   For  each  row the column values are bound to
+          the variables in the binding list, then the  script  is
+          executed.   Binding  is strictly positional.  The first
+          variable in the binding list is bound to the first col-
+          umn  of  the row, and so on.  The variables are created
+          in the current context (if they do not already  exist).
+          A  variable  name beginning with a hyphen is not bound;
+          it serves as a placeholder in  the  binding  list.   If
+          there are more columns than variables the extra columns
+          are ignored.
+
+          The msqlmap command is similar to an ordinary  foreach.
+          A foreach iterates over the elements of a list, msqlmap
+          iterates over the rows of a pending  result.   In  both
+          cases  iteration  is affected by break and continue Tcl
+          commands.  The binding list variables retain their last
+          values after the command has completed.
+
+          An  simple  example follows.  Assume $db is a handle in
+          use.
+
+               msqlsel $db {select lname, fname, area, phone from
+          friends
+                    order by lname, fname}
+               msqlmap $db {ln fn - phone} {
+                    if {$phone == {}} continue
+                    puts [format "%16s %-8s %s" $ln $fn $phone]
+               }
+
+          The  msqlsel command gets and sorts all rows from table
+          friends.  The msqlmap command is  used  to  format  and
+          print  the  result  in a way suitable for a phone list.
+          For demonstration purposes one of the columns (area) is
+          not  used.   The  script  begins  by skipping over rows
+          which have no phone number.  The second command in  the
+          script formats and prints values from the row.
+
+          Msqlmap  raises  a  Tcl  error  if  there is no pending
+          result for handle, or  if  binding-list  contains  more
+          variables than there are columns in the pending result.
+
+
+     msqlseek handle row-index
+          Moves the current position among the rows in the  pend-
+          ing result.  This may cause msqlnext and msqlmap to re-
+          read rows, or to skip over rows.
+
+          Row index 0 is the position just before the  first  row
+          in the pending result; row index 1 is the position just
+
+
+
+Tcl                       Last change:                          3
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+          before the second row, and so on.  You  may  specify  a
+          negative  row index.  Row index -1 is the position just
+          before the last row; row index -2 is the position  just
+          before  the  second  last  row,  and so on.  An out-of-
+          bounds row index will cause msqlseek  to  set  the  new
+          current  position  either just before the first row (if
+          the index is too negative), or just after the last  row
+          (if the index exceeds the number of rows).  This is not
+          an error condition.
+
+          Msqlseek returns the number of rows that  can  be  read
+          sequentially  from  the new current position.  Msqlseek
+          raises a Tcl error if there is no  pending  result  for
+          handle.
+
+          Portability note: The functionality of msqlseek is fre-
+          quently absent in other Tcl extensions for SQL.
+
+
+     msqlcol handle table-name option
+
+     msqlcol handle table-name option-list
+
+     msqlcol handle table-name option ?option ...?
+          Return information about the columns of a table.   Han-
+          dle  must  be in use.  Table-name must be the name of a
+          table; it may be a table name or -current if there is a
+          pending  result.   One  or  more  options  control what
+          information to return.  Each option must be one of  the
+          following keywords.
+
+          name
+               Return the name of a column.
+
+          type
+               Return  the  type  of a column; one of the strings
+               int, real, char.
+
+          length
+               Return the length of a column in bytes.
+
+          table
+               Return the name of the table in which this  column
+               occurs.
+
+          non_null
+               Return the string ``1'' if the column is non-null;
+               otherwise ``0''.
+
+          prim_key
+               Return the string ``1'' if the column is  part  of
+               the primary key; otherwise ``0''.
+
+
+
+Tcl                       Last change:                          4
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+     The  three  forms of this command generate their result in a
+     particular way.
+
+     [1]  If a single option is present the result  is  a  simple
+          list of values; one for each column.
+
+     [2]  If  the options are given in the form of an option list
+          the result is a list of  lists.   Each  sublist  corre-
+          sponds  to a column and contains the information speci-
+          fied by the options.
+
+     [3]  If several options are given, but not in  a  list,  the
+          result is also a list of lists.  In this case each sub-
+          list corresponds to an option and  contains  one  value
+          for each column.
+
+          The  following is a sample interactive session contain-
+          ing all forms of the msqlcol command and their results.
+          The  last  command  uses the -current option.  It could
+          alternatively specify the table name explicitly.
+
+               % msqlcol $db friends name
+               fname lname area phone
+               % msqlcol $db friends {name type length}
+               {fname char 12} {lname  char  20}  {area  char  5}
+          {phone char 12}
+               % msqlsel $db {select * from friends}
+               % msqlcol $db -current name type length
+               {fname lname area phone} {char char char char} {12
+          20 5 12}
+
+
+     msqlinfo handle option
+          Return various database information  depending  on  the
+          option.   The  option must be one of the following key-
+          words.
+
+          databases
+               Return a list of all database names known  to  the
+               server.  The handle must be connected.
+
+          dbname
+               Return  the  name  of  the database with which the
+               handle is associated.  The handle must be in  use.
+
+          dbname?
+               Return  the  name  of  the database with which the
+               handle is associated; an empty string if the  han-
+               dle is connected, but not in use.
+
+          host
+               Return the name of the host to which the handle is
+
+
+
+Tcl                       Last change:                          5
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+               connected.  The handle must be connected.
+
+          host?
+               Return the name of the host to which the handle is
+               connected;  an  empty  string if the handle is not
+               connected.
+
+          tables
+               Return a list of all table names in  the  database
+               with  which  the handle is associated.  The handle
+               must be in use.
+
+     msqlresult handle option
+          Return information about the pending result.  Note that
+          a result is pending until cancelled by an msqlexec com-
+          mand, even if no rows remain to be read.   Option  must
+          be one of the following keywords.
+
+          cols
+               Return  the  number  of  columns  in  the  pending
+               result.  There must be a pending result.
+
+          cols?
+               Return  the  number  of  columns  in  the  pending
+               result; an empty string if no result is pending.
+
+          current
+               Return the current position in the pending result;
+               a non-negative integer.  This value can be used as
+               row-index  in  the  msqlseek command.  An error is
+               raised if there is no pending result.
+
+          current?
+               As above, but returns an empty string if there  is
+               no pending result.
+
+          rows
+               Return the number of rows that can be read sequen-
+               tially from the current position  in  the  pending
+               result.  There must be a pending result.
+
+          rows?
+               Return the number of rows that can be read sequen-
+               tially from the current position  in  the  pending
+               result; an empty string if no result is pending.
+
+
+          o    Note  that  [msqlresult $db current] + [msqlresult
+               $db always equals the total number of rows in  the
+               pending result.
+
+     msqlstate ?-numeric? handle
+
+
+
+Tcl                       Last change:                          6
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+          Return  the state of a handle as a string or in numeric
+          form.  There is no requirement on handle; it may be any
+          string.   The  return  value  is  one  of the following
+          strings, or the corresponding numeric value if -numeric
+          is specified.  The states form a progression where each
+          state builds on the previous.
+
+          NOT_A_HANDLE (0)
+               The string supplied for handle is not  an  msqltcl
+               handle at all.
+
+          UNCONNECTED (1)
+               The  string supplied for handle is one of the pos-
+               sible msqltcl handles, but it is not connected  to
+               any server.
+
+          CONNECTED (2)
+               The handle is connected to a server, but not asso-
+               ciated with a database.
+
+          IN_USE (3)
+               The handle is  connected  and  associated  with  a
+               database, but there is no pending result.
+
+          RESULT_PENDING (4)
+               The   handle   is  connected,  associated  with  a
+               database, and there is a pending result.
+
+
+     msqlclose ?handle?
+          Closes the server connection  associated  with  handle,
+          causing it to go back to the unconnected state.  Closes
+          all connections if handle is omitted.  Returns an empty
+          string.   Msqlclose  raises  a Tcl error if a handle is
+          specified which is not connected.
+
+
+STATUS INFORMATION
+     Msqltcl creates and maintains a Tcl global array to  provide
+     status  information.   Its  name  is msqlstatus.  Msqlstatus
+     elements:
+
+     code
+          A numeric conflict code set after  every  msqltcl  com-
+          mand.  Zero means no conflict; non-zero means some kind
+          of conflict.  All conflicts also generate a Tcl  error.
+
+          Almost  all  conflicts set msqlstatus(code) to -1.  The
+          only exception is when a Unix system  call  in  msqltcl
+          fails.   Then  the  Unix  errno (a positive integer) is
+          assigned to msqlstatus(code).
+
+
+
+
+Tcl                       Last change:                          7
+
+
+
+
+
+
+Msqltcl(TCL)       MISC. REFERENCE MANUAL PAGES      Msqltcl(TCL)
+
+
+
+     command
+          The last failing msqltcl command.  Not updated for suc-
+          cessful commands.
+
+     message
+          Message  string  for  the  last conflict detected.  The
+          same string is returned as the result  of  the  failing
+          msqltcl  command.  Not updated for successful commands.
+
+     nullvalue
+          The string to use in query results to represent the SQL
+          null  value.   The empty string is used initially.  You
+          may set it to another value.
+
+     version
+          A read-only string displaying the msqltcl version.
+
+
+ENVIRONMENT VARIABLES
+     None.
+
+
+BUGS & POSSIBLE MISFEATURES
+     Sure.  The msqltcl commands silently ignore  any  extraneous
+     arguments.   Some of the options of the information commands
+     (msqlinfo, msqlresult, msqlcol,  msqlstate)  keep  returning
+     results even if the mSQL server has ceased to exist.  Delet-
+     ing any of the msqltcl commands closes all connections.
+
+
+AUTHOR
+     Hakan Soderstrom (hs@soderstrom.se), Soderstrom Programvaru-
+     verkstad, S-12242 Enskede, Sweden.  Msqltcl was derived from
+     Sybtcl by Tom Poindexter (tpoindex@nyx.net).
+
+     $Revision: 1.99 $
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tcl                       Last change:                          8
+
+
+

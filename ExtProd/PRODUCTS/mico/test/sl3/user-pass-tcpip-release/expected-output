@@ -1,0 +1,22 @@
+wcout init
+ServerCredsObserver create_credentials: MICO_TCPIP:0
+SL3:ServerCredsObserver create_credentials: MICO_SL3CSI:0
+Running.
+AcceptingContextObserver establish_context: MICO_TCPIPAcceptingContext:0
+SL3:ClientCredentialsObserver create_credentials: CSI_ClientCredentials:0
+server: Hello World
+SL3:ServerCredsObserver relinquish_credentials: MICO_SL3CSI:0
+SL3:ClientCredentialsObserver release_credentials: CSI_ClientCredentials:0
+SL3:ClientCredentialsObserver destroy_credentials: CSI_ClientCredentials:0
+SL3:ServerCredsObserver destroy_credentials: MICO_SL3CSI:0
+AcceptingContextObserver close_context: MICO_TCPIPAcceptingContext:0
+AcceptingContextObserver destroy_context: MICO_TCPIPAcceptingContext:0
+ClientCredsObserver create_credentials: MICO_TCPIP:0
+SL3:ClientCredsObserver create_credentials: MICO_SL3CSI:0
+InitiatingContextObserver establish_context: MICO_TCPIPInitiatingContext:0
+SL3:TargetCredentialsObserver create_credentials: CSI_TargetCredentials:0
+SL3:ClientCredsObserver relinquish_credentials: MICO_SL3CSI:0
+SL3:TargetCredentialsObserver release_credentials: CSI_TargetCredentials:0
+SL3:TargetCredentialsObserver destroy_credentials: CSI_TargetCredentials:0
+SL3:ClientCredsObserver destroy_credentials: MICO_SL3CSI:0
+InitiatingContextObserver close_context: MICO_TCPIPInitiatingContext:0

@@ -1,0 +1,206 @@
+wcout init
+Running.
+
+Target credentials:
+interface InitiatingContext {
+  context_id = MICO_TLSInitiatingContext:0
+  client_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:X509DirectoryPathName
+      the_name = {
+        "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+        "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = true
+    alternate_names = {
+    }
+  }
+  client_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  client_restricted_resources = {
+  }
+  target_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:X509DirectoryPathName
+      the_name = {
+        "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+        "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = true
+    alternate_names = {
+    }
+  }
+  target_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  target_restricted_resources = {
+  }
+  environmental_attributes = {
+    PrinAttribute("SL3:TransportMechanism","TLS")
+    PrinAttribute("SL3:TLSCipherSuite","AES256-SHA")
+    PrinAttribute("SL3:ChannelIdentifier","TCPIPv4:127.0.0.1:7813-127.0.0.1:2313")
+  }
+  parent_credentials = MICO_TLS:0
+  client_authentication = true
+  target_authentication = true
+  confidentiality = true
+  integrity = true
+  expiry_time = UtcT(-1,0,0,0)
+}
+Hello World
+client credentials: 
+interface AcceptingContext {
+  context_id = MICO_TLSAcceptingContext:0
+  client_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:X509DirectoryPathName
+      the_name = {
+        "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+        "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = true
+    alternate_names = {
+    }
+  }
+  client_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/CN=Karel Gardas/emailAddress=kgardas@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  client_restricted_resources = {
+  }
+  target_principal = valuetype SimplePrincipal {
+    the_type = 0
+    the_name = struct PrincipalName {
+      the_type = SL3:X509DirectoryPathName
+      the_name = {
+        "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+        "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+      }
+    }
+
+    with_privileges = {
+    }
+    authenticated = true
+    alternate_names = {
+    }
+  }
+  target_supporting_statements = {
+    valuetype PrincipalIdentityStatement {
+      the_layer = 1
+      the_type = 1
+      encoding_type = Unknown
+      interpretation_aid = X509:V1IdentityCertificate
+      the_principal = valuetype SimplePrincipal {
+        the_type = 0
+        the_name = struct PrincipalName {
+          the_type = SL3:X509DirectoryPathName
+          the_name = {
+            "/C=EN/L=Cambridge/O=ObjectSecurity Ltd./CN=www.objectsecurity.com/emailAddress=info@objectsecurity.com"
+            "/C=CZ/L=Roznov/O=SignEveryThing/CN=Sign Every Thing, s.r.o./emailAddress=set@iol.cz"
+          }
+        }
+
+        with_privileges = {
+        }
+        authenticated = true
+        alternate_names = {
+        }
+      }
+    }
+  }
+  target_restricted_resources = {
+  }
+  environmental_attributes = {
+    PrinAttribute("SL3:TransportMechanism","TLS")
+    PrinAttribute("SL3:TLSCipherSuite","AES256-SHA")
+    PrinAttribute("SL3:ChannelIdentifier","TCPIPv4:127.0.0.1:7813-127.0.0.1:2313")
+  }
+  parent_credentials = MICO_TLS:0
+  client_authentication = true
+  target_authentication = true
+  confidentiality = true
+  integrity = true
+  expiry_time = UtcT(-1,0,0,0)
+  impersonalble = false
+  endorseable = false
+  quotable = false
+}
+

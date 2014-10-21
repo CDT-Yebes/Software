@@ -1,0 +1,13 @@
+typedef octet int_t;
+module M {
+    typedef short int_t;
+    interface Foo {
+        typedef long int_t;
+        int_t f1(); // return long
+        M::Foo::int_t f1_2(); // return long
+        ::M::Foo::int_t f1_3(); // return long
+        M::int_t f2(); // return short
+        ::M::int_t f3(); // return short
+	::int_t f4(); // return octet
+    };
+};

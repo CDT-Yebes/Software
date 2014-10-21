@@ -1,0 +1,148 @@
+//
+//  MICO SL3 --- an Open Source SL3 implementation
+//  Copyright (C) 2003, 2004 ObjectSecurity Ltd.
+//
+//  Early drafts partly inspired by Adiron's SL3
+//  Copyright (C) 2001 Adiron LLC
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+//  Send comments and/or bug reports to:
+//                 micosec@objectsecurity.com
+//
+
+//  Written by Karel Gardas, <kgardas@objectsecurity.com>
+
+#ifndef _SL3OM_IDL_
+#define _SL3OM_IDL_
+
+#include <mico/security/sl3cm.idl>
+#include <mico/security/transportsecurity.idl>
+#include <mico/security/securitylevel3.idl>
+
+/**
+ * This module provides interfaces for Observers Model.
+ */
+module SL3OM {
+
+    /**
+     * This is an abstract Observer which others extend
+     */
+    local interface Observer {
+	readonly attribute string name;
+    };
+
+    typedef sequence<Observer> ObserverSeq;
+
+    /**
+     * This observer is used to be notified when either creation or
+     * relinquishing of credentials happen
+     */
+    local interface CredentialsObserver : Observer {
+	/**
+	 * This operation notifies the observer about created
+	 * credentials. It is invoked when a call to
+	 * CredentialsAcquirer::get_credentials happens
+	 */
+	void create_credentials(in SL3CM::CredentialsId id);
+	/**
+	 * This operation notifies the observer about released
+	 * OwnCredentials either by the CredentialsCurator::release_credentials
+	 * call or by OwnCredentials::release call.
+	 */
+	void relinquish_credentials(in SL3CM::CredentialsId id);
+    };
+
+    // Transport Security observers
+    /**
+     * This Observer is used to watch the establishing or closing of
+     * AcceptingContext (ClientCredentials)
+     */
+    local interface AcceptingContextObserver : Observer {
+	/**
+	 * This operation notifies observer about context establishment
+	 */
+	void establish_context(in TransportSecurity::ClientCredentials
+			       ctx);
+	/**
+	 * This operation notifies observer about closing of appropriate
+	 * context
+	 */
+	void close_context(in TransportSecurity::ClientCredentials
+			   ctx);
+    };
+
+    /**
+     * This Observer is used to watch the establishing or closing of
+     * InitiatingContext (TargetCredentials)
+     */
+    local interface InitiatingContextObserver : Observer {
+	/**
+	 * This operation notifies observer about context establishment
+	 */
+	void establish_context(in TransportSecurity::TargetCredentials
+			       ctx);
+	/**
+	 * This operation notifies observer about closing of appropriate
+	 * context
+	 */
+	void close_context(in TransportSecurity::TargetCredentials
+			   ctx);
+    };
+
+    // SecurityLevel3 observers
+    /**
+     * This Observer is used to watch the creation or releasing of
+     * ClientCredentials
+     */
+    local interface ClientCredentialsObserver : Observer {
+	/**
+	 * This operation notifies the observer about created
+	 * credentials.
+	 */
+	void create_credentials(in SecurityLevel3::ClientCredentials
+				creds);
+	/**
+	 * This operation notifies the observer about released
+	 * credentials.
+	 */
+	void release_credentials(in SecurityLevel3::ClientCredentials
+				 creds);
+    };
+
+    /**
+     * This Observer is used to watch the creation or releasing of
+     * TargetCredentials
+     */
+    local interface TargetCredentialsObserver : Observer {
+	/**
+	 * This operation notifies the observer about created
+	 * credentials.
+	 */
+	void create_credentials(in SecurityLevel3::TargetCredentials
+				creds);
+	/**
+	 * This operation notifies the observer about released
+	 * credentials.
+	 */
+	void release_credentials(in SecurityLevel3::TargetCredentials
+				 creds);
+    };
+}; // SL3OM
+
+#endif // _SL3OM_IDL_
+
+
+

@@ -1,0 +1,22 @@
+*** shell.itk.orig	Tue May 20 11:07:56 2003
+--- shell.itk	Tue May 20 11:08:12 2003
+***************
+*** 244,249 ****
+--- 244,260 ----
+      raise $itk_component(hull)
+      wm deiconify $itk_component(hull)
+      tkwait visibility $itk_component(hull)
++     # For some mysterious reason, Tk sometimes returns too late from the
++     # "tkwait visibility", i.e. after the "deactivate" method was invoked,
++     # i.e. after the dialog window already disappeared. This would lead to
++     # an infinite vwait on _wait($this) further on. Trap this case.
++     # See also 2002-03-15 message to the Tcl/Tk newsgroup.
++     # Remark that tests show that if "raise" is given *after* "deiconify" 
++     # (see above), "tkwait visibility" always returns duly on time.....
++     if {![winfo ismapped $itk_component(hull)]} {
++ 	# means "deactivate" went already through the grab-release stuff.
++ 	return $_result
++     }
+  
+      # Need to flush the event loop.  This line added as a result of
+      # SF ticket #227885.

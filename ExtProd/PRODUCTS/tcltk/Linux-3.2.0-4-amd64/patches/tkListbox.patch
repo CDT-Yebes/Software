@@ -1,0 +1,14 @@
+*** tk8.5.13/generic/tkListbox.c.orig	2012-11-06 15:08:55.000000000 +0000
+--- tk8.5.13/generic/tkListbox.c	2013-03-12 08:22:59.578314000 +0000
+***************
+*** 1630,1638 ****
+  		if (Tcl_SetVar2Ex(interp, listPtr->listVarName, NULL,
+  			listVarObj, TCL_GLOBAL_ONLY|TCL_LEAVE_ERR_MSG)
+  			== NULL) {
+- 		    if (oldListObj == NULL) {
+- 			Tcl_DecrRefCount(listVarObj);
+- 		    }
+  		    continue;
+  		}
+  	    }
+--- 1630,1635 ----

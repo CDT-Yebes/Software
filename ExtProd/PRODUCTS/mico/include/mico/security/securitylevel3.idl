@@ -1,0 +1,982 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2002, 2003 ObjectSecurity Ltd.
+//
+#ifndef _SECURITY_LEVEL3_IDL_
+#define _SECURITY_LEVEL3_IDL_
+
+#include <mico/security/sl3pm.idl>
+#include <mico/security/sl3cm.idl>
+#include <mico/security/sl3aqargs.idl>
+
+//#include <mico/orb.idl>
+#include <mico/policy.idl>
+#include <mico/timebase.idl>
+
+#pragma prefix "adiron.com"
+
+/**
+ * The Security Level 3 module contains the data definitions and
+ * the Application Programmers Interface for dealing with the 
+ * ORBAsec SL3 Security, and the new CSIv2 Security Protocol, which has
+ * been adopted by the OMG.
+ * <p>
+ * The SecurityLevel3 interfaces and its security data structures
+ * are based on the Principal Calculus. This is a mathematical
+ * model of representing principals for the use of access control
+ * and auditing.
+ * <p>
+ * The SecurityLevel3 Security Service is represented by two objects
+ * that are returned by the ORB's resolve_initial_reference call.
+ * Those two objects are the SecurityManager and the SecurityCurrent.
+ * Other objects associated with the security service emanate from
+ * these two objects.
+ * <p>
+ * The SecurityLevel3 Security Service has a Credentials model. This
+ * model, which is heavily based on the Principal Calculus, yields
+ * an API for accessing principal information. The credentials 
+ * represent a principal's credentials, as well as the establishment
+ * of security contexts between client and servers.
+ * <p>
+ * The SecurityLevel3 Security Service is currently CSIv2 Level 2
+ * compliant:
+ * <ul>
+ * <li>
+ * It works over TLS and plain TCPIP.
+ * <li>
+ * It handles the GSSUP (Username/Password) mechanism for
+ * CSI level Client Authentication.
+ * <li>
+ * It has the ability to "quote" an identity, i.e. CSIv2
+ * Identity Assertion.
+ * <li>
+ * It has the ability to "push" privileges, which it does
+ * ATLAS enabled servers.
+ * <li>
+ * It has the ability to install your own authorization
+ * token process that can allow for delegation.
+ * </ul>
+ * <p>
+ * The Security Level 3 ORB Security Service does supports retention
+ * of CSI state. Client Authentication information and Identity
+ * assertion information is transmitted on each request.
+ * <p>
+ * The Security Level 3 ORB Security Service does not automatically
+ * support endorsement at this time (CSIv2 Level 2 compliance), but
+ * does give you facility to do so.
+ */
+module SecurityLevel3 {
+
+    /**
+     * The Adiron VMCID, which is used in Minor Error Codes, 
+     * Policy Tags, etc.
+     */
+    const unsigned long ADIRON_VMCID = 0xA11C000;
+    
+    //-------------------------------------------------------------
+    //  Security Level 3 Application Users Interface
+    //
+    //-------------------------------------------------------------
+    
+    //
+    // The Security Level 3 Credentials Model
+    //
+    
+    /**
+     * The Initiator Type of the Initiator Side of the Credentials states
+     * the kind of Initiator it is. There are three types that mirror
+     * the type of Principal, Simple, Quoting, and Proxy, that the 
+     * initiator intends to represent to a server while trying to 
+     * establish a security context with the server.
+     */
+    typedef unsigned long InitiatorType;
+    /**
+     * The IT_None InitiatorType is a value that is defined for 
+     * completeness, and has no real use.
+     */
+    const InitiatorType IT_None     = 0;
+    /**
+     * The IT_Simple InitiatorType is a value that states that the 
+     * initiator is a "Simple" Principal.
+     */
+    const InitiatorType IT_Simple   = 1;
+    /**
+     * The IT_Quoting InitiatorType is a value that states that the 
+     * initiator will quote another principal to the server. This
+     * principal is denoted in the Principal Calculus as (A|B), i.e.
+     * A quoting B. 
+     */
+    const InitiatorType IT_Quoting  = 2;
+    /**
+     * The IT_Proxy InitiatorType is a value that states that the 
+     * initiator will quote another principal to the server along with
+     * getting or providing proof to the server that it can act on
+     * behalf of the quoted principals. This
+     * principal is denoted in the Principal Calculus as (A for B). 
+     */
+    const InitiatorType IT_Proxy    = 3;
+
+    /**
+     * The CredsInitiator object is an object that is directly a 
+     * member of a particular OwnCredentials object. It represents
+     * the "initiator" side of the credentials.
+     */    
+    local interface CredsInitiator {
+
+        /**
+         * The principal field contains a local view of the 
+         * Principal that the Credentials intend to represent.
+         * Note that during context establishment, the actual establish
+         * client principal may be represented differently, especially
+         * with respect to environmental attributes. Some environmental 
+         * attributes are a direct result of context establishment.
+         */
+        readonly attribute SL3PM::Principal        the_principal;
+        /**
+         * The supporting statements field contains a list of statements
+         * supporting the principal associated with this initiator.
+         */
+        readonly attribute SL3PM::StatementList    supporting_statements;
+        /**
+         * The restricted_resources field contains a list of 
+         * resource names, by which the credentials initiator
+         * believes his authorizations apply.
+         */
+        readonly attribute SL3PM::ResourceNameList restricted_resources;
+
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+        /**
+         * The initiator_type field signifies the intent of the
+         * initiator as to the principal it presents for the 
+         * security context establishment. It should correspond
+         * to the type of the Principal. However, it might be slightly
+         * different, because using CSIv2 Client Authentication
+         * technically creates a "QuotingPrincipal" however, the 
+         * initiator type will still be simple as no CSIv2 Identity
+         * Assertion will be used in establishing the security
+         * context.
+         */
+        readonly attribute InitiatorType    initiator_type;
+        /**
+         * The supports_embodiment field is true if these credentials
+         * can be directed by use of the CredsDirective, to give the
+         * the accepting end of a context establishment the ability
+         * to impersonate this initiator principal.
+         */
+        readonly attribute boolean          supports_embodiment;
+        /**
+         * The supports_endorsement field is true if these credentials
+         * can be directed by use of the CredsDirective, to endorse
+         * the accepting end of a context establishment to act
+         * on behalf of this initiator principal.
+         */
+        readonly attribute boolean          supports_endorsement;
+        /**
+         * The supports_quoting field is true if these credentials
+         * can be directed by use of the CredsDirective, to simply
+         * quote another principal on top of these credentials.
+         */
+        readonly attribute boolean          supports_quoting;
+        /**
+         * The expiry_time field denotes the time that these
+         * credentials expire.
+         */
+        readonly attribute TimeBase::UtcT   expiry_time;
+    };
+    
+    /**
+     * The CredsAcceptor object is an object that is directly a 
+     * member of a particular OwnCredentials object. It represents
+     * the "acceptor" side of the credentials.
+     */
+    local interface CredsAcceptor {
+
+        /**
+         * The principal field contains a local view of the 
+         * Principal that the Credentials intend to represent.
+         * Note that during context establishment, the actual establish
+         * target principal may be represented differently, especially
+         * with respect to environmental attributes. Some environmental 
+         * attributes are a direct result of context establishment.
+         */
+        readonly attribute SL3PM::Principal       the_principal;
+        /**
+         * The supporting_statements field contains a list of statements
+         * supporting the principal associated with this acceptor.
+         */
+        readonly attribute SL3PM::StatementList   supporting_statements;
+        /**
+         * The restricted_resources field contains a list of 
+         * resource names, by which the credentials initiator
+         * believes his authorizations apply.
+         */
+        readonly attribute SL3PM::ResourceNameList                restricted_resources;
+
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+        /**
+         * The accepts_endorsement field is true if these credentials
+         * support and accept CSIv2 endorsement information.
+         */
+        readonly attribute boolean                         accepts_endorsement;
+        /**
+         * The accepts_quoting field is true if these credentials
+         * support and accept CSIv2 Identity Assertion information.
+         */
+        readonly attribute boolean                         accepts_quoting;
+        /**
+         * The expiry_time field denotes the time that these
+         * credentials expire.
+         */
+        readonly attribute TimeBase::UtcT                  expiry_time;
+    
+    };
+
+    /**
+     * This type is used to identify listeners for removal.
+     * A Listener identity will be assigned to a listener when
+     * it is assigned to a particular object.
+     */
+
+    // begin of ObjectSecurity removal
+
+//      typedef string ListenerId;
+
+    /**
+     * This local interface is used to notify the user when the credentials
+     * have been relinquished. When credentials are "released" they may
+     * stay around until their work is finished. At that point they
+     * will be relinquished. Also, if the underlying transport credentials
+     * are released, then the SecurityLevel3 Credentials get released
+     * as well. This listener will get informed of this event.
+     */
+//      local interface RelinquishedCredentialsListener {
+//          void relinquished_notify(
+//              in SL3CM::CredentialsId creds_id
+//          );
+//      };
+
+    // end of ObjectSecurity removal
+
+    /**
+     * The Credentials base interface contains the common items for 
+     * the different types of credentials.
+     * @see OwnCredentials
+     * @see ClientCredentials
+     * @see TargetCredentials
+     */
+    local interface Credentials {
+
+        /**
+         * The creds_id attribute contains a system generated 
+         * identifier with which can uniquely reference the credentials
+         * object.
+         */
+        readonly attribute SL3CM::CredentialsId    creds_id;
+
+        /**
+         * The creds_type stipulates the type of credentials, i.e.
+         * to which type of credentials it may be narrowed.
+         */
+        readonly attribute SL3CM::CredentialsType  creds_type;
+
+        /**
+         * The creds_usage field stipulates the intended usage of the
+         * credentials. For OwnCredentials, it will be one of 
+         * CU_AcceptOnly, CU_Initiate, CU_InitiateAndAccept. 
+         * For ClientCredentials and TargetCredentials it will be 
+         * CU_None.
+         */
+        readonly attribute SL3CM::CredentialsUsage creds_usage; 
+
+        /**
+         * The creds_state field contains the 
+         * validity state of the credentials.
+         */
+        readonly attribute SL3CM::CredentialsState creds_state;
+
+        /**
+         * Add a listener that will get notified when the 
+         * OwnCredentials are finally done with any pending
+         * work and are relinquished by the security service.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_relinquished_listener(
+//              in RelinquishedCredentialsListener listener
+//          );
+
+
+        /**
+         * Removes a listener. This function raises a BAD_PARAM
+         * exception if the listener is not registered.
+         */
+//          void remove_relinquished_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal
+
+    };
+    /**
+     * A list of credentials.
+     */
+    typedef sequence<Credentials> CredentialsList;
+    
+    /**
+     * OwnCredentials are created as a result of Credentials acquisition
+     * from the CredentialsCurator's CredentialsAcquirers.
+     * The Credentials have an initiator and an acceptor based
+     * upon its intended usage and capability. Some OwnCredentials
+     * that were acquired solely for initiating contexts (i.e. client side)
+     * will not have an acceptor, and visa versa.
+     */
+    local interface OwnCredentials : Credentials {
+
+        /**
+         * The creds_initiator field contains a reference to the 
+         * local credentials initiator associated with these credentials.
+         * It is null if the creds_usage is AcceptOnly.
+         */
+        readonly attribute CredsInitiator  creds_initiator;
+
+        /**
+         * The creds_acceptor field contains a reference to the 
+         * local credentials acceptor associated with these credentials.
+         * It is null if the creds_usage is InitiateOnly.
+         */
+        readonly attribute CredsAcceptor   creds_acceptor;
+        
+        /**
+         * The release_credentials operation disables the credentials
+         * from further initiating and/or accepting contexts. 
+         * Formal destruction of the Credentials object is delayed until
+         * its pending work is done, at which time it becomes Invalid.
+         */
+        void release_credentials ();
+    };
+
+    /**
+     * A list of OwnCredentials
+     */
+    typedef sequence<OwnCredentials> OwnCredentialsList;
+    
+    /**
+     * The ClientCredentials object is created as the result of accepting a
+     * security context for a remote client. It represents that context.
+     * It contains only the information used from the OwnCredentials
+     * that was pertinent in establishing the context.
+     * There is a pointer back to that OwnCredentials object.
+     * Once this context is created, its attributes are guaranteed
+     * not to change.
+     */
+    local interface ClientCredentials : Credentials {
+
+        /**
+         * The context_id field contains a system generated unique identifier
+         * for the context.
+         */
+        readonly attribute SL3CM::ContextId                context_id;
+
+        /**
+         * The client_principal field contains the principal that
+         * the security service can deduce is the client from the
+         * information and mechanisms used.
+         */
+        readonly attribute SL3PM::Principal                client_principal;
+
+        /**
+         * The client_supporting_statements field contains the statements that
+         * delivered from CSIv2 protocol along with any from the associated
+         * OwnCredentials that are used to deduce the client principal. 
+         */
+        readonly attribute SL3PM::StatementList            client_supporting_statements;
+
+        /**
+         * The client_restricted_resources field contains the names of the
+         * resources that the security service deduces from the CSIv2
+         * information and information from the associated OwnCredentials.
+         */
+        readonly attribute SL3PM::ResourceNameList         client_restricted_resources;
+
+        /**
+         * The target_principal field contains the exact principal that
+         * the security service believes is representative of the 
+         * clients version of the target's principal.
+         */
+        readonly attribute SL3PM::Principal                target_principal;
+
+        /**
+         * The target_supporting_statements field contains the statements that
+         * support the deduction of the target principal. 
+         */
+        readonly attribute SL3PM::StatementList            target_supporting_statements;
+
+        /**
+         * The target_restricted_resources field contains names of resources
+         * on which the target is restricted. This information may come
+         * from the OwnCredentials.
+         */
+        readonly attribute SL3PM::ResourceNameList         target_restricted_resources;
+
+	/**
+	 * This field is directly copied from TransportSecurity::ClientCredentials
+	 */
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+
+        /**
+         * This field refers to the OwnCredentials that were used in
+         * establishing the security context.
+         */
+        readonly attribute OwnCredentials           parent_credentials;
+
+        /**
+         * This field is true if the client has been authenticated, either
+         * over the transport, or at the CSIv2 ClientAuthentication Layer.
+         */
+        readonly attribute boolean                  client_authentication;
+        /**
+         * This field is true if the target believes that it performed
+         * a successful authentication of the target with the client.
+         */
+        readonly attribute boolean                  target_authentication;
+
+        /**
+         * This field is true if the context is providing confidentiality
+         * protection.
+         */
+        readonly attribute boolean                  confidentiality;
+
+        /**
+         * This field is true if the context is providing integrity
+         * protection.
+         */
+        readonly attribute boolean                  integrity;
+    };
+    
+    /**
+     * The TargetCredentials object is created as the result of accepting a
+     * security context for a target. It represents that context.
+     * It contains only the information used from the OwnCredentials
+     * that was pertinent in establishing the context.
+     * There is a pointer back to that OwnCredentials object.
+     * Once this context is created, its attributes are guaranteed
+     * not to change.
+     */
+    local interface TargetCredentials : Credentials {
+
+        /**
+         * The context_id attribute contains a system generated
+         * unique identifier for the context.
+         */
+        readonly attribute SL3CM::ContextId               context_id;
+
+        /**
+         * The client_principal attribute contains the principal that
+         * the security service believe is the target's 
+         * ClientCredentials client_principal field.
+         */
+        readonly attribute SL3PM::Principal               client_principal;
+
+        /**
+         * The client_supporting_statements attribute contains the
+         * statements that support the deduction of the client principal. 
+         */
+        readonly attribute SL3PM::StatementList           client_supporting_statements;
+
+        /**
+         * The client_restricted_resources attribute contains names of
+         * resources on which the client believes the client is restricted. 
+         * This information may be derived from newly acquired endorsement
+         * information.
+         */
+        readonly attribute SL3PM::ResourceNameList        client_restricted_resources;
+
+        /**
+         * The target_principal attribute contains the exact principal that
+         * the security service deduces to be the target.
+         */
+        readonly attribute SL3PM::Principal               target_principal;
+
+        /**
+         * The target_supporting_statements attribute contains the statements
+         * that support the deduction of the target principal. 
+         */
+        readonly attribute SL3PM::StatementList           target_supporting_statements;
+
+        /**
+         * The target_restricted_resources attribute contains names of
+         * resources on which the target is restricted. This information
+         * may not be available.
+         */
+        readonly attribute SL3PM::ResourceNameList        target_restricted_resources;
+
+	/**
+	 * This field is directly copied from TransportSecurity::TargetCredentials
+	 */
+	readonly attribute SL3PM::PrinAttributeList         environmental_attributes;
+
+        /**
+         * The parent_credentials attribute refers to the OwnCredentials
+         * that were used in establishing the security context.
+         */
+        readonly attribute OwnCredentials          parent_credentials;
+
+        /**
+         * The client_authentication attribute is true if the client has
+         * been authenticated, either over the transport, or at the
+         * CSIv2 ClientAuthentication Layer.
+         */
+        readonly attribute boolean                  client_authentication;
+
+        /**
+         * The target_authentication attribute is true if the target
+         * believes that it performed a successful authentication of the
+         * target with the client.
+         */
+        readonly attribute boolean                 target_authentication;
+
+        /**
+         * The confidentiality attribute is true if the context is
+         * providing confidentiality protection.
+         */
+        readonly attribute boolean                 confidentiality;
+
+        /**
+         * The integrity attribute is true if the context is providing
+         * integrity protection.
+         */
+        readonly attribute boolean                 integrity;
+
+        /**
+         * The target_embodied attribute is true if the security service
+         * believes that the target is embodied to impersonate the client
+         * side principal.
+         */
+        readonly attribute boolean                 target_embodied;
+
+        /**
+         * The target_endorsed attribute is true if the security service
+         * believes that the target is endorsed to act on behalf of the
+         * client side principal.
+         */
+        readonly attribute boolean                 target_endorsed;
+        
+        /**
+         * The release operation indicates to the CSIv2 protocol, that if
+         * state is being retained for these credentials, they
+         * will be discarded with the pending next request that
+         * may have not yet gone out.
+         * <p>
+         * Any objects references that are binded to these 
+         * credentials after you release them will become unusable.
+         *
+         * This operation is experimental.
+         */
+        void release();
+    };
+
+    
+    //--------------------------------------------------------------------
+    // Security Invocation Policy
+    // 
+    //--------------------------------------------------------------------
+
+    /**
+     * The ContextEstablishmentPolicy policy object directs the
+     * establishment of security contexts with a target.
+     * <p>
+     * The CredsDirective usage is the following:
+     * <dl>
+     * <dt>
+     * CD_Default
+     * <dd>
+     *       This directive means to use the default set
+     *       up by the thread, the  ORB, the ORB configuration,
+     *       available credentials, or other policies.
+     * <dt>
+     * CD_InvokeTarget
+     * <dd>
+     *       This directive means to use the
+     *       the specified OwnCredentials to create a 
+     *       secure association with the target
+     *       before invocation. Do not endorse or embody the target.
+     *       Credentials may be IT_Simple, IT_Quoting, or IT_Proxy.
+     * <dt>
+     * CD_EndorseTarget
+     * <dd>
+     *       This directive means to use the 
+     *       the specified OwnCredentials to create a 
+     *       secure association with the target
+     *       before invocation. 
+     *       The credentials must be
+     *       IT_Simple, IT_Quoting, or IT_Proxy own credentials 
+     *       that supports endorsement.
+     *       Note, a Initiator Credentials that is a IT_Proxy
+     *       may have an endorsement statement that not only
+     *       endorses this immediate client, but may very well
+     *       apply to the next target.
+     * <dt>
+     * CD_EmbodyTarget
+     * <dd>
+     *       If possible give the target the ability to
+     *       impersonate the client, is performed using
+     *       transports that can forward their credentials
+     *       in the transport that give the ability to the
+     *       target to work in their own behalf. Alternatively,
+     *       the authenticator may be able to be passed on.
+     *       IT_Simple credentials must have or have the
+     *       ability to forward credentials. This is analogous
+     *       to flipping the DELEGATE bit on GSS-Kerberos Forwardable
+     *       credentials. IT_Quoting principals means
+     *       that you can forward the transport credentials,
+     *       authenticator plus the Quoting statement.
+     *       IT_Proxy principals means that you can forward
+     *       the transport credentials, authenticator,
+     *       and associated proxy statements.
+     * </dl>
+     * <p>
+     * On using Own Credentials. The creds_ids name Own Credentials. 
+     * Also, they restrict the invocation to use only certain credentials.
+     * If the cred_ids list is empty, then the own credentials for the 
+     * invocation are selected from a default, which may be 
+     * set on the thread or the ORB instance.
+     */
+    local interface ContextEstablishmentPolicy : CORBA::Policy {
+
+        readonly attribute SL3CM::CredsDirective      creds_directive;
+        readonly attribute OwnCredentialsList  creds_list;
+        readonly attribute SL3CM::FeatureDirective    use_client_auth;
+        readonly attribute SL3CM::FeatureDirective    use_target_auth;
+        readonly attribute SL3CM::FeatureDirective    use_confidentiality;
+        readonly attribute SL3CM::FeatureDirective    use_integrity;
+    };
+
+    /**
+     * The ContextEstablishmentPolicyType constant is 
+     * holds value used to denote the ContextEstablishmentPolicy.
+     */
+    const CORBA::PolicyType ContextEstablishmentPolicyType = ADIRON_VMCID | 1001;
+    
+    
+    /**
+     * The ObjectCredentialsPolicy object is placed on the policy list
+     * of a POA to indicate the own credentials
+     * that govern the accepting contexts for objects underneath
+     * that POA. The credentials listed here, only if they have Accepting
+     * capability, are used to created security components in the 
+     * IOR of the object's reference when created.
+     */
+
+    local interface ObjectCredentialsPolicy : CORBA::Policy {
+        readonly attribute OwnCredentialsList   creds_list;
+    };
+
+    /**
+     * The ObjectCredentialsPolicyType constant is 
+     * holds value used to denote the ObjectCredentialsPolicy.
+     */
+    const CORBA::PolicyType ObjectCredentialsPolicyType = ADIRON_VMCID | 1002;
+
+    //--------------------------------------------------------------------
+    // Security Level 3 Credentials Acquisition Mechanism
+    // 
+    //--------------------------------------------------------------------
+
+    /**
+     * The CredentialsAcquirer object is created by the Credentials
+     * Curator based on the selected method and initial acquisition
+     * arguments. When this acquisition is complete and successful,
+     * the created credentials are placed on the Credentials
+     * curator's own_credentials list. Once get_credentials is called,
+     * this object is destroyed.
+     */
+    local interface CredentialsAcquirer {
+        
+        /**
+         * The acquisition_method attribute contains the acquisition method
+         * identifier naming the method by which these credentials
+         * are being acquired.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          readonly attribute SL3CM::AcquisitionMethod acquisition_method;
+
+	// end of ObjectSecurity removal
+        
+        /**
+         * This call is used to retrieve the acquired OwnCredentials
+         * and place the credentials on the curator's own
+         * credentials list.
+         *
+         * @param on_list  True if these credentials go on the default
+         *                 list of credentials.
+         */
+        OwnCredentials get_credentials(
+            in boolean on_list
+        );
+        
+        /**
+         * This operation is used to destroy the object before
+         * get_credentials is called.
+         */
+        void destroy();
+    };
+    
+    /**
+     * The CredentialsCurator object is a single object per an ORB
+     * instance's Security Service. It has the ability to create
+     * CredentialsAcquirers and keeps a list of active credentials.
+     * <pre>
+     * CredentialsCurator cur = ....
+     *          resolve_initial_references("SL3:CredentialsCurator");
+     * Any arg = ... build up acquisition 
+     *              argument with SL3CSI::CSIArgBuilder
+     * CredentialsAcquirer aqr =
+     *          cur.acquire_credentials("SL3CSIAQArgs",arg);
+     * OwnCredentials own = aqr.get_credentials(false);
+     * </pre>
+     */
+    local interface CredentialsCurator {
+
+        /**
+         * The supported_methods attribute contains a list of 
+         * acquisition methods that are supported. Method identifiers
+         * are defined in modules that signify their support.
+         *
+         * @see "SL3AQArgs"
+         * @see "SL3CSI"
+         * @see "SL3TLS"
+         * @see "SL3TCPIP"
+         * @see "SL3KRB5"
+         */
+
+	// begin of ObjectSecurity removal
+//          readonly attribute SL3CM::AcquisitionMethodList
+//                                                          supported_methods;
+
+	// end of ObjectSecurity removal
+        
+        /**
+         * This operation is used to create a CredentialsAcquirer for
+         * a particular acquisition method. It takes an initial set
+         * of arguments, so the possibility that the credentials
+         * may be immediately available from a call to get_credentials
+         * on the created Credentials Acquirer.
+         * <p>
+         * The acquisition_arguments is a CORBA any that is constructed
+         * according to the method used. Please see the ArgumentFactory
+         * from the SL3AQArgs module for a local object that helps 
+         * immensely with the construction of this complex argument.
+         * Extensions of that object are defined in their own
+         * separate modules that pertain to the particular acquisition
+         * mechanism, such as the SL3CSI, SL3TLS, SL3TCPIP modules.
+         *
+         * <h4>Parameters</h4>
+         * <dl>
+         * <dt>acquisition_method
+         * <dd>The identifier of the desired acquisition method.
+         *       A CORBA BAD_PARAM exception will be raised if the
+         *       named method is not supported.
+         * <dt>acquisition_arguments
+         * <dd>The argument of the desired acquisition method.
+         *       This CORBA any type is constructed according to 
+         *       the particular mechanism.
+         * </dl>
+         * @see "SL3AQArgs"
+         * @see "SL3CSI"
+         * @see "SL3TLS"
+         * @see "SL3TCPIP"
+         */
+
+	// begin of ObjectSecurity change
+
+        CredentialsAcquirer acquire_credentials(
+            in SL3AQArgs::Argument acquisition_arguments
+        );
+
+	// end of ObjectSecurity change
+
+        /**
+         * The Curator's Default Own Credentials list.
+         */
+        readonly attribute OwnCredentialsList default_creds_list;
+        
+        /**
+         * The Curator's ids of the credentials on the default list.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          readonly attribute SL3CM::CredentialsIdList  default_creds_ids;
+
+	// end of ObjectSecurity removal
+
+        /**
+         * This operation retrieves Own Credentials by identifier.
+         * It is not required that the identifier name a credentials
+         * on the default_credentials_list.  The Curator keeps track 
+         * of all OwnCredentials it creates, until they are explicitly
+         * released.
+         */
+        OwnCredentials get_own_credentials(
+            in SL3CM::CredentialsId credentials_id
+        );
+        
+        /**
+         * This operation releases credentials from the default_creds_list,
+         * if there, and also disables the credentials from further use,
+         * provided that all their pending work is done.
+         */
+        void release_own_credentials (
+            in SL3CM::CredentialsId  credentials_id
+        );
+            
+    };
+    
+    //--------------------------------------------------------------------
+    // Security Service ORB Objects
+    //     Retrieved from the ORB by "resolve_initial_references".
+    // 
+    //--------------------------------------------------------------------
+
+    /**
+     * The SecurityManager object represents the Security Level 3
+     * Security Service. There is one object of this type per ORB
+     * instance. It is resolved by a call to
+     * <p>
+     * ORB::resolve_initial_references("SecurityLevel3::SecurityManager");
+     */
+    local interface SecurityManager {
+
+        /**
+         * The credentials_curator attribute contains the reference
+         * to the SecurityLevel3 Credentials Curator. There is only
+         * one instance per ORB.
+         */
+        readonly attribute CredentialsCurator credentials_curator;
+        
+        /**
+         * The get_target_credentials operation retrieves the
+         * TargetCredentials that represents a CSIv2 security association
+         * with a Target. This operation causes communication with
+         * the target in order to establish a security context.
+         */
+        TargetCredentials get_target_credentials(
+            in  Object          the_object
+        );
+        
+        /**
+         * The create_context_estab_policy operation is a policy factory
+         * operation that creates the Security Level 3 
+         * ContextEstablishmentPolicy object. This policy is placed on 
+         * the policy override lists of object references to direct
+         * the security characteristics when communicating through
+         * that object reference.
+         * <p>
+         * If this policy is not put on an object reference, and the
+         * <a href="TransportSecurity.ObjectCredentialsPolicy.html">
+         * TransportSecurity::ObjectCredentialsPolicy</a>
+         * is also not on the object references policy list,
+         * then the default credentials lists from the
+         * <a href="SecurityLevel3.CredentialsCurator.html">
+         * SecurityLevel3::CredentialsCurator</a>
+         * and
+         * <a href="TransportSecurity::CredentialsCurator.html">
+         * TransportSecurity::CredentialsCurator</a>
+         * are used. 
+         */
+        ContextEstablishmentPolicy create_context_estab_policy(
+            in SL3CM::CredsDirective     creds_directive,
+            in OwnCredentialsList creds_list,
+            in SL3CM::FeatureDirective   use_client_auth,
+            in SL3CM::FeatureDirective   use_target_auth,
+            in SL3CM::FeatureDirective   use_confidentiality,
+            in SL3CM::FeatureDirective   use_integrity
+        );
+
+        /**
+         * The create_object_creds_policy is a policy factory operation
+         * that creates the ObjectCredentialsPolicy object. This policy
+         * is solely for use with policies place on POAs with "POA.create_POA".
+         * It restricts the POAs use of credentials. If this policy is
+         * not put on a POA, and the
+         * <a href="TransportSecurity.ObjectCredentialsPolicy.html">
+         * TransportSecurity::ObjectCredentialsPolicy</a>
+         * is also not on the  POA policy list, then the default
+         * credentials lists from the
+         * <a href="SecurityLevel3.CredentialsCurator.html">
+         * SecurityLevel3::CredentialsCurator</a>
+         * and
+         * <a href="TransportSecurity::CredentialsCurator.html">
+         * TransportSecurity::CredentialsCurator</a>
+         * are used. 
+         */
+
+        ObjectCredentialsPolicy create_object_creds_policy(
+            in OwnCredentialsList   creds_list
+        );
+    };
+    
+    /**
+     * The Security Current object references thread specific
+     * data pertaining to the security service. It is used
+     * to retrieve the client's credentials during an invocation
+     * on the server side.
+     * <p>
+     * There is only one instance of this object per ORB instance.
+     * It is retrieved by
+     * <pre>
+     * ORB.resolve_initial_references("SecurityLevel3::SecurityCurrent");
+     * </pre>
+     */
+    local interface SecurityCurrent {
+
+        /**
+         * From inside the execution of a target object implementation the
+         * client_credentials attribute contains the representation of 
+         * the remote client's credentials. This object represents the
+         * security context with the remote CSIv2 client.
+         * <p>
+         * If the client is not CSIv2 based, there are no CSIv2 Client
+         * Credentials, and this operation returns null. In this case, 
+         * the user should try the
+         * <a href="TransportSecurity.SecurityCurrent.html>
+         * TransportSecurity::SecurityCurrent</a>,
+         * as the request may have come over a secure or 
+         * insecure transport, such as IIOP or TLS, without a CSIv2
+         * Service Context.
+         */
+        readonly attribute ClientCredentials client_credentials;
+        
+        /**
+         * The request_is_local attribute is true if the current thread
+         * of execution is servicing a request on a collocated object. 
+         * The value of this attribute is false if there is no remote
+         * request, i.e. if this attribute is queried from a pure 
+         * client thread.
+         * <p>
+         * If this attribute is true, the client_credentials attribute
+         * returns the credentials of the remote client no matter how
+         * deep the collocated call stack, unless of course, this request
+         * is not CSIv2 based, in which case it returns null.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          readonly attribute boolean request_is_local;
+
+	// end of ObjectSecurity removal
+    };
+
+};
+#endif // _SECURITY_LEVEL3_IDL_

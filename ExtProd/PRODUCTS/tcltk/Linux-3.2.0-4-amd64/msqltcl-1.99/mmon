@@ -1,0 +1,2643 @@
+#!/usr/local/bin/msqlwish
+
+#
+#  mmon -- Mini-Monitor
+# 	
+#  $Id: mmon,v 1.99 1996/09/27 20:53:09 hs Rel $
+#------------------------------------------------------------------------
+#  Copyright (c) 1995-1996 Hakan Soderstrom
+# 
+#  Permission to use, copy, modify, distribute, and sell this software
+#  and its documentation for any purpose is hereby granted without fee,
+#  provided that the above copyright notice and this permission notice
+#  appear in all copies of the software and related documentation.
+#  
+#  THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+#  EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+#  WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+#
+#  IN NO EVENT SHALL HAKAN SODERSTROM OR SODERSTROM PROGRAMVARUVERKSTAD
+#  AB BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL
+#  DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+#  OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE POSSIBILITY
+#  OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN
+#  CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#------------------------------------------------------------------------
+#  Acknowledgement:
+#  Based on the design of wisqlite 2.2 by Tom Poindexter.
+#------------------------------------------------------------------------
+#
+#  DESCRIPTION
+#
+#  A window-based, interactive monitor for mSQL.
+#  ASSUMPTION, RESTRICTIONS: Requires Tk 4
+#  This version does not require TclX, in contrast to previous versions.
+#
+#  USAGE:
+#  mmon
+#   or
+#  msqlwish mmon &
+#
+#  MSQL_HOSTS: Optional environment variable which may contain a
+#  colon-separated list of host names where mSQL servers may be
+#  available.
+#
+#  There is also an option with the same purpose: *env.mSQLHosts. The
+#  environment variable takes precedence over the option if both are
+#  set.
+#
+#  MMON_CONNECT: Optional environment variable which may contain a host
+#  name and a database name separated by a colon.  If so, mmon will
+#  attempt to connect to the host and use the database.  An empty host
+#  name is taken to mean the local host.
+#
+#  There is also an option with the same purpose: *env.autoConnect. The
+#  environment variable takes precedence over the option if both are
+#  set.
+#
+#  MMON_DEFAULTS: Optional environment variable which may contain the
+#  name of an option database file. The format must be the usual
+#  .Xdefaults style (also described in the Tk documentation). You may
+#  use this file to personalize some aspects of the appearance and
+#  behaviour of mmon.  The description of global variables below
+#  introduces the name of several useful generic options.
+#
+#  If MMON_DEFAULTS is not defined 'mmon' will look for a file named
+#  '~/.mmondefaults'. If MMON_DEFAULTS is defined 'mmon' will not
+#  attempt to read any other file, even if the file MMON_DEFAULTS
+#  specifies is not readable.
+#
+
+#
+#  NAMING CONVENTIONS
+#
+#  Procs occur in alphabetical order.
+#
+#  The code is divided into modules. A module is a functional unit.
+#  Each module has a two-letter prefix. The prefix is prepended to all
+#  proc names in the module. Several modules have a proc called
+#  <prefix>_main which is the main entry to the module.
+#
+#  Callback procs have names starting with <prefix>_cb_. A callback proc
+#  generally assumes it is invoked in the context of a particular window.
+#
+
+############################################################################
+## REQUIRED PACKAGES
+if [catch {package require Tk 4.1} msg] {
+    puts [format {`mmon' requires Tk version 4.1 or later: %s} $msg]
+    exit 1
+}
+
+if [catch {package require msqltcl 1.80} msg] {
+    puts [format {`mmon' requires msqltcl version 1.80 or later: %s} $msg]
+    exit 1
+}
+
+############################################################################
+## MAIN PROGRAM LOGIC (mmon_) ##
+
+# GLOBAL VARIABLE DESCRIPTIONS.
+
+# Monitor state (except the command ring).
+# global mmon
+#
+# Many entries have a corresponding option. (See the discussion of the
+# MMON_DEFAULTS environment variable above.) The option name (where
+# applicable) is mentioned in the description of the entry. You are free
+# to use any window-specific options, of course.
+#
+# The following entries are used:
+# mmon(actPrefix)	-- action prefix.
+# mmon(autoConn)	-- autoconnect (host:database).
+#			   option: *env.autoConnect
+# mmon(cmtPrefix)	-- comment prefix.
+# mmon(colMaxLen)	-- (integer) current max column length in result text;
+#				zero means no limit.
+# mmon(ctrlAB)		-- control active background.
+#			   option: *widget.activeBackground
+# mmon(ctrlBG)		-- control background.
+#			   option: *widget.controlBackground
+# mmon(ctrlFG)		-- control foreground.
+#			   option: *widget.controlForeground
+# mmon(ctrlHL)		-- control highlight.
+#			   option: *widget.controlHighlight
+# mmon(dbname)		-- database name; or empty if no current database.
+# mmon(dDListboxF)	-- font used in data dictionary listboxes.
+#			   option: *widget.dataDictionaryListboxFont
+# mmon(execCmd)		-- proc to be invoked by "Execute" menu option.
+# mmon(helpEmphBG)	-- emphasized help text background.
+#			   option: *widget.helpEmphBackground
+# mmon(helpEmphF)	-- emphasized help text font.
+#			   option: *widget.helpEmphFont
+# mmon(helpEmphFG)	-- emphasized help text foreground.
+#			   option: *widget.helpEmphForeground
+# mmon(helpHeadBG)	-- heading help text background.
+#			   option: *widget.helpHeadBackground
+# mmon(helpHeadF)	-- heading help text font.
+#			   option: *widget.helpHeadFont
+# mmon(helpHeadFG)	-- heading help text foreground.
+#			   option: *widget.helpHeadForeground
+# mmon(helpPlainBG)	-- plain help text background.
+#			   option: *widget.helpPlainBackground
+# mmon(helpPlainF)	-- plain help text font.
+#			   option: *widget.helpPlainFont
+# mmon(helpPlainFG)	-- plain help text foreground.
+#			   option: *widget.helpPlainForeground
+# mmon(hosts)		-- list of names of potential mSQL hosts.
+#			   option: *env.mSQLHosts
+# mmon(iactFForm)	-- interaction font format (a font spec containing '%s'
+#			   for the size).
+#			   option: *widget.interactionFontFormat
+# mmon(iactFDSize)	-- interaction font default size.
+#			   option: *widget.interactionFontDefaultSize
+# mmon(iactHLBG)	-- interaction highlight background.
+#			   option: *widget.interactionHighlightBackground
+# mmon(iactHLFG)	-- interaction highlight foreground.
+#			   option: *widget.interactionHighlightForeground
+# mmon(inpBG)		-- input background.
+#			   option: *widget.inputBackground
+# mmon(inpFG)		-- input foreground.
+#			   option: *widget.inputForeground
+# mmon(interrupt)	-- (boolean) interrupt flag.
+# mmon(lDisplayF)	-- large display font.
+#			   option: *widget.largeDisplayFont
+# mmon(lLabelF)		-- large label font.
+#			   option: *widget.largeLabelFont
+# mmon(messBG)		-- message background.
+#			   option: *widget.messageBackground
+# mmon(messF)		-- font used for the message window.
+#			   option: *widget.mmonMessageFont
+# mmon(messFG)		-- message foreground.
+#			   option: *widget.messageForeground
+# mmon(outpBG)		-- output background.
+#			   option: *widget.outputBackground
+# mmon(outpFG)		-- output foreground.
+#			   option: *widget.outputForeground
+# mmon(printCmd)	-- print command: must be a command that prints its
+#				standard input.
+#			   option: *env.printCommand
+# mmon(resClear)	-- (boolean) clear result text each query if true;
+#				append otherwise.
+# mmon(resMaxLines)	-- (integer) max result lines before promting user;
+#				zero means no limit.
+# mmon(server)		-- server name; or empty when unconnected.
+# mmon(sqlFile)		-- current SQL file name; or empty string.
+# mmon(sqlTerm)		-- SQL statement terminator (reg. expr).
+# mmon(tlevel)          -- Trace level (for debugging). Default 0 (no trace).
+# mmon(version)		-- Mini-Monitor version.
+# mmon(white)		-- our definition of white space (reg. expr).
+
+########################
+#
+# mmon_Init
+#
+#   Initialize globals and other initial state stuff.
+#
+
+proc mmon_Init {} {
+  # Database handle.
+  global msql
+
+  # Monitor state (except the command ring).
+  global mmon
+
+  # State variables which need to be global because they are used in the
+  # user interface.
+  global mmui
+
+  # Command ring.
+  global cmdRing
+
+  # SET INITIAL VALUES.
+  # 
+  set msql {}
+  gl_opt_db_init
+  gl_state_init
+  set mmui(dummy) {}
+
+  # Initialize command ring.
+
+  set cmdRing(IDX)  0
+  set cmdRing(LAST) 0
+  for {set i 0} {$i < 10} {incr i} {
+    set cmdRing($i) ""
+  }
+}
+
+
+########################
+#
+# mmon_KickOff
+#
+#   Starts the application; ASSUMES initializations have been done.
+#
+
+proc mmon_KickOff {} {
+  global env
+
+  mn_main
+  set auto [array names env MMON_CONNECT]
+
+  if {$auto != {}} {
+    if {[llength [set auto [split $env(MMON_CONNECT) :]]] == 2} {
+      set host [lindex $auto 0]
+      set dbname [lindex $auto 1]
+      if {[do_conn_serv $host]} {
+        set success 0
+      } elseif {[do_conn_db $dbname]} {
+        set success 0
+      } else {
+        set success 1
+      }
+    } else {
+      set success 0
+    }
+  } else {
+    set success 0
+  }
+
+  if {!$success} sv_main
+}
+
+
+########################
+#
+# mmon_Main
+#
+#   A one-stop proc to start it all
+#
+
+proc mmon_Main {} {
+  mmon_Init
+  mmon_KickOff
+}
+
+
+############################################################################
+## DATABASE INFO PROCS (di_)
+
+########################
+#
+# di_fields
+#
+#   Create a toplevel window with a table's fields
+#   'tab' must be the name of the table.
+#
+
+proc di_fields {tab} {
+  global msql
+  global msqlstatus
+  global mmon
+
+  if {[mh_checkConn 3]} return
+
+  set plist ""
+
+  if {[catch {msqlcol $msql $tab \
+	{name type length prim_key non_null}} info]} {
+    mh_setMsg
+    return
+  }
+
+  foreach item $info {
+    set nm [lindex $item 0]
+    if {[set tp [lindex $item 1]] == "char"} {
+      append tp ([lindex $item 2])
+    }
+    if {[lindex $item 3]} {
+      set pk PK
+    } else {
+      set pk "  "
+    }
+    if {[lindex $item 4]} {
+      set nn NN
+    } else {
+      set nn "  "
+    }
+
+    lappend plist [format "%-24.24s %-11.11s %s %s" $nm $tp $pk $nn]
+  }
+
+  if {[llength $plist] == 0} {
+    mh_setMsg "No fields in table $tab"
+    return
+  }
+  lb_main .$mmon(dbname)_$tab Columns 42x10 $plist {} sq_insert
+  return 0
+}
+
+
+########################
+#
+# di_tables
+#
+#   Create a toplevel window displaying database table names
+#
+
+proc di_tables {} {
+  global msql
+  global msqlstatus
+  global mmon
+
+  if {[mh_checkConn 3]} return
+
+  if {[catch {msqlinfo $msql tables} plist]} {
+    mh_setMsg
+    return
+  } elseif {[llength $plist] == 0} {
+    mh_setMsg "No user tables in $mmon(dbname)"
+    return
+  }
+  lb_main .$mmon(dbname)_Tables Tables 20x20 [lsort $plist] \
+	di_fields sq_insert
+}
+
+
+############################################################################
+## ACTION PROCS (do_)
+## An action proc performs the non-interactive essence of a menu selection.
+## Since action procs are non-interactive they may be called from most
+## anywhere.
+## Nevertheless, some procs still contain interactive stuff.
+## They are marked ***.
+## The name of an action proc is formed from menu entries (possibly
+## abbreviated).
+## Procs are in alphabetical order, which is not necessarily menu order.
+
+
+########################
+#
+# do_conn_db  Connect->Database
+#
+#   Use a database.
+#   RETURNS 0 on success, 1 on conflict.
+#
+
+proc do_conn_db {dbname} {
+  global msql
+  global mmon
+
+  if {[catch {msqluse $msql $dbname}]} {
+    mh_setMsg "Could not use database ($dbname)"
+    set res 1
+  } else {
+    set mmon(dbname) [msqlinfo $msql dbname]
+    mh_setMsg "Database changed to: $mmon(dbname)"
+    set res 0
+  }
+  return $res
+}
+
+
+########################
+#
+# do_conn_serv  Connect->Server
+#
+#   Try a connection to the mSQL server.
+#   'ser' must be a server name.
+#   'quiet' must be non-null to prevent the main status area to be set
+#   in case of conflict.
+#   RETURNS 0 on success, 1 on conflict.
+#   SIDE EFFECT: Close the previous connection, if any.
+#
+
+proc do_conn_serv {ser {quiet {}}} {
+  global msql
+  global msqlstatus
+  global mmon
+
+  set message {}
+
+  # Save current connection.
+  set old_msql $msql
+
+  # Attempt connection.
+  set retcode [catch {set msql [msqlconnect $ser]}]
+
+  if {$retcode==0} {
+    if {[msqlstate -numeric $old_msql] > 1} {
+      msqlclose $old_msql
+    }
+    set mmon(server) [msqlinfo $msql host]
+    set message "New connection to: $mmon(server)"
+    set res 0
+  } else {
+    set message $msqlstatus(message)
+    set msql $old_msql
+    set res 1
+  }
+
+  if {[string length $quiet] == 0} {
+    mh_setMsg $message
+  }
+  return $res
+}
+
+
+########################
+#
+# do_help_about  Help->About ***
+#
+
+proc do_help_about {} {
+  global mmon
+  set w [hl_main About_Mini-Monitor "Mini-Monitor $mmon(version)"]
+  hl_par $w "Author: Hakan Soderstrom after an original design\
+by Tom Poindexter."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_help_gen  Help->General ***
+#
+
+proc do_help_gen {} {
+  set w [hl_main General_Help {MINI-MONITOR INTRODUCTION}]
+  hl_par $w "The Mini-Monitor basically lets you enter and edit\
+Mini-SQL commands, have them executed, and manage the result.\
+Several useful features simplify this basic process.\
+The following paragraphs describe what you see on the main screen."
+  hl_subj $w {Menu Bar}
+  hl_par $w "The menu bar is the topmost area of the main screen.\
+In addition to menus the menu bar contains two buttons."
+  hl_subj $w {Connection Display}
+  hl_par $w "The area below the menu bar displays the host and\
+database you are connected to (if any). Use the 'Connection' menu to\
+connect to another host or database."
+  hl_subj $w {SQL Input Window}
+  hl_par $w "The SQL input window is used to enter and edit Mini-SQL\
+commands.\
+You may enter text from the keyboard or from a file.\
+Use the 'SQL' menu to get text from a file, or to save the current text."
+  hl_par $w "Execute the contents of the SQL input window by pushing the\
+'Execute' button, or by pressing Ctrl-Return (or Shift-Return)."
+  hl_par $w "There is also a history mechanism.\
+Press Ctrl-UpArrow one or more times to go back to previously executed\
+commands, Ctrl-DownArrow to go forwards.\
+(Shift-UpArrow and Shift-DownArrow have the same functions.)"
+  hl_par $w "The SQL input window may contain more than one\
+Mini-SQL statement.\
+The Mini-Monitor divides the input into statements and sends them one by one\
+to the mSQL database engine.\
+For this to be possible a semicolon must terminate each statement, and\
+each new statement must begin on a new line.\
+(The last statement need not end with semicolon.)\
+Comments (lines beginning with '#') and empty lines are also allowed."
+  hl_subj $w {Results Window}
+  hl_par $w "The Results window displays the result of executing SQL\
+input."
+  hl_subj $w {Environment Variables}
+  hl_par $w "You may use the following optional environment variables to\
+customize some Mini-Monitor behaviour."
+  hl_par $w "MSQL_HOSTS: May contain a colon-separated list of host names\
+where mSQL servers may be available."
+  hl_par $w "MMON_CONNECT: May contain a host name and a database name\
+separated by a colon. If so, mmon will attempt to connect to the host\
+and use the database.  An empty host name is taken to mean the local host."
+  hl_par $w "MMON_DEFAULTS: May contain the name of an option database file.\
+The file format must be the usual .Xdefaults style (also described in the Tk\
+documentation).\
+You may use this file to personalize some aspects of the appearance and\
+behaviour of mmon.\
+You will have to read the mmon source code to find out option names."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_help_men_conn  Help->Menus->Connection ***
+#
+
+proc do_help_men_conn {} {
+  set w [hl_main Connection_Help {'CONNECTION' MENU}]
+  hl_par $w "The 'Connection' menu is used to connect to a database\
+server and a database.\
+If the MMON_CONNECT environment variable is set to a host name and a\
+database name separated by a colon,\
+the Mini-Monitor tries to quick-start by connecting to this host and\
+database. (Omit host name to indicate the local host.)"
+  hl_subj $w {Database}
+  hl_par $w "Displays a dialog box of databases available on the server\
+you are connected to.\
+Double clicking (button 1) on a database name is a quick way of selecting\
+a database.\
+The name of the currently selected database is shown in the Connection\
+Display."
+  hl_subj $w {Server}
+  hl_par $w "Displays a dialog box where you may select an mSQL\
+server host.\
+If you push the 'Connect' button with an empty 'Server' entry a connection\
+is attempted to the local host.\
+If the MSQL_HOSTS environment variable is defined\
+(as a colon-separated list of host names)\
+the 'Server' entry label is, in fact, a menu button from which you may\
+select a host name.\
+You may always fill in the host name manually."
+  hl_par $w "The name of the host you are connected to is shown in\
+the Connection Display."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_help_men_ex  Help->Menus->Execute ***
+#
+
+proc do_help_men_ex {} {
+  set w [hl_main Execute_Help {'EXECUTE' MENU BAR BUTTON}]
+  hl_par $w "Sends the contents of the SQL input window to the database\
+server.\
+Any error messages are displayed in the message area.\
+The statement causing the conflict is highlighted.\
+(Control-Delete reverts the highlighted text to normal.)\
+See also Help->General about the SQL input window."
+  hl_par $w "While execution is active, the 'Execute' button turns into\
+a 'Cancel' button.\
+You may use this button to interrupt execution at any time."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_help_men_res  Help->Menus->Results ***
+#
+
+proc do_help_men_res {} {
+  set w [hl_main Results_Help {'RESULTS' MENU}]
+  hl_par $w "The 'Results' menu controls how query results are displayed\
+in the Results window and allows you to save or print its contents."
+  hl_subj $w {Append results -- Clear results}
+  hl_par $w "You may toggle between append mode and clear mode.\
+In append mode the result of each query is appended to the end of whatever\
+the Results window contains.\
+In clear mode the Results window is cleared for each query."
+  hl_subj $w {Save As}
+  hl_par $w "Displays a file selection box.\
+You may specify a new or existing file for saving the contents of the\
+Results window."
+  hl_subj $w {Print}
+  hl_par $w "Prints the contents of the Results window."
+  hl_subj $w {Font size}
+  hl_par $w "Sets the size of the Results window font."
+  hl_subj $w {Limit result}
+  hl_par $w "Displays a dialog box that allows you to limit query results\
+in two different ways:"
+  hl_par $w "You may limit the number of characters displayed for any\
+column.\
+Columns longer than the limit you set will be truncated.\
+Zero means no truncation."
+  hl_par $w "You may impose a limit on the number of rows returned\
+before the Mini-Monitor asks for your confirmation to continue.\
+Zero means no confirmation is requested.\
+You may always use the 'Cancel' button."
+  hl_subj $w {Null value}
+  hl_par $w "You may set the string to represent NULL in query results.\
+Initially the empty string is used."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_help_men_sql  Help->Menus->SQL ***
+#
+
+proc do_help_men_sql {} {
+  set w [hl_main SQL_Help {'SQL' MENU}]
+  hl_par $w "The 'SQL' menu is mainly concerned with the contents of the\
+SQL input window."
+  hl_subj $w {Clear}
+  hl_par $w "Clears the SQL input window and the Results window."
+  hl_subj $w {Hilite Off}
+  hl_par $w "Reverts any highlighted SQL statement back to normal.\
+This is equivalent to Control-Delete.\
+Highlighting occurs if a conflict is detected during SQL execution."
+  hl_subj $w {Open}
+  hl_par $w "Displays a file selection dialog box.\
+You may select a file for copying into the SQL input window.\
+The window is cleared before copying."
+  hl_subj $w {Save}
+  hl_par $w "Saves the contents of the SQL input window into the\
+current file name.\
+The current file name is displayed above the SQL input window."
+  hl_subj $w {Save As}
+  hl_par $w "Displays a file selection dialog box.\
+You may specify a new or existing file for saving the contents of the\
+SQL input window."
+  hl_subj $w {Exit}
+  hl_par $w "Displays a dialog box which allows you to exit the\
+Mini-Monitor."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_help_men_tab  Help->Menus->Tables ***
+#
+
+proc do_help_men_tab {} {
+  set w [hl_main Tables_Help {'TABLES' MENU BAR BUTTON}]
+  hl_par $w "Displays a dialog box containing the names of the tables of\
+the current database."
+  hl_subj $w {The Tables Dialog Box}
+  hl_par $w "The window title contains the database name.\
+After selecting a table name (single button 1 click) you may,"
+  hl_par $w "-- Click on the 'Select' button to obtain a new dialog box\
+containing data about the columns of the selected table.\
+(Double click with button 1 is a short cut.)\
+This dialog box is further described below."
+  hl_par $w "-- Click on the 'Insert' button to insert the table name\
+into the SQL input window.\
+This may be handy when you write queries.\
+(Button 3 click is a short cut.)"
+  hl_subj $w {The Columns Dialog Box}
+  hl_par $w "The window title contains the database and table names.\
+The listbox shows name and datatype of each column.\
+'PK' or 'NN' at the end of an entry signify 'Primary Key' and 'Not Null',\
+respectively.\
+As with the tables dialog box you may quickly insert a column name into the\
+SQL input window by clicking with button 3,\
+or clicking on the 'Insert' button."
+
+  hl_show $w
+}
+
+
+########################
+#
+# do_res_clear  Result->Clear
+#
+#   Clear the output listbox
+#
+
+proc do_res_clear {} {
+
+  .m.o.out delete 0 end
+  mh_setMsg {}
+  focus .m.s.sql
+}
+
+
+########################
+#
+# do_res_font  Result->Font size
+#
+#    Sets the font size of the result window.
+#
+
+proc do_res_font {size} {
+global mmon
+  set font [format $mmon(iactFForm) $size]
+  .m.o.out configure -font $font
+}
+
+
+########################
+#
+# do_res_print  Result->Print
+#
+#    Print contents of result window
+#
+
+proc do_res_print {} {
+  global mmon
+  
+  if [.m.o.out size]==0 {
+    mh_setMsg "No output to print"
+    return
+  }
+
+  for {set i 0} {$i < [.m.o.out size]} {incr i} {
+    append out_lines "[.m.o.out get $i]\n"
+  }
+  
+  # Print: have standard out and standard error both appear in the
+  # message area.
+  mh_setMsg [exec $mmon(printCmd) << $out_lines |& cat]
+}
+
+
+########################
+#
+# do_res_save  Result->Save
+#
+#    Save result window contents
+#
+
+proc do_res_save {filename fh} {
+    global cmdRing
+    set cmdRing(IDX) $cmdRing(LAST)
+
+    set lbsize [.m.o.out size]
+
+    if {$lbsize > 0} {
+	for {set i 0} {$i < $lbsize} {incr i} {
+	    puts $fh [.m.o.out get $i]
+	}
+	mh_setMsg "Results saved to $filename"
+    } else {
+	mh_setMsg "Nothing to save"
+    }
+}
+
+
+########################
+#
+# do_sql_clear  SQL->Clear
+#
+#   Clear SQL and result windows
+#
+
+proc do_sql_clear {} {
+  global mmon
+  global cmdRing
+  set cmdRing(IDX) $cmdRing(LAST)
+
+  do_res_clear
+  sq_clear
+
+  mh_setMsg {}
+  focus .m.s.sql
+
+  set mmon(sqlFile) {}
+}
+
+
+########################
+#
+# do_sql_exit  SQL->Exit
+#
+#   Exit the mini-monitor
+#
+
+proc do_sql_exit {} {
+	msqlclose
+	exit 0
+}
+
+
+########################
+#
+# do_sql_open  SQL->Open
+#
+#    Try to open the file passed by file selection
+#
+
+proc do_sql_open {filename fh} {
+    global mmon
+    global cmdRing
+    set cmdRing(IDX) $cmdRing(LAST)
+
+    sq_clear
+    do_res_clear
+    set mmon(sqlFile) [file tail $filename]
+    .m.s.l configure -text "SQL ($mmon(sqlFile))"
+    .m.s.sql insert 1.0 [read -nonewline $fh]
+    mh_setMsg "$filename loaded"
+    focus .m.s.sql
+}
+
+
+########################
+#
+# do_sql_save  SQL->Save
+#
+#    Save the sql code to sqlFile or use file selection
+#
+
+proc do_sql_save {} {
+    global mmon
+    global cmdRing
+    set cmdRing(IDX) $cmdRing(LAST)
+
+    if {[string length $mmon(sqlFile)] == 0} {
+	fs_write "Save SQL Window" do_sql_saveAs
+    } else {
+	set f [open $mmon(sqlFile) w]
+	puts $f [.m.s.sql get 1.0 "end - 1 char"]
+	close $f
+	mh_setMsg "Saved to $mmon(sqlFile)"
+    }
+}
+
+
+########################
+#
+# do_sql_saveAs  SQL->Save As ***
+#
+#    Save the SQL window contents in a new file
+#
+
+proc do_sql_saveAs {filename fh} {
+    global mmon
+    global cmdRing
+    set cmdRing(IDX) $cmdRing(LAST)
+
+    set mmon(sqlFile) [file tail $filename]
+    .m.s.l configure -text "SQL ($mmon(sqlFile))"
+
+    puts $fh [.m.s.sql get 1.0 "end - 1 char"]
+    mh_setMsg "SQL saved to $mmon(sqlFile)"
+}
+
+
+############################################################################
+## DATABASE SELECTION WINDOW (ds_)
+
+########################
+#
+# ds_main
+#
+#   Select a database on the current server
+#
+
+proc ds_main {} {
+  global msql
+  global mmon
+
+  if {[mh_checkConn 2]} {
+    return
+  } elseif {[catch {msqlinfo $msql databases} dblist]} {
+    mh_setMsg $dblist
+  } else {
+    lb_main .Set_DB Databases 20x7 $dblist ds_cb_tryDb
+  }
+}
+
+
+########################
+#
+# ds_cb_tryDb
+#
+#   Callback for setting database
+#
+
+proc ds_cb_tryDb {dbname} {
+
+  if {[do_conn_db $dbname]} {
+    mh_setMsg
+  }
+  return 1
+}
+
+
+############################################################################
+## FILE SELECTION WINDOW (fs_)
+## Slightly modified from
+## Practical Programming in Tcl and Tk
+## by Brent Welch
+## and published by Prentice Hall
+## ISBN 0-13-182007-9
+## 
+## Copyright 1995 Brent Welch. All rights reserved.
+## 
+## License is granted to copy, to use, and to make and to use derivative
+## works for any purpose, provided that the this copyright notice and
+## this license notice is included in all copies and any derivatives
+## works.  The licensee acknowleges that Brent Welch, Prentice Hall, and
+## Xerox Corporation have no liability for licensee's use or for any
+## derivative works made by licensee.  The Xerox name shall not be used
+## in any advertising or the like without its written permission.
+## 
+## This software is provided AS IS.  XEROX CORPORATION DISCLAIMS AND
+## LICENSEE AGREES THAT ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+## WITHOUT LIMITATION THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+## FITNESS FOR A PARTICULAR PURPOSE.  NOTWITHSTANDING ANY OTHER
+## PROVISION CONTAINED HEREIN, ANY LIABILITY FOR DAMAGES RESULTING FROM
+## THE SOFTWARE OR ITS USE IS EXPRESSLY DISCLAIMED, INCLUDING
+## CONSEQUENTIAL OR ANY OTHER INDIRECT DAMAGES, WHETHER ARISING IN
+## CONTRACT, TORT (INCLUDING NEGLIGENCE) OR STRICT LIABILITY, EVEN IF
+## XEROX CORPORATION IS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."
+
+proc fs_read {msg proc} {
+    set path [fs_engine $msg {} 1]
+    # Empty path means 'Cancel'.
+    if {[string length $path] > 0} {
+	if [catch {open $path r} fh] {
+	    mh_setMsg "$path: $fh"
+	} else {
+	    $proc $path $fh
+	    close $fh
+	}
+    } else {
+	mh_setMsg "Open was cancelled"
+    }
+}
+
+proc fs_write {msg proc} {
+    global fs_stat
+
+    fs_engine $msg {} 0
+    # Empty path means 'Cancel'.
+    if {[string length $fs_stat(path)] > 0} {
+	if $fs_stat(doesExist) {
+	    set path $fs_stat(path)
+	} else {
+	    set path $fs_stat(dir)/$fs_stat(path)
+	}
+	if [catch {open $path w} fh] {
+	    mh_setMsg "$path: $fh"
+	} else {
+	    $proc $path $fh
+	    close $fh
+	}
+    } else {
+	mh_setMsg "Save was cancelled"
+    }
+}
+
+proc fs_Resources {} {
+    # path is used to enter the file name
+    option add *Fileselect*path.relief		sunken	startup
+    # Text for the OK and Cancel buttons
+    option add *Fileselect*ok*text		OK	startup
+    option add *Fileselect*ok*underline		0	startup
+    option add *Fileselect*cancel.text		Cancel	startup
+    option add *Fileselect*cancel.underline 	0	startup
+    # Size of the listbox
+    option add *Fileselect*list.width		24	startup
+    option add *Fileselect*list.height		12	startup
+}
+
+# fs_engine returns the selected pathname, or {}
+# 'mustExist' == 1: intends to read
+# 'mustExist' == 0: intends to write
+
+proc fs_engine {{why "File Selection"} {default {}} {mustExist 1} } {
+    global fs_stat
+    global mmon
+
+    catch {destroy .fsw}
+    set t [toplevel .fsw -bd 4 -class Fileselect]
+    wm title .fsw "File Selection"
+    wm transient .fsw .
+    fs_Resources
+    
+    message $t.msg -aspect 1000 -text $why
+    pack $t.msg -side top -fill x
+    
+    # Create a read-only entry for the current directory
+    set fs_stat(dirEnt) [entry $t.dir -width 15 -bg $mmon(outpBG) \
+			     -fg $mmon(outpFG) -relief raised -state disabled]
+    pack $t.dir -side top -fill x
+    
+    # Create an entry for the pathname
+    # The value is kept in fs_stat(path)
+    frame $t.top
+    set e [entry $t.top.path \
+	       -textvariable fs_stat(path)]
+    label $t.top.h -anchor w -text "Spacebar: file name completion"
+    pack $t.top -side top -fill x
+    pack $t.top.path $t.top.h -side top -fill x -expand true
+    
+    # Create a listbox to hold the directory contents
+    set lb [listbox $t.list \
+		-yscrollcommand [list $t.scroll set]]
+    scrollbar $t.scroll -command [list $lb yview]
+
+    # Create the OK and Cancel buttons
+    # The OK button has a rim to indicate it is the default
+    frame $t.buttons -bd 10
+    frame $t.buttons.ok -bd 2 -relief sunken
+    set ok [button $t.buttons.ok.b \
+		-command fs_OK]
+    set can [button $t.buttons.cancel \
+		 -command fs_Cancel]
+
+    # Pack the list, scrollbar, and button box
+    # in a horizontal stack below the upper widgets
+    pack $t.list -side left -fill both -expand true
+    pack $t.scroll -side left -fill y
+    pack $t.buttons -side left -fill both
+    pack $t.buttons.ok $t.buttons.cancel \
+	-side top -padx 10 -pady 5
+    pack $t.buttons.ok.b -padx 4 -pady 4
+
+    fs_Bindings $t $e $lb $ok $can
+
+    # Initialize variables and list the directory
+    if {[string length $default] == 0} {
+	set fs_stat(path) {}
+	set dir [pwd]
+    } else {
+	set fs_stat(path) [file tail $default]
+	set dir [file dirname $default]
+    }
+    set fs_stat(dir) {}
+    set fs_stat(done) 0
+    set fs_stat(mustExist) $mustExist
+
+    # Wait for the listbox to be visible so
+    # we can provide feedback during the listing 
+    tkwait visibility .fsw.list
+    fs_List $dir
+
+    tkwait variable fs_stat(done)
+    destroy $t
+    return $fs_stat(path)
+}
+
+proc fs_Bindings { t e lb ok can } {
+    # t - toplevel
+    # e - name entry
+    # lb - listbox
+    # ok - OK button
+    # can - Cancel button
+
+    # Elimate the all binding tag because we
+    # do our own focus management
+    foreach w [list $e $lb $ok $can] {
+	bindtags $w [list $t [winfo class $w] $w]
+    }
+    # Dialog-global cancel binding
+    bind $t <Control-c> fs_Cancel
+
+    # Entry bindings
+    bind $e <Return> fs_OK
+    bind $e <space> fs_Complete
+
+    # A single click, or <space>, puts the name in the entry
+    # A double-click, or <Return>, selects the name
+    bind $lb <space> "fs_Take $%W ; focus $e"
+    bind $lb <Button-1> \
+	"fs_Click %W %y ; focus $e"
+    bind $lb <Return> "fs_Take %W ; fs_OK"
+    bind $lb <Double-Button-1> \
+	"fs_Click %W %y ; fs_OK"
+
+    # Focus management.  	# <Return> or <space> selects the name.
+    bind $e <Tab> "focus $lb ; $lb select set 0"
+    bind $lb <Tab> "focus $e"
+
+    # Button focus.  Extract the underlined letter
+    # from the button label to use as the focus key.
+    foreach but [list $ok $can] {
+	set char [string tolower [string index  \
+				      [$but cget -text] [$but cget -underline]]]
+	bind $t <Alt-$char> "focus $but ; break"
+    }
+    bind $ok <Tab> "focus $can"
+    bind $can <Tab> "focus $ok"
+
+    # Set up for type in
+    focus $e
+}
+
+proc fs_List { dir {files {}} } {
+    global fs_stat
+
+    # Update the directory display
+    set e $fs_stat(dirEnt)
+    $e config -state normal
+    $e delete 0 end
+    $e insert 0 $dir
+    $e config -state disabled
+    # scroll to view the tail end
+    $e xview moveto 1
+
+    .fsw.list delete 0 end
+    set fs_stat(dir) $dir
+    if ![file isdirectory $dir] {
+	.fsw.list insert 0 "Bad Directory"
+	return
+    }
+    .fsw.list insert 0 Listing...
+    update idletasks
+    .fsw.list delete 0
+    if {[string length $files] == 0} {
+	# List the directory and add an
+	# entry for the parent directory
+	set files [glob -nocomplain $fs_stat(dir)/*]
+	.fsw.list insert end ../
+    }
+    # Sort the directories to the front
+    set dirs {}
+    set others {}
+    foreach f [lsort $files] {
+	if [file isdirectory $f] {
+	    lappend dirs [file tail $f]/
+	} else {
+	    lappend others [file tail $f]
+	}
+    }
+    foreach f [concat $dirs $others] {
+	.fsw.list insert end $f
+    }
+}
+
+proc fs_OK {} {
+    global fs_stat
+
+    # Handle the parent directory specially
+    if {[regsub {^\.\./?} $fs_stat(path) {} newpath] != 0} {
+	set fs_stat(path) $newpath
+	set fs_stat(dir) [file dirname $fs_stat(dir)]
+	fs_OK
+	return
+    }
+    
+    set path [string trimright $fs_stat(dir)/$fs_stat(path) /]
+    
+    if [file isdirectory $path] {
+	set fs_stat(path) {}
+	fs_List $path
+	return
+    }
+    if [file exists $path] {
+	set fs_stat(doesExist) 1
+	if {$fs_stat(mustExist) == 0} {
+	    if {[tk_dialog .fsconf "Overwrite?" \
+		     "OK to overwrite $path?" {} 1 \
+		     "OK" "Hold it; don't overwrite"] == 0} {
+		set fs_stat(path) $path
+		set fs_stat(done) 1
+	    }
+	} else {
+	    set fs_stat(path) $path
+	    set fs_stat(done) 1
+	}
+	return
+    } else {
+	set fs_stat(doesExist) 0
+    }
+
+    # Neither a file or a directory.
+    # See if glob will find something
+    if [catch {glob $path} files] {
+	# No, perhaps the user typed a new absolute pathname
+	if [catch {glob $fs_stat(path)} path] {
+	    # Nothing good
+	    if {$fs_stat(mustExist)} {
+		# Attempt completion
+		fs_Complete
+	    } elseif [file isdirectory \
+			  [file dirname $fs_stat(path)]] {
+		# Allow new name
+		set fs_stat(done) 1
+	    }
+	    return
+	} else {
+	    # OK - try again
+	    set fs_stat(dir) [file dirname $fs_stat(path)]
+	    set fs_stat(path) [file tail $fs_stat(path)]
+	    fs_OK
+	    return
+	}
+    } else {
+	# Ok - current directory is ok,
+	# either select the file or list them.
+	if {[llength [split $files]] == 1} {
+	    set fs_stat(path) $files
+	    fs_OK
+	} else {
+	    set fs_stat(dir) [file dirname [lindex $files 0]]
+	    fs_List $fs_stat(dir) $files
+	}
+    }
+}
+
+proc fs_Cancel {} {
+    global fs_stat
+    set fs_stat(doesExist) 0
+    set fs_stat(done) 1
+    set fs_stat(path) {}
+}
+
+proc fs_Click { lb y } {
+    # Take the item the user clicked on
+    global fs_stat
+    set fs_stat(path) [$lb get [$lb nearest $y]]
+}
+
+proc fs_Take { lb } {
+    # Take the currently selected list item
+    global fs_stat
+    set fs_stat(path) [$lb get [$lb curselection]]
+}
+
+proc fs_Complete {} {
+    global fs_stat
+
+    # Do file name completion
+    # Nuke the space that triggered this call
+    set fs_stat(path) [string trim $fs_stat(path) \t\ ]
+
+    # Figure out what directory we are looking at
+    # dir is the directory
+    # tail is the partial name
+    if {[string match /* $fs_stat(path)]} {
+	set dir [file dirname $fs_stat(path)]
+	set tail [file tail $fs_stat(path)]
+    } elseif [string match ~* $fs_stat(path)] {
+	if [catch {file dirname $fs_stat(path)} dir] {
+	    return	;# Bad user
+	}
+	set tail [file tail $fs_stat(path)]
+    } else {
+	set path $fs_stat(dir)/$fs_stat(path)
+	set dir [file dirname $path]
+	set tail [file tail $path]
+    }
+    # See what files are there
+    set files [glob -nocomplain $dir/$tail*]
+    if {[llength [split $files]] == 1} {
+	# Matched a single file
+	set fs_stat(dir) $dir
+	set fs_stat(path) [file tail $files]
+    } else {
+	if {[llength [split $files]] > 1} {
+	    # Find the longest common prefix
+	    set l [expr [string length $tail]-1]
+	    set miss 0
+	    # Remember that files has absolute paths
+	    set file1 [file tail [lindex $files 0]]
+	    while {!$miss} {
+		incr l
+		if {$l == [string length $file1]} {
+		    # file1 is a prefix of all others
+		    break
+		}
+		set new [string range $file1 0 $l]
+		foreach f $files {
+		    if ![string match $new* [file tail $f]] {
+			set miss 1
+			incr l -1
+			break
+		    }
+		}
+	    }
+	    set fs_stat(path) [string range $file1 0 $l]
+	}
+	fs_List $dir $files
+    }
+}
+
+
+############################################################################
+## GLOBAL VARIABLES & AUXILIARY PROCS (gl_) ##
+
+########################
+#
+# gl_opt_db_init
+#
+#   Initializes the option database.
+#
+
+proc gl_opt_db_init {} {
+  global env
+
+  # Assign default values to options.
+  gl_opt_defaults startupFile
+
+  set fname [array names env MMON_DEFAULTS]
+  if {$fname != {}} {
+    set fname $env(MMON_DEFAULTS)
+  } else {
+    set fname {~/.mmondefaults}
+  }
+
+  # Attempt to read the option file.
+  if [file readable $fname] {
+    if {[catch {option readfile $fname userDefault} msg]} {
+      puts [format {*** %s} $msg]
+    }
+  }
+}
+
+########################
+#
+# gl_opt_defaults
+#
+#   Assign default values to options
+#
+
+proc gl_opt_defaults {pri} {
+  # No reasonable defaults for these:
+  # option add *env.autoConnect {}
+  # option add *env.mSQLHosts {}
+  # option add *env.printCommand
+
+  set dark_red		#9c6a00000000
+  set signal_red	#c3d657ee57ee
+  set pale_yellowish	#fffffcabdeb7
+  set deeper_yellow	#ffffd5800000
+  set deep_yellow	#fffff419b851
+  set pale_greenish	#ed2bf999d428
+  set dark_green	#7afc9c284376
+  set clear_blue	#47c086caba5e
+
+  option add *widget.activeBackground $deeper_yellow	$pri
+  option add *widget.controlBackground $deep_yellow	$pri
+  option add *widget.controlForeground black		$pri
+  option add *widget.controlHighlight $dark_green	$pri
+  option add *widget.dataDictionaryListboxFont \
+	{-*-courier-*-r-*-*-14-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.helpEmphBackground $pale_yellowish	$pri
+  option add *widget.helpEmphFont \
+	{-*-times-bold-r-*--16-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.helpEmphForeground $signal_red	$pri
+  option add *widget.helpHeadBackground $pale_yellowish	$pri
+  option add *widget.helpHeadFont \
+	{-*-times-bold-r-*--20-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.helpHeadForeground $clear_blue	$pri
+  option add *widget.helpPlainBackground $pale_yellowish	$pri
+  option add *widget.helpPlainFont \
+	{-*-times-medium-r-*--16-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.helpPlainForeground black		$pri
+  option add *widget.interactionFontFormat \
+	{-*-courier-*-r-*-*-%s-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.interactionFontDefaultSize 14	$pri
+  option add *widget.interactionHighlightBackground $dark_green	$pri
+  option add *widget.interactionHighlightForeground white	$pri
+  option add *widget.inputBackground $pale_greenish	$pri
+  option add *widget.inputForeground black		$pri
+  option add *widget.largeDisplayFont \
+	{-*-helvetica-bold-r-*-*-20-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.largeLabelFont \
+	{-*-helvetica-bold-o-*-*-20-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.mmonMessageFont \
+	{-*-helvetica-bold-r-*-*-17-*-*-*-*-*-iso8859-1}	$pri
+  option add *widget.messageBackground $pale_yellowish	$pri
+  option add *widget.messageForeground $dark_red	$pri
+  option add *widget.outputBackground $pale_yellowish	$pri
+  option add *widget.outputForeground black		$pri
+}
+
+########################
+#
+# gl_state_init
+#
+#   Initialize mmon state.
+#
+
+proc gl_state_init {} {
+  global mmon
+
+  # No options for these.
+  set mmon(actPrefix)	{#>}
+  set mmon(cmtPrefix)	{#}
+  set mmon(colMaxLen)	0
+  set mmon(dbname)	{}
+  set mmon(execCmd)	sq_submit
+  set mmon(printCmd)	lpr
+  set mmon(resClear)	1
+  set mmon(resMaxLines)	0
+  set mmon(server)	{}
+  set mmon(sqlFile)	{}
+  set mmon(sqlTerm)	{;$}
+  set mmon(tlevel)	0
+  set mmon(version)	{$Revision: 1.99 $}
+  set mmon(white)	{[ 	]*}
+
+  # Need these to make 'option get' behave.
+  frame .env
+  frame .widget
+
+  # Get widget-oriented values
+  gl_wstate ctrlAB	activeBackground
+  gl_wstate ctrlBG	controlBackground
+  gl_wstate ctrlFG	controlForeground
+  gl_wstate ctrlHL	controlHighlight
+  gl_wstate dDListboxF	dataDictionaryListboxFont
+  gl_wstate helpEmphBG	helpEmphBackground
+  gl_wstate helpEmphF	helpEmphFont
+  gl_wstate helpEmphFG	helpEmphForeground
+  gl_wstate helpHeadBG	helpHeadBackground
+  gl_wstate helpHeadFG	helpHeadForeground
+  gl_wstate helpHeadF	helpHeadFont
+  gl_wstate helpPlainBG	helpPlainBackground
+  gl_wstate helpPlainF	helpPlainFont
+  gl_wstate helpPlainFG	helpPlainForeground
+  gl_wstate iactFForm	interactionFontFormat
+  gl_wstate iactFDSize	interactionFontDefaultSize
+  gl_wstate iactHLBG	interactionHighlightBackground
+  gl_wstate iactHLFG	interactionHighlightForeground
+  gl_wstate inpBG	inputBackground
+  gl_wstate inpFG	inputForeground
+  gl_wstate lDisplayF	largeDisplayFont
+  gl_wstate lLabelF	largeLabelFont
+  gl_wstate messBG	messageBackground
+  gl_wstate messF	mmonMessageFont
+  gl_wstate messFG	messageForeground
+  gl_wstate outpBG	outputBackground
+  gl_wstate outpFG	outputForeground
+
+  # Destroy temporary windows.
+  destroy .env
+  destroy .widget
+
+  # Set some class options.
+  option add *Button.activeBackground		$mmon(ctrlAB)
+  option add *Button.background			$mmon(ctrlBG)
+  option add *Button.foreground			$mmon(ctrlFG)
+  option add *Button.highlightColor		$mmon(ctrlHL)
+  option add *Entry.background			$mmon(inpBG)
+  option add *Entry.foreground			$mmon(inpFG)
+  option add *Entry.selectBackground		$mmon(iactHLBG)
+  option add *Entry.selectForeground		$mmon(iactHLFG)
+  option add *Listbox.background		$mmon(outpBG)
+  option add *Listbox.font			$mmon(dDListboxF)
+  option add *Listbox.foreground		$mmon(ctrlFG)
+  option add *Listbox.highlightColor		$mmon(ctrlHL)
+  option add *Listbox.selectBackground		$mmon(ctrlAB)
+  option add *Menubutton.activeBackground	$mmon(ctrlAB)
+  option add *Menubutton.background		$mmon(ctrlBG)
+  option add *Menubutton.foreground		$mmon(ctrlFG)
+  option add *Menubutton.highlightColor		$mmon(ctrlHL)
+  option add *Menu.activeBackground		$mmon(ctrlAB)
+  option add *Menu.background			$mmon(ctrlBG)
+  option add *Menu.foreground			$mmon(ctrlFG)
+  option add *Menu.highlightColor		$mmon(ctrlHL)
+  option add *Scale.activeBackground		$mmon(ctrlAB)
+  option add *Scale.background			$mmon(ctrlBG)
+  option add *Scale.foreground			$mmon(ctrlFG)
+  option add *Scale.highlightColor		$mmon(ctrlHL)
+  option add *Scale.troughColor			$mmon(ctrlHL)
+  option add *Text.selectBackground		$mmon(iactHLBG)
+  option add *Text.selectForeground		$mmon(iactHLFG)
+}
+
+########################
+#
+# gl_wstate
+#
+#   Initialize a widget-oriented mmon state variable.
+#     'elm' must be the element name of the 'mmon' array.
+#     'opt' must be the last part of the option name.
+#
+
+proc gl_wstate {elm opt} {
+  global mmon
+
+  set mmon($elm) [option get .widget $opt Mmon]
+}
+
+############################################################################
+## INTERACTIVE HELP PROCS (hl_)
+
+proc hl_main {win head} {
+# Creates a new help window with a heading.
+# 'head' must be the heading text.
+# The proc adds newlines after the heading text.
+  set w [hl_win $win]
+  hl_text $w head "$head\n"
+  return $w
+}
+
+proc hl_par {win par} {
+# Add a new paragraph to the help text.
+# 'win' must be the name of a window created by 'hl_win'.
+# 'par' must be the text of the paragraph.
+# The proc adds newlines before the paragraph text.
+	$win.f.t insert end "\n$par\n"
+}
+
+proc hl_show {win} {
+# Must be invoked to show the otherwise invisible help window.
+	$win.f.t configure -state disabled
+	wm deiconify $win
+}
+
+proc hl_subj {win head} {
+# Adds a heading.
+# 'win' must be the name of a window created by 'hl_win'.
+# 'head' must be the heading text.
+	$win.f.t insert end "\n"
+	hl_text $win head "$head "
+}
+
+proc hl_text {win tag txt} {
+# Adds text to a help window.
+# 'win' must be the name of a window created by 'hl_win'.
+# 'tag' may be a tag name, or empty.
+# 'txt' must be the text to add; use a trailing space.
+	set tbeg [$win.f.t index insert]
+	$win.f.t insert end $txt
+	if {$tag != {}} {
+		$win.f.t tag add $tag $tbeg insert
+	}
+}
+
+proc hl_win {win} {
+# Creates a window suitable for displaying help text.
+# 'win' must be the name of the new window (no leading dot).
+# It is also used for the window title.
+# RETURNS the name of the new window.
+global mmon
+	regsub -all {_} $win { } title
+	set win [string tolower .$win]
+	catch {destroy $win}
+	toplevel $win
+	wm withdraw $win
+	wm title $win $title
+	wm transient $win .
+	set xpos [expr [winfo rootx .]+[winfo width .]/9]
+	set ypos [expr [winfo rooty .]+[winfo height .]/5]
+	wm geom $win +${xpos}+$ypos
+
+	frame $win.f -relief ridge  -borderwidth 3
+	scrollbar $win.f.s -command "$win.f.t yview" -orient vertical
+	text $win.f.t -height 17 -width 70 -relief flat -wrap word \
+		-font $mmon(helpPlainF) -yscroll "$win.f.s set" \
+		-foreground $mmon(helpPlainFG) -background $mmon(helpPlainBG)
+	button $win.ok -text Dismiss -command "destroy $win"
+	pack $win.f -side top
+	pack $win.f.s -side right -fill y
+	pack $win.f.t -side left -fill both -expand 1
+	pack $win.ok -fill x -expand 1
+	$win.f.t tag configure body -font $mmon(helpPlainF) \
+		-foreground $mmon(helpPlainFG) -background $mmon(helpPlainBG)
+	$win.f.t tag configure head -font $mmon(helpHeadF) \
+		-foreground $mmon(helpHeadFG) -background $mmon(helpHeadBG)
+	$win.f.t tag configure emph -font $mmon(helpEmphF) \
+		-foreground $mmon(helpHeadFG) -background $mmon(helpHeadBG)
+	return $win
+}
+
+
+############################################################################
+## GENERIC LISTBOX PROCS (lb_)
+
+########################
+#
+# lb_main
+#
+#   Return a selection from a listbox by calling a proc.
+#   'win' must be the the new window name.
+#   'heading' will appear as a heading over the listbox.
+#   'geom' must be the desired geometry of the listbox itself.
+#   The unit is characters; the format is <width>x<lines>.
+#   'plist' must be the list whose items should appear in the listbox.
+#   'callproc' may be a proc name or empty.
+#   If non-empty a "Select" button will be created which invokes the proc.
+#   The selected list item will be passed to the proc.
+#   The proc must return a boolean: '1' means destroy the listbox toplevel;
+#   '0' means don't.
+#   'insert' may be a proc name or empty.
+#   If it is a proc a third button (Insert) will be created (similar to
+#   callproc) and button <3> will be activated.
+#
+
+proc lb_main {win heading geom plist {callproc {}} {insert {}}} {
+  global mmon
+
+  set win_title $win
+  regsub -all {_} $win_title " " win_title
+  regsub -all {:} $win " " win
+  set win [string tolower $win]
+  
+  catch {destroy $win}
+  toplevel $win
+  wm title $win [string range $win_title 1 end]
+
+  # Try to place window away from the main toplevel.
+  set topgeom [split [split [winfo geom .] x] +]
+  set newx [expr {[lindex $topgeom 1] + [lindex [lindex $topgeom 0] 0]} ]
+  set newy [expr {[lindex $topgeom 2] + 10}]
+  wm geom $win +${newx}+$newy
+
+  # Build the window.
+  frame $win.l 
+  frame $win.f 
+  frame $win.b -relief sunken -borderwidth 1 -bg blue
+
+  label $win.l.l -text $heading -anchor w
+
+  scrollbar $win.f.vert -orient vertical -command "$win.f.box yview" \
+			-relief sunken
+  set geom [split $geom "x"]
+  listbox $win.f.box -yscroll "$win.f.vert set" -relief sunken \
+	-selectmode single
+  if {[llength $geom] == 2} {
+    $win.f.box configure -width [lindex $geom 0] -height [lindex $geom 1]
+  }
+
+  foreach lem $plist {
+    $win.f.box insert end $lem
+  }
+
+  # Is 'callproc' there?
+  set doproc [string length [info commands $callproc]]
+  if $doproc {
+    button $win.b.ok -text "Select" -relief raised -borderwidth 2 \
+	-command "lb_act $win $callproc"
+    bind $win.f.box <Double-Button-1> \
+	"lb_act $win $callproc %y"
+  }
+
+  # Is 'insert' there?
+  set doinsert [string length [info commands $insert]]
+  if $doinsert {
+    button $win.b.ins -text "Insert" -relief raised -borderwidth 2 \
+		-command "lb_act $win $insert"
+    bind $win.f.box <3> \
+	"lb_act $win $insert %y"
+  }
+
+  button $win.b.can -text "Cancel" -relief raised -borderwidth 2 \
+		-command "destroy $win"
+
+  pack $win.l -side top -fill x
+  pack $win.f -side top -fill both -expand 1
+  pack $win.b -side bottom -fill x
+
+  pack $win.l.l    -side top -fill x -anchor nw
+  pack $win.f.vert -side right -fill both 
+  pack $win.f.box  -side left -fill both -expand 1
+
+  if $doproc {
+    pack $win.b.ok -side left -fill x -expand 1
+  }
+
+  if $doinsert {
+    pack $win.b.ins -side left -fill x -expand 1
+  }
+
+  pack $win.b.can  -side right -fill x -expand 1
+  $win.f.box select set 0
+}
+
+
+########################
+#
+# lb_act
+#
+#   Performs an action on a listbox
+#     'win' must be the toplevel window.
+#     'callproc' must be the proc taking the action.
+#     'ycoord' may be the Y coordinate where the action was initiated.
+#     If present, selection is set to the nearest listbox item.
+#     If omitted, the current selection is taken, if any.
+#     If there is no current selection the proc does nothing.
+#
+
+proc lb_act {win callproc {ycoord {}}} {
+  if {$ycoord != {}} {
+    $win.f.box selection clear 0 end
+    $win.f.box selection set [$win.f.box nearest $ycoord]
+  }
+  if {[set sel_idx [$win.f.box curselection]] == {}} return
+
+  if {[$callproc [$win.f.box get $sel_idx]]} {
+    destroy $win
+  }
+}
+
+
+############################################################################
+## MESSAGE HANDLING PROCS (mh_)
+## This module also includes some general service procs.
+
+########################
+#
+# mh_checkConn
+#
+#   Checks the current connection state against a minimum level.
+#   'min_state' must be the minimum, numeric connection state.
+#   RETURNS 1 if the connection is NOT ok; 0 otherwise.
+#
+
+proc mh_checkConn {min_state} {
+  global msql
+
+  if {[msqlstate -numeric $msql] < $min_state} {
+    mh_setMsg "Connection state [msqlstate $msql] insufficient"
+    return 1
+  } else {
+    return 0
+  }
+}
+
+
+########################
+#
+# mh_exit
+#
+#   Ask if user really wants to exit; do it if affirmative.
+#
+
+proc mh_exit {} {
+  set do_exit [tk_dialog .exit? {Exit Mini-Monitor} {Really Exit?} \
+	{} 0 {Sure} {No, don't exit}]
+  if {$do_exit == 0} do_sql_exit
+}
+
+
+########################
+#
+# mh_setMsg
+#
+#   Set the text for the label at bottom of results window.
+#   'txt' may be the message text.
+#   Gets the message from msqlstatus if no args.
+#
+
+proc mh_setMsg {{txt {}}}  {
+  global msqlstatus
+
+  if {[string length $txt] == 0} {
+    if {$msqlstatus(code) > 0} {
+      set txt [format "Error %s: %s" $msqlstatus(code) $msqlstatus(message)]
+    } else {
+      set txt $msqlstatus(message)
+    }
+  }
+
+  .m.msg configure -text $txt
+  update
+}
+
+
+########################
+#
+# mh_trace
+#
+#   Emit a trace message
+#
+
+proc mh_trace {pr msg} {
+  puts [format {*** %s: %s} $pr $msg]
+}
+
+
+############################################################################
+## MAIN WINDOW (mn_) ##
+
+########################
+#
+# mn_exec_tog
+#
+#   Toggles the Execute/Cancel button.
+#   'flag' must be non-zero to cause the button to go 'Cancel'.
+#   Otherwise the button goes 'Execute'.
+#
+
+proc mn_exec_tog {flag} {
+  global mmon
+
+  if {$flag} {
+    set mmon(interrupt) 0
+    set mmon(execCmd) "set mmon(interrupt) 1"
+    .m.mb.exec configure -text "Cancel"
+  } else {
+    set mmon(execCmd) sq_submit
+    .m.mb.exec configure -text "Execute"
+  }
+}
+
+
+########################
+#
+# mn_main
+#
+#   create the main window
+#
+
+proc mn_main {} {
+  global msql
+  global msqlstatus
+  global mmon
+
+  wm title    . "Mini-Monitor for mSQL"
+  wm iconname . "mmon"
+  wm geom    . 600x500
+  wm minsize . 400 370
+
+  #-- Top level frame.
+
+  frame .m -relief flat
+  pack .m -side top -fill both -expand 1
+
+  #-- Create a menu bar with some menu buttons.
+
+  frame .m.mb -relief raised -borderwidth 2
+  menubutton .m.mb.file -text "SQL" -menu .m.mb.file.m -underline 0
+  menu .m.mb.file.m
+  .m.mb.file.m add command -label "Clear" -command do_sql_clear -underline 0
+  .m.mb.file.m add command -label "Hilite Off" \
+      -command {.m.s.sql tag delete statement} -underline 0
+  .m.mb.file.m add command -label "Open..." \
+      -command "fs_read {Open SQL File} do_sql_open" -underline 0
+  .m.mb.file.m add command -label "Save" -command do_sql_save  -underline 0
+  .m.mb.file.m add command -label "Save as..." \
+      -command "fs_write {Save SQL Window} do_sql_saveAs" -underline 5
+  .m.mb.file.m add separator
+  .m.mb.file.m add command -label "Exit"  -command mh_exit  -underline 0
+
+  menubutton .m.mb.out -text "Results" -menu .m.mb.out.m -underline 0
+  menu .m.mb.out.m
+  .m.mb.out.m add radiobutton -label "Append results" \
+      -variable mmon(resClear) -value 0  -command "set mmon(resClear) 0"
+  .m.mb.out.m add radiobutton -label "Clear results" -variable mmon(resClear) \
+      -value 1  -command "set mmon(resClear) 1"
+  .m.mb.out.m add separator
+
+  .m.mb.out.m add command -label "Clear" -command do_res_clear -underline 0
+  .m.mb.out.m add command -label "Save as..." \
+      -command "fs_write {Save Result Window} do_res_save" -underline 0
+  .m.mb.out.m add command -label "Print" -command do_res_print -underline 0
+  .m.mb.out.m add cascade -label "Font size  " -menu .m.mb.out.m.f -underline 0
+
+  menu .m.mb.out.m.f
+  .m.mb.out.m.f add radiobutton -value  8 -label " 8" \
+    -variable mmon(iactFDSize) -command {do_res_font 8}
+  .m.mb.out.m.f add radiobutton -value 10 -label "10" \
+    -variable mmon(iactFDSize) -command {do_res_font 10}
+  .m.mb.out.m.f add radiobutton -value 12 -label "12" \
+    -variable mmon(iactFDSize) -command {do_res_font 12}
+  .m.mb.out.m.f add radiobutton -value 14 -label "14" \
+    -variable mmon(iactFDSize) -command {do_res_font 14}
+  .m.mb.out.m.f add radiobutton -value 18 -label "18" \
+    -variable mmon(iactFDSize) -command {do_res_font 18}
+  .m.mb.out.m.f add radiobutton -value 20 -label "20" \
+    -variable mmon(iactFDSize) -command {do_res_font 20}
+
+  .m.mb.out.m add command -label "Limit result ..."  -command rl_main \
+                         -underline 0
+  .m.mb.out.m add command -label "Null value ..."  -command nv_main \
+                         -underline 0
+
+  menubutton .m.mb.cn -text "Connection" -menu .m.mb.cn.m -underline 0
+  menu .m.mb.cn.m
+  .m.mb.cn.m add command -label "Database" -command ds_main -underline 0
+  .m.mb.cn.m add command -label "Server" -command sv_main -underline 0
+
+  button .m.mb.ob -text "Tables" -command di_tables -relief raised
+
+  # mmon(execCmd) is normally "sq_submit", except while in sq_submit,
+  # then it is Cancel.
+  button .m.mb.exec  -text "Execute" -command {eval $mmon(execCmd)} \
+	-relief raised
+  button .m.mb.hloff -text "Hilite Off" \
+	-command {.m.s.sql tag delete statement} -relief raised
+
+  menubutton .m.mb.help -text "Help" -menu .m.mb.help.m  -underline 0
+  menu .m.mb.help.m
+  .m.mb.help.m add command -label "General" -command do_help_gen -underline 0
+  .m.mb.help.m add cascade -label "Menus/Buttons" -menu .m.mb.help.m.m \
+	-underline 0
+  .m.mb.help.m add command -label "About" -command do_help_about -underline 0
+
+  menu .m.mb.help.m.m
+  .m.mb.help.m.m add command -label "SQL" -command do_help_men_sql -underline 0
+  .m.mb.help.m.m add command -label "Results" -command do_help_men_res -underline 0
+  .m.mb.help.m.m add command -label "Connection" -command do_help_men_conn \
+	-underline 0
+  .m.mb.help.m.m add command -label "Tables" -command do_help_men_tab \
+	-underline 0
+  .m.mb.help.m.m add command -label "Execute" -command do_help_men_ex \
+	-underline 0
+
+  pack .m.mb -side top -fill x
+  pack .m.mb.file  .m.mb.out .m.mb.cn .m.mb.ob  .m.mb.exec \
+	-side left
+  pack .m.mb.help -side right
+
+  tk_bindForTraversal .m.mb
+  tk_menuBar .m.mb .m.mb.file .m.mb.out .m.mb.cn \
+		    .m.mb.ob .m.mb.exec .m.mb.help 
+
+  #-- Server and database names
+
+  frame .m.tt
+  label .m.tt.sl -text "Server:" -relief flat -font $mmon(lLabelF)
+  entry .m.tt.se -state disabled -relief raised -font $mmon(lDisplayF) \
+	-textvariable mmon(server) \
+	-foreground $mmon(outpFG) -background $mmon(outpBG)
+  label .m.tt.dl -text "  Database:" -relief flat -font $mmon(lLabelF)
+  entry .m.tt.de -state disabled -relief raised -font $mmon(lDisplayF) \
+	-textvariable mmon(dbname) \
+	-foreground $mmon(outpFG) -background $mmon(outpBG)
+
+  pack .m.tt -side top -fill x
+  pack .m.tt.sl .m.tt.se -side left -padx 1
+  pack .m.tt.de .m.tt.dl -side right -padx 1
+
+  #-- SQL window
+
+  frame .m.s -relief raised -borderwidth 2
+  pack .m.s -side top -fill both
+
+  label .m.s.l -text "SQL input (noname)" 
+  scrollbar .m.s.vert -relief sunken -command ".m.s.sql yview" \
+	  -orient vertical
+  text .m.s.sql -font [format $mmon(iactFForm) 14] -relief sunken \
+	  -height 8 -width 80 -yscroll ".m.s.vert set"  -wrap word \
+	  -borderwidth 2 -foreground $mmon(inpFG) -background $mmon(inpBG)
+  bind .m.s.sql <Control-Return> ".m.mb.exec invoke"
+  bind .m.s.sql <Shift-Return>   ".m.mb.exec invoke"
+  bind .m.s.sql <Shift-Up>       "sq_cr_step -1"
+  bind .m.s.sql <Control-Up>     "sq_cr_step -1"
+  bind .m.s.sql <Shift-Down>     "sq_cr_step  1"
+  bind .m.s.sql <Control-Down>   "sq_cr_step  1"
+  bind .m.s.sql <Control-Delete> ".m.s.sql tag delete statement"
+
+  pack .m.s.l    -side top -fill x
+  pack .m.s.vert -side right -fill y
+  pack .m.s.sql  -side left -fill both  -expand 1
+
+
+  #-- Result window
+
+  frame .m.o -relief raised
+  pack .m.o -side top -fill both -expand 1
+
+  label .m.o.l -text "Results"
+  scrollbar .m.o.vert -relief sunken -command ".m.o.out yview" \
+	-orient vertical
+  scrollbar .m.o.horz -relief sunken -command ".m.o.out xview" \
+	-orient horizontal
+  listbox .m.o.out -relief sunken \
+	-yscroll ".m.o.vert set" -xscroll ".m.o.horz set"
+  do_res_font 14
+
+  pack .m.o.l    -side top -fill x
+  pack .m.o.vert -side right -fill y
+  pack .m.o.horz -side bottom -fill x
+  pack .m.o.out  -side left -fill both -expand 1
+
+
+  # create a message at the bottom
+
+  #label .m.msg -text "" -width 40 -relief sunken 
+  message .m.msg -text "" -justify center -aspect 1000 -relief sunken \
+	-font $mmon(messF) -foreground $mmon(messFG) -background $mmon(messBG)
+    
+  pack .m.msg -side bottom -fill x
+
+  focus .m.s.sql
+
+  .m.msg configure -text "At your service....."
+
+}
+
+
+############################################################################
+## NULL VALUE WINDOW PROCS (nv_)
+
+########################
+#
+# nv_main
+#
+#   Create window to let user define null value representation
+#
+
+proc nv_main {} {
+  global mmon
+  global mmui
+  global msqlstatus
+
+  set mmui(nullvalue) $msqlstatus(nullvalue)
+
+  catch {destroy .nullv}
+  toplevel .nullv -class Dialog
+  wm transient .nullv .
+  set xpos [expr [winfo rootx .]+[winfo width .]/3]
+  set ypos [expr [winfo rooty .]+[winfo height .]/3]
+  wm geom .nullv +${xpos}+$ypos
+  wm title .nullv "Null Value"
+
+  message .nullv.m1 -aspect 500 -justify center -text \
+    {You may set the string to display when a NULL value is returned from a query}
+
+  frame .nullv.c
+  label .nullv.c.l -text "Current setting:" -width 18
+  label .nullv.c.t -text [format {"%s"} $msqlstatus(nullvalue)]
+
+  frame .nullv.n
+  label .nullv.n.l -text "New setting:" -width 18
+  entry .nullv.n.t -relief sunken -width 20 -textvariable mmui(nullvalue)
+  # This can be changed in Tk 4.0
+  .nullv.n.t select from 0
+  .nullv.n.t select adjust end
+
+  frame .nullv.b
+  button .nullv.b.apply -text Apply -command {\
+    destroy .nullv; \
+    set msqlstatus(nullvalue) $mmui(nullvalue)}
+  button .nullv.b.cancel -text Cancel -command {destroy .nullv}
+
+  pack .nullv.c.l -side left -anchor e
+  pack .nullv.c.t -side left
+  pack .nullv.n.l -side left -anchor e
+  pack .nullv.n.t -side left
+  pack .nullv.b.apply .nullv.b.cancel -side left -fill x -expand yes
+  pack .nullv.m1 .nullv.c .nullv.n -side top -pady 10 -fill x
+  pack .nullv.b -side top -fill x -expand yes
+  bind .nullv.n.t <KeyPress-Return> ".nullv.b.apply invoke"
+  focus .nullv.n.t
+
+  grab .nullv
+  tkwait window .nullv
+}
+
+
+############################################################################
+## RESULT LIMIT WINDOW PROCS (rl_)
+
+########################
+#
+# rl_main
+#
+#   Create window to let user define result limits
+#
+
+proc rl_main {} {
+  global mmon
+  global mmui
+
+  set mmui(colMaxLen) $mmon(colMaxLen)
+  set mmui(resMaxLines) $mmon(resMaxLines)
+
+  catch {destroy .srlim}
+  toplevel .srlim -class Dialog
+  wm transient .srlim .
+  set xpos [expr [winfo rootx .]+[winfo width .]/3]
+  set ypos [expr [winfo rooty .]+[winfo height .]/3]
+  wm geom .srlim +${xpos}+$ypos
+  wm title .srlim "Set Result Limits"
+
+  message .srlim.m1 -aspect 1200 -text \
+    {Truncate long columns in the result window; 0 means no truncation}
+
+  frame .srlim.col
+  button .srlim.col.res -text "Reset" \
+	-command {set mmui(colMaxLen) 0; .srlim.col.sc set 0}
+  scale .srlim.col.sc -label "Number of characters" -orient horizontal \
+	-from 0 -to 100 -tickinterval 20 -length 220  -relief groove \
+	-command {set mmui(colMaxLen)}
+  .srlim.col.sc set $mmui(colMaxLen)
+  frame .srlim.col.a
+  button .srlim.col.a.dec -text " < " \
+	-command {incr mmui(colMaxLen) -1; .srlim.col.sc set $mmui(colMaxLen)}
+  button .srlim.col.a.inc -text " > " \
+	-command {incr mmui(colMaxLen); .srlim.col.sc set $mmui(colMaxLen)}
+  button .srlim.col.a.round -text "Round" \
+    -command {set mmui(colMaxLen) [expr round([.srlim.col.sc get].0/10)*10]; \
+      .srlim.col.sc set $mmui(colMaxLen)}
+
+  frame .srlim.fil1 -height 25
+
+  message .srlim.m2 -aspect 1200 -text \
+    {Confirmation requested for voluminous results; 0 means never ask}
+
+  frame .srlim.lin
+  button .srlim.lin.res -text "Reset" \
+	-command {set mmui(resMaxLines) 0; .srlim.lin.sc set 0}
+  scale .srlim.lin.sc -label "Number of rows" -orient horizontal \
+	-from 0 -to 1000 -tickinterval 200 -length 220 -relief groove \
+	-command {set mmui(resMaxLines)}
+  .srlim.lin.sc set $mmui(resMaxLines)
+  frame .srlim.lin.a
+  button .srlim.lin.a.dec -text " < " \
+    -command {incr mmui(resMaxLines) -1; .srlim.lin.sc set $mmui(resMaxLines)}
+  button .srlim.lin.a.inc -text " > " \
+    -command {incr mmui(resMaxLines); .srlim.lin.sc set $mmui(resMaxLines)}
+  button .srlim.lin.a.round -text "Round" \
+    -command {set mmui(resMaxLines) [expr round([.srlim.lin.sc get].0/10)*10];\
+      .srlim.lin.sc set $mmui(resMaxLines)}
+
+  frame .srlim.b
+  button .srlim.b.apply -text Apply -command {\
+    destroy .srlim; \
+    set mmon(colMaxLen) $mmui(colMaxLen); \
+    set mmon(resMaxLines) $mmui(resMaxLines)}
+  button .srlim.b.cancel -text Cancel -command {destroy .srlim}
+
+  frame .srlim.fil2 -height 25
+
+  # Add some 'Shift' acceleration.
+  bind .srlim.col.a.dec <Shift-1> \
+    {incr mmui(colMaxLen) -5; .srlim.col.sc set $mmui(colMaxLen)}
+  bind .srlim.col.a.inc <Shift-1> \
+    {incr mmui(colMaxLen) 5; .srlim.col.sc set $mmui(colMaxLen)}
+  bind .srlim.lin.a.dec <Shift-1> \
+    {incr mmui(resMaxLines) -5; .srlim.lin.sc set $mmui(resMaxLines)}
+  bind .srlim.lin.a.inc <Shift-1> \
+    {incr mmui(resMaxLines) 5; .srlim.lin.sc set $mmui(resMaxLines)}
+
+  pack .srlim.m1 .srlim.col .srlim.fil1 .srlim.m2 .srlim.lin .srlim.fil2 \
+    -side top
+  pack .srlim.b -fill x
+  pack .srlim.col.res .srlim.col.sc .srlim.col.a -side left -padx 7
+  pack .srlim.col.a.dec .srlim.col.a.inc .srlim.col.a.round -side left
+  pack .srlim.lin.res .srlim.lin.sc .srlim.lin.a -side left -padx 7
+  pack .srlim.lin.a.dec .srlim.lin.a.inc .srlim.lin.a.round -side left
+  pack .srlim.b.apply .srlim.b.cancel -fill x -expand 1 -side left
+
+  grab .srlim
+  tkwait window .srlim
+}
+
+
+############################################################################
+## RESULT WINDOW PROCS (rs_)
+
+########################
+#
+# rs_col_form
+#
+#   Generate format for result columns.
+#   'col_data' must be a list of three lists containing column names,
+#     types, and lenghts, respectively
+#   ASSUMES char columns can be truncated to 'mmon(colMaxLen)' if not zero.
+#
+#   RETURN a list of two components
+#   (0) Format string for printing the column.
+#   (1) Heading string.
+#
+
+proc rs_col_form {col_data} {
+  global mmon
+
+  if $mmon(tlevel) {mh_trace rs_col_form $col_data}
+  set cName [lindex $col_data 0]
+  set cType [lindex $col_data 1]
+  set cLength [lindex $col_data 2]
+  set idx -1
+  set fmt ""
+  set hdr ""
+
+  foreach item $cName {
+    incr idx
+    set len0 [lindex $cLength $idx]
+    switch [lindex $cType $idx] {
+      {int}	{set len 12 ; set just "" }
+      {real}	{set len 12 ; set just "" }
+      {char}	{if {$mmon(colMaxLen) > 0} {
+		  set len $mmon(colMaxLen)
+		  if {$len0 < $len} {set len $len0}
+                } else {
+		  set len $len0
+		}
+		set just - }
+      {default} {set len 32 ; set just - }
+    }
+
+    # make sure length is as long as colunm name 
+    set len1 [string length $item]
+    if {$len1 > $len} {set len $len1}
+    append fmt "%${just}${len}.${len}s "
+    set count [expr $len - [string length $item]]
+    set dash {}
+    while {$count > 0} {
+      append dash -
+      incr count -1
+    }
+    append hdr $item $dash { }
+  }
+  return [list $fmt $hdr]
+}
+
+
+########################
+#
+# rs_display
+#
+#   Gets and displays the rows retrieved by a previous SELECT query.
+#   ASSUMES this proc is invoked through 'catch'.
+#   Does NOT manage the Execute/Cancel toggle.
+#
+
+proc rs_display {} {
+  global msql
+  global mmon
+
+  set slist [rs_col_form [msqlcol $msql -current name type length]]
+  if $mmon(tlevel) {mh_trace rs_display $slist}
+  set fmt [lindex $slist 0]
+  .m.o.out insert end [lindex $slist 1]
+  set cnt 0
+
+  while {!$mmon(interrupt) && [msqlresult $msql rows] > 0} {
+
+    set row [msqlnext $msql]
+    incr cnt
+    if $mmon(tlevel) {mh_trace ROW [format {(%s) %s} $cnt $row]}
+
+    if {[string length $row] == 0} {
+      .m.o.out insert end ""
+    }  else {
+      .m.o.out insert end [eval format \"$fmt\" $row]
+    }
+
+    if {$mmon(resMaxLines) > 0} {
+      if {$cnt % $mmon(resMaxLines) == 0} {
+        rs_pause $cnt
+      }
+    } elseif {$cnt % 50 == 0} {
+      mh_setMsg "$cnt rows so far..."
+      update
+    }
+  }
+
+  if {$mmon(interrupt) == 0} {
+    mh_setMsg "SQL finished, $cnt rows displayed "
+  } else {
+    mh_setMsg "SQL interrupted, $cnt rows displayed "
+  }
+}
+
+
+########################
+#
+# rs_pause
+#
+#   Pause getting query results and ask for confirmation.
+#   'cnt' must be the number of rows so far.
+#
+
+proc rs_pause {cnt} {
+  global mmon
+
+  catch {destroy .more}
+  toplevel .more
+  wm transient .more .
+  set xpos [expr [winfo rootx .]+[winfo width .]/4]
+  set ypos [expr [winfo rooty .]+[winfo height .]/5]
+  wm geom .more +${xpos}+$ypos
+  wm title .more "Get More Result Rows?"
+
+  message .more.msg -aspect 1200 -text "$cnt result rows so far; continue?"
+
+  frame .more.b
+  button .more.b.goon -text "Go On" -command {destroy .more}
+  button .more.b.stop -text "Stop It" \
+    -command {set mmon(interrupt) 1; destroy .more}
+
+  pack .more.msg -side top -pady 7
+  pack .more.b -side top -fill x
+  pack .more.b.goon .more.b.stop -fill x -expand 1 -side left
+
+  grab .more
+  tkwait window .more
+}
+
+
+############################################################################
+## SQL WINDOW PROCS (sq_)
+## Includes procs for managing the command ring (sq_cr_).
+
+########################
+#
+# sq_action
+#
+#   Execute an action: a Mini-Monitor command.
+#   'stm' must be the command.
+#   SIDE EFFECT: Sets mmon(interrupt) on conflict.
+#   NOTE: Not implemented yet.
+
+proc sq_action {stm} {
+  global mmon
+
+  if $mmon(tlevel) {mh_trace sq_action $stm}
+}
+
+
+########################
+#
+# sq_clear
+#
+#   Clear the SQL window
+#
+
+proc sq_clear {} {
+  global mmon
+  global cmdRing
+
+  set cmdRing(IDX) $cmdRing(LAST)
+
+  .m.s.sql delete 1.0 end
+  .m.s.l   configure -text "SQL (noname)"
+  set mmon(sqlFile) ""
+  mh_setMsg {}
+  focus .m.s.sql
+}
+
+
+########################
+#
+# sq_cr_insert
+#
+#   Insert the current Sql into the command ring
+#
+
+proc sq_cr_insert {} {
+  global cmdRing
+
+  set currentSql [.m.s.sql get 1.0 end]
+
+  # don't save null buffers
+  if {[string length [string trim $currentSql]] == 0} {
+    return
+  }
+
+  set cmdRing($cmdRing(LAST)) $currentSql
+
+  set cmdRing(IDX) $cmdRing(LAST)
+
+  incr cmdRing(LAST)
+  if {$cmdRing(LAST) > 9} {
+    set cmdRing(LAST) 0
+  }
+
+}
+
+
+########################
+#
+# sq_cr_step
+#
+#   Save current sql window, replace with previous (dir=-1) or next (dir=1)
+#
+
+proc sq_cr_step {dir} {
+  global cmdRing
+
+  set i 0
+  set result_lines ""
+
+  while {$i < 10 && [string length $result_lines] == 0} {
+    incr cmdRing(IDX) $dir
+
+    if {$cmdRing(IDX) < 0} {
+      set cmdRing(IDX) 9
+    }
+    if {$cmdRing(IDX) > 9} {
+      set cmdRing(IDX) 0
+    }
+    set result_lines $cmdRing($cmdRing(IDX))
+    incr i
+  }
+
+  if {[string length $result_lines] > 0} {
+    .m.s.sql delete 1.0 end
+    .m.s.sql insert 1.0 "$result_lines"
+  }
+
+}
+
+
+########################
+#
+# sq_exec
+#
+#   Exec an SQL statement.
+#   'stm' must be a single non-empty SQL statement.
+#   It usually has a semicolon at the end.
+#   RETURNS 1 if the statement leaves one or more result rows;
+#   0 otherwise.
+#   ASSUMES this proc is invoked through 'catch'.
+#
+
+proc sq_exec {stm} {
+  global mmon msql
+
+  mh_setMsg "Executing SQL"
+  set stm [string trimright $stm { ;}]
+
+  # We will get -1 if the statement is non-SELECT.
+  set dbret [msqlsel $msql $stm]
+  if $mmon(tlevel) {mh_trace sq_exec $dbret}
+
+  if {$dbret < 0} {
+    mh_setMsg "Non-SELECT execution completed"
+  } elseif {$dbret > 0} {
+    mh_setMsg "Query completed; getting results"
+  } else {
+    mh_setMsg "Query completed; no result rows"
+  }
+
+  return [expr $dbret > 0]
+}
+
+
+########################
+#
+# sq_insert
+#
+#   Insert text into the SQL text window.
+#   'text' must be the text to process; only the first word is inserted.
+#
+
+proc sq_insert {text} {
+	if {[string length $text] > 0} {
+		.m.s.sql insert insert [lindex $text 0]
+	}
+	return 0
+}
+
+
+########################
+#
+# sq_submit
+#
+#   Execute SQL script (possibly more than one statement)
+#
+
+proc sq_submit {} {
+  global mmon errorInfo
+
+  mn_exec_tog 1
+  .m.s.sql tag delete statement
+  if $mmon(resClear) do_res_clear
+  sq_cr_insert
+  set conflict 0
+
+  # mSQL only accepts one SQL statement at a time. We must parse the script.
+
+  # Find the number of lines in the SQL script.
+  scan [.m.s.sql index end] %d lineCount
+  .m.s.sql mark unset first last
+
+  # Parse the SQL script for "statements" in a line-oriented way.
+  # For each turn the marks 'first', 'last' identify the statement text.
+  # It is also tagged by a tag named 'statement'.
+  set idx 1.0
+  # The pattern to find the last line of an SQL statement.
+  set sqlpat [format {.*%s} $mmon(sqlTerm)]
+
+  while {!$mmon(interrupt)} {
+    # Extract the next line.
+    .m.s.sql mark set first $idx
+    .m.s.sql mark set last "$idx lineend"
+    set lastidx [.m.s.sql index last]
+    set stm [.m.s.sql get first last]
+
+    # Check what kind of line this is.
+    if {[regexp -indices "^$mmon(white)$mmon(actPrefix)" $stm hit]} {
+      # Sets mmon(interrupt) and the message in case of conflict.
+      sq_action \
+        [string trim [string range $stm [expr [lindex $hit 1] +1] end]]
+    } elseif {[regexp -indices "^$mmon(white)$mmon(cmtPrefix)" $stm hit]} {
+      if $mmon(tlevel) {mh_trace {sq_submit/comment} $stm}
+    } elseif {[regexp "^$mmon(white)\$" $stm]} {
+      if $mmon(tlevel) {mh_trace {sq_submit/white space} [format {>%s<} $stm]}
+    } else {
+      if $mmon(tlevel) {mh_trace {sq_submit/SQL} $stm}
+      # Seems to be an SQL statement; find its last line.
+      while {![regexp $sqlpat $stm]} {
+        set try [.m.s.sql index "last lineend + 1 char"]
+        if {$try <= $lastidx} break
+        .m.s.sql mark set last "$try lineend"
+        set lastidx [.m.s.sql index last]
+        set stm [.m.s.sql get first last]
+      }
+      if {[catch {sq_exec $stm} has_result]} {
+        mh_setMsg
+        set conflict 1
+        set mmon(interrupt) 1
+        break
+      }
+      if $mmon(tlevel) {mh_trace {sq_submit:has_result} $has_result}
+      if {$has_result} {
+        if {[catch {rs_display}]} {
+          if $mmon(tlevel) {mh_trace errorInfo $errorInfo}
+          mh_setMsg
+          set conflict 1
+          set mmon(interrupt) 1
+          break
+        }
+      }
+    }
+    # Adjust 'idx' to next line, if any.
+    set idx [.m.s.sql index "last lineend + 1 char"]
+    if {$idx <= $lastidx} break
+  }
+
+  if {$conflict} {
+    # Highlight and show the trouble spot.
+    .m.s.sql tag add statement first last
+    .m.s.sql tag configure statement -foreground $mmon(iactHLFG) \
+	-background $mmon(iactHLBG)
+    .m.s.sql yview first
+    .m.s.sql mark set insert last
+    update
+  }
+
+  mn_exec_tog 0
+}
+
+
+############################################################################
+## SERVER CONNECTION WINDOW PROCS (sv_)
+
+########################
+#
+# sv_main
+#
+#   Create window for allowing the user to select an mSQL server
+#
+
+proc sv_main {} {
+  global env
+  global msql
+  global mmon
+
+  # get valid servers
+  set msql_home [array names env MSQL_HOSTS]
+
+  if {$msql_home != {}} {
+      set serverList [split $env(MSQL_HOSTS) :]
+  } else {
+      set serverList {}
+  }
+  
+  catch {destroy .conn}
+  toplevel .conn	
+  wm title    .conn "Connection"
+  wm iconname .conn "Connection"
+  raise .conn .
+  #-- Title message
+  message .conn.m -justify center  -text "mSQL Server Connection" \
+	-aspect 2000 -font $mmon(lLabelF)
+  #-- Current state
+  frame .conn.c
+  frame .conn.c.fl
+  label .conn.c.l -text "Current state:"
+  label .conn.c.st
+  frame .conn.c.fr
+  if {[msqlstate -numeric $msql] > 1} {
+    .conn.c.st configure -text "Connected to [msqlinfo $msql host]"
+  } else {
+    .conn.c.st configure -text "Not connected"
+  }
+  #-- Server entry
+  frame .conn.s
+  frame .conn.s.fl
+  entry .conn.s.ser -relief sunken -width 10 \
+	-foreground $mmon(inpFG) -background $mmon(inpBG)
+  if {$serverList != {}} {
+    menubutton .conn.s.s -text "Server" -anchor e -menu .conn.s.s.m \
+	-relief raised
+    menu .conn.s.s.m
+    foreach s $serverList {
+      .conn.s.s.m add command -label $s \
+        -command ".conn.s.ser delete 0 end; .conn.s.ser insert 0 $s "
+    }
+  } else {
+    label .conn.s.s -text "Server" -anchor e
+  }
+  frame .conn.s.fr
+  #-- Error message
+  message .conn.err -text "(omitted server name means local host)" \
+	-justify center -aspect 2000
+  #-- Connect and Cancel buttons
+  frame .conn.b
+  button .conn.b.ok  -text "Connect" \
+      -command {sv_cb_connect [.conn.s.ser get]}
+  button .conn.b.can -text "Cancel" -command "destroy .conn"
+  #-- Pack and bind
+  pack .conn.m .conn.c .conn.s .conn.err -side top -fill x -pady 5
+  pack .conn.c.fl -side left -expand yes
+  pack .conn.c.l .conn.c.st -side left
+  pack .conn.c.fr -side right -expand yes
+  pack .conn.s.fl -side left -expand yes
+  pack .conn.s.s .conn.s.ser -side left
+  pack .conn.s.fr -side right -expand yes
+  pack .conn.b -side top -fill x
+  pack .conn.b.ok .conn.b.can -side left -fill x -expand yes
+
+  bind .conn.s.ser <Key-Return> ".conn.b.ok invoke"
+  focus .conn.s.ser
+}
+
+
+########################
+#
+# sv_cb_connect
+#
+#   Connect callback from toplevel .conn
+#
+
+proc sv_cb_connect {ser} {
+  global msqlstatus
+
+  if {[do_conn_serv $ser quiet]} {
+    .conn.err configure -text $msqlstatus(message)
+  } else {
+    destroy .conn
+  }
+}
+
+
+############################################################################
+# Kick off the entire process.
+
+# load msqltk.so msqltcl
+if {!$tcl_interactive} {
+  mmon_Main
+}

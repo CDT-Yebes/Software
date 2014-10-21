@@ -1,0 +1,403 @@
+# Module dependencies
+CosNaming.o CosNaming.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/codec.h ../../include/mico/codeset.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/config-win32.h ../../include/mico/config.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/current.h ../../include/mico/dii.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/dsi.h ../../include/mico/dynany.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/ir_base.h ../../include/mico/magic.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/memtrace.h ../../include/mico/messaging.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/orb_excepts.h ../../include/mico/orb_fwd.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/orb_mico.h ../../include/mico/os-thread.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/os-thread/dcethreads.h ../../include/mico/os-thread/pthreads.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/os-thread/pththreads.h ../../include/mico/os-thread/solaris-threads.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/DomainManager.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/SecurityAdmin.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/atlas.h ../../include/mico/security/csi.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/csi_base.h ../../include/mico/security/csiiop.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/csiv2.h ../../include/mico/security/gssup.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/odm.h ../../include/mico/security/security.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/securitylevel1.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/securitylevel2.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/securitylevel3.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3aqargs.h ../../include/mico/security/sl3aqargs_p.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3authorization.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3cm.h ../../include/mico/security/sl3cmdext.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3csi.h ../../include/mico/security/sl3ipc.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3om.h ../../include/mico/security/sl3omext.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3pm.h ../../include/mico/security/sl3tcpip.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/sl3tls.h ../../include/mico/security/transportsecurity.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/transportsecurity_p.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/value.h ../../include/mico/valuetype.h
+CosNaming.o CosNaming.pic.o: ../../include/mico/valuetype_impl.h ../../include/mico/version.h
+CosNaming.o CosNaming.pic.o: ../../include/ministl/bool.h ../../include/ministl/bstring.h
+CosNaming.o CosNaming.pic.o: ../../include/ministl/defalloc.h ../../include/ministl/function
+CosNaming.o CosNaming.pic.o: ../../include/ministl/function.h ../../include/ministl/list
+CosNaming.o CosNaming.pic.o: ../../include/ministl/list.h ../../include/ministl/map
+CosNaming.o CosNaming.pic.o: ../../include/ministl/map.h ../../include/ministl/ministl.h
+CosNaming.o CosNaming.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+CosNaming.o CosNaming.pic.o: ../../include/ministl/set ../../include/ministl/set.h
+CosNaming.o CosNaming.pic.o: ../../include/ministl/simplevec.h ../../include/ministl/string
+CosNaming.o CosNaming.pic.o: ../../include/ministl/vector ../../include/ministl/vector.h
+CosNaming.o CosNaming.pic.o: ./CosNaming.h CosNaming.cc
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/CORBA.h ../../include/mico/address.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/codec.h ../../include/mico/codeset.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/config-win32.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/ir.h ../../include/mico/ir_base.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/os-thread.h ../../include/mico/os-thread/dcethreads.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/os-thread/pthreads.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/os-thread/pththreads.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/os-thread/solaris-threads.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/DomainManager.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/SecurityAdmin.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/atlas.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/csi.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/csi_base.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/csiiop.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/csiv2.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/gssup.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/odm.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/security.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/securitylevel1.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/securitylevel2.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/securitylevel3.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3aqargs.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3aqargs_p.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3authorization.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3cm.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3cmdext.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3csi.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3ipc.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3om.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3omext.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3pm.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3tcpip.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/sl3tls.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/transportsecurity.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/transportsecurity_p.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/trust.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/security/userpassword.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/service_info.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/static.h ../../include/mico/string.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/sysexc.h ../../include/mico/tcconst.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/tckind.h ../../include/mico/template.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/template_impl.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/typecode_seq.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/types.h ../../include/mico/value.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/string ../../include/ministl/vector
+CosNaming_skel.o CosNaming_skel.pic.o: ../../include/ministl/vector.h ./CosNaming.h
+CosNaming_skel.o CosNaming_skel.pic.o: CosNaming_skel.cc
+NamingClient.o NamingClient.pic.o: ../../include/CORBA.h ../../include/coss/CosNaming.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/address.h ../../include/mico/address_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/codec.h ../../include/mico/codec_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/codeset.h ../../include/mico/codeset_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/config-win32.h ../../include/mico/config.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/current.h ../../include/mico/dii.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/dsi.h ../../include/mico/dynany.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/except.h ../../include/mico/fast_array.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/fixed.h ../../include/mico/impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/imr.h ../../include/mico/iop.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/ior_impl.h ../../include/mico/ir.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/ir_base.h ../../include/mico/magic.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/memtrace.h ../../include/mico/message.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/messaging.h ../../include/mico/mt_dispatcher.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/mt_manager.h ../../include/mico/mtdebug.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/operation.h ../../include/mico/operation_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/orb_mico.h ../../include/mico/os-misc.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/os-thread.h ../../include/mico/os-thread/dcethreads.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/os-thread/pthreads.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/os-thread/pththreads.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/os-thread/solaris-threads.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/policy_impl.h ../../include/mico/poll_dispatcher.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/process.h ../../include/mico/process_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/DomainManager.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/SecurityAdmin.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/atlas.h ../../include/mico/security/csi.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/csi_base.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/csiiop.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/csiv2.h ../../include/mico/security/gssup.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/odm.h ../../include/mico/security/security.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/securitylevel1.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/securitylevel2.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/securitylevel3.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3aqargs.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3aqargs_p.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3authorization.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3cm.h ../../include/mico/security/sl3cmdext.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3csi.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3ipc.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3om.h ../../include/mico/security/sl3omext.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3pm.h ../../include/mico/security/sl3tcpip.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/sl3tls.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/transportsecurity.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/transportsecurity_p.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/select_dispatcher.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/service_info.h ../../include/mico/shlib.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/shlib_impl.h ../../include/mico/static.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/transport.h ../../include/mico/transport/tcp.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/transport/udp.h ../../include/mico/transport/unix.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/transport_impl.h ../../include/mico/typecode.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/util.h ../../include/mico/value.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+NamingClient.o NamingClient.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+NamingClient.o NamingClient.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+NamingClient.o NamingClient.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+NamingClient.o NamingClient.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+NamingClient.o NamingClient.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+NamingClient.o NamingClient.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+NamingClient.o NamingClient.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+NamingClient.o NamingClient.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+NamingClient.o NamingClient.pic.o: ../../include/ministl/string ../../include/ministl/vector
+NamingClient.o NamingClient.pic.o: ../../include/ministl/vector.h ./NamingClient.h
+NamingClient.o NamingClient.pic.o: NamingClient.cc NamingClient.h
+Naming_impl.o Naming_impl.pic.o: ../../include/CORBA.h ../../include/coss/CosNaming.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/address.h ../../include/mico/any.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/array.h ../../include/mico/assert.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/basic.h ../../include/mico/basic_seq.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/buffer.h ../../include/mico/codec.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/codeset.h ../../include/mico/config-win32.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/config.h ../../include/mico/current.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/dii.h ../../include/mico/dsi.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/ioptypes.h ../../include/mico/ior.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/ir.h ../../include/mico/ir_base.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/os-misc.h ../../include/mico/os-thread.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/os-thread/dcethreads.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/os-thread/pthreads.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/os-thread/pththreads.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/os-thread/solaris-threads.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/DomainManager.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/SecurityAdmin.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/atlas.h ../../include/mico/security/csi.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/csi_base.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/csiiop.h ../../include/mico/security/csiv2.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/gssup.h ../../include/mico/security/odm.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/security.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/securitylevel1.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/securitylevel2.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/securitylevel3.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3aqargs.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3aqargs_p.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3authorization.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3cm.h ../../include/mico/security/sl3cmdext.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3csi.h ../../include/mico/security/sl3ipc.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3om.h ../../include/mico/security/sl3omext.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3pm.h ../../include/mico/security/sl3tcpip.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/sl3tls.h ../../include/mico/security/transportsecurity.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/transportsecurity_p.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/util.h ../../include/mico/value.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+Naming_impl.o Naming_impl.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/string ../../include/ministl/vector
+Naming_impl.o Naming_impl.pic.o: ../../include/ministl/vector.h ./Naming_impl.h
+Naming_impl.o Naming_impl.pic.o: Naming_impl.cc
+nsadmin.o nsadmin.pic.o: ../../include/CORBA-SMALL.h ../../include/CORBA.h
+nsadmin.o nsadmin.pic.o: ../../include/coss/CosNaming.h ../../include/mico/address.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/any.h ../../include/mico/array.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/codec.h ../../include/mico/codeset.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/config-win32.h ../../include/mico/config.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/current.h ../../include/mico/dii.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/dsi.h ../../include/mico/dynany.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/except.h ../../include/mico/fixed.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/imr.h ../../include/mico/ioptypes.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/ir_base.h ../../include/mico/magic.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/memtrace.h ../../include/mico/messaging.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/mtdebug.h ../../include/mico/mtpolicy.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/mttypes.h ../../include/mico/native.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/object.h ../../include/mico/operators.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/orb_excepts.h ../../include/mico/orb_fwd.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/orb_mico.h ../../include/mico/os-misc.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/os-thread.h ../../include/mico/os-thread/dcethreads.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/os-thread/pthreads.h ../../include/mico/os-thread/pththreads.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/os-thread/solaris-threads.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/poa_base.h ../../include/mico/poa_stubs.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/policy.h ../../include/mico/policy2.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/DomainManager.h ../../include/mico/security/SecurityAdmin.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/atlas.h ../../include/mico/security/csi.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/csi_base.h ../../include/mico/security/csiiop.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/csiv2.h ../../include/mico/security/gssup.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/odm.h ../../include/mico/security/security.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/securitylevel1.h ../../include/mico/security/securitylevel2.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/securitylevel3.h ../../include/mico/security/sl3aqargs.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/sl3aqargs_p.h ../../include/mico/security/sl3authorization.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/sl3cm.h ../../include/mico/security/sl3cmdext.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/sl3csi.h ../../include/mico/security/sl3ipc.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/sl3om.h ../../include/mico/security/sl3omext.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/sl3pm.h ../../include/mico/security/sl3tcpip.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/sl3tls.h ../../include/mico/security/transportsecurity.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/transportsecurity_p.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/util.h ../../include/mico/value.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/valuetype.h ../../include/mico/valuetype_impl.h
+nsadmin.o nsadmin.pic.o: ../../include/mico/version.h ../../include/ministl/bool.h
+nsadmin.o nsadmin.pic.o: ../../include/ministl/bstring.h ../../include/ministl/defalloc.h
+nsadmin.o nsadmin.pic.o: ../../include/ministl/function ../../include/ministl/function.h
+nsadmin.o nsadmin.pic.o: ../../include/ministl/list ../../include/ministl/list.h
+nsadmin.o nsadmin.pic.o: ../../include/ministl/map ../../include/ministl/map.h
+nsadmin.o nsadmin.pic.o: ../../include/ministl/ministl.h ../../include/ministl/pair
+nsadmin.o nsadmin.pic.o: ../../include/ministl/pair.h ../../include/ministl/set
+nsadmin.o nsadmin.pic.o: ../../include/ministl/set.h ../../include/ministl/simplevec.h
+nsadmin.o nsadmin.pic.o: ../../include/ministl/string ../../include/ministl/vector
+nsadmin.o nsadmin.pic.o: ../../include/ministl/vector.h ./NamingClient.h
+nsadmin.o nsadmin.pic.o: NamingClient.h nsadmin.cc
+nsd.o nsd.pic.o: ../../include/CORBA-SMALL.h ../../include/CORBA.h ../../include/coss/CosNaming.h
+nsd.o nsd.pic.o: ../../include/mico/address.h ../../include/mico/any.h ../../include/mico/array.h
+nsd.o nsd.pic.o: ../../include/mico/assert.h ../../include/mico/basic.h
+nsd.o nsd.pic.o: ../../include/mico/basic_seq.h ../../include/mico/buffer.h
+nsd.o nsd.pic.o: ../../include/mico/codec.h ../../include/mico/codeset.h
+nsd.o nsd.pic.o: ../../include/mico/config-win32.h ../../include/mico/config.h
+nsd.o nsd.pic.o: ../../include/mico/current.h ../../include/mico/dii.h ../../include/mico/dsi.h
+nsd.o nsd.pic.o: ../../include/mico/dynany.h ../../include/mico/except.h
+nsd.o nsd.pic.o: ../../include/mico/fixed.h ../../include/mico/imr.h ../../include/mico/ioptypes.h
+nsd.o nsd.pic.o: ../../include/mico/ior.h ../../include/mico/ir.h ../../include/mico/ir_base.h
+nsd.o nsd.pic.o: ../../include/mico/magic.h ../../include/mico/memtrace.h
+nsd.o nsd.pic.o: ../../include/mico/messaging.h ../../include/mico/mtdebug.h
+nsd.o nsd.pic.o: ../../include/mico/mtpolicy.h ../../include/mico/mttypes.h
+nsd.o nsd.pic.o: ../../include/mico/native.h ../../include/mico/object.h
+nsd.o nsd.pic.o: ../../include/mico/operators.h ../../include/mico/orb_excepts.h
+nsd.o nsd.pic.o: ../../include/mico/orb_fwd.h ../../include/mico/orb_mico.h
+nsd.o nsd.pic.o: ../../include/mico/os-misc.h ../../include/mico/os-thread.h
+nsd.o nsd.pic.o: ../../include/mico/os-thread/dcethreads.h ../../include/mico/os-thread/pthreads.h
+nsd.o nsd.pic.o: ../../include/mico/os-thread/pththreads.h ../../include/mico/os-thread/solaris-threads.h
+nsd.o nsd.pic.o: ../../include/mico/pi.h ../../include/mico/poa.h ../../include/mico/poa_base.h
+nsd.o nsd.pic.o: ../../include/mico/poa_stubs.h ../../include/mico/policy.h
+nsd.o nsd.pic.o: ../../include/mico/policy2.h ../../include/mico/security/DomainManager.h
+nsd.o nsd.pic.o: ../../include/mico/security/SecurityAdmin.h ../../include/mico/security/atlas.h
+nsd.o nsd.pic.o: ../../include/mico/security/csi.h ../../include/mico/security/csi_base.h
+nsd.o nsd.pic.o: ../../include/mico/security/csiiop.h ../../include/mico/security/csiv2.h
+nsd.o nsd.pic.o: ../../include/mico/security/gssup.h ../../include/mico/security/odm.h
+nsd.o nsd.pic.o: ../../include/mico/security/security.h ../../include/mico/security/securitylevel1.h
+nsd.o nsd.pic.o: ../../include/mico/security/securitylevel2.h ../../include/mico/security/securitylevel3.h
+nsd.o nsd.pic.o: ../../include/mico/security/sl3aqargs.h ../../include/mico/security/sl3aqargs_p.h
+nsd.o nsd.pic.o: ../../include/mico/security/sl3authorization.h ../../include/mico/security/sl3cm.h
+nsd.o nsd.pic.o: ../../include/mico/security/sl3cmdext.h ../../include/mico/security/sl3csi.h
+nsd.o nsd.pic.o: ../../include/mico/security/sl3ipc.h ../../include/mico/security/sl3om.h
+nsd.o nsd.pic.o: ../../include/mico/security/sl3omext.h ../../include/mico/security/sl3pm.h
+nsd.o nsd.pic.o: ../../include/mico/security/sl3tcpip.h ../../include/mico/security/sl3tls.h
+nsd.o nsd.pic.o: ../../include/mico/security/transportsecurity.h ../../include/mico/security/transportsecurity_p.h
+nsd.o nsd.pic.o: ../../include/mico/security/trust.h ../../include/mico/security/userpassword.h
+nsd.o nsd.pic.o: ../../include/mico/sequence.h ../../include/mico/sequence_special.h
+nsd.o nsd.pic.o: ../../include/mico/service_info.h ../../include/mico/static.h
+nsd.o nsd.pic.o: ../../include/mico/string.h ../../include/mico/sysexc.h
+nsd.o nsd.pic.o: ../../include/mico/tcconst.h ../../include/mico/tckind.h
+nsd.o nsd.pic.o: ../../include/mico/template.h ../../include/mico/template_impl.h
+nsd.o nsd.pic.o: ../../include/mico/throw.h ../../include/mico/timebase.h
+nsd.o nsd.pic.o: ../../include/mico/transport.h ../../include/mico/typecode.h
+nsd.o nsd.pic.o: ../../include/mico/typecode_seq.h ../../include/mico/types.h
+nsd.o nsd.pic.o: ../../include/mico/util.h ../../include/mico/value.h ../../include/mico/valuetype.h
+nsd.o nsd.pic.o: ../../include/mico/valuetype_impl.h ../../include/mico/version.h
+nsd.o nsd.pic.o: ../../include/ministl/bool.h ../../include/ministl/bstring.h
+nsd.o nsd.pic.o: ../../include/ministl/defalloc.h ../../include/ministl/function
+nsd.o nsd.pic.o: ../../include/ministl/function.h ../../include/ministl/list
+nsd.o nsd.pic.o: ../../include/ministl/list.h ../../include/ministl/map
+nsd.o nsd.pic.o: ../../include/ministl/map.h ../../include/ministl/ministl.h
+nsd.o nsd.pic.o: ../../include/ministl/pair ../../include/ministl/pair.h
+nsd.o nsd.pic.o: ../../include/ministl/set ../../include/ministl/set.h ../../include/ministl/simplevec.h
+nsd.o nsd.pic.o: ../../include/ministl/string ../../include/ministl/vector
+nsd.o nsd.pic.o: ../../include/ministl/vector.h ./Naming_impl.h Naming_impl.h
+nsd.o nsd.pic.o: nsd.cc

@@ -1,0 +1,36 @@
+
+all:  client.exe server.exe mt
+
+!ifdef VC8
+mt:
+	$(MT) -manifest client.exe.manifest -outputresource:client.exe;#1
+	$(MT) -manifest server.exe.manifest -outputresource:server.exe;#1
+!else
+mt:
+!endif
+
+RELATIVE=..\..\..
+!include ../../MakeVars.win32
+
+INSTALL_DIR     = obv/abstract
+INSTALL_SRCS    = README Makefile client.cc server.cc abstract.idl \
+		  abstract_impl.h
+INSTALL_SCRIPTS = abstract
+
+server.exe: abstract.h abstract_impl.h abstract.obj server.obj $(DEPS)
+	$(LINK) $(LDFLAGS) abstract.obj server.obj $(LDLIBS) /out:server.exe
+
+client.exe: abstract.h abstract_impl.h abstract.obj client.obj $(DEPS)
+	$(LINK)  $(LDFLAGS) abstract.obj client.obj $(LDLIBS) /out:client.exe
+
+
+abstract.h abstract.cc : abstract.idl 
+	$(IDL) $(IDLFLAGS) abstract.idl
+
+run:
+	abstract.bat
+
+clean:
+	-$(DELETE)
+	-$(RM) /q abstract.cc abstract.h
+

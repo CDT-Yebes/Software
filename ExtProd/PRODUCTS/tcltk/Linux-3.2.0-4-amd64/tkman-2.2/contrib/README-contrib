@@ -1,0 +1,101 @@
+This directory contains files contributed by TkMan users.  These files
+are not installed, supported, or regularly updated to work with new
+versions of TkMan.  They are included because some may find them
+useful, and if so they prevent duplication of effort.
+
+-----
+
+tkman.bitmap (colorized as TkMan.gif) - Rei Shinozuka
+TkMan.xpm - by Roar Smith
+AIcons.bitmap - Anthony Thyssen
+hman.xbm - taken from Baudoulin Raoult's hman
+tkman.xbm - Mike Eggleston
+tkman.xpm - drawn by Ion Cionca, contributed by Dimitry Kloper
+
+Possible icons for TkMan.
+
+To use an icon, specify its path name in the Preferences/Icon dialog box
+(under the Occasionals menu) or as a command line option.
+
+-----
+
+outline.tcl
+
+Demonstration of how to use the text widget's elide text feature
+to implemented outlining.
+
+-----
+
+xman-mandesc.tcl - Dietmar Theobald (theobald@fzi.de)
+
+Parse your old xman mandesc in TkMan.
+
+-----
+
+remote.tcl
+
+This code shows how to use the `send' command to call TkMan from another
+Tcl/Tk application.
+
+-----
+
+tkman_selection.txt - Scott Schwartz <schwartz@groucho.cse.psu.edu>
+tkmanclient - Chris Siebenmann <cks@hawkwind.utcs.toronto.edu>
+              changes by Anthony Baxter <anthony@aaii.oz.au>
+
+These two provide an alternative interface to TkMan, via the X selection or
+the command line, respectively.
+
+-----
+
+calltkman.tcl - Neil Smithline (Neil.Smithline@eng.sun.com)
+
+Adding the code for callTkMan to your .tkman file causes tkman to
+bring up a second window labeled "callTkMan".  The intent of this
+window is to provide a convenient mechanism for kicking off tkman
+searches without keeping the entire tkman window open on your screen.
+
+-----
+
+*** The correct bindings file is automatically established for new TkMan users. ***
+
+irix_bindings.tcl -
+	Paul Raines (raines@bohr.physics.upenn.edu),
+	Craig Ruff (cruff@ncar.ucar.edu),
+	and Scott Nelson (nelson18@llnl.gov)
+
+Copy this file into your home directory and name it .tkman in order to
+establish the many volume groupings used by SGI.  First time users
+have this written as their initial .tkman automatically.  You can edit
+the .tkman file to change the groupings, splitting out a group of
+particular interest, or merging some if you don't like 47 different
+groupings, most of which are sparsely populated.
+
+-----
+
+*** The correct bindings file is automatically established for new TkMan users. ***
+
+sco_bindings.tcl - anonymous
+
+Details changes to make to tkman.tcl before `compiling' (`make'ing) to
+adapt TkMan to SCO UNIX.
+
+-----
+
+*** The correct bindings file is automatically established for new TkMan users. ***
+
+solaris_bindings.tcl - Will C Lauer (wcl@cadre.com)
+solaris_bindings25.tcl and solaris_bindings26.tcl
+	- Peter Dyballa (pete@thi.informatik.uni-frankfurt.de)
+
+Instead of collecting volumes that start with same character under a single
+volume listing (e.g., 1, 1b, 1c, 1f, 1m and 1s all collected under 1),
+keep them separate.
+
+-----
+
+
+
+WANTED
+
+a tutorial for tkmandesc commands

@@ -1,0 +1,6 @@
+// -*- c++ -*-
+
+interface HelloWorld {
+  void hello();
+  void hello_with_timeout(in long sec);
+};

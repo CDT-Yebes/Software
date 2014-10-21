@@ -1,0 +1,752 @@
+//tabstop=4
+//***********************************************************************
+// ORBAsec SL3                                                     
+// ----------------------------------------------------------------------
+// Copyright (C) 2001 Adiron, LLC.                                 
+//                    All rights reserved.                         
+// ----------------------------------------------------------------------
+// $Id$
+//***********************************************************************
+//
+// Marked modifications Copyright (C) 2002, 2003 ObjectSecurity Ltd.
+//
+#ifndef _TRANSPORT_SECURITY2_IDL_
+#define _TRANSPORT_SECURITY2_IDL_
+
+#include <mico/security/transportsecurity.idl>
+#include <mico/security/sl3om.idl>
+
+#pragma prefix "adiron.com"
+
+module TransportSecurity
+{
+    //--------------------------------------------------------------------
+    // Transport Security Implementers Interfaces.
+    // 
+    // These interfaces and definitions are available for different
+    // secure transports to be implemented within the ORBAsec Transport
+    // Security Framework, which integrates the concepts of secure
+    // association with an ORB's transport interfaces.
+    //
+    //--------------------------------------------------------------------
+
+    typedef string ContextEstablisherId;
+    typedef sequence<ContextEstablisherId> ContextEstablisherIdList;
+
+    // Forward Declarations
+    local interface ContextEstablisher;
+    typedef sequence<ContextEstablisher> ContextEstablisherList;
+
+    local interface InitiatingContext;
+    typedef sequence<InitiatingContext> InitiatingContextList;
+
+    local interface AcceptingContext;
+    typedef sequence<AcceptingContext> AcceptingContextList;
+
+    /**
+     * This type is used to identify listeners for removal.
+     * A Listener identity will be assigned to a listener when
+     * it is assigned to a particular object.
+     */
+
+    // begin of ObjectSecurity removal
+
+//      typedef string ListenerId;
+
+    /**
+     * This local interface may be used by transport components
+     * to get notified when credentials have been created and
+     * are enabled.
+     */
+//      local interface CredentialsCreationListener {
+//          void created_notify(
+//              in OwnCredentials creds
+//          );
+//      };
+    
+    /**
+     * This local interface is used to notify the user when the credentials
+     * have been relinquished.
+     */
+//      local interface RelinquishedCredentialsListener {
+
+//          void relinquished_notify(
+//              in SL3CM::CredentialsId creds_id
+//          );
+//      };
+
+    /**
+     * This local interface is used by mostly by auditing functions
+     * that want to monitor the establishment of new accepting
+     * contexts.
+     */
+//      local interface AcceptingContextEstablishmentListener {
+//          void established_notify(
+//              in AcceptingContext accepting_context
+//          );
+//      };
+    
+    /**
+     * This local interface is used by auditing functions that want
+     * to monitor the establishment of new initiating contexts.
+     */
+//      local interface InitiatingContextEstablishmentListener {
+//          void established_notify(
+//              in InitiatingContext initiating_context
+//          );
+//      };
+    
+    /**
+     * The InitiatingContextClosedListener local interface is used by
+     * auditing functions that want to  monitor the closing or shutdown
+     * of existing initiating contexts.
+     */
+//      local interface InitiatingContextClosedListener {
+//          void closed_notify(
+//              in InitiatingContext initiating_context
+//          );
+//      };
+
+    /**
+     * The AcceptingContextClosedListener local interface is used by
+     * auditing functions that want to monitor the closing or shutdown
+     * of existing accepting contexts.
+     */
+//      local interface AcceptingContextClosedListener {
+//          void closed_notify(
+//              in AcceptingContext initiating_context
+//          );
+//      };
+
+    // end of ObjectSecurity removal
+    
+    /**
+     * The TransportCredentialsCurator local interface is used by the
+     * ORB Interceptor to enable any of its valid credentials to start
+     * accepting security contexts if not already doing so.
+     */
+    local interface TransportCredentialsCurator : CredentialsCurator {
+
+        /**
+         * The add_credentials_creation_listener operation adds a
+         * credentials creation listener.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_credentials_creation_listener(
+//              in CredentialsCreationListener listener
+//          );
+        
+        /**
+         * The remove_credentials_creation_listener operation removes
+         * a credentials creation listener.
+         */
+//          void remove_credentials_creation_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal
+        
+        /**
+         * The enable_transport_acceptors operation is used by the
+         * internals to enable all the credentials to start
+         * accepting security associations.
+         */
+        void enable_transport_acceptors();
+    };
+    
+    /**
+     * The TransportOwnCredentials extension of the OwnCredentials
+     * is used to give the ability for users these credentials to
+     * get notification when these credentials finally become
+     * relinquished. These functions are used by the Security
+     * Level3 Credentials in their release management.
+     */
+    local interface TransportOwnCredentials : OwnCredentials {
+
+        /**
+         * The add_relinquished_listener operations adds
+         * a listener that will get notified when the 
+         * OwnCredentials are finally done with any pending
+         * work and are relinquished by the security service
+         * The credentials must be released.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_relinquished_listener(
+//              in RelinquishedCredentialsListener listener
+//          );
+        
+        /**
+         * The remove_relinquished_listener operation removes a listener.
+         * This function raises a BAD_PARAM exception if the listener
+         * is not registered.
+         */
+//          void remove_relinquished_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal        
+    };
+    
+    /**
+     * An object of the TransportInitiator interface 
+     * is associated with Transport OwnCredentials.
+     * Its operations create or reuse secure context
+     * establishers.
+     */
+    local interface TransportInitiator : CredentialsInitiator {
+
+        /**
+         * The increment_work operation is used by the ClientRequestInterceptor
+         * when a request is made.
+         */
+        void increment_work();
+
+        /**
+         * The decrement_work operation is used by the ClientRequestInterceptor
+         * when a request is done.
+         */
+        void decrement_work();
+
+        /**
+         * The supports_invoc_options operation is used by the
+         * framework to discover if this initiator can be used to
+         * create the desired secure association.
+         * <p>
+         * Note:Presently not used, may be deprecated.
+         */
+        boolean supports_invoc_options(
+            in CSIIOP::AssociationOptions invocation_options_supported,
+            in CSIIOP::AssociationOptions invocation_options_required
+        );
+        
+        /**
+         * The supports_csi_version operation returns true if this
+         * initiator supports the particular CSI version.
+         */
+        boolean supports_csi_version(
+            in CSIVersion csi_version
+        );
+        
+        /**
+         * The is_usable operation is used by the Transport Security framework
+         * to see if this initiator can handle the specified policy
+         * against the components of the target's IOR.
+         */
+        boolean is_usable(
+            in  string                   host,
+            in  unsigned long            port,
+            in  SL3CM::CredsDirective           creds_directive,
+            in  SL3CM::FeatureDirective         client_authentication,
+            in  SL3CM::FeatureDirective         target_authentication,
+            in  SL3CM::FeatureDirective         confidentiality,
+            in  SL3CM::FeatureDirective         integrity,
+            in  CSIVersion               csi_version,
+            in  IOP::TaggedComponentSeq  transport_components
+        );
+        
+        /**
+         * The create_context_establishers operation is used by the
+         * Transport Security framework to create a set of NEW 
+         * ContextEstablishers.
+         */
+        ContextEstablisherList create_context_establishers(
+            in  string                   host,
+            in  unsigned long            port,
+            in  SL3CM::CredsDirective           creds_directive,
+            in  SL3CM::FeatureDirective         client_authentication,
+            in  SL3CM::FeatureDirective         target_authentication,
+            in  SL3CM::FeatureDirective         confidentiality,
+            in  SL3CM::FeatureDirective         integrity,
+            in  CSIVersion               csi_version,
+            in  IOP::TaggedComponentSeq  transport_components
+        );
+        
+        /**
+         * FOR INTERNAL USE OWNLY.
+         * This operation returns the context establisher for its identifier.
+         * WHAT IS THIS USED FOR? THIS IS USED FOR INTEGRATION WITH THE
+         * OCI (because of the IOR profiles are selected
+         * before the intercept calls. However, this call could be used to
+         * quickly figure out ownership of a ContextEstablisher should the
+         * identities mandated to be unique and prefixed with the OwnCredentials
+         * id.
+         */
+        ContextEstablisher get_context_establisher(
+            in ContextEstablisherId id
+        );
+        
+        /**
+         * The context_establishers attribute contains a
+         * list of available context establishers.
+         */
+        readonly attribute ContextEstablisherList    context_establishers;
+        
+        /**
+         * This is IIOP after all, so we list the host/network interface
+         * device from which this establisher will establish contexts.
+         */
+        readonly attribute string host;
+        
+        /**
+         * The low_port attribute represents the low end of the 
+         * range of ports from which the establisher
+         * will try to allocate.
+         */
+        readonly attribute unsigned long low_port;
+        
+        /**
+         * The high_port attribute represents the high end of the 
+         * range of ports from which the establisher
+         * will try to allocate.
+         */
+        readonly attribute unsigned long high_port;
+        
+        /**
+         * The add_initiating_context_establishment_listener
+         * operation adds an initiating listener, which is called
+         * when new contexts are established with the context establishers
+         * that are created by this initiator. The listener is given a
+         * Listener identifier that can only be used to remove the 
+         * listener. 
+         * <p>
+         * These listeners are needed by certain auditing functions.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_initiating_context_establishment_listener(
+//              in InitiatingContextEstablishmentListener listener
+//          );
+        
+        /**
+         * The remove_initiating_context_establishment_listener
+         * operation removes the listener. This operation raises
+         * a BAD_PARAM exception if the listener id is not registered.
+         */
+//          void remove_initiating_context_establishment_listener(
+//              in ListenerId id
+//          );  
+
+	// end of ObjectSecurity removal
+    };
+
+    /**
+     * An object of the TransportAcceptor interface is part of
+     * the Own Credentials and is used to accept secure associations
+     * from clients.
+     */
+    local interface TransportAcceptor : CredentialsAcceptor {
+
+        /**
+         * The increment_work operation is used by the ClientRequestInterceptor
+         * when a request is made.
+         */
+        void increment_work();
+
+        /**
+         * The decrement_work operation is used by the ClientRequestInterceptor
+         * when a request is signaled to be received.
+         */
+        void decrement_work();
+
+        /**
+         * This is IIOP after all. The hosts attribute lists the host
+         * listening addresses on which these credentials are working.
+         */
+        readonly attribute CORBA::StringSeq hosts;
+        
+        /**
+         * The port attribute names the allocated listening port.
+         */
+        readonly attribute unsigned long port;
+        
+        /**
+         * The transport_components operation returns the tagged component
+         * that represents the security mechanism according to the CSI version.
+         */
+        IOP::TaggedComponentSeq transport_components(
+            in CSIVersion   csi_version
+        );
+        
+        /**
+         * The options_required attribute returns the options required. 
+         */
+        readonly attribute CSIIOP::AssociationOptions options_required;
+        
+        /**
+         * The options_supported attribute returns the options supported. 
+         */
+        readonly attribute CSIIOP::AssociationOptions options_supported;
+        
+        /**
+         * The transport_matches operation is used by the framework to
+         * see if the transport component matches the one supported
+         * by this acceptor.
+         */
+        boolean transport_matches(
+            in string                  host,
+            in unsigned long           port,
+            in IOP::TaggedComponentSeq transport_components
+        );
+        
+        /**
+         * The accept operation is used by the TransportSecurity framework to
+         * accept a secure association. It shall only block waiting for
+         * establishment if indicated. It should return null, if it cannot
+         * return an Accepting Context.
+         */
+        AcceptingContext accept(
+            in boolean block
+        );
+        
+        /**
+         * The shutdown operation is used by the framework to shutdown the 
+         * acceptor. The is object is invalid after this operation
+         * is invoked.
+         */
+        void shutdown();
+        
+        /**
+         * The enable operation is used by the framework to start the listening
+         * process on this acceptor.
+         */
+        void enable();
+        
+        /**
+         * The add_accepting_context_establishment_listener
+         * operation adds an accept call back which is called
+         * when new contexts are established with this acceptor.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_accepting_context_establishment_listener(
+//              in AcceptingContextEstablishmentListener listener
+//          );
+        
+        /**
+         * The remove_accepting_context_establishment_listener
+         * operation removes the named listener. This operation
+         * shall raise a BAD_PARAM exception if the listener is not 
+         * registered. 
+         */
+//          void remove_accepting_context_establishment_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal        
+    };
+
+    /**
+     * The IdentityTokenInfo structure is returned by the
+     * IdentityTokenGenerator when it generates a CSI Identity token.
+     */
+    struct IdentityTokenInfo {
+        boolean                           is_absent;
+        boolean                           is_anonymous;
+        CSI::IdentityToken                the_token;
+        SL3PM::SimplePrincipal   the_principal;
+        SL3PM::IdentityStatement the_statement;
+    };
+    
+    /**
+     * An object of theIdentityTokenGenerator interface may be used
+     * by the TokenGenerator to assert a particular identity over the
+     * transport.
+     */
+    local interface IdentityTokenGenerator {
+
+        SL3PM::SimplePrincipal   the_principal();
+        SL3PM::IdentityStatement the_statement();
+        
+        boolean generate_identity(
+            in  CSI::IdentityTokenType id_token_types,
+            in  CSI::OIDList           gss_naming_mechs,
+            out IdentityTokenInfo      identity_token_info
+        );
+        
+        void destroy();
+    };
+
+    /**
+     * An AcceptingContext is an extension of ClientCredentials and
+     * represents a live connection with the client.
+     * An object of this interface is created by the TransportAcceptor.
+     */
+    // begin of ObjectSecurity change
+    local interface AcceptingContext : ClientCredentials,
+				       SL3OM::CredentialsObserver {
+	// end of ObjectSecurity change
+
+        /**
+         * This operation is used by the SecurityLevel3 Credentials
+         * to generate an Identity Token Generator that will generate
+         * the proper identity when trying to "quote" a client.
+         */
+        IdentityTokenGenerator create_client_identity_token_generator();
+        
+        /**
+         * An AcceptingContext represents a live connected transport
+         * with a client. One can add an AcceptingContextClosedListener
+         * to get notified when this context is shutdown, i.e.
+         * connection is closed. The returned ListenerId is for use with the
+         * remove_accepting_context_closed_listener operation.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_accepting_context_closed_listener(
+//              in AcceptingContextClosedListener listener
+//          );
+        
+        /**
+         * The remove_accepting_context_closed_listener operation
+         * removes a previously installed listener.
+         */
+//          void remove_accepting_context_closed_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal
+    };
+
+    /**
+     * A ContextEstablisher represents the potential connection to
+     * a remote target with which to establish an InitiatingContext.
+     * An object of theContextEstablisher interface is created by the
+     * TransportInitiator.
+     * It does not connect to the remote server, but stores the information
+     * and capability to establish a context with a particular remote server.
+     */
+    local interface ContextEstablisher {
+
+        /**
+         * The establisher id shall be unique throughout the system.
+         * To do this, the TransportInitiator creates this establisher's id
+         * by appending the credentials id, which must be unique throughout
+         * the system, with an identifier unique within the 
+         * credentials' initiator.
+         */
+        readonly attribute ContextEstablisherId  establisher_id;
+        
+        /**
+         * The expiry_time attribute will have the time this establisher
+         * is no longer good, if known.
+         */
+        readonly attribute TimeBase::UtcT        expiry_time;
+        
+        /**
+         * The parent_credentials attribute contains a pointer
+         * to the OwnCredentials that created this Context Establisher.
+         */
+        readonly attribute OwnCredentials        parent_credentials;
+        
+        /**
+         * The remote_host attribute contains the 
+         * IIOP remote host for which this ContextEstablisher
+         * was created. Other host addresses may be contained
+         * in the transport_components.
+         */
+        readonly attribute string                remote_host;
+
+        /**
+         * The remote_port attribute contains the
+         * IIOP remote port of the remote host for which this
+         * ContextEstablisher was created. Other host addresses and
+         * ports may be contained in the transport_components.
+         */
+        readonly attribute unsigned long         remote_port;
+        
+        /**
+         * The transport_components attribute contains the
+         * relevant transport component associated with this
+         * Context Establisher. These are used for comparison
+         * purposes.
+         */
+        readonly attribute IOP::TaggedComponentSeq  transport_components;
+        
+        /**
+         * The establish_context operation tries to establish
+         * an InitiatingContext with its peer.
+         * The context shall be null, if it cannot generate a usable context.
+         * This operation returns true if the context was actually created
+         * for this call. If the result is false, then there is no
+         * InitiatingContext.
+         */
+        boolean establish_context(
+            out InitiatingContext        initiating_context
+        );
+        
+        /**
+         * The establish_context_timeout operation tries to establish
+         * an InitiatingContext with its peer with a timeout.
+         * The context shall be null, if it cannot generate a usable context.
+         * This operation returns true if the context was actually created
+         * for this call. If the result is false, then there is no
+         * InitiatingContext.
+         */
+        boolean establish_context_timeout(
+            in  unsigned long            timeout,
+            out InitiatingContext        initiating_context
+        );
+        
+        /**
+         * The establish_alt_context operation tries to establish
+         * an InitiatingContext with its peer.
+         * The context shall be null, if it cannot generate a usable context.
+         * This operation returns true if the context was actually created
+         * for this call. If the result is false, then there is no
+         * InitiatingContext.
+         * <p>
+         * This call is different than establish_context, in that it is
+         * used by the CSIv2 framework. It is used to establish new
+         * transports that are not embodies or endorsed. This call is
+         * performed at the CSIv2 trust layer to obtain trust in the 
+         * the target, via target authentication. Performing this extra
+         * step may prevent the transmission of sensitive CSIv2 data,
+         * before the target is authenticated and subsequently trusted.
+         */
+        boolean establish_alt_context(
+            in  SL3CM::CredsDirective           creds_directive,
+            out InitiatingContext        initiating_context
+        );
+        
+        /**
+         * The establish_alt_context_timeout
+         *  operation is like the establish_alt_context, but with a timeout.
+         */
+        boolean establish_alt_context_timeout(
+            in  SL3CM::CredsDirective           creds_directive,
+            in  unsigned long            timeout,
+            out InitiatingContext        initiating_context
+        );
+        
+        /**
+         * The is_usable operation returns true if this ContextEstablisher
+         * has the ability to establish an InitiatingContext according
+         * to the given policy.
+         */
+        boolean is_usable(
+            in  string                   host,
+            in  unsigned long            port,
+            in  SL3CM::CredsDirective           creds_directive,
+            in  SL3CM::FeatureDirective         client_authentication,
+            in  SL3CM::FeatureDirective         target_authentication,
+            in  SL3CM::FeatureDirective         confidentiality,
+            in  SL3CM::FeatureDirective         integrity,
+            in  CSIVersion               csi_version,
+            in  IOP::TaggedComponentSeq  transport_components
+        );
+        
+        /**
+         * The equivalent operation tests to see if the Context Establisher
+         * is equivalent to the argument. There might be occasion
+         * when a Context Establisher gets created and then they
+         * need to be tested for the same functionality so that
+         * they can be filtered out from use (i.e. destroying 
+         * duplicated functionality).
+         */
+        boolean equivalent(
+            in ContextEstablisher estab
+        );
+        
+        /**
+         * The add_initiating_context_establishment_listener operation
+         * add a initiating context establishment listener to 
+         * this object for each time this object establishes its
+         * context.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_initiating_context_establishment_listener(
+//              in InitiatingContextEstablishmentListener listener
+//          );
+        
+        /**
+         * The remove_initiating_context_establishment_listener operation
+         * removes the named listener. This operation removes the
+         * named listener. This operation shall raise a BAD_PARAM
+         * exception if the listener is not registered.
+         */
+//          void remove_initiating_context_establishment_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal
+    };
+    
+    /**
+     * An Initiating Context is an extension of TargetCredentials and
+     * represents a live connection with the target.
+     * An object of the InitiatingContext interface is
+     * created by a ContextEstablisher.
+     */
+    // begin of ObjectSecurity change
+    local interface InitiatingContext : TargetCredentials,
+					SL3OM::CredentialsObserver {
+	// end of ObjectSecurity change
+
+        /**
+         * The is_usable operation is used by the TransportSecurity Framework
+         * to indicate that the initiating context is good for the
+         * desired secure association.
+         */
+        boolean is_usable(
+            in  string                  host,
+            in  unsigned long           port,
+            in  SL3CM::CredsDirective          creds_directive,
+            in  SL3CM::FeatureDirective        client_authentication,
+            in  SL3CM::FeatureDirective        target_authentication,
+            in  SL3CM::FeatureDirective        confidentiality,
+            in  SL3CM::FeatureDirective        integrity,
+            in  CSIVersion              csi_version,
+            in  IOP::TaggedComponentSeq transport_components
+        );
+        
+        /**
+         * The add_initiating_context_closed_listener
+         * operation is used to add listener to be notified
+         * when the Context has been terminated.
+         */
+
+	// begin of ObjectSecurity removal
+
+//          ListenerId add_initiating_context_closed_listener(
+//              in InitiatingContextClosedListener listener
+//          );
+        
+        /**
+         * The remove_initiating_context_closed_listener
+         * operation removes the registered listener. This
+         * operation shall raise a BAD_PARAM exception should the
+         * listener not be registered.
+         */
+//          void remove_initiating_context_closed_listener(
+//              in ListenerId id
+//          );
+
+	// end of ObjectSecurity removal
+        
+        /**
+         * The shutdown operation is used by the framework to shutdown
+         * the initiating context and clean up.
+         */
+        void shutdown();
+        
+    };
+
+    // begin of ObjectSecurity addition
+    local interface CredentialsAcquirerFactory {
+	CredentialsAcquirer create(in SL3AQArgs::Argument value);
+	boolean supports_all_args(in SL3AQArgs::Argument value);
+    };
+    // end of ObjectSecurity addition
+
+}; // TransportSecurity
+
+#endif // _TRANSPORT_SECURITY2_IDL_

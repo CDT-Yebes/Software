@@ -1,0 +1,108 @@
+//
+//  MICO SL3 --- an Open Source SL3 implementation
+//  Copyright (C) 2004 ObjectSecurity Ltd.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+//  Send comments and/or bug reports to:
+//                 micosec@objectsecurity.com
+//
+
+//  Written by Karel Gardas, <kgardas@objectsecurity.com>
+
+#ifndef _SL3OMEXT_IDL_
+#define _SL3OMEXT_IDL_
+
+#include <mico/security/sl3om.idl>
+
+
+/**
+ * This module provides interfaces for MICO's Observers Model extensions.
+ * These interfaces can be used by SL3 enabled application, but the user
+ * have to keep in mind that they are MICO proprietary and so the application
+ * code is not portable across various SL3 implementations.
+ */
+module SL3OMExt {
+    /**
+     * This observer is an extension of CredentialsObserver. It adds
+     * functionality for notification about credentials destruction.
+     */
+    local interface CredentialsDestroyObserver : SL3OM::CredentialsObserver {
+	/**
+	 * This operation notifies the observer about credentials
+	 * destruction. It is usually called from OwnCredentials
+	 * implementation destructor.
+	 */
+	void destroy_credentials(in SL3CM::CredentialsId id);
+    };
+
+    /**
+     * This observer is an extension of AcceptingContextObserver. It adds
+     * functionality for notification about credentials destruction.
+     */
+    local interface AcceptingContextDestroyObserver : SL3OM::AcceptingContextObserver {
+	/**
+	 * This operation notifies the observer about credentials
+	 * destruction. It is usually called from ClientCredentials
+	 * implementation destructor.
+	 */
+	void destroy_context(in TransportSecurity::ClientCredentials
+			     ctx);
+    };
+
+    /**
+     * This observer is an extension of InitiatingContextObserver. It adds
+     * functionality for notification about credentials destruction.
+     */
+    local interface InitiatingContextDestroyObserver : SL3OM::InitiatingContextObserver {
+	/**
+	 * This operation notifies the observer about credentials
+	 * destruction. It is usually called from TargetCredentials
+	 * implementation destructor.
+	 */
+	void destroy_context(in TransportSecurity::TargetCredentials
+			     ctx);
+    };
+
+    /**
+     * This observer is an extension of ClientCredentialsObserver. It adds
+     * functionality for notification about credentials destruction.
+     */
+    local interface ClientCredentialsDestroyObserver : SL3OM::ClientCredentialsObserver {
+	/**
+	 * This operation notifies the observer about credentials
+	 * destruction. It is usually called from ClientCredentials
+	 * implementation destructor.
+	 */
+	void destroy_credentials(in SecurityLevel3::ClientCredentials
+				 creds);
+    };
+
+    /**
+     * This observer is an extension of TargetCredentialsObserver. It adds
+     * functionality for notification about credentials destruction.
+     */
+    local interface TargetCredentialsDestroyObserver : SL3OM::TargetCredentialsObserver {
+	/**
+	 * This operation notifies the observer about credentials
+	 * destruction. It is usually called from TargetCredentials
+	 * implementation destructor.
+	 */
+	void destroy_credentials(in SecurityLevel3::TargetCredentials
+				 creds);
+    };
+}; // SL3OMExt
+
+#endif // _SL3OMEXT_IDL_

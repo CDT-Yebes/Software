@@ -1,0 +1,19 @@
+Running.
+Using thread-pool concurrency model.
+Using client concurrency model: threaded
+Hello World
+Hello 1 seconds sleeping world
+caught expected TIMEOUT exception
+Hello 3 seconds sleeping world
+Using thread-pool concurrency model.
+Using client concurrency model: reactive
+Hello World
+Hello 1 seconds sleeping world
+caught expected TIMEOUT exception
+Hello 3 seconds sleeping world
+Using thread-pool concurrency model.
+Using client concurrency model: threaded/blocking
+Hello World
+Hello 1 seconds sleeping world
+caught expected TIMEOUT exception
+Hello 3 seconds sleeping world
