@@ -1,0 +1,1545 @@
+lun oct 20 10:02:54 UTC 2014
+==== Building MICO from: /home/almamgr/ACS/ExtProd/INSTALL/../PRODUCTS into: /alma/ACS-2014.4
+==== mico build Directory exists. Removing it
+==== Extracting mico package
+done Extracting package ====
+
+==== Patching mico (needed for gcc >= 4.3)
+patching file mico/orb/fast_array.cc
+patching file mico/include/mico/tckind.h
+patching file mico/orb/typecode.cc
+patching file mico/orb/poa_impl.cc
+patching file mico/orb/security/securitylevel3_impl.cc
+patching file mico/orb/security/sl3aqargs_impl.cc
+done Patching mico ====
+
+==== Configuring mico
+loading cache ./config.cache
+checking for extra include and lib directories...
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking build system type... x86_64-unknown-linux-gnu
+checking for gcc... (cached) gcc
+checking whether the C compiler (gcc  -Wl,--no-as-needed) works... yes
+checking whether the C compiler (gcc  -Wl,--no-as-needed) is a cross-compiler... no
+checking whether we are using GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking how to run the C preprocessor... (cached) gcc -E
+checking for c++... (cached) c++
+checking whether the C++ compiler (c++  -Wl,--no-as-needed) works... yes
+checking whether the C++ compiler (c++  -Wl,--no-as-needed) is a cross-compiler... no
+checking whether we are using GNU C++... (cached) yes
+checking whether c++ accepts -g... (cached) yes
+checking how to run the C++ preprocessor... (cached) c++ -E
+checking for POSIXized ISC... no
+checking OS Type... unix
+checking for open in -lpthread... (cached) yes
+checking for pthread.h... (cached) yes
+checking for sched.h... (cached) yes
+checking for semaphore.h... (cached) yes
+checking for bison... (cached) bison -y
+checking for flex... (cached) flex
+checking for yywrap in -lfl... (cached) yes
+checking for ar... ar rc
+checking for ranlib... (cached) ranlib
+checking whether make sets ${MAKE}... (cached) yes
+checking for tclsh... (cached) /usr/bin/tclsh
+checking for javac... (cached) /usr/lib/jvm/java-7-openjdk-amd64/bin/javac
+checking for JDK 1.1... yes
+checking for JavaCUP... no
+configure: warning: you have not installed JDK 1.1 and JavaCUP. java parts disabled.
+checking for esnacc/c++/asn-incl.h... (cached) no
+checking for open in -lc++asn1... (cached) no
+checking for esnacc... (cached) no
+checking for smp/AttributeCertificateDefinitions.h... (cached) no
+checking for open in -lcmlasn... (cached) no
+checking for open in -lm... (cached) yes
+checking for open in -lnsl... (cached) no
+checking for X... (cached) no
+checking for open in -lsocket... (cached) no
+checking for open in -lbsd... (cached) no
+checking for open in -lelf... (cached) no
+checking for open in -ldl... (cached) yes
+checking for open in -ldld... (cached) no
+checking for open in -lld... (cached) no
+checking for open in -lcrypto... (cached) yes
+checking for open in -lssl... (cached) yes
+checking for open in -lncurses... (cached) no
+checking for open in -ltermcap... (cached) no
+checking for open in -lHcurses... (cached) no
+checking for open in -lcurses... (cached) no
+checking for readline in -lreadline... (cached) no
+checking for ANSI C header files... (cached) yes
+checking for fcntl.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for sys/select.h... (cached) yes
+checking for strings.h... (cached) yes
+checking for float.h... (cached) yes
+checking for ieeefp.h... (cached) no
+checking for sys/un.h... (cached) yes
+checking for netinet/in.h... (cached) yes
+checking for arpa/inet.h... (cached) yes
+checking for netdb.h... (cached) yes
+checking for dlfcn.h... (cached) yes
+checking for dl.h... (cached) no
+checking for netinet/tcp.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for sys/time.h... (cached) yes
+checking for sunmath.h... (cached) no
+checking for sys/stat.h... (cached) yes
+checking for poll.h... (cached) yes
+checking for exception... (cached) yes
+checking for exception.h... (cached) no
+checking for terminate.h... (cached) no
+checking for openssl/ssl.h... (cached) yes
+checking for pgsql/libpq-fe.h... (cached) no
+checking for qapplication.h... (cached) no
+checking for qsocketnotifier.h... (cached) no
+checking for qlineedit.h... (cached) no
+checking for byteorder.h... (cached) no
+checking for iostream... (cached) yes
+checking for map... (cached) yes
+checking for string... (cached) yes
+checking for sstream... (cached) yes
+checking for Ansi C++ headers... yes
+checking for cxxabi.h... (cached) yes
+checking for __cxa_demangle... (cached) yes
+checking whether time.h and sys/time.h may both be included... (cached) yes
+checking for the third argument of getsockname... (cached) socklen_t
+checking for the second argument of getsockname... (cached) struct sockaddr *
+checking for select argument type... (cached) fd_set *
+checking whether gettimeofday has two args... (cached) yes
+checking for scanf("%Lf")... ok
+checking for printf("%Lf")... ok
+checking for vprintf... (cached) yes
+checking for strdup... (cached) yes
+checking for strerror... (cached) yes
+checking for gethostname... (cached) yes
+checking for infnan... (cached) no
+checking for isnan... (cached) yes
+checking for isinf... (cached) yes
+checking for finite... (cached) yes
+checking for infnanl... (cached) no
+checking for isnanl... (cached) yes
+checking for isinfl... (cached) yes
+checking for asinl... (cached) yes
+checking for ldexpl... (cached) yes
+checking for frexpl... (cached) yes
+checking for fabsl... (cached) yes
+checking for floorl... (cached) yes
+checking for ceill... (cached) yes
+checking for powl... (cached) yes
+checking for fmodl... (cached) yes
+checking for dlopen... (cached) yes
+checking for shl_load... (cached) no
+checking for ftime... (cached) yes
+checking for backtrace... (cached) yes
+checking for backtrace_symbols... (cached) yes
+checking size of unsigned char... (cached) 1
+checking size of int... (cached) 4
+checking size of unsigned int... (cached) 4
+checking size of long... (cached) 8
+checking size of unsigned long... (cached) 8
+checking size of long long... (cached) 8
+checking size of unsigned long long... (cached) 8
+checking size of short... (cached) 2
+checking size of unsigned short... (cached) 2
+checking size of float... (cached) 4
+checking size of double... (cached) 8
+checking size of long double... (cached) 16
+checking whether byte ordering is bigendian... (cached) no
+checking for floating point type... IEEE
+checking for gethostname prototype... yes
+checking for finite prototype... yes
+checking for strerror prototype... yes
+checking for ftime prototype... yes
+checking for bool... (cached) yes
+checking for typename... (cached) yes
+checking for guiding declarations... (cached) yes
+checking for namespaces... (cached) yes
+checking for const overload... (cached) no
+checking for explicit method override... (cached) yes
+checking whether explicit struct methods are needed... (cached) no
+checking for overloaded typedefs... (cached) yes
+checking for dynamic_cast support... (cached) yes
+checking for exception handling flags... none
+checking for exception handling... ok
+checking for standard exception handling... ok
+checking how to create shared libraries... using admin/mico-shld.def.in with -fPIC
+checking build of PIC object file... ok
+checking creation of shared lib... ok
+checking if binary linked against shlib works... ok
+checking for exceptions in shared libraries... ok
+checking for dynamic loading... ok, using dlopen() family
+checking for thread-safe openssl... ok
+creating ./config.status
+creating MakeVars
+creating demo/MakeVars.install
+creating admin/mico-c++
+creating admin/mico-shc++
+creating admin/mico-ld
+creating admin/mico-ar
+creating admin/mico-setup.sh
+creating admin/mico-setup.csh
+creating admin/mico-config
+creating include/mico/config.h
+include/mico/config.h is unchanged
+creating include/mico/config.idl
+include/mico/config.idl is unchanged
+done Configuring mico ====
+
+==== Building mico
+make[1]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico'
+for i in admin include; do make -C $i adm || exit 1; done
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/admin'
+make[2]: No se hace nada para `adm'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/admin'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/include'
+make[2]: No se hace nada para `adm'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/include'
+for i in orb ir idl auxdir coss ccm; do make -C $i lib || exit 1; done
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/orb'
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c os-unix.cc -o os-unix.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c dii.cc -o dii.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c typecode.cc -o typecode.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c any.cc -o any.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c codec.cc -o codec.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c buffer.cc -o buffer.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c context.cc -o context.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c except.cc -o except.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c dispatch.cc -o dispatch.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c string.cc -o string.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c object.cc -o object.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c address.cc -o address.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ior.cc -o ior.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c orb.cc -o orb.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c dsi.cc -o dsi.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c transport.cc -o transport.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c transport/tcp.cc -o transport/tcp.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c transport/udp.cc -o transport/udp.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c transport/unix.cc -o transport/unix.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c iop.cc -o iop.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c util.cc -o util.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c basic_seq.cc -o basic_seq.pic.o
+util.cc: In function ‘CORBA::Boolean mico_fnmatch(const char*, const char*)’:
+util.cc:893:9: warning: suggest explicit braces to avoid ambiguous ‘else’ [-Wparentheses]
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c fast_array.cc -o fast_array.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ssl.cc -o ssl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c fixed.cc -o fixed.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c codeset.cc -o codeset.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c queue.cc -o queue.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c static.cc -o static.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c current.cc -o current.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c policy_impl.cc -o policy_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c service_info.cc -o service_info.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ioptypes.cc -o ioptypes.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ssliop.cc -o ssliop.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c value.cc -o value.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c valuetype.cc -o valuetype.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c valuetype_impl.cc -o valuetype_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c dynany_impl.cc -o dynany_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c policy2.cc -o policy2.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c tckind.cc -o tckind.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c orb_excepts.cc -o orb_excepts.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c policy.cc -o policy.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c poa.cc -o poa.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c poa_base.cc -o poa_base.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c poa_impl.cc -o poa_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c dynany.cc -o dynany.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC   -c except2.cc -o except2.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c pi.cc -o pi.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c pi_impl.cc -o pi_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c typecode_seq.cc -o typecode_seq.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c timebase.cc -o timebase.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ir.cc -o ir.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ir_base.cc -o ir_base.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c imr.cc -o imr.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c mtdebug.cc -o mtdebug.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c reflection.cc -o reflection.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c mttypes.cc -o mttypes.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c os-thread.cc -o os-thread.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c operation.cc -o operation.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c message.cc -o message.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c mt_dispatcher.cc -o mt_dispatcher.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c mt_manager.cc -o mt_manager.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c messaging.cc -o messaging.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c messaging_impl.cc -o messaging_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c mtpolicy.cc -o mtpolicy.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c mtpolicy_impl.cc -o mtpolicy_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/csi_base.cc -o security/csi_base.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/csi.cc -o security/csi.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/csiiop.cc -o security/csiiop.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/gssup.cc -o security/gssup.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/csiv2.cc -o security/csiv2.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/csiv2_impl.cc -o security/csiv2_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/atlas.cc -o security/atlas.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3pm.cc -o security/sl3pm.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3cm.cc -o security/sl3cm.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3om.cc -o security/sl3om.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/securitylevel3.cc -o security/securitylevel3.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/transportsecurity.cc -o security/transportsecurity.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/transportsecurity_p.cc -o security/transportsecurity_p.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3aqargs.cc -o security/sl3aqargs.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3tcpip.cc -o security/sl3tcpip.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3tls.cc -o security/sl3tls.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3aqargs_p.cc -o security/sl3aqargs_p.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3csi.cc -o security/sl3csi.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/userpassword.cc -o security/userpassword.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/trust.cc -o security/trust.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3authorization.cc -o security/sl3authorization.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3ipc.cc -o security/sl3ipc.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3omext.cc -o security/sl3omext.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3pm_impl.cc -o security/sl3pm_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/securitylevel3_impl.cc -o security/securitylevel3_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/transportsecurity_impl.cc -o security/transportsecurity_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3tcpip_impl.cc -o security/sl3tcpip_impl.pic.o
+security/securitylevel3_impl.cc: In member function ‘void MICOSL3_SecurityLevel3::ClientCredsHolder::release_credentials(const char*)’:
+security/securitylevel3_impl.cc:1482:23: warning: variable ‘ttt’ set but not used [-Wunused-but-set-variable]
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3aqargs_p_impl.cc -o security/sl3aqargs_p_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3aqargs_impl.cc -o security/sl3aqargs_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3utils.cc -o security/sl3utils.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3csi_impl.cc -o security/sl3csi_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3tls_impl.cc -o security/sl3tls_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3ipc_impl.cc -o security/sl3ipc_impl.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c security/sl3cmdext.cc -o security/sl3cmdext.pic.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c os-unix.cc -o os-unix.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c dii.cc -o dii.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c typecode.cc -o typecode.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c any.cc -o any.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codec.cc -o codec.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c buffer.cc -o buffer.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c context.cc -o context.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c except.cc -o except.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c dispatch.cc -o dispatch.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c string.cc -o string.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c object.cc -o object.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c address.cc -o address.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ior.cc -o ior.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c orb.cc -o orb.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c dsi.cc -o dsi.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c transport.cc -o transport.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c transport/tcp.cc -o transport/tcp.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c transport/udp.cc -o transport/udp.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c transport/unix.cc -o transport/unix.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c iop.cc -o iop.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c util.cc -o util.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c basic_seq.cc -o basic_seq.o
+util.cc: In function ‘CORBA::Boolean mico_fnmatch(const char*, const char*)’:
+util.cc:893:9: warning: suggest explicit braces to avoid ambiguous ‘else’ [-Wparentheses]
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c fast_array.cc -o fast_array.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ssl.cc -o ssl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c fixed.cc -o fixed.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codeset.cc -o codeset.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c queue.cc -o queue.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c static.cc -o static.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c current.cc -o current.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c policy_impl.cc -o policy_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c service_info.cc -o service_info.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ioptypes.cc -o ioptypes.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ssliop.cc -o ssliop.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c value.cc -o value.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c valuetype.cc -o valuetype.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c valuetype_impl.cc -o valuetype_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c dynany_impl.cc -o dynany_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c policy2.cc -o policy2.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c tckind.cc -o tckind.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c orb_excepts.cc -o orb_excepts.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c policy.cc -o policy.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c poa.cc -o poa.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c poa_base.cc -o poa_base.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c poa_impl.cc -o poa_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c dynany.cc -o dynany.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE      -c except2.cc -o except2.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c pi.cc -o pi.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c pi_impl.cc -o pi_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c typecode_seq.cc -o typecode_seq.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c timebase.cc -o timebase.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ir.cc -o ir.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ir_base.cc -o ir_base.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c imr.cc -o imr.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c mtdebug.cc -o mtdebug.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c reflection.cc -o reflection.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c mttypes.cc -o mttypes.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c os-thread.cc -o os-thread.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c operation.cc -o operation.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c message.cc -o message.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c mt_dispatcher.cc -o mt_dispatcher.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c mt_manager.cc -o mt_manager.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c messaging.cc -o messaging.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c messaging_impl.cc -o messaging_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c mtpolicy.cc -o mtpolicy.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c mtpolicy_impl.cc -o mtpolicy_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/csi_base.cc -o security/csi_base.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/csi.cc -o security/csi.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/csiiop.cc -o security/csiiop.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/gssup.cc -o security/gssup.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/csiv2.cc -o security/csiv2.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/csiv2_impl.cc -o security/csiv2_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/atlas.cc -o security/atlas.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3pm.cc -o security/sl3pm.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3cm.cc -o security/sl3cm.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3om.cc -o security/sl3om.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/securitylevel3.cc -o security/securitylevel3.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/transportsecurity.cc -o security/transportsecurity.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/transportsecurity_p.cc -o security/transportsecurity_p.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3aqargs.cc -o security/sl3aqargs.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3tcpip.cc -o security/sl3tcpip.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3tls.cc -o security/sl3tls.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3aqargs_p.cc -o security/sl3aqargs_p.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3csi.cc -o security/sl3csi.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/userpassword.cc -o security/userpassword.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/trust.cc -o security/trust.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3authorization.cc -o security/sl3authorization.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3ipc.cc -o security/sl3ipc.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3omext.cc -o security/sl3omext.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3pm_impl.cc -o security/sl3pm_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/securitylevel3_impl.cc -o security/securitylevel3_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/transportsecurity_impl.cc -o security/transportsecurity_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3tcpip_impl.cc -o security/sl3tcpip_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3aqargs_p_impl.cc -o security/sl3aqargs_p_impl.o
+security/securitylevel3_impl.cc: In member function ‘void MICOSL3_SecurityLevel3::ClientCredsHolder::release_credentials(const char*)’:
+security/securitylevel3_impl.cc:1482:23: warning: variable ‘ttt’ set but not used [-Wunused-but-set-variable]
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3aqargs_impl.cc -o security/sl3aqargs_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3utils.cc -o security/sl3utils.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3csi_impl.cc -o security/sl3csi_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3tls_impl.cc -o security/sl3tls_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3ipc_impl.cc -o security/sl3ipc_impl.o
+c++  -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c security/sl3cmdext.cc -o security/sl3cmdext.o
+rm -f libmico2.3.13.so
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mico-shld -o libmico2.3.13 os-unix.pic.o dii.pic.o typecode.pic.o any.pic.o codec.pic.o buffer.pic.o context.pic.o except.pic.o dispatch.pic.o string.pic.o object.pic.o address.pic.o ior.pic.o orb.pic.o dsi.pic.o transport.pic.o transport/tcp.pic.o transport/udp.pic.o transport/unix.pic.o iop.pic.o util.pic.o basic_seq.pic.o fast_array.pic.o ssl.pic.o fixed.pic.o codeset.pic.o queue.pic.o static.pic.o current.pic.o policy_impl.pic.o service_info.pic.o ioptypes.pic.o ssliop.pic.o value.pic.o valuetype.pic.o valuetype_impl.pic.o dynany_impl.pic.o policy2.pic.o tckind.pic.o orb_excepts.pic.o policy.pic.o poa.pic.o poa_base.pic.o poa_impl.pic.o dynany.pic.o uni_base64.pic.o uni_unicode.pic.o uni_fromuni.pic.o uni_touni.pic.o except2.pic.o pi.pic.o pi_impl.pic.o typecode_seq.pic.o timebase.pic.o ir.pic.o ir_base.pic.o imr.pic.o mtdebug.pic.o reflection.pic.o mttypes.pic.o os-thread.pic.o operation.pic.o message.pic.o mt_dispatcher.pic.o mt_manager.pic.o messaging.pic.o messaging_impl.pic.o mtpolicy.pic.o mtpolicy_impl.pic.o security/csi_base.pic.o security/csi.pic.o security/csiiop.pic.o security/gssup.pic.o security/csiv2.pic.o security/csiv2_impl.pic.o security/atlas.pic.o security/sl3pm.pic.o security/sl3cm.pic.o security/sl3om.pic.o security/securitylevel3.pic.o security/transportsecurity.pic.o security/transportsecurity_p.pic.o security/sl3aqargs.pic.o security/sl3tcpip.pic.o security/sl3tls.pic.o security/sl3aqargs_p.pic.o security/sl3csi.pic.o security/userpassword.pic.o security/trust.pic.o security/sl3authorization.pic.o security/sl3ipc.pic.o security/sl3omext.pic.o security/sl3pm_impl.pic.o security/securitylevel3_impl.pic.o security/transportsecurity_impl.pic.o security/sl3tcpip_impl.pic.o security/sl3aqargs_p_impl.pic.o security/sl3aqargs_impl.pic.o security/sl3utils.pic.o security/sl3csi_impl.pic.o security/sl3tls_impl.pic.o security/sl3ipc_impl.pic.o security/sl3cmdext.pic.o 
+c++ -shared -fPIC -fPIC -rdynamic  -Wl,--no-as-needed  -o libmico2.3.13.so   'os-unix.pic.o' 'dii.pic.o' 'typecode.pic.o' 'any.pic.o' 'codec.pic.o' 'buffer.pic.o' 'context.pic.o' 'except.pic.o' 'dispatch.pic.o' 'string.pic.o' 'object.pic.o' 'address.pic.o' 'ior.pic.o' 'orb.pic.o' 'dsi.pic.o' 'transport.pic.o' 'transport/tcp.pic.o' 'transport/udp.pic.o' 'transport/unix.pic.o' 'iop.pic.o' 'util.pic.o' 'basic_seq.pic.o' 'fast_array.pic.o' 'ssl.pic.o' 'fixed.pic.o' 'codeset.pic.o' 'queue.pic.o' 'static.pic.o' 'current.pic.o' 'policy_impl.pic.o' 'service_info.pic.o' 'ioptypes.pic.o' 'ssliop.pic.o' 'value.pic.o' 'valuetype.pic.o' 'valuetype_impl.pic.o' 'dynany_impl.pic.o' 'policy2.pic.o' 'tckind.pic.o' 'orb_excepts.pic.o' 'policy.pic.o' 'poa.pic.o' 'poa_base.pic.o' 'poa_impl.pic.o' 'dynany.pic.o' 'uni_base64.pic.o' 'uni_unicode.pic.o' 'uni_fromuni.pic.o' 'uni_touni.pic.o' 'except2.pic.o' 'pi.pic.o' 'pi_impl.pic.o' 'typecode_seq.pic.o' 'timebase.pic.o' 'ir.pic.o' 'ir_base.pic.o' 'imr.pic.o' 'mtdebug.pic.o' 'reflection.pic.o' 'mttypes.pic.o' 'os-thread.pic.o' 'operation.pic.o' 'message.pic.o' 'mt_dispatcher.pic.o' 'mt_manager.pic.o' 'messaging.pic.o' 'messaging_impl.pic.o' 'mtpolicy.pic.o' 'mtpolicy_impl.pic.o' 'security/csi_base.pic.o' 'security/csi.pic.o' 'security/csiiop.pic.o' 'security/gssup.pic.o' 'security/csiv2.pic.o' 'security/csiv2_impl.pic.o' 'security/atlas.pic.o' 'security/sl3pm.pic.o' 'security/sl3cm.pic.o' 'security/sl3om.pic.o' 'security/securitylevel3.pic.o' 'security/transportsecurity.pic.o' 'security/transportsecurity_p.pic.o' 'security/sl3aqargs.pic.o' 'security/sl3tcpip.pic.o' 'security/sl3tls.pic.o' 'security/sl3aqargs_p.pic.o' 'security/sl3csi.pic.o' 'security/userpassword.pic.o' 'security/trust.pic.o' 'security/sl3authorization.pic.o' 'security/sl3ipc.pic.o' 'security/sl3omext.pic.o' 'security/sl3pm_impl.pic.o' 'security/securitylevel3_impl.pic.o' 'security/transportsecurity_impl.pic.o' 'security/sl3tcpip_impl.pic.o' 'security/sl3aqargs_p_impl.pic.o' 'security/sl3aqargs_impl.pic.o' 'security/sl3utils.pic.o' 'security/sl3csi_impl.pic.o' 'security/sl3tls_impl.pic.o' 'security/sl3ipc_impl.pic.o' 'security/sl3cmdext.pic.o'
+ar rc libmico2.3.13.a os-unix.o dii.o typecode.o any.o codec.o buffer.o context.o except.o dispatch.o string.o object.o address.o ior.o orb.o dsi.o transport.o transport/tcp.o transport/udp.o transport/unix.o iop.o util.o basic_seq.o fast_array.o ssl.o fixed.o codeset.o queue.o static.o current.o policy_impl.o service_info.o ioptypes.o ssliop.o value.o valuetype.o valuetype_impl.o dynany_impl.o policy2.o tckind.o orb_excepts.o policy.o poa.o poa_base.o poa_impl.o dynany.o uni_base64.o uni_unicode.o uni_fromuni.o uni_touni.o except2.o pi.o pi_impl.o typecode_seq.o timebase.o ir.o ir_base.o imr.o mtdebug.o reflection.o mttypes.o os-thread.o operation.o message.o mt_dispatcher.o mt_manager.o messaging.o messaging_impl.o mtpolicy.o mtpolicy_impl.o security/csi_base.o security/csi.o security/csiiop.o security/gssup.o security/csiv2.o security/csiv2_impl.o security/atlas.o security/sl3pm.o security/sl3cm.o security/sl3om.o security/securitylevel3.o security/transportsecurity.o security/transportsecurity_p.o security/sl3aqargs.o security/sl3tcpip.o security/sl3tls.o security/sl3aqargs_p.o security/sl3csi.o security/userpassword.o security/trust.o security/sl3authorization.o security/sl3ipc.o security/sl3omext.o security/sl3pm_impl.o security/securitylevel3_impl.o security/transportsecurity_impl.o security/sl3tcpip_impl.o security/sl3aqargs_p_impl.o security/sl3aqargs_impl.o security/sl3utils.o security/sl3csi_impl.o security/sl3tls_impl.o security/sl3ipc_impl.o security/sl3cmdext.o
+ranlib libmico2.3.13.a
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs ../libs
+cd ../libs; rm -f libmico2.3.13.so; ln -f -s ../orb/libmico2.3.13.so .
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs ../libs
+cd ../libs; rm -f libmico2.3.13.a; ln -f -s ../orb/libmico2.3.13.a .
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/orb'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ir'
+c++  -I. -I../idl -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ir_skel.cc -o ir_skel.pic.o
+c++  -I. -I../idl -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -DPIC -fPIC  -c ir_impl.cc -o ir_impl.pic.o
+c++  -I. -I../idl -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ir_skel.cc -o ir_skel.o
+c++  -I. -I../idl -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ir_impl.cc -o ir_impl.o
+ar rc libmicoir2.3.13.a ir_skel.o ir_impl.o
+ranlib libmicoir2.3.13.a
+rm -f libmicoir2.3.13.so
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs ../libs
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mico-shld -o libmicoir2.3.13 ir_skel.pic.o ir_impl.pic.o -L../libs -lmico2.3.13 
+cd ../libs; rm -f libmicoir2.3.13.a; ln -f -s ../ir/libmicoir2.3.13.a .
+c++ -shared -fPIC -fPIC -rdynamic  '-L../libs' -Wl,--no-as-needed  -o libmicoir2.3.13.so   'ir_skel.pic.o' 'ir_impl.pic.o' '-lmico2.3.13'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs ../libs
+cd ../libs; rm -f libmicoir2.3.13.so; ln -f -s ../ir/libmicoir2.3.13.so .
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ir'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/idl'
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c params.cc -o params.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c parser.cc -o parser.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c yacc.cc -o yacc.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c scanner.cc -o scanner.o
+yacc.c: In function ‘int yyparse()’:
+yacc.c:4451:24: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+yacc.c:4566:35: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+yacc.c: In function ‘void yydestruct(int, yystype)’:
+yacc.c:1564:1: note: the ABI of passing union with long double has changed in GCC 4.4
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c parsenode.cc -o parsenode.o
+scanner.cc:2232:13: warning: ‘void yyunput(int, char*)’ defined but not used [-Wunused-function]
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c idlparser.cc -o idlparser.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c ir-copy.cc -o ir-copy.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen.cc -o codegen.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-c++-util.cc -o codegen-c++-util.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-c++-common.cc -o codegen-c++-common.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-c++-stub.cc -o codegen-c++-stub.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-c++-skel.cc -o codegen-c++-skel.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-c++-impl.cc -o codegen-c++-impl.o
+codegen-c++-stub.cc: In member function ‘void CodeGenCPPStub::emit_Interface(CORBA::InterfaceDef_ptr)’:
+codegen-c++-stub.cc:1630:8: warning: variable ‘has_local_base’ set but not used [-Wunused-but-set-variable]
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-c++.cc -o codegen-c++.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-idl.cc -o codegen-idl.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-midl.cc -o codegen-midl.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c dep.cc -o dep.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c error.cc -o error.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c const.cc -o const.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c db.cc -o db.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c prepro.cc -o prepro.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c keymap.cc -o keymap.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c codegen-wsdl.cc -o codegen-wsdl.o
+codegen-wsdl.cc: In member function ‘CodeGenWSDL::Identifier CodeGenWSDL::getTypename(CORBA::IDLType_ptr, bool)’:
+codegen-wsdl.cc:939:16: warning: format ‘%lu’ expects argument of type ‘long unsigned int’, but argument 4 has type ‘CORBA::ULong {aka unsigned int}’ [-Wformat]
+codegen-wsdl.cc:950:16: warning: format ‘%lu’ expects argument of type ‘long unsigned int’, but argument 4 has type ‘CORBA::ULong {aka unsigned int}’ [-Wformat]
+codegen-wsdl.cc:961:15: warning: format ‘%lu’ expects argument of type ‘long unsigned int’, but argument 4 has type ‘CORBA::ULong {aka unsigned int}’ [-Wformat]
+codegen-wsdl.cc:972:16: warning: format ‘%lu’ expects argument of type ‘long unsigned int’, but argument 4 has type ‘CORBA::ULong {aka unsigned int}’ [-Wformat]
+ar rc libidl.a params.o parser.o yacc.o scanner.o parsenode.o idlparser.o ir-copy.o codegen.o codegen-c++-util.o codegen-c++-common.o codegen-c++-stub.o codegen-c++-skel.o codegen-c++-impl.o codegen-c++.o codegen-idl.o codegen-midl.o dep.o error.o const.o db.o prepro.o keymap.o codegen-wsdl.o ../cpp/alloca.o
+ranlib libidl.a
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/idl'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/auxdir'
+make[2]: No se hace nada para `lib'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/auxdir'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss'
+make[2]: No se hace nada para `lib'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ccm'
+make[2]: No se hace nada para `lib'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ccm'
+for i in orb ir cpp idl daemon auxdir coss ccm tools; do make -C $i prg || exit 1; done
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/orb'
+make[2]: No se hace nada para `prg'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/orb'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ir'
+c++  -I. -I../idl -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c main.cc -o main.o
+c++  -I. -I../idl -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE  -L. -L../idl -L../orb -Wl,--no-as-needed  -rdynamic main.o -L. -lidl -lmicoir2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  ../idl/libidl.a -o ird
+true ird
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ir'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/cpp'
+make[2]: No se hace nada para `prg'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/cpp'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/idl'
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c main.cc -o main.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L. -L../orb -L../ir -Wl,--no-as-needed  -rdynamic main.o  -lmicoir2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  libidl.a -o idl
+true idl
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/idl'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/daemon'
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -c poamediator.cc -o poamediator.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -c main.cc -o main.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -c imr_impl.cc -o imr_impl.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -c imr_client.cc -o imr_client.o
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE  -L../orb -Wl,--no-as-needed  -rdynamic imr_client.o -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o imr
+true imr
+c++  -I. -I../include  -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE  -L../orb -Wl,--no-as-needed  -rdynamic poamediator.o main.o imr_impl.o -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o micod
+true micod
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/daemon'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/auxdir'
+make[2]: No se hace nada para `prg'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/auxdir'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss'
+for i in  naming events property time; do make -C $i idlcompile || exit 1; done
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./idl/idl -B../.. --c++-skel --name CosNaming \
+		../../include/coss/CosNaming.idl
+cp CosNaming.h ../../include/coss
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./idl/idl -B../.. --name CosEventComm \
+		../../include/coss/CosEventComm.idl
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./idl/idl -B../.. --name CosEventChannelAdmin \
+		../../include/coss/CosEventChannelAdmin.idl
+cp CosEventComm.h ../../include/coss
+cp CosEventChannelAdmin.h ../../include/coss
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./idl/idl -B../.. --any --name PropertyService \
+	       ../../include/coss/PropertyService.idl
+cp PropertyService.h ../../include/coss
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./idl/idl -B../.. --name CosTime \
+		../../include/coss/CosTime.idl
+cp CosTime.h ../../include/coss
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+for i in  naming events property time; do make -C $i lib || exit 1; done
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c CosNaming.cc -o CosNaming.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -DPIC -fPIC -c CosNaming.cc -o CosNaming.pic.o
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c CosEventComm.cc -o CosEventComm.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -DPIC -fPIC -c CosEventComm.cc -o CosEventComm.pic.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c CosEventChannelAdmin.cc -o CosEventChannelAdmin.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -DPIC -fPIC -c CosEventChannelAdmin.cc -o CosEventChannelAdmin.pic.o
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c PropertyService.cc -o PropertyService.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c PropertyService_impl.cc -o PropertyService_impl.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -DPIC -fPIC -c PropertyService.cc -o PropertyService.pic.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -DPIC -fPIC -c PropertyService_impl.cc -o PropertyService_impl.pic.o
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c CosTime.cc -o CosTime.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE    -DPIC -fPIC -c CosTime.cc -o CosTime.pic.o
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+ar rc libmicocoss2.3.13.a naming/CosNaming.o events/CosEventComm.o events/CosEventChannelAdmin.o property/PropertyService_impl.o property/PropertyService.o time/CosTime.o
+ranlib libmicocoss2.3.13.a
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs ../libs
+cd ../libs; rm -f libmicocoss2.3.13.a; ln -f -s ../coss/libmicocoss2.3.13.a .
+rm -f libmicocoss2.3.13.so
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mico-shld -o libmicocoss2.3.13 naming/CosNaming.pic.o events/CosEventComm.pic.o events/CosEventChannelAdmin.pic.o property/PropertyService_impl.pic.o property/PropertyService.pic.o time/CosTime.pic.o \
+		-L../libs -lmico2.3.13 
+c++ -shared -fPIC -fPIC -rdynamic  '-L../libs' -Wl,--no-as-needed  -o libmicocoss2.3.13.so   'naming/CosNaming.pic.o' 'events/CosEventComm.pic.o' 'events/CosEventChannelAdmin.pic.o' 'property/PropertyService_impl.pic.o' 'property/PropertyService.pic.o' 'time/CosTime.pic.o' '-lmico2.3.13'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs ../libs
+cd ../libs; rm -f libmicocoss2.3.13.so; ln -f -s ../coss/libmicocoss2.3.13.so .
+for i in  naming events property time; do make -C $i prg || exit 1; done
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c Naming_impl.cc -o Naming_impl.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c nsd.cc -o nsd.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c CosNaming_skel.cc -o CosNaming_skel.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L.. -L../../orb -Wl,--no-as-needed  -rdynamic Naming_impl.o nsd.o CosNaming_skel.o -lmicocoss2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o nsd
+true nsd
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c NamingClient.cc -o NamingClient.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c nsadmin.cc -o nsadmin.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L.. -L../../orb -Wl,--no-as-needed  -rdynamic NamingClient.o nsadmin.o -lmicocoss2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread -o nsadmin
+true nsadmin
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c CosEvent_impl.cc -o CosEvent_impl.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c main.cc -o main.o
+CosEvent_impl.cc: In member function ‘virtual void ProxyPushSupplier_impl::notify(const CORBA::Any&)’:
+CosEvent_impl.cc:119:52: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+CosEvent_impl.cc: In member function ‘virtual void ProxyPullSupplier_impl::notify(const CORBA::Any&)’:
+CosEvent_impl.cc:303:64: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L.. -L.. -L../../orb -Wl,--no-as-needed  -rdynamic CosEvent_impl.o main.o -lmicocoss2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o eventd
+true eventd
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c main.cc -o main.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L.. -L../../orb -Wl,--no-as-needed  -rdynamic main.o -lmicocoss2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o propertyd
+true propertyd
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c TimeService_help.cc -o TimeService_help.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c TimeService_impl.cc -o TimeService_impl.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c TimeService_tio.cc -o TimeService_tio.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c TimeService_uto.cc -o TimeService_uto.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c main.cc -o main.o
+TimeService_tio.cc: In member function ‘virtual CosTime::OverlapType TIO_impl::spans(CosTime::UTO_ptr, CosTime::TIO_out)’:
+TimeService_tio.cc:81:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:81:60: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:86:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:86:67: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:91:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:91:67: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc: In member function ‘virtual CosTime::OverlapType TIO_impl::overlaps(CosTime::TIO_ptr, CosTime::TIO_out)’:
+TimeService_tio.cc:137:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:137:60: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:142:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:142:67: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:147:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_tio.cc:147:67: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+TimeService_impl.cc: In member function ‘virtual CosTime::UTO* TimeService_impl::universal_time()’:
+TimeService_impl.cc:33:61: warning: ‘timeV’ is used uninitialized in this function [-Wuninitialized]
+TimeService_impl.cc: In member function ‘virtual CosTime::UTO* TimeService_impl::secure_universal_time()’:
+TimeService_impl.cc:66:11: warning: ‘retval’ may be used uninitialized in this function [-Wuninitialized]
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L.. -L.. -L../../orb -Wl,--no-as-needed  -rdynamic TimeService_help.o TimeService_impl.o TimeService_tio.o TimeService_uto.o main.o -lmicocoss2.3.13 -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o timed
+true timed
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ccm'
+make[2]: No se hace nada para `prg'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ccm'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools'
+test -z "iordump" || \
+	  eval 'for i in iordump; do make -C $i || exit 1; done'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools/iordump'
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE     -c iordump.cc -o iordump.o
+c++  -I. -I../../include -Wall -Wwrite-strings -fno-strict-aliasing -D_REENTRANT -D_GNU_SOURCE   -L../../orb -Wl,--no-as-needed  -rdynamic -L../../idl iordump.o -lidl -lmico2.3.13 -lssl -lcrypto -ldl -lm  -lpthread  -o iordump
+true iordump
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools/iordump'
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools'
+make[1]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico'
+done Building mico ====
+
+==== Installing mico as non-root user, without running ldconfig
+make[1]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico'
+for i in admin orb ir daemon idl cpp auxdir coss ccm tools include man demo; do make -C $i install-cd || exit 1; done
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/admin'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/lib
+mkdir /alma/ACS-2014.4/mico
+mkdir /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-setup.sh /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-setup.csh /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+mkdir /alma/ACS-2014.4/mico/bin
+test -f mico-c++   && /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-c++   /alma/ACS-2014.4/mico/bin
+test -f mico-ld    && /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-ld    /alma/ACS-2014.4/mico/bin
+test -f mico-ar    && /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-ar    /alma/ACS-2014.4/mico/bin
+test -f mico-shc++ && /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-shc++ /alma/ACS-2014.4/mico/bin
+test -f mico-shld  && /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-shld  /alma/ACS-2014.4/mico/bin 
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mkdepend /alma/ACS-2014.4/mico/bin
+test -f mico-config && /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-config /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-setup.sh.in /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-setup.csh.in /alma/ACS-2014.4/mico/lib
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/admin'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/orb'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 555 libmico2.3.13.a /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 555 libmico2.3.13.so /alma/ACS-2014.4/mico/lib
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/orb'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ir'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 ird /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 555 libmicoir2.3.13.a /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 555 libmicoir2.3.13.so /alma/ACS-2014.4/mico/lib
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ir'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/daemon'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 micod /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 imr /alma/ACS-2014.4/mico/bin
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/daemon'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/idl'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 idl /alma/ACS-2014.4/mico/bin
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/idl'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/cpp'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 mico-cpp /alma/ACS-2014.4/mico/bin
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/cpp'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/auxdir'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/lib
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/auxdir'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 555 libmicocoss2.3.13.so /alma/ACS-2014.4/mico/lib
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 555 libmicocoss2.3.13.a /alma/ACS-2014.4/mico/lib
+for i in  naming events property time; do make -C $i install || exit 1; done	
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 nsd /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 nsadmin /alma/ACS-2014.4/mico/bin
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/naming'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 eventd /alma/ACS-2014.4/mico/bin
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/events'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 propertyd /alma/ACS-2014.4/mico/bin
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/property'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 timed /alma/ACS-2014.4/mico/bin
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss/time'
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/coss'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ccm'
+make[2]: No se hace nada para `install-cd'.
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/ccm'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools'
+test -z "iordump" || \
+	  eval 'for i in iordump; do make -C $i install || exit 1; done'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools/iordump'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/bin
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 iordump /alma/ACS-2014.4/mico/bin
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools/iordump'
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/tools'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/include'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/include
+mkdir /alma/ACS-2014.4/mico/include
+for i in *.h; do \
+	  /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/include; \
+	done
+for i in mico ministl coss; do \
+	  /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/include/$i; \
+	  for j in $i/*; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $j /alma/ACS-2014.4/mico/include/$i/; \
+	  done; \
+	done
+mkdir /alma/ACS-2014.4/mico/include/mico
+cp: se omite el directorio «mico/os-thread»
+cp: se omite el directorio «mico/security»
+cp: se omite el directorio «mico/transport»
+mkdir /alma/ACS-2014.4/mico/include/ministl
+mkdir /alma/ACS-2014.4/mico/include/coss
+for i in os-thread transport security; do \
+	  /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/include/mico/$i; \
+	  for j in mico/$i/*; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $j /alma/ACS-2014.4/mico/include/mico/$i/; \
+	  done; \
+	done
+mkdir /alma/ACS-2014.4/mico/include/mico/os-thread
+mkdir /alma/ACS-2014.4/mico/include/mico/transport
+mkdir /alma/ACS-2014.4/mico/include/mico/security
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/include'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/man'
+for i in man1 man5 man8; do \
+	  /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/man/$i; \
+	  for j in $i/*.[1-9]; do /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $j \
+		/alma/ACS-2014.4/mico/man/$i/; done; \
+	done
+mkdir /alma/ACS-2014.4/mico/man
+mkdir /alma/ACS-2014.4/mico/man/man1
+mkdir /alma/ACS-2014.4/mico/man/man5
+mkdir /alma/ACS-2014.4/mico/man/man8
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/man'
+make[2]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples
+mkdir /alma/ACS-2014.4/mico/doc
+mkdir /alma/ACS-2014.4/mico/doc/mico
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples
+sed -e s/@MICO_VERSION@/2.3.13/g \
+		< MakeVars.install > MakeVars.install.ver
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 MakeVars.install.ver /alma/ACS-2014.4/mico/doc/mico/examples/MakeVars
+rm -f MakeVars.install.ver
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples
+for i in bench dynany interop henning codesets poa random obv services dispatcher mcast generic pi ssl csiv2 sl3 mt shlib ssl; do make -C $i install || exit 1; done
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/bench'
+Makefile:44: atención: se imponen comandos para el objetivo `run'
+Makefile:41: atención: se ignoran las instrucciones viejas para el objetivo `run'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/bench
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/bench
+test -z "Makefile client.cc server.cc bench.idl bench_impl.h" || \
+	  eval 'for i in Makefile client.cc server.cc bench.idl bench_impl.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/bench; \
+	  done'
+test -z "bench" || \
+	  eval 'for i in bench; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/bench; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/bench'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/dynany'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/dynany
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/dynany
+test -z "Makefile test.idl dynany.cc dynanytest.cc" || \
+	  eval 'for i in Makefile test.idl dynany.cc dynanytest.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/dynany; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/dynany; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/dynany'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop'
+Makefile:33: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/interop
+for i in orbix visibroker jdk jacorb jboss; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/orbix'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/orbix
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/orbix
+test -z "Makefile README grid.idl main.cc" || \
+	  eval 'for i in Makefile README grid.idl main.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/orbix; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/orbix; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/orbix'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/visibroker'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/visibroker
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/visibroker
+test -z "Makefile Account.idl Client.java ClientApplet.html.in ClientApplet.java README main.cc" || \
+	  eval 'for i in Makefile Account.idl Client.java ClientApplet.html.in ClientApplet.java README main.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/visibroker; \
+	  done'
+test -z "account run_applet" || \
+	  eval 'for i in account run_applet; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/visibroker; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/visibroker'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jdk'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jdk
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jdk
+test -z "Makefile Account.idl Client.java ClientApplet.html.in ClientApplet.java README main.cc" || \
+	  eval 'for i in Makefile Account.idl Client.java ClientApplet.html.in ClientApplet.java README main.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/jdk; \
+	  done'
+test -z "account run_applet" || \
+	  eval 'for i in account run_applet; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/jdk; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jdk'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jacorb'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jacorb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jacorb
+test -z "Makefile Account.idl Server.java Client.java ClientApplet.html.in ClientApplet.java README server.cc client.cc" || \
+	  eval 'for i in Makefile Account.idl Server.java Client.java ClientApplet.html.in ClientApplet.java README server.cc client.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/jacorb; \
+	  done'
+test -z "account run_applet" || \
+	  eval 'for i in account run_applet; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/interop/jacorb; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jacorb'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss'
+Makefile:35: atención: se imponen comandos para el objetivo `install'
+../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss
+for i in jdk1.3.x jdk1.4.x; do make -C $i install || exit 1; done
+make[5]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x'
+Makefile:36: atención: se imponen comandos para el objetivo `install'
+../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 setenv.sh /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x
+for i in cart-ejb converter-ejb corba-friendly-ejb; do make -C $i install || exit 1; done
+make[6]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x/cart-ejb'
+Makefile:94: atención: se imponen comandos para el objetivo `install'
+../../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/META-INF
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 client.cc /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 run-client /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/ejb-jar.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/jboss.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/BookException.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/Cart.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CartBean.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CartHome.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/IdVerifier.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/cart-ejb/examples
+make[6]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x/cart-ejb'
+make[6]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x/converter-ejb'
+Makefile:87: atención: se imponen comandos para el objetivo `install'
+../../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/META-INF
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/examples
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 client.cc /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 run-client /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/ejb-jar.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/jboss.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/Converter.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/ConverterBean.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/ConverterHome.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/converter-ejb/examples
+make[6]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x/converter-ejb'
+make[6]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x/corba-friendly-ejb'
+Makefile:103: atención: se imponen comandos para el objetivo `install'
+../../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/META-INF
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples/corba
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples/corba
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 client.cc /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 run-client /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/ejb-jar.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/jboss.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySession.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySessionBean.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySessionHome.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/corba/DataObject.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.3.x/corba-friendly-ejb/examples/corba
+make[6]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x/corba-friendly-ejb'
+make[5]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.3.x'
+make[5]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x'
+Makefile:36: atención: se imponen comandos para el objetivo `install'
+../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 setenv.sh /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x
+for i in cart-ejb converter-ejb corba-friendly-ejb; do make -C $i install || exit 1; done
+make[6]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x/cart-ejb'
+Makefile:108: atención: se imponen comandos para el objetivo `install'
+../../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/META-INF
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/jdk1.4-Throwable
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 client.cc /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 run-client /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/ejb-jar.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/jboss.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/BookException.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/Cart.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CartBean.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CartHome.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/IdVerifier.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/StackTraceElement.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/Throwable.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/seq1_StackTraceElement.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/cart-ejb/jdk1.4-Throwable
+make[6]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x/cart-ejb'
+make[6]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x/converter-ejb'
+Makefile:107: atención: se imponen comandos para el objetivo `install'
+../../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/META-INF
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/examples
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/jdk1.4-Throwable
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 client.cc /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 run-client /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/ejb-jar.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/jboss.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/Converter.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/ConverterBean.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/ConverterHome.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/StackTraceElement.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/Throwable.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/seq1_StackTraceElement.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/converter-ejb/jdk1.4-Throwable
+make[6]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x/converter-ejb'
+make[6]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x/corba-friendly-ejb'
+Makefile:120: atención: se imponen comandos para el objetivo `install'
+../../../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/META-INF
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples/corba
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples/corba
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/jdk1.4-Throwable
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 client.cc /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 run-client /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/ejb-jar.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 META-INF/jboss.xml /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/META-INF
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySession.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySessionBean.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySessionHome.java /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySession.cc.saved /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/CorbaFriendlySession.h.saved /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 examples/corba/DataObject.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/examples/corba
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/StackTraceElement.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/Throwable.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/jdk1.4-Throwable
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 jdk1.4-Throwable/seq1_StackTraceElement.idl /alma/ACS-2014.4/mico/doc/mico/examples/interop/jboss/jdk1.4.x/corba-friendly-ejb/jdk1.4-Throwable
+make[6]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x/corba-friendly-ejb'
+make[5]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss/jdk1.4.x'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop/jboss'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/interop'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/henning'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/henning
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/henning
+test -z "README diffs" || \
+	  eval 'for i in README diffs; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/henning; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/henning; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/henning'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/codesets'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/codesets
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/codesets
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/codesets; \
+	  done'
+test -z "runit" || \
+	  eval 'for i in runit; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/codesets; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/codesets'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa'
+Makefile:19: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/poa
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/poa
+for i in hello-1 hello-2 inherit account-1 account-2 account-3; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/hello-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-1
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-1; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/hello-1'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/hello-2'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-2
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-2
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-2; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/hello-2; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/hello-2'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/inherit'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa/inherit
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa/inherit
+test -z "Makefile client.cc server.cc inherit.idl" || \
+	  eval 'for i in Makefile client.cc server.cc inherit.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/inherit; \
+	  done'
+test -z "inherit" || \
+	  eval 'for i in inherit; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/inherit; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/inherit'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/account-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-1
+test -z "Makefile client.cc server.cc account.idl" || \
+	  eval 'for i in Makefile client.cc server.cc account.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-1; \
+	  done'
+test -z "account" || \
+	  eval 'for i in account; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/account-1'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/account-2'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-2
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-2
+test -z "Makefile client.cc server.cc account.idl" || \
+	  eval 'for i in Makefile client.cc server.cc account.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-2; \
+	  done'
+test -z "account" || \
+	  eval 'for i in account; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-2; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/account-2'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/account-3'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-3
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-3
+test -z "Makefile client.cc server.cc account.idl" || \
+	  eval 'for i in Makefile client.cc server.cc account.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-3; \
+	  done'
+test -z "account" || \
+	  eval 'for i in account; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/poa/account-3; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa/account-3'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/poa'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/random'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/random
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/random
+test -z "Makefile client.cc random.idl" || \
+	  eval 'for i in Makefile client.cc random.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/random; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/random; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/random'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv'
+Makefile:19: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/obv
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/obv
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/obv
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/obv
+for i in abstract custom date tree tricky; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/abstract'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/obv/abstract
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/obv/abstract
+test -z "README Makefile client.cc server.cc abstract.idl abstract_impl.h" || \
+	  eval 'for i in README Makefile client.cc server.cc abstract.idl abstract_impl.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/abstract; \
+	  done'
+test -z "abstract" || \
+	  eval 'for i in abstract; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/abstract; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/abstract'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/custom'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/obv/custom
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/obv/custom
+test -z "README Makefile test.cc custom.idl custom_impl.cc custom_impl.h" || \
+	  eval 'for i in README Makefile test.cc custom.idl custom_impl.cc custom_impl.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/custom; \
+	  done'
+test -z "custom" || \
+	  eval 'for i in custom; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/custom; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/custom'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/date'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/obv/date
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/obv/date
+test -z "Makefile client.cc server.cc date.idl calendar.idl date_impl.cc date_impl.h" || \
+	  eval 'for i in Makefile client.cc server.cc date.idl calendar.idl date_impl.cc date_impl.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/date; \
+	  done'
+test -z "date" || \
+	  eval 'for i in date; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/date; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/date'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/tree'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/obv/tree
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/obv/tree
+test -z "Makefile client.cc server.cc tree.idl tree_impl.cc tree_impl.h" || \
+	  eval 'for i in Makefile client.cc server.cc tree.idl tree_impl.cc tree_impl.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/tree; \
+	  done'
+test -z "tree" || \
+	  eval 'for i in tree; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/tree; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/tree'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/tricky'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/obv/tricky
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/obv/tricky
+test -z "Makefile client.cc server.cc tricky.idl tricky_impl.cc tricky_impl.h" || \
+	  eval 'for i in Makefile client.cc server.cc tricky.idl tricky_impl.cc tricky_impl.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/tricky; \
+	  done'
+test -z "tricky" || \
+	  eval 'for i in tricky; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/obv/tricky; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv/tricky'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/obv'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services'
+Makefile:52: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/services
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/services
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/services
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/services
+for i in  naming naming-lb naming-mt events property-daemon stream-sound; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/naming'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/services/naming
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/services/naming
+test -z "Makefile account.idl client.cc server.cc" || \
+	  eval 'for i in Makefile account.idl client.cc server.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/naming; \
+	  done'
+test -z "account_test" || \
+	  eval 'for i in account_test; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/naming; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/naming'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/naming-lb'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/services/naming-lb
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/services/naming-lb
+test -z "Makefile Printer.idl Printer_impl.h Printer_impl.cc Client.cc Server.cc" || \
+	  eval 'for i in Makefile Printer.idl Printer_impl.h Printer_impl.cc Client.cc Server.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/naming-lb; \
+	  done'
+test -z "printer_test" || \
+	  eval 'for i in printer_test; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/naming-lb; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/naming-lb'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/naming-mt'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/naming-mt'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/events'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/services/events
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/services/events
+test -z "Makefile client.cc client2.cc server.cc server2.cc server3.cc" || \
+	  eval 'for i in Makefile client.cc client2.cc server.cc server2.cc server3.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/events; \
+	  done'
+test -z "runit" || \
+	  eval 'for i in runit; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/events; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/events'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/property-daemon'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/services/property-daemon
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/services/property-daemon
+test -z "Makefile set_properties.cc get_properties.cc bank.idl README" || \
+	  eval 'for i in Makefile set_properties.cc get_properties.cc bank.idl README; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/property-daemon; \
+	  done'
+test -z "start_demo" || \
+	  eval 'for i in start_demo; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/property-daemon; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/property-daemon'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/stream-sound'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/services/stream-sound
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/services/stream-sound
+test -z "Makefile client.cc server.cc sound.h" || \
+	  eval 'for i in Makefile client.cc server.cc sound.h; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/stream-sound; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/services/stream-sound; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services/stream-sound'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/services'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/dispatcher'
+Makefile:30: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/dispatcher
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/dispatcher
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/dispatcher
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/dispatcher
+test -z "" || \
+	  eval 'for i in ; do make -C $i install || exit 1; done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/dispatcher'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mcast'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/mcast
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/mcast
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/mcast; \
+	  done'
+test -z "runit" || \
+	  eval 'for i in runit; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/mcast; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mcast'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/generic'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/generic
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/generic
+test -z "Makefile client.cc server.cc test.idl test_cases" || \
+	  eval 'for i in Makefile client.cc server.cc test.idl test_cases; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/generic; \
+	  done'
+test -z "run_test" || \
+	  eval 'for i in run_test; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/generic; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/generic'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi'
+Makefile:19: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/pi
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/pi
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/pi
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/pi
+for i in dii poa poa2 current; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/dii'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/pi/dii
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/pi/dii
+test -z "Makefile diiclient.cc diiserver.cc" || \
+	  eval 'for i in Makefile diiclient.cc diiserver.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/dii; \
+	  done'
+test -z "rundiic rundiis runit" || \
+	  eval 'for i in rundiic rundiis runit; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/dii; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/dii'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/poa'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa
+test -z "Makefile client.cc server.cc collocated.cc account.idl" || \
+	  eval 'for i in Makefile client.cc server.cc collocated.cc account.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa; \
+	  done'
+test -z "account" || \
+	  eval 'for i in account; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/poa'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/poa2'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa2
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa2
+test -z "Makefile client.cc server.cc account.idl" || \
+	  eval 'for i in Makefile client.cc server.cc account.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa2; \
+	  done'
+test -z "account" || \
+	  eval 'for i in account; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/poa2; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/poa2'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/current'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/pi/current
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/pi/current
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/current; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/pi/current; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi/current'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/pi'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/ssl'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/ssl
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/ssl
+test -z "Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/ssl; \
+	  done'
+test -z "ssl" || \
+	  eval 'for i in ssl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/ssl; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/ssl'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2'
+Makefile:20: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/csiv2
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/csiv2
+for i in hello-1 tls-hello-1 tls-hello-2 identity-1 tls-identity-1 interop; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/hello-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/hello-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/hello-1
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/hello-1; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/hello-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/hello-1'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/tls-hello-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-1
+test -z "Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem ca_cert.pem" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem ca_cert.pem; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-1; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/tls-hello-1'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/tls-hello-2'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-2
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-2
+test -z "Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem ca_cert.pem" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem ca_cert.pem; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-2; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-hello-2; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/tls-hello-2'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/identity-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/identity-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/identity-1
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/identity-1; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/identity-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/identity-1'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/tls-identity-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-identity-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-identity-1
+test -z "Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem ca_cert.pem" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem ca_cert.pem; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-identity-1; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/tls-identity-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/tls-identity-1'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/interop'
+Makefile:19: atención: se imponen comandos para el objetivo `install'
+../../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop
+for i in adiron; do make -C $i install || exit 1; done
+make[5]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/interop/adiron'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop/adiron
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop/adiron
+test -z "Makefile client.cc client2.cc server.cc InterOpTest.idl ca_cert.pem c_cert.pem c_key.pem s_cert.pem s_key.pem" || \
+	  eval 'for i in Makefile client.cc client2.cc server.cc InterOpTest.idl ca_cert.pem c_cert.pem c_key.pem s_cert.pem s_key.pem; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop/adiron; \
+	  done'
+test -z "run.sh get_iors.sh iiop_csiv2_extedned_hello.sh iiop_csiv2_hello.sh iiop_hello.sh tls_csiv2_extedned_hello.sh tls_csiv2_hello.sh tls_hello.sh" || \
+	  eval 'for i in run.sh get_iors.sh iiop_csiv2_extedned_hello.sh iiop_csiv2_hello.sh iiop_hello.sh tls_csiv2_extedned_hello.sh tls_csiv2_hello.sh tls_hello.sh; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/csiv2/interop/adiron; \
+	  done'
+make[5]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/interop/adiron'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2/interop'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/csiv2'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/sl3'
+make[3]: No se hace nada para `install'.
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/sl3'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mt'
+Makefile:16: atención: se imponen comandos para el objetivo `install'
+../MakeVars:76: atención: se ignoran las instrucciones viejas para el objetivo `install'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/mt
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/mt
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 Makefile /alma/ACS-2014.4/mico/doc/mico/examples/mt
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 README /alma/ACS-2014.4/mico/doc/mico/examples/mt
+for i in callback prodcons-1; do make -C $i install || exit 1; done
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mt/callback'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/mt/callback
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/mt/callback
+test -z "Makefile client.cc server.cc callback.idl" || \
+	  eval 'for i in Makefile client.cc server.cc callback.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/mt/callback; \
+	  done'
+test -z "run" || \
+	  eval 'for i in run; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/mt/callback; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mt/callback'
+make[4]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mt/prodcons-1'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/mt/prodcons-1
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/mt/prodcons-1
+test -z "Makefile prodcons.cc" || \
+	  eval 'for i in Makefile prodcons.cc; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/mt/prodcons-1; \
+	  done'
+test -z "" || \
+	  eval 'for i in ; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/mt/prodcons-1; \
+	  done'
+make[4]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mt/prodcons-1'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/mt'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/shlib'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/shlib
+mkdir /alma/ACS-2014.4/mico/doc/mico/examples/shlib
+test -z "Makefile client.cc server.cc hello.idl" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/shlib; \
+	  done'
+test -z "hello" || \
+	  eval 'for i in hello; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/shlib; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/shlib'
+make[3]: se ingresa al directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/ssl'
+/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico/examples/ssl
+test -z "Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem" || \
+	  eval 'for i in Makefile client.cc server.cc hello.idl s_cert.pem s_key.pem c_cert.pem c_key.pem; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 $i /alma/ACS-2014.4/mico/doc/mico/examples/ssl; \
+	  done'
+test -z "ssl" || \
+	  eval 'for i in ssl; do \
+	    /home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 755 $i /alma/ACS-2014.4/mico/doc/mico/examples/ssl; \
+	  done'
+make[3]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo/ssl'
+make[2]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico/demo'
+if test -f doc/doc.ps; then \
+		/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/mkinstalldirs /alma/ACS-2014.4/mico/doc/mico; \
+		/home/almamgr/ACS/ExtProd/PRODUCTS/mico/./admin/install-sh -c -m 644 doc/doc.ps /alma/ACS-2014.4/mico/doc/mico/manual.ps; \
+	fi
+make[1]: se sale del directorio `/home/almamgr/ACS_javarias/ExtProd/PRODUCTS/mico'
+done Installing mico ====
+
+==== Stripping mico
+done Stripping mico ====
+
+==== MICO fully built   ==========
+
+Make sure that the following environment variables
+are set before using MICO:
+ - MICO_HOME=/alma/ACS-2014.4/mico
+========= DONE   ==========
+MICO installation done!
+lun oct 20 10:04:42 UTC 2014
